@@ -1,3 +1,4 @@
+using FuncionalidadesCore.UI;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -19,6 +20,10 @@ namespace FuncionalidadesCore.Inventory.UI
         public GameObject GridItemPrefab; // El item en sí
         public GameObject EmptySlotPrefab; // NUEVO: El cuadradito vacío de fondo
 
+        [Header("Detalles del Ítem (Hover)")]
+        public TMPro.TextMeshProUGUI ItemTitleText;
+        public TMPro.TextMeshProUGUI ItemDescriptionText;
+
         [Header("Configuración de la Cuadrícula")]
         public KeyCode ToggleKey = KeyCode.Tab;
         public int Columns = 8;
@@ -34,13 +39,10 @@ namespace FuncionalidadesCore.Inventory.UI
 
         private void Start()
         {
-            if (Manager == null) Manager = FindObjectOfType<InventoryManager>();
+            if (Manager == null) Manager = Object.FindFirstObjectByType<InventoryManager>();
             if (Manager == null) return;
 
             gridOccupied = new bool[Columns, Rows];
-
-            // Tamaño fijo visual del Grid Pane para que entre justo
-            GridPane.sizeDelta = new Vector2(Columns * CellSize, Rows * CellSize);
 
             // Escuchar al core invisible
             Manager.Core.OnItemAdded += HandleItemAdded;
@@ -51,6 +53,28 @@ namespace FuncionalidadesCore.Inventory.UI
             
             // Asegurarnos de arrancar con el menú cerrado
             if (InventoryWindow) InventoryWindow.SetActive(false);
+            
+            HideItemDetails(); // Limpiar textos al inicio
+        }
+
+        // ==============================================
+        // TOOLTIPS Y DETALLES DEL ÍTEM
+        // ==============================================
+
+        public void ShowItemDetails(string guid)
+        {
+            var itemDef = Manager.Database.Items.FirstOrDefault(i => i.GUID == guid);
+            if (itemDef != null)
+            {
+                if (ItemTitleText != null) ItemTitleText.text = itemDef.Title;
+                if (ItemDescriptionText != null) ItemDescriptionText.text = itemDef.Description;
+            }
+        }
+
+        public void HideItemDetails()
+        {
+            if (ItemTitleText != null) ItemTitleText.text = "";
+            if (ItemDescriptionText != null) ItemDescriptionText.text = "";
         }
 
         private void DrawBackgroundGrid()
@@ -91,6 +115,12 @@ namespace FuncionalidadesCore.Inventory.UI
                 {
                     bool isOpen = !InventoryWindow.activeSelf;
                     InventoryWindow.SetActive(isOpen);
+
+                    // NUEVO: Ocultar o mostrar retícula interacciones cuando se abre inventario
+                    if (UIManager.Instance != null)
+                    {
+                        UIManager.Instance.ToggleHUD(!isOpen);
+                    }
 
                     // Congelar al jugador y mostrar el mouse usando el GameManager
                     if (GameManagerCore.Instance != null && !GameManagerCore.Instance.PlayerDied)
@@ -156,7 +186,6 @@ namespace FuncionalidadesCore.Inventory.UI
             else
             {
                 Debug.LogWarning($"[Grid UI] ¡No hay espacio físico {w}x{h} para colocar {itemDef.Title}!");
-                // Opcional: podrías devolver el item o tirarlo al piso, aquí al menos la UI rechaza pintarlo
             }
         }
 
@@ -206,7 +235,6 @@ namespace FuncionalidadesCore.Inventory.UI
             resultX = -1;
             resultY = -1;
 
-            // Evitar objetos más grandes que el inventario entero
             if (width > Columns || height > Rows) return false;
 
             for (int y = 0; y <= Rows - height; y++)
@@ -217,7 +245,7 @@ namespace FuncionalidadesCore.Inventory.UI
                     {
                         resultX = x;
                         resultY = y;
-                        return true; // Encontramos el primer hueco
+                        return true;
                     }
                 }
             }
@@ -230,7 +258,7 @@ namespace FuncionalidadesCore.Inventory.UI
             {
                 for (int x = startX; x < startX + width; x++)
                 {
-                    if (gridOccupied[x, y]) return false; // si un solo cuadrito está ocupado, falla
+                    if (gridOccupied[x, y]) return false;
                 }
             }
             return true;

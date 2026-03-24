@@ -61,12 +61,12 @@ namespace FuncionalidadesCore.Interaction
                     {
                         currentInteractable = interactable;
                         
-                        // Mostrar Prompt en UI
+                        // Mostrar Prompt en UI con formato rico (Ej: Linterna \n [E] USAR)
                         var info = hit.collider.GetComponentInParent<IInteractInfo>();
-                        if (info != null)
-                            OnShowPrompt?.Invoke(info.InteractTitle);
-                        else
-                            OnShowPrompt?.Invoke("Interactuar"); // Default fallback
+                        string titleText = info != null ? info.InteractTitle : "Objeto";
+                        string promptMessage = $"{titleText}\n<size=75%><color=white>[E]</color> USAR</size>";
+                        
+                        OnShowPrompt?.Invoke(promptMessage);
                     }
                     return;
                 }

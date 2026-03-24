@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.UI;
 
 namespace FuncionalidadesCore.UI
 {
@@ -12,8 +13,18 @@ namespace FuncionalidadesCore.UI
     {
         public static UIManager Instance { get; private set; }
 
+        [Header("Contenedor Principal (Ocultable)")]
+        [Tooltip("Mete tu ReticleImage y textos dentro de un Panel transparente y arrástralo aquí")]
+        public GameObject HUDPanel;
+
         [Header("Retícula e Interacción")]
-        public GameObject ReticleDot;
+        public Image ReticleImage; // Importante: Arrastrar el componente Image en vez del GameObject
+        public Sprite NormalReticle;
+        public Sprite InteractReticle;
+        public float NormalSize = 1f;
+        public float InteractSize = 1.5f;
+        public float ScaleSpeed = 15f;
+
         [Tooltip("El texto que dice 'Pulsa E para interactuar'")]
         public TextMeshProUGUI InteractionPromptText;
         [Tooltip("Si usas un panel con fondo negro translúcido para que el texto resalte")]
@@ -24,6 +35,7 @@ namespace FuncionalidadesCore.UI
         public float DefaultHintDuration = 3f;
 
         private Coroutine hintCoroutine;
+        private float currentTargetScale;
 
         private void Awake()
         {
@@ -35,15 +47,26 @@ namespace FuncionalidadesCore.UI
             Instance = this;
 
             // Iniciar con todo oculto
+            currentTargetScale = NormalSize;
             HideInteractionPrompt();
             if (HintHintText != null) HintHintText.text = "";
+        }
+
+        private void Update()
+        {
+            if (ReticleImage != null)
+            {
+                // Interpolar suavemente el tamaño (Lerp) para el efecto elástico
+                float currentScale = ReticleImage.transform.localScale.x;
+                float newScale = Mathf.Lerp(currentScale, currentTargetScale, Time.deltaTime * ScaleSpeed);
+                ReticleImage.transform.localScale = new Vector3(newScale, newScale, newScale);
+            }
         }
 
         // ============================================
         // INTERACCIÓN (Conectar a InteractionDetector)
         // ============================================
 
-        /// <summary>Muestra el texto de interacción (Ej: "Recoger Poción")</summary>
         public void ShowInteractionPrompt(string text)
         {
             if (InteractionPromptText != null)
@@ -55,9 +78,10 @@ namespace FuncionalidadesCore.UI
             if (InteractionPromptBackground != null)
                 InteractionPromptBackground.SetActive(true);
 
-            // Opcional: Expandir o cambiar color de la retícula
-            if (ReticleDot != null)
-                ReticleDot.transform.localScale = Vector3.one * 1.5f;
+            // Cambiar imagen a "Interactuable" y decirle que crezca suavemente
+            currentTargetScale = InteractSize;
+            if (ReticleImage != null && InteractReticle != null)
+                ReticleImage.sprite = InteractReticle;
         }
 
         /// <summary>Oculta el texto de interacción cuando dejas de mirar objeto</summary>
@@ -69,8 +93,18 @@ namespace FuncionalidadesCore.UI
             if (InteractionPromptBackground != null)
                 InteractionPromptBackground.SetActive(false);
 
-            if (ReticleDot != null)
-                ReticleDot.transform.localScale = Vector3.one;
+            // Cambiar imagen a "Normal" y decirle que encoja suavemente
+            currentTargetScale = NormalSize;
+            if (ReticleImage != null && NormalReticle != null)
+                ReticleImage.sprite = NormalReticle;
+        }
+
+        public void ToggleHUD(bool show)
+        {
+            if (HUDPanel != null)
+            {
+                HUDPanel.SetActive(show);
+            }
         }
 
         // ============================================

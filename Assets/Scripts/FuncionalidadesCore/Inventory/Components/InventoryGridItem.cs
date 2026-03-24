@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems; // Necesario para detectar el mouse encima
 
 namespace FuncionalidadesCore.Inventory.UI
 {
@@ -8,9 +9,9 @@ namespace FuncionalidadesCore.Inventory.UI
     /// Componente que va en el PREFAB visual para el inventario de estilo Grid NxM.
     /// Funciona en conjunto con InventoryGridUI.
     /// </summary>
-    public class InventoryGridItem : MonoBehaviour
+    public class InventoryGridItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        public Image BackgroundImage; // Opcional, para pintar un cuadrito al item (ej: color gris translúcido)
+        public Image BackgroundImage;
         public Image IconImage;
         public TextMeshProUGUI QuantityText;
         public Button ActionButton; // Botón para clickear usar
@@ -50,7 +51,22 @@ namespace FuncionalidadesCore.Inventory.UI
         private void OnItemClicked()
         {
             parentGrid.RequestUseItem(itemGUID);
-            // Aquí en un futuro puedes agregar click derecho, arrastrar, examinar, etc.
+            HideHoverDetails(); // Limpiamos texto al usar el ítem (por si desaparece)
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            if (parentGrid != null) parentGrid.ShowItemDetails(itemGUID);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            HideHoverDetails();
+        }
+
+        private void HideHoverDetails()
+        {
+            if (parentGrid != null) parentGrid.HideItemDetails();
         }
     }
 }
