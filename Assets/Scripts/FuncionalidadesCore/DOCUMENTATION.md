@@ -587,7 +587,13 @@ objectiveManager.SetDisplay(objectiveUI);
 
 **¿Qué hace?** Lógica completa de inventario: agregar/remover items, stacking, crafting, combinación. Sin grid UI.
 
-**Cómo usar:**
+### Componentes Listos Para Usar (Carpeta Components/)
+Para facilitar la integración en Unity sin tener que programar de cero, el paquete incluye scripts "Plug and Play" en `Assets/FuncionalidadesCore/Inventory/Components/`:
+- **`InventoryDatabase`**: Ponlo en un objeto vacío. Te permite configurar todos tus items visualmente desde el Inspector de Unity e inicializa el Core automáticamente.
+- **`InventoryItemPickup`**: Ponlo en los modelos 3D del mundo. Permite interactuar con ellos ("Pulsar E") para agregarlos al inventario y destruir el modelo 3D.
+- **`InventoryDemoUI`**: Plantilla base para tu menú que se suscribe automáticamente a los eventos de crear/destruir slots.
+
+**Cómo usar la lógica pura (Core):**
 ```csharp
 // Configurar base de datos de items
 inventory.SetItemDatabase(myItemsList);
