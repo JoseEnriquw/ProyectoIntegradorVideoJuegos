@@ -26,6 +26,7 @@ namespace UHFPS.Runtime
         public AudioSource DialogueAudio;
         public string BinderName;
 
+        public bool Repeatable;
         public bool RangedDialogue;
         public bool ResetDialogueWhenOut;
         public float LocalDialogueRange;
@@ -104,6 +105,16 @@ namespace UHFPS.Runtime
                 return;
 
             isTriggered = dialogueSystem.PlayDialogue(this);
+        }
+
+        /// <summary>
+        /// Resets the dialogue trigger state so it can be played again.
+        /// Called automatically by DialogueSystem when Repeatable is true.
+        /// </summary>
+        public void ResetTriggerState()
+        {
+            IsCompleted = false;
+            isTriggered = false;
         }
 
         public StorableCollection OnSave()

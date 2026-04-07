@@ -41,6 +41,7 @@ namespace UHFPS.Editors
                         Properties.Draw("DialogueAudio");
 
                     Properties.Draw("BinderName");
+                    Properties.Draw("Repeatable");
                 }
 
                 if (dialogueType == DialogueTrigger.DialogueTypeEnum.Local)
