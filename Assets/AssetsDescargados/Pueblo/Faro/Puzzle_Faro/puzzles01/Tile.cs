@@ -7,46 +7,38 @@ public class Tile : MonoBehaviour
     public Vector2Int gridPos;
 
     private PuzzleManager manager;
-    private RectTransform rectTransform;
-    private Button button;
+    private RectTransform rect;
 
     void Awake()
     {
-        rectTransform = GetComponent<RectTransform>();
-        button = GetComponent<Button>();
+        rect = GetComponent<RectTransform>();
     }
 
-    void Start()
+    public void Init(PuzzleManager m, Vector2Int startPos, float spacing)
     {
-        manager = FindObjectOfType<PuzzleManager>();
-        button.onClick.AddListener(OnClick);
+        manager = m;
+        correctPos = startPos;
+
+        SetGridPosition(startPos, spacing);
+
+        Button btn = GetComponent<Button>();
+        btn.onClick.RemoveAllListeners();
+        btn.onClick.AddListener(OnClick);
     }
 
-    public void SetPosition(Vector2Int newPos, float spacing)
+    public void SetGridPosition(Vector2Int pos, float spacing)
     {
-        gridPos = newPos;
+        gridPos = pos;
 
-        rectTransform.anchoredPosition = new Vector2(
-            newPos.x * spacing,
-            newPos.y * spacing
+        rect.anchoredPosition = new Vector2(
+            pos.x * spacing,
+            pos.y * spacing
         );
-    }
-
-    void Update()
-    {
-        // 🔥 SOLO habilita click si es movible
-        if (manager != null)
-        {
-            button.interactable = manager.IsTileMovable(this);
-        }
     }
 
     void OnClick()
     {
-        // 🔒 doble validación (seguridad)
-        if (!manager.IsTileMovable(this)) return;
-
-        manager.Move(this);
+        manager.TryMove(this);
     }
 
     public bool IsCorrect()

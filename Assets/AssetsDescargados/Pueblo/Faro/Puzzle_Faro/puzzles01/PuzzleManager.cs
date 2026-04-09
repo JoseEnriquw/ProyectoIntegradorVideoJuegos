@@ -8,23 +8,15 @@ public class PuzzleManager : MonoBehaviour
     public Tile[] tiles;
 
     private Vector2Int emptyPos;
-    private bool isSolved = false;
+    private bool isShuffling = false;
 
     void Start()
     {
-        Setup();
+        Initialize();
         Shuffle();
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F10))
-        {
-            SolveInstant();
-        }
-    }
-
-    void Setup()
+    void Initialize()
     {
         int index = 0;
 
@@ -34,8 +26,8 @@ public class PuzzleManager : MonoBehaviour
             {
                 if (index < tiles.Length)
                 {
-                    tiles[index].correctPos = new Vector2Int(x, y);
-                    tiles[index].SetPosition(new Vector2Int(x, y), spacing);
+                    Vector2Int pos = new Vector2Int(x, y);
+                    tiles[index].Init(this, pos, spacing);
                     index++;
                 }
                 else
@@ -46,26 +38,23 @@ public class PuzzleManager : MonoBehaviour
         }
     }
 
-    public void Move(Tile tile)
+    public void TryMove(Tile tile)
     {
-        if (isSolved) return;
-
         if (!IsAdjacent(tile.gridPos, emptyPos))
             return;
 
-        Vector2Int oldPos = tile.gridPos;
-
-        tile.SetPosition(emptyPos, spacing);
-        emptyPos = oldPos;
-
-        CheckWin();
+        MoveTile(tile);
     }
 
-    public bool IsTileMovable(Tile tile)
+    void MoveTile(Tile tile)
     {
-        if (isSolved) return false;
+        Vector2Int oldPos = tile.gridPos;
 
-        return IsAdjacent(tile.gridPos, emptyPos);
+        tile.SetGridPosition(emptyPos, spacing);
+        emptyPos = oldPos;
+
+        if (!isShuffling)
+            CheckWin();
     }
 
     bool IsAdjacent(Vector2Int a, Vector2Int b)
@@ -75,27 +64,35 @@ public class PuzzleManager : MonoBehaviour
 
     void Shuffle()
     {
-        for (int i = 0; i < 100; i++)
+        isShuffling = true;
+
+        for (int i = 0; i < 200; i++)
         {
             Tile randomTile = tiles[Random.Range(0, tiles.Length)];
 
             if (IsAdjacent(randomTile.gridPos, emptyPos))
             {
-                Vector2Int oldPos = randomTile.gridPos;
-                randomTile.SetPosition(emptyPos, spacing);
-                emptyPos = oldPos;
+                MoveTile(randomTile);
             }
+        }
+
+        isShuffling = false;
+
+        if (IsSolved())
+        {
+            Shuffle();
+            return;
         }
     }
 
-    void SolveInstant()
+    bool IsSolved()
     {
         foreach (Tile tile in tiles)
         {
-            tile.SetPosition(tile.correctPos, spacing);
+            if (!tile.IsCorrect())
+                return false;
         }
-
-        CheckWin();
+        return true;
     }
 
     void CheckWin()
@@ -106,21 +103,24 @@ public class PuzzleManager : MonoBehaviour
                 return;
         }
 
-        Debug.Log("GANASTE 🔥");
+        FindObjectOfType<PuzzleInteraction>()?.OnSolved();
+    }
 
-        isSolved = true;
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F10))
+        {
+            Solve();
+        }
+    }
 
-        // 🔥 Desactivar interacción
+    void Solve()
+    {
         foreach (Tile tile in tiles)
         {
-            tile.GetComponent<UnityEngine.UI.Button>().interactable = false;
+            tile.SetGridPosition(tile.correctPos, spacing);
         }
 
-        // 🔥 Avisar al sistema externo
-        PuzzleInteraction interaction = FindObjectOfType<PuzzleInteraction>();
-        if (interaction != null)
-        {
-            interaction.OnSolved();
-        }
+        CheckWin();
     }
 }
