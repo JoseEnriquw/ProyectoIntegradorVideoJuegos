@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class PuzzleInteraction : MonoBehaviour
 {
-    public GameObject puzzleBoard;
-    public GameObject hiddenObject;
+    [Header("Referencias")]
+    public GameObject puzzleBoard;   // TODO el tablero (Canvas o Panel)
+    public GameObject hiddenObject;  // Hoja escondida
 
+    [Header("Configuración")]
     public float delayBeforeClose = 2f;
 
     private bool isActive = false;
@@ -50,6 +53,7 @@ public class PuzzleInteraction : MonoBehaviour
         Cursor.visible = false;
     }
 
+    // 🔥 CUANDO SE COMPLETA
     public void OnSolved()
     {
         StartCoroutine(SolveSequence());
@@ -57,14 +61,23 @@ public class PuzzleInteraction : MonoBehaviour
 
     IEnumerator SolveSequence()
     {
+        Debug.Log("Puzzle resuelto ⏳");
+
         yield return new WaitForSecondsRealtime(delayBeforeClose);
 
+        // 🔥 OPCIÓN 1: DESACTIVAR COMPLETO
         puzzleBoard.SetActive(false);
+        //gameObject.SetActive(false);
+        Destroy(gameObject,2f);
+
+        // 🔥 Mostrar objeto oculto
         hiddenObject.SetActive(true);
 
         Time.timeScale = 1f;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        Debug.Log("Tablero oculto, objeto revelado ✅");
     }
 }
