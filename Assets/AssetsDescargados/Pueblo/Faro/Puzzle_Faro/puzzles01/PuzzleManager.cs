@@ -24,16 +24,17 @@ public class PuzzleManager : MonoBehaviour
         {
             for (int x = 0; x < size; x++)
             {
-                if (index < tiles.Length)
+                Vector2Int pos = new Vector2Int(x, y);
+
+                // 🔥 SI ES LA ESQUINA ABAJO DERECHA → VACÍO
+                if (x == size - 1 && y == 0)
                 {
-                    Vector2Int pos = new Vector2Int(x, y);
-                    tiles[index].Init(this, pos, spacing);
-                    index++;
+                    emptyPos = pos;
+                    continue;
                 }
-                else
-                {
-                    emptyPos = new Vector2Int(x, y);
-                }
+
+                tiles[index].Init(this, pos, spacing);
+                index++;
             }
         }
     }
