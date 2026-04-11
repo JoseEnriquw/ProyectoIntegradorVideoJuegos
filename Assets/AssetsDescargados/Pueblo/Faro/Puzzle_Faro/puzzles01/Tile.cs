@@ -15,25 +15,30 @@ public class Tile : MonoBehaviour
         rect = GetComponent<RectTransform>();
     }
 
-    public void Init(PuzzleManager m, Vector2Int startPos, float spacing)
+    public void Init(PuzzleManager m, Vector2Int startPos)
     {
         manager = m;
         correctPos = startPos;
 
-        SetGridPosition(startPos, spacing);
+        SetGridPosition(startPos);
 
         Button btn = GetComponent<Button>();
         btn.onClick.RemoveAllListeners();
         btn.onClick.AddListener(OnClick);
     }
 
-    public void SetGridPosition(Vector2Int pos, float spacing)
+    public void SetGridPosition(Vector2Int pos)
     {
         gridPos = pos;
 
-        int size = 3; // puzzle 3x3
+        int size = manager.size;
 
-        // 🔥 cálculo real del centro del grid
+        // 🔥 tamaño REAL del tile (esto arregla TODO)
+        float tileSize = rect.sizeDelta.x;
+
+        // 🔥 separación automática (10% del tamaño)
+        float spacing = tileSize * 1.1f;
+
         float totalSize = spacing * (size - 1);
         float offset = totalSize / 2f;
 

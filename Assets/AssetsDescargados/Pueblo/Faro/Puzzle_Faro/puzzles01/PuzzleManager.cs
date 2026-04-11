@@ -2,9 +2,10 @@
 
 public class PuzzleManager : MonoBehaviour
 {
+    [Header("Config")]
     public int size = 3;
-    public float spacing = 200f;
 
+    [Header("Tiles")]
     public Tile[] tiles;
 
     private Vector2Int emptyPos;
@@ -26,14 +27,13 @@ public class PuzzleManager : MonoBehaviour
             {
                 Vector2Int pos = new Vector2Int(x, y);
 
-                // 🔥 SI ES LA ESQUINA ABAJO DERECHA → VACÍO
                 if (x == size - 1 && y == 0)
                 {
                     emptyPos = pos;
                     continue;
                 }
 
-                tiles[index].Init(this, pos, spacing);
+                tiles[index].Init(this, pos);
                 index++;
             }
         }
@@ -51,7 +51,7 @@ public class PuzzleManager : MonoBehaviour
     {
         Vector2Int oldPos = tile.gridPos;
 
-        tile.SetGridPosition(emptyPos, spacing);
+        tile.SetGridPosition(emptyPos);
         emptyPos = oldPos;
 
         if (!isShuffling)
@@ -119,7 +119,7 @@ public class PuzzleManager : MonoBehaviour
     {
         foreach (Tile tile in tiles)
         {
-            tile.SetGridPosition(tile.correctPos, spacing);
+            tile.SetGridPosition(tile.correctPos);
         }
 
         CheckWin();
