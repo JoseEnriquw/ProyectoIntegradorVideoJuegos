@@ -132,7 +132,16 @@ namespace UHFPS.Runtime
         private IEnumerator HandleDialogue(Dialogue dialogue)
         {
             yield return HandleSubtitles(dialogue);
-            currentTrigger.IsCompleted = true;
+
+            // If the trigger is repeatable, reset its state instead of marking it completed
+            if (currentTrigger != null && currentTrigger.Repeatable)
+            {
+                currentTrigger.ResetTriggerState();
+            }
+            else
+            {
+                currentTrigger.IsCompleted = true;
+            }
 
             SendBinderEvent(DialogueBinderType.End);
             ResetDialogue();
