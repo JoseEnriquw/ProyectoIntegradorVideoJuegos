@@ -19,7 +19,6 @@ public class MedicalItemEffect : MonoBehaviour
         {
             symptomSystem = FindFirstObjectByType<PlayerSymptom>();
         }
-
         // 3. Aplicamos el efecto configurado
         if (symptomSystem != null)
         {

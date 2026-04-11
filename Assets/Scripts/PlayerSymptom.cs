@@ -7,7 +7,6 @@ using UHFPS.Rendering; // For DualKawaseBlur, Scanlines
 public class PlayerSymptom : MonoBehaviour
 {
     public enum SymptomType { None, Blur, BlackAndWhite, VHS, Drunk }
-
     [Header("General Settings")]
     public bool EnableSymptoms = true;
 
