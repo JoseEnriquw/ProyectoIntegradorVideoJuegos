@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class Tile : MonoBehaviour
 {
+    [Header("Grid Logic")]
     public Vector2Int correctPos;
     public Vector2Int gridPos;
 
@@ -30,9 +31,15 @@ public class Tile : MonoBehaviour
     {
         gridPos = pos;
 
+        int size = 3; // puzzle 3x3
+
+        // 🔥 cálculo real del centro del grid
+        float totalSize = spacing * (size - 1);
+        float offset = totalSize / 2f;
+
         rect.anchoredPosition = new Vector2(
-            pos.x * spacing,
-            pos.y * spacing
+            (pos.x * spacing) - offset,
+            (pos.y * spacing) - offset
         );
     }
 

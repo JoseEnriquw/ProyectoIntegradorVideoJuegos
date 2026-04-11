@@ -68,7 +68,7 @@ public class PuzzleInteraction : MonoBehaviour
         // 🔥 OPCIÓN 1: DESACTIVAR COMPLETO
         puzzleBoard.SetActive(false);
         //gameObject.SetActive(false);
-        Destroy(gameObject,2f);
+        Destroy(gameObject,0.5f);
 
         // 🔥 Mostrar objeto oculto
         hiddenObject.SetActive(true);
