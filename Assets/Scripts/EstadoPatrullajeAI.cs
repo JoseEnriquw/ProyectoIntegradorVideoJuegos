@@ -12,6 +12,10 @@ namespace UHFPS.Runtime.States
         public float distanciaDeParada = 1f;
         public float tiempoEsperaEnPunto = 2f;
 
+        [Header("Configuracion de Persecucion desde Patrulla")]
+        [Tooltip("Si el jugador está escondido, no lo detecta. Aquí puedes ajustar un 'oído' para que te sienta si estás pegado a él aunque no te vea de frente.")]
+        public float distanciaDeteccionCercana = 1.5f;
+
         public override FSMAIState InitState(NPCStateMachine machine, AIStatesGroup group)
         {
             // Pasamos también el grupo (donde definimos los parámetros del Animador)
@@ -40,9 +44,8 @@ namespace UHFPS.Runtime.States
             { 
                 this.asset = stateAsset;
                 this.agent = machine.GetComponent<NavMeshAgent>();
-                this.animator = machine.Animator; // El animator configurado en el StateMachine
+                this.animator = machine.Animator;
                 
-                // Intentamos parsear/castear el grupo al nuestro personalizado
                 this.customGroup = group as CustomNPCStateGroup;
             }
 
@@ -146,11 +149,24 @@ namespace UHFPS.Runtime.States
                 // Usamos los strings parametrizados en el Custom Group que armamos
                 animator.SetBool(customGroup.WalkParameter, isWalking);
                 animator.SetBool(customGroup.IdleParameter, isIdle);
+                
+                // Actualizamos el Multiplicador de velocidad de tu animación 
+                if (agent != null)
+                {
+                    animator.SetFloat("Speed", agent.velocity.magnitude);
+                }
             }
 
             public override Transition[] OnGetTransitions()
             {
-                return new Transition[0];
+                // Agregamos la lógica para saltar a persecución si nos detecta
+                return new Transition[]
+                {
+                    Transition.To<EstadoPersecucionAI>(() =>
+                        !IsPlayerDead && // No te persigue si ya te mató
+                        !playerMachine.IsCurrent(PlayerStateMachine.HIDING_STATE) && // No te persigue si estás escondido
+                        SeesPlayerOrClose(asset.distanciaDeteccionCercana)) // Te persigue si entras a su visión o estás tan cerca que te "oye"
+                };
             }
         }
     }

@@ -15,6 +15,7 @@ MonoBehaviour:
   velocidadPatrullaje: 1.5
   distanciaDeParada: 1
   tiempoEsperaEnPunto: 4
+  distanciaDeteccionCercana: 1.5
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30,13 +31,31 @@ MonoBehaviour:
   AIStates:
   - StateAsset: {fileID: -628444004351628532}
     IsEnabled: 1
+  - StateAsset: {fileID: 6608096893714432505}
+    IsEnabled: 1
   IdleParameter: Idle
   WalkParameter: Walk
   RunParameter: Run
   InteractParameter: Interact
   AttackTrigger: Attack
-  InstakillOnCatch: 0
+  InstakillOnCatch: 1
   DamageRange:
     min: 20
     max: 35
   RangoAtaque: 1.5
+--- !u!114 &6608096893714432505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f6444d5e576e2740bd836c58f03384a, type: 3}
+  m_Name: ' (UHFPS.Runtime.States.EstadoPersecucionAI)'
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.EstadoPersecucionAI
+  velocidadPersecucion: 3.5
+  distanciaDeAtaque: 1
+  tiempoParaRendirse: 4
+  radioDeteccionCercana: 1.5
