@@ -277,27 +277,33 @@ public class PlayerSymptom : MonoBehaviour
 
     private void ChooseRandomSymptom()
     {
-        System.Collections.Generic.List<SymptomType> available = new();
-        if (EnableBlurAndTunnel) available.Add(SymptomType.Blur);
-        if (EnableBlackAndWhite) available.Add(SymptomType.BlackAndWhite);
-        if (EnableVHSGlitch) available.Add(SymptomType.VHS);
-        if (EnableDrunkMotion) available.Add(SymptomType.Drunk);
+        if (EnableSymptoms && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "IntroHouse")
+        {
+            System.Collections.Generic.List<SymptomType> available = new();
+            if (EnableBlurAndTunnel) available.Add(SymptomType.Blur);
+            if (EnableBlackAndWhite) available.Add(SymptomType.BlackAndWhite);
+            if (EnableVHSGlitch) available.Add(SymptomType.VHS);
+            if (EnableDrunkMotion) available.Add(SymptomType.Drunk);
 
-        if (available.Count > 0)
-        {
-            int index = Random.Range(0, available.Count);
-            currentActiveSymptom = available[index];
-            Debug.Log("[PlayerSymptom] Nuevo síntoma activado: " + currentActiveSymptom);
+            if (available.Count > 0)
+            {
+                int index = Random.Range(0, available.Count);
+                currentActiveSymptom = available[index];
+                Debug.Log("[PlayerSymptom] Nuevo síntoma activado: " + currentActiveSymptom);
+            }
+            else
+            {
+                currentActiveSymptom = SymptomType.None;
+            }
         }
-        else
-        {
-            currentActiveSymptom = SymptomType.None;
-        }
+       
     }
 
     void Update()
     {
-        // Actualización dinámica en tiempo real
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "IntroHouse")
+            return; // Evitamos que el sistema normal de síntomas interfiera con la secuencia de introducción
+                    // Actualización dinámica en tiempo real
         if (symptomBlur != null) symptomBlur.BlurRadius.value = MaxBlurIntensity;
         if (symptomVignette != null) symptomVignette.intensity.value = MaxTunnelIntensity;
         if (symptomColorAdj != null) symptomColorAdj.saturation.value = MinSaturation;
