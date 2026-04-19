@@ -48105,241 +48105,6 @@ Transform:
   - {fileID: 1664824716}
   m_Father: {fileID: 188795288}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &805466551
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 805466552}
-  - component: {fileID: 805466556}
-  - component: {fileID: 805466555}
-  - component: {fileID: 805466554}
-  - component: {fileID: 805466553}
-  m_Layer: 6
-  m_Name: Syringe
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &805466552
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 805466551}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.500001, y: -0.499999, z: -0.49999905, w: 0.50000095}
-  m_LocalPosition: {x: 0, y: 0.0669, z: 0}
-  m_LocalScale: {x: 1.4285713, y: 1.4285716, z: 1.4285715}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1876240445}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: -90}
---- !u!114 &805466553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 805466551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1193cc42578b51349ae91df02822e87c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <UniqueID>k__BackingField:
-    Id: 24a131155a3b4b7cafc158b744933fdd
-  InteractableType: 2
-  MessageType: 0
-  ExamineType: 1
-  ExamineRotate: 3
-  DisableType: 0
-  PickupItem:
-    m_GUID: 
-    m_Item:
-      Name: 
-      GUID: 
-      Icon: {fileID: 0}
-    m_Section:
-      Name: 
-      GUID: 
-  ItemCustomData:
-    Type: 0
-    JsonData: 
-    ItemAttributes:
-      Items: []
-  InteractTitle:
-    GlocText: '*Syringe'
-    NormalText: Syringe
-  ExamineTitle:
-    GlocText: '*Syringe'
-    NormalText: Syringe
-  PaperText:
-    GlocText: 
-    NormalText: 
-  HintMessage:
-    GlocText: 
-    NormalText: 
-  MessageTime: 3
-  Quantity: 1
-  SlotsToExpand: 1
-  ExpandRows: 0
-  UseInventoryTitle: 0
-  ExamineInventoryTitle: 0
-  ShowExamineTitle: 1
-  ShowFloatingIcon: 0
-  TakeFromExamine: 0
-  AllowCursorExamine: 0
-  IsPaper: 0
-  AutoShortcut: 0
-  AutoEquip: 0
-  UseExamineZooming: 1
-  ExamineZoomLimits:
-    min: 0.3
-    max: 0.4
-  ExamineDistance: 0.4
-  UseFaceRotation: 1
-  FaceRotation: {x: 0, y: 180, z: 90}
-  UseControlPoint: 1
-  ControlPoint: {x: 0, y: 0.1, z: 0}
-  CollidersEnable: []
-  CollidersDisable: []
-  ExamineHotspot:
-    HotspotTransform: {fileID: 0}
-    Enabled: 1
-    ResetHotspot: 0
-    HotspotAction:
-      m_PersistentCalls:
-        m_Calls: []
-  PickupSound:
-    audioClip: {fileID: 0}
-    volume: 0
-  ExamineSound:
-    audioClip: {fileID: 0}
-    volume: 0
-  ExamineHintSound:
-    audioClip: {fileID: 0}
-    volume: 0
-  OnTakeEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnExamineStartEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UHFPS.Runtime.GlareEffect, Assembly-CSharp
-        m_MethodName: SetGlareVisibility
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnExamineEndEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UHFPS.Runtime.GlareEffect, Assembly-CSharp
-        m_MethodName: SetGlareVisibility
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  IsExamined: 0
-  references:
-    version: 2
-    RefIds: []
---- !u!65 &805466554
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 805466551}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.086018644, y: 0.23038077, z: 0.02995351}
-  m_Center: {x: 0, y: -0.020891221, z: 0.0000008973292}
---- !u!23 &805466555
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 805466551}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: d9e619cd06ed1274fbdd94a67cd275f9, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &805466556
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 805466551}
-  m_Mesh: {fileID: 4309010749960864949, guid: 489c557864f7d864aba1bc19cab3aebb, type: 3}
 --- !u!1 &807097916
 GameObject:
   m_ObjectHideFlags: 0
@@ -54107,6 +53872,7 @@ MonoBehaviour:
   DrunkSounds: []
   SymptomsAudioVolume: 0.8
   IntroSymptomDelay: 2
+  IntroDialogue: {fileID: 1685929879}
 --- !u!114 &945191510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54424,14 +54190,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 945191506}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.005112926, y: 0.58529365, z: -0.0036959113, w: 0.8107969}
-  m_LocalPosition: {x: -18.86, y: 0.4, z: 5.73}
+  m_LocalRotation: {x: 0.0023099696, y: 0.05519758, z: -0.0058707595, w: 0.9984555}
+  m_LocalPosition: {x: -18.85341, y: 0.3999424, z: 5.724665}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 797155630}
   m_Father: {fileID: 377154842}
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.301, y: 6.327, z: -0.657}
 --- !u!1 &947768258
 GameObject:
   m_ObjectHideFlags: 0
@@ -78276,7 +78042,7 @@ Transform:
   m_GameObject: {fileID: 1334939781}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -14.295, y: -0.44, z: 5.316465}
+  m_LocalPosition: {x: -14.295, y: -0.44, z: 5.439}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -86601,7 +86367,7 @@ GameObject:
   - component: {fileID: 1539151747}
   - component: {fileID: 1539151746}
   m_Layer: 6
-  m_Name: Paper_C
+  m_Name: CartaAbuelo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -86830,12 +86596,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1539151745}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: -13.58, y: 1.538, z: 9.552567}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0.0000024972005, z: 0.0000024972005, w: -0.7071068}
+  m_LocalPosition: {x: -0.27856684, y: 0.09888854, z: -0.015713757}
+  m_LocalScale: {x: 0.56994295, y: 0.56994295, z: 0.56994295}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1876240445}
   m_LocalEulerAnglesHint: {x: -90, y: 180, z: 0}
 --- !u!64 &1539627806
 MeshCollider:
@@ -93411,6 +93177,60 @@ Transform:
   - {fileID: 137870505}
   m_Father: {fileID: 1621667684}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1685929878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1685929880}
+  - component: {fileID: 1685929879}
+  m_Layer: 0
+  m_Name: SintomaDIalogo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1685929879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685929878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463818b2825d6b0439a2f9ff3b9ab45f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.DialogueTrigger
+  TriggerType: 0
+  DialogueType: 0
+  DialogueContinue: 0
+  Dialogue: {fileID: 11400000, guid: 8d86a57d78502de47a6c163f0ec4677a, type: 2}
+  DialogueAudio: {fileID: 945191516}
+  BinderName: Me
+  Repeatable: 0
+  RangedDialogue: 0
+  ResetDialogueWhenOut: 0
+  LocalDialogueRange: 0
+--- !u!4 &1685929880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685929878}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -17.54719, y: 1.38866, z: 6.37447}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1688685195
 GameObject:
   m_ObjectHideFlags: 0
@@ -94333,7 +94153,7 @@ MonoBehaviour:
   DialogueType: 0
   DialogueContinue: 0
   Dialogue: {fileID: 11400000, guid: 6ee3d2e7a5df4d24d98378044274376e, type: 2}
-  DialogueAudio: {fileID: 1700897320}
+  DialogueAudio: {fileID: 945191516}
   BinderName: SpeechTest
   Repeatable: 0
   RangedDialogue: 1
@@ -96934,8 +96754,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1752328921}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.005112926, y: 0.58529365, z: -0.0036959113, w: 0.8107969}
-  m_LocalPosition: {x: -561.83966, y: 0.55986476, z: -487.26324}
+  m_LocalRotation: {x: 0.0023099696, y: 0.05519758, z: -0.0058707595, w: 0.9984555}
+  m_LocalPosition: {x: -561.83307, y: 0.5598078, z: -487.2686}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -102661,8 +102481,8 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 726668178}
-  - {fileID: 805466552}
   - {fileID: 1193488653}
+  - {fileID: 1539151751}
   m_Father: {fileID: 1334939782}
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!64 &1876240446
@@ -139869,4 +139689,4 @@ SceneRoots:
   - {fileID: 2000824092}
   - {fileID: 1225590014}
   - {fileID: 2089937559}
-  - {fileID: 1539151751}
+  - {fileID: 1685929880}

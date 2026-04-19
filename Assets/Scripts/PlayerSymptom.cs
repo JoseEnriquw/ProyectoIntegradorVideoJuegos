@@ -74,6 +74,7 @@ public class PlayerSymptom : MonoBehaviour
     [Header("Intro Sequence")]
     [Tooltip("Tiempo que espera al iniciar la escena para lanzar el síntoma (útil para saltar pantallas negras de carga)")]
     public float IntroSymptomDelay = 2f;
+    public DialogueTrigger IntroDialogue;
 
     private float timer;
     private float timeAlive = 0f;
@@ -271,6 +272,7 @@ public class PlayerSymptom : MonoBehaviour
         if (currentActiveSymptom == SymptomType.Blur)
         {
             RelieveSymptomsTemporarily();
+            if (IntroDialogue != null) IntroDialogue.TriggerDialogue();
             // Quitamos el Stop() brusco aquí. El sonido se desvanecerá naturalmente junto a la visión en Update.
         }
     }
