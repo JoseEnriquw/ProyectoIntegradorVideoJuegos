@@ -1,5 +1,6 @@
-using UnityEngine;
 using UHFPS.Runtime;
+using Unity.VisualScripting;
+using UnityEngine;
 
 public class AnimationEventBridge : MonoBehaviour
 {
@@ -8,9 +9,13 @@ public class AnimationEventBridge : MonoBehaviour
     // ?? ESTE MÉTODO LO LLAMA LA ANIMACIÓN
     public void StartRun()
     {
+        Debug.Log("EVENTO START RUN DISPARADO");
+
         if (machine != null)
         {
             machine.SendAnimationMessage("StartRun");
         }
     }
+
 }
+

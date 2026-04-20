@@ -7,15 +7,8 @@ namespace UHFPS.Runtime.States
     [CreateAssetMenu(fileName = "EstadoCorrerWaypointsAI", menuName = "UHFPS/AI States/EstadoCorrerWaypointsAI")]
     public class EstadoCorrerWaypointsAI : AIStateAsset
     {
-        [Header("Configuracion de Carrera hacia Waypoints")]
         public float velocidadCarrera = 3.5f;
-
-        [Tooltip("Distancia para cambiar al siguiente waypoint antes de frenar")]
         public float distanciaCambio = 0.5f;
-
-        [Header("Delay Inicial")]
-        [Tooltip("Tiempo antes de empezar a moverse (para animacion de giro)")]
-        public float delayInicial = 1.5f;
 
         public override FSMAIState InitState(NPCStateMachine machine, AIStatesGroup group)
         {
@@ -37,29 +30,59 @@ namespace UHFPS.Runtime.States
 
             private bool recorridoFinalizado = false;
 
-            // Delay inicial
-            private bool esperandoInicio = true;
-            private float timerInicio = 0f;
+            // 🔥 NUEVO
+            private bool esperandoStartRun = true;
 
             public EstadoCorrerWaypointsAI_State(NPCStateMachine machine, EstadoCorrerWaypointsAI stateAsset, AIStatesGroup group) : base(machine)
             {
-                asset = stateAsset;
-                agent = machine.GetComponent<NavMeshAgent>();
-                animator = machine.Animator;
-                customGroup = group as CustomNPCStateGroup;
+                this.asset = stateAsset;
+                this.agent = machine.GetComponent<NavMeshAgent>();
+                this.animator = machine.Animator;
+                this.customGroup = group as CustomNPCStateGroup;
             }
 
             public override void OnStateEnter()
             {
-                esperandoInicio = true;
+                // Dejamos que el NavMeshAgent controle la rotación de forma nativa
+                machine.RotateAgentManually = false;
 
-                // escuchar evento de animación
+                esperandoStartRun = true;
+
+                if (agent != null)
+                {
+                    agent.speed = asset.velocidadCarrera;
+                    agent.isStopped = true; // ⛔ NO SE MUEVE TODAVÍA
+
+                    agent.autoBraking = false;
+                    agent.stoppingDistance = 0f;
+                    agent.acceleration = 100f;
+                    agent.angularSpeed = 720f;
+
+                    var closest = FindClosestWaypointsGroup();
+                    currentGroup = closest.Key;
+
+                    if (currentGroup != null)
+                    {
+                        Debug.Log("Grupo de waypoints encontrado: " + currentGroup.gameObject.name);
+                        currentWaypointIndex = 0;
+                        recorridoFinalizado = false;
+                        
+                        // ✅ Le asignamos el destino DESDE EL INICIO para que sepa hacia dónde tiene que orientarse
+                        MoverAlSiguienteWaypoint();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("No se encontró AI Waypoints Group cercano.");
+                    }
+                }
+
+                // ✅ Le decimos al Animator que empiece el flujo (Idle -> Turn -> Run)
+                UpdateAnimator(true, false);
+
+                // ✅ ESCUCHAR EVENTO DE ANIMACIÓN (Opcional)
                 machine.CatchMessage("StartRun", () =>
                 {
-                    esperandoInicio = false;
-
-                    UpdateAnimator(true, false); // activar run
-                    MoverAlSiguienteWaypoint();  // empezar movimiento
+                    ActivarMovimiento();
                 });
             }
 
@@ -80,14 +103,37 @@ namespace UHFPS.Runtime.States
                 if (currentGroup == null || agent == null || recorridoFinalizado)
                     return;
 
+                // ⛔ NO HACER NADA FÍSICAMENTE HASTA QUE TERMINE DE GIRAR
+                if (esperandoStartRun)
+                {
+                    // ALTERNATIVA SEGURA: Si el evento falla, revisamos directamente si el Animator ya llegó al estado "run"
+                    // (En tu captura el estado se llama "run" en minúsculas).
+                    if (IsAnimation(0, "run") || IsAnimation(0, "Run"))
+                    {
+                        ActivarMovimiento();
+                    }
+                    return;
+                }
 
-                // Movimiento normal
                 UpdateAnimator(true, false);
 
                 if (!agent.pathPending && agent.remainingDistance <= asset.distanciaCambio)
                 {
                     MoverAlSiguienteWaypoint();
                 }
+            }
+
+            private void ActivarMovimiento()
+            {
+                if (!esperandoStartRun) return; // Si ya se activó, no hacer nada
+                
+                esperandoStartRun = false;
+
+                if (agent != null)
+                    agent.isStopped = false;
+
+                // NOTA: Ya no llamamos a MoverAlSiguienteWaypoint() aquí porque lo llamamos en OnStateEnter 
+                // para que el NavMeshAgent calcule el steeringTarget desde el principio y se oriente bien.
             }
 
             private void MoverAlSiguienteWaypoint()
@@ -97,15 +143,15 @@ namespace UHFPS.Runtime.States
                 AIWaypoint[] waypoints = currentGroup.GetComponentsInChildren<AIWaypoint>();
                 if (waypoints.Length == 0) return;
 
-                // 🛑 FIN DEL RECORRIDO (sin loop)
                 if (currentWaypointIndex >= waypoints.Length)
                 {
+                    Debug.Log("Recorrido finalizado.");
                     recorridoFinalizado = true;
 
                     agent.velocity = Vector3.zero;
                     agent.ResetPath();
 
-                    UpdateAnimator(false, true); // idle
+                    UpdateAnimator(false, true);
                     return;
                 }
 
@@ -113,6 +159,7 @@ namespace UHFPS.Runtime.States
 
                 if (destino != null)
                 {
+                    Debug.Log("Moviendo al waypoint índice: " + currentWaypointIndex);
                     agent.SetDestination(destino.transform.position);
                 }
 
@@ -124,19 +171,13 @@ namespace UHFPS.Runtime.States
                 if (animator == null || customGroup == null) return;
 
                 if (!string.IsNullOrEmpty(customGroup.RunParameter))
-                {
-                    try { animator.SetBool(customGroup.RunParameter, isRunning); } catch { }
-                }
+                    animator.SetBool(customGroup.RunParameter, isRunning);
 
                 if (!string.IsNullOrEmpty(customGroup.IdleParameter))
-                {
-                    try { animator.SetBool(customGroup.IdleParameter, isIdle); } catch { }
-                }
+                    animator.SetBool(customGroup.IdleParameter, isIdle);
 
                 if (agent != null)
-                {
-                    try { animator.SetFloat("Speed", agent.velocity.magnitude); } catch { }
-                }
+                    animator.SetFloat("Speed", agent.velocity.magnitude);
             }
 
             public override Transition[] OnGetTransitions()
