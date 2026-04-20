@@ -155,7 +155,7 @@ namespace UHFPS.Runtime
                     {
                         foreach (var interactStartPlayer in interactableObject.GetComponents<IInteractStartPlayer>())
                         {
-                            interactStartPlayer.InteractStartPlayer(transform.root.gameObject);
+                            interactStartPlayer.InteractStartPlayer(PlayerManager.gameObject);
                         }
 
                         foreach (var interactStart in interactableObject.GetComponents<IInteractStart>())
