@@ -10,6 +10,12 @@ namespace UHFPS.Runtime.States
         public float velocidadCarrera = 3.5f;
         public float distanciaCambio = 0.5f;
 
+        [Tooltip("Tiempo en segundos que se quedará en su lugar antes de empezar a moverse (Para dar tiempo a que tu animación inicial termine)")]
+        public float tiempoDeArranque = 1.5f;
+        
+        [Tooltip("¿Borrar el NPC del mapa cuando llegue a su destino final?")]
+        public bool destruirAlTerminar = true;
+
         public override FSMAIState InitState(NPCStateMachine machine, AIStatesGroup group)
         {
             return new EstadoCorrerWaypointsAI_State(machine, this, group);
@@ -29,9 +35,7 @@ namespace UHFPS.Runtime.States
             private int currentWaypointIndex = 0;
 
             private bool recorridoFinalizado = false;
-
-            // 🔥 NUEVO
-            private bool esperandoStartRun = true;
+            private float timerArranque;
 
             public EstadoCorrerWaypointsAI_State(NPCStateMachine machine, EstadoCorrerWaypointsAI stateAsset, AIStatesGroup group) : base(machine)
             {
@@ -43,19 +47,20 @@ namespace UHFPS.Runtime.States
 
             public override void OnStateEnter()
             {
-                // Dejamos que el NavMeshAgent controle la rotación de forma nativa
                 machine.RotateAgentManually = false;
 
-                esperandoStartRun = true;
+                timerArranque = asset.tiempoDeArranque;
 
                 if (agent != null)
                 {
                     agent.speed = asset.velocidadCarrera;
-                    agent.isStopped = true; // ⛔ NO SE MUEVE TODAVÍA
+                    
+                    // Si el timer es mayor a 0, congelamos mientras reproduce el grito/susto. Si es 0, corre.
+                    agent.isStopped = (timerArranque > 0f); 
 
                     agent.autoBraking = false;
                     agent.stoppingDistance = 0f;
-                    agent.acceleration = 100f;
+                    agent.acceleration = 120f;
                     agent.angularSpeed = 720f;
 
                     var closest = FindClosestWaypointsGroup();
@@ -63,27 +68,14 @@ namespace UHFPS.Runtime.States
 
                     if (currentGroup != null)
                     {
-                        Debug.Log("Grupo de waypoints encontrado: " + currentGroup.gameObject.name);
                         currentWaypointIndex = 0;
                         recorridoFinalizado = false;
-                        
-                        // ✅ Le asignamos el destino DESDE EL INICIO para que sepa hacia dónde tiene que orientarse
                         MoverAlSiguienteWaypoint();
-                    }
-                    else
-                    {
-                        Debug.LogWarning("No se encontró AI Waypoints Group cercano.");
                     }
                 }
 
-                // ✅ Le decimos al Animator que empiece el flujo (Idle -> Turn -> Run)
+                // Encendemos su Bool "Run" desde el Frame 1, que debería activar tu animación de Screamer -> Run
                 UpdateAnimator(true, false);
-
-                // ✅ ESCUCHAR EVENTO DE ANIMACIÓN (Opcional)
-                machine.CatchMessage("StartRun", () =>
-                {
-                    ActivarMovimiento();
-                });
             }
 
             public override void OnStateExit()
@@ -103,37 +95,25 @@ namespace UHFPS.Runtime.States
                 if (currentGroup == null || agent == null || recorridoFinalizado)
                     return;
 
-                // ⛔ NO HACER NADA FÍSICAMENTE HASTA QUE TERMINE DE GIRAR
-                if (esperandoStartRun)
+                // Lógica del "Susto Inicial" antes de empezar a pisar
+                if (timerArranque > 0f)
                 {
-                    // ALTERNATIVA SEGURA: Si el evento falla, revisamos directamente si el Animator ya llegó al estado "run"
-                    // (En tu captura el estado se llama "run" en minúsculas).
-                    if (IsAnimation(0, "run") || IsAnimation(0, "Run"))
+                    timerArranque -= Time.deltaTime;
+                    if (timerArranque <= 0f)
                     {
-                        ActivarMovimiento();
+                        // Se terminó la animación previa, soltamos las riendas y permitimos caminar
+                        agent.isStopped = false;
                     }
-                    return;
+                    return; // Retornamos para que no procese el avance mientras grita/posa
                 }
 
+                // Asegurar que el bool de correr siga vivo
                 UpdateAnimator(true, false);
 
                 if (!agent.pathPending && agent.remainingDistance <= asset.distanciaCambio)
                 {
                     MoverAlSiguienteWaypoint();
                 }
-            }
-
-            private void ActivarMovimiento()
-            {
-                if (!esperandoStartRun) return; // Si ya se activó, no hacer nada
-                
-                esperandoStartRun = false;
-
-                if (agent != null)
-                    agent.isStopped = false;
-
-                // NOTA: Ya no llamamos a MoverAlSiguienteWaypoint() aquí porque lo llamamos en OnStateEnter 
-                // para que el NavMeshAgent calcule el steeringTarget desde el principio y se oriente bien.
             }
 
             private void MoverAlSiguienteWaypoint()
@@ -145,21 +125,24 @@ namespace UHFPS.Runtime.States
 
                 if (currentWaypointIndex >= waypoints.Length)
                 {
-                    Debug.Log("Recorrido finalizado.");
                     recorridoFinalizado = true;
-
                     agent.velocity = Vector3.zero;
                     agent.ResetPath();
 
                     UpdateAnimator(false, true);
+                    
+                    // ACCIÓN FINAL: Desaparecer
+                    if (asset.destruirAlTerminar)
+                    {
+                        Destroy(machine.gameObject);
+                    }
+                    
                     return;
                 }
 
                 AIWaypoint destino = waypoints[currentWaypointIndex];
-
                 if (destino != null)
                 {
-                    Debug.Log("Moviendo al waypoint índice: " + currentWaypointIndex);
                     agent.SetDestination(destino.transform.position);
                 }
 
