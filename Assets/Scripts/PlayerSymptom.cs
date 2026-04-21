@@ -63,9 +63,23 @@ public class PlayerSymptom : MonoBehaviour
     // Restauramos el nombre original de la variable para recuperar el ajuste de velocidad
     public float BlurTransitionSpeed = 1f;
 
+    [Header("Symptom Sounds")]
+    public AudioClip[] BlurSounds;
+    public AudioClip[] BlackAndWhiteSounds;
+    public AudioClip[] VHSSounds;
+    public AudioClip[] DrunkSounds;
+    [Range(0f, 1f)]
+    public float SymptomsAudioVolume = 0.8f;
+
+    [Header("Intro Sequence")]
+    [Tooltip("Tiempo que espera al iniciar la escena para lanzar el síntoma (útil para saltar pantallas negras de carga)")]
+    public float IntroSymptomDelay = 2f;
+    public DialogueTrigger IntroDialogue;
+
     private float timer;
     private float timeAlive = 0f;
     private SymptomType currentActiveSymptom = SymptomType.None;
+    private AudioSource symptomAudioSource;
 
     // Utilizamos volúmenes separados internamente para que no haya conflictos de compatibilidad
     private GameObject blurVolumeObject;
@@ -101,6 +115,15 @@ public class PlayerSymptom : MonoBehaviour
     {
         timer = TimeBetweenSymptoms;
         playerStateMachine = GetComponent<PlayerStateMachine>();
+
+        // --- 0. CONFIGURAR FUENTE DE AUDIO ---
+        GameObject audioObj = new GameObject("SymptomAudioSource");
+        audioObj.transform.SetParent(transform);
+        audioObj.transform.localPosition = Vector3.zero;
+        symptomAudioSource = audioObj.AddComponent<AudioSource>();
+        symptomAudioSource.spatialBlend = 0f; // Sonido 2D (en la cabeza del jugador)
+        symptomAudioSource.volume = SymptomsAudioVolume;
+        symptomAudioSource.playOnAwake = false;
 
         // --- 1. CONFIGURAR VOLUMEN DE BLUR ---
         blurVolumeObject = new GameObject("SymptomVolume_Blur");
@@ -212,31 +235,77 @@ public class PlayerSymptom : MonoBehaviour
         symptomMotionBlur.quality.value = MotionBlurQuality.High;
 
         drunkVolume.profile = drunkProfile;
+
+        if (EnableSymptoms && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "IntroHouse")
+        {
+            StartCoroutine(IntroBlurRoutine());
+        }
+    }
+
+    private System.Collections.IEnumerator IntroBlurRoutine()
+    {
+        // Dale tiempo a la escena a quitar su pantalla de carga/negro inicial.
+        if (IntroSymptomDelay > 0f)
+        {
+            yield return new WaitForSeconds(IntroSymptomDelay);
+        }
+
+        currentActiveSymptom = SymptomType.Blur;
+        // Forzamos un timeAlive muy alto para que el targetWeight sea 1 (intensidad máxima). 
+        timeAlive = MinutesToMaxIntensity * 60f;
+        
+        // ¡Forzamos el volumen visual de inmediato! Así sonido e imagen arrancan violentamente al mismo tiempo.
+        if (blurVolume != null) blurVolume.weight = 1f;
+
+        if (BlurSounds != null && BlurSounds.Length > 0)
+        {
+            AudioClip clip = BlurSounds[Random.Range(0, BlurSounds.Length)];
+            if (clip != null)
+            {
+                symptomAudioSource.clip = clip;
+                symptomAudioSource.Play();
+            }
+        }
+
+        yield return new WaitForSeconds(1.07f);
+
+        if (currentActiveSymptom == SymptomType.Blur)
+        {
+            RelieveSymptomsTemporarily();
+            if (IntroDialogue != null) IntroDialogue.TriggerDialogue();
+            // Quitamos el Stop() brusco aquí. El sonido se desvanecerá naturalmente junto a la visión en Update.
+        }
     }
 
     private void ChooseRandomSymptom()
     {
-        System.Collections.Generic.List<SymptomType> available = new();
-        if (EnableBlurAndTunnel) available.Add(SymptomType.Blur);
-        if (EnableBlackAndWhite) available.Add(SymptomType.BlackAndWhite);
-        if (EnableVHSGlitch) available.Add(SymptomType.VHS);
-        if (EnableDrunkMotion) available.Add(SymptomType.Drunk);
+        if (EnableSymptoms && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "IntroHouse")
+        {
+            System.Collections.Generic.List<SymptomType> available = new();
+            if (EnableBlurAndTunnel) available.Add(SymptomType.Blur);
+            if (EnableBlackAndWhite) available.Add(SymptomType.BlackAndWhite);
+            if (EnableVHSGlitch) available.Add(SymptomType.VHS);
+            if (EnableDrunkMotion) available.Add(SymptomType.Drunk);
 
-        if (available.Count > 0)
-        {
-            int index = Random.Range(0, available.Count);
-            currentActiveSymptom = available[index];
-            Debug.Log("[PlayerSymptom] Nuevo síntoma activado: " + currentActiveSymptom);
+            if (available.Count > 0)
+            {
+                int index = Random.Range(0, available.Count);
+                currentActiveSymptom = available[index];
+                Debug.Log("[PlayerSymptom] Nuevo síntoma activado: " + currentActiveSymptom);
+            }
+            else
+            {
+                currentActiveSymptom = SymptomType.None;
+            }
         }
-        else
-        {
-            currentActiveSymptom = SymptomType.None;
-        }
+       
     }
 
     void Update()
     {
-        // Actualización dinámica en tiempo real
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "IntroHouse")
+            return; // Evitamos que el sistema normal de síntomas interfiera con la secuencia de introducción
+                    // Actualización dinámica en tiempo real
         if (symptomBlur != null) symptomBlur.BlurRadius.value = MaxBlurIntensity;
         if (symptomVignette != null) symptomVignette.intensity.value = MaxTunnelIntensity;
         if (symptomColorAdj != null) symptomColorAdj.saturation.value = MinSaturation;
@@ -333,6 +402,25 @@ public class PlayerSymptom : MonoBehaviour
             // Si camina a un costado, el stumbleInertia explotará esa inercia y lo arrastrará de más a los lados.
             playerStateMachine.AddForce(transform.right * (passiveSideDrift + stumbleInertia) * currentDrunkWeight, ForceMode.Force);
         }
+
+        // --- SINCRONIA: El volumen del audio sigue el desvanecimiento visual ---
+        if (symptomAudioSource != null)
+        {
+            float maxActiveWeight = 0f;
+            if (blurVolume != null && blurVolume.weight > maxActiveWeight) maxActiveWeight = blurVolume.weight;
+            if (bwVolume != null && bwVolume.weight > maxActiveWeight) maxActiveWeight = bwVolume.weight;
+            if (vhsVolume != null && vhsVolume.weight > maxActiveWeight) maxActiveWeight = vhsVolume.weight;
+            if (drunkVolume != null && drunkVolume.weight > maxActiveWeight) maxActiveWeight = drunkVolume.weight;
+
+            symptomAudioSource.volume = maxActiveWeight * SymptomsAudioVolume;
+            
+            // Pausar completamente para no gastar recursos si no hay síntoma visual
+            if (maxActiveWeight <= 0.001f && symptomAudioSource.isPlaying)
+            {
+                symptomAudioSource.Stop();
+                symptomAudioSource.clip = null;
+            }
+        }
     }
 
     // Efecto visual: aplicamos tambaleo a la cámara al final del frame para que el LookController no lo sobreescriba.
@@ -379,6 +467,7 @@ public class PlayerSymptom : MonoBehaviour
 
     void OnDestroy()
     {
+        if (symptomAudioSource != null) Destroy(symptomAudioSource.gameObject);
         if (blurVolumeObject != null) Destroy(blurVolumeObject);
         if (bwVolumeObject != null) Destroy(bwVolumeObject);
         if (vhsVolumeObject != null) Destroy(vhsVolumeObject);
