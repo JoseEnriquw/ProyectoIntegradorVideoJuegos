@@ -18,6 +18,18 @@ namespace UHFPS.Runtime.States
         [Tooltip("Radio extra por si le pasas muy por la espalda mientras te busca")]
         public float radioDeteccionCercana = 1.5f;
 
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            // Fuerza a la ventana de escena de Unity a redibujarse cuando cambias 
+            // tus valores en el asset (para que veas crecer/achicarse las esferas al instante)
+            UnityEditor.EditorApplication.delayCall += () =>
+            {
+                if (this != null) UnityEditor.SceneView.RepaintAll();
+            };
+        }
+#endif
+
         // Inicializador
         public override FSMAIState InitState(NPCStateMachine machine, AIStatesGroup group)
         {
