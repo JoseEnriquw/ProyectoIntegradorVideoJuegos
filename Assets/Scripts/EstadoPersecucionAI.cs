@@ -18,6 +18,9 @@ namespace UHFPS.Runtime.States
         [Tooltip("Radio extra por si le pasas muy por la espalda mientras te busca")]
         public float radioDeteccionCercana = 1.5f;
 
+        [Tooltip("Ajusta este valor para sincronizar la animación (1 = velocidad real, 0.5 = mitad de velocidad, etc)")]
+        public float multiplicadorVelocidadAnim = 1.0f;
+
         // Inicializador
         public override FSMAIState InitState(NPCStateMachine machine, AIStatesGroup group)
         {
@@ -145,7 +148,7 @@ namespace UHFPS.Runtime.States
                 // Le pasamos la magnitud de velocidad actual al parámetro de Multiplicador que configuraste
                 if (agent != null) 
                 {
-                    animator.SetFloat("Speed", agent.velocity.magnitude);
+                    animator.SetFloat("Speed", agent.velocity.magnitude * asset.multiplicadorVelocidadAnim);
                 }
             }
         }
