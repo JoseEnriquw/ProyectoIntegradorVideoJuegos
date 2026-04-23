@@ -49,6 +49,13 @@ namespace UHFPS.Runtime.States
                 this.animator = machine.Animator;
                 
                 this.customGroup = group as CustomNPCStateGroup;
+
+                // Si el NPC tiene asignado manualmente un grupo, lo guardamos desde el inicio.
+                var assigner = machine.GetComponent<NPCWaypointAssigner>();
+                if (assigner != null && assigner.grupoDeWaypoints != null)
+                {
+                    currentGroup = assigner.grupoDeWaypoints;
+                }
             }
 
             public override void OnStateEnter()
@@ -59,8 +66,13 @@ namespace UHFPS.Runtime.States
                 if (agent != null)
                 {
                     agent.speed = asset.velocidadPatrullaje;
-                    
-                    currentGroup = FindClosestWaypointsGroup().Key;
+
+                    // Si currentGroup ya fue asignado manualmente por NPCWaypointAssigner, lo respetamos.
+                    // Si no, buscamos el grupo más cercano como antes.
+                    if (currentGroup == null)
+                    {
+                        currentGroup = FindClosestWaypointsGroup().Key;
+                    }
                     
                     if (currentGroup != null)
                     {

@@ -307,14 +307,99 @@ namespace UHFPS.Runtime
 
         private void OnDrawGizmosSelected()
         {
-            if (!ShowSights)
-                return;
+            if (ShowSights)
+            {
+                // Dibujar el cono de visión real — igual a lo que usa SeesPlayer() en runtime
+                int segments = 30;
+                float halfFOV = SightsFOV * 0.5f;
+                Vector3 origin = transform.position;
 
-            Vector3 fovLeftDir = Quaternion.AngleAxis(-SightsFOV / 2, Vector3.up) * transform.forward;
-            Vector3 fovRightDir = Quaternion.AngleAxis(SightsFOV / 2, Vector3.up) * transform.forward;
+                // Rayos laterales del cono
+                Vector3 fovLeftDir  = Quaternion.AngleAxis(-halfFOV, Vector3.up) * transform.forward;
+                Vector3 fovRightDir = Quaternion.AngleAxis( halfFOV, Vector3.up) * transform.forward;
 
-            Gizmos.DrawRay(transform.position, fovLeftDir * SightsDistance);
-            Gizmos.DrawRay(transform.position, fovRightDir * SightsDistance);
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawRay(origin, fovLeftDir  * SightsDistance);
+                Gizmos.DrawRay(origin, fovRightDir * SightsDistance);
+
+                // Arco del extremo del cono (para ver claramente hasta dónde llega la detección)
+                Vector3 prevPoint = origin + fovLeftDir * SightsDistance;
+                for (int i = 1; i <= segments; i++)
+                {
+                    float t = (float)i / segments;
+                    float angle = Mathf.Lerp(-halfFOV, halfFOV, t);
+                    Vector3 dir = Quaternion.AngleAxis(angle, Vector3.up) * transform.forward;
+                    Vector3 nextPoint = origin + dir * SightsDistance;
+                    Gizmos.DrawLine(prevPoint, nextPoint);
+                    prevPoint = nextPoint;
+                }
+
+                // Relleno semitransparente del cono
+                Gizmos.color = new Color(1f, 1f, 0f, 0.05f);
+                for (int i = 0; i < segments; i++)
+                {
+                    float t0 = (float)i / segments;
+                    float t1 = (float)(i + 1) / segments;
+                    float angle0 = Mathf.Lerp(-halfFOV, halfFOV, t0);
+                    float angle1 = Mathf.Lerp(-halfFOV, halfFOV, t1);
+                    Vector3 dir0 = Quaternion.AngleAxis(angle0, Vector3.up) * transform.forward;
+                    Vector3 dir1 = Quaternion.AngleAxis(angle1, Vector3.up) * transform.forward;
+                    // Triángulo: origin → punto0 → punto1
+                    Gizmos.DrawLine(origin, origin + dir0 * SightsDistance);
+                    Gizmos.DrawLine(origin + dir0 * SightsDistance, origin + dir1 * SightsDistance);
+                }
+            }
+
+            // Dibuja todos los radios de detección leyendo directamente los assets del NPC
+            if (StatesAsset != null)
+            {
+                foreach (var stateData in StatesAsset.AIStates)
+                {
+                    // ─── Radio que INICIA la persecución (desde estado de patrulla) ───
+                    if (stateData.StateAsset is UHFPS.Runtime.States.EstadoPatrullajeAI patrullaje)
+                    {
+                        // Relleno naranja semitransparente
+                        Gizmos.color = new Color(1f, 0.5f, 0f, 0.15f);
+                        Gizmos.DrawSphere(transform.position, patrullaje.distanciaDeteccionCercana);
+                        // Borde naranja sólido
+                        Gizmos.color = new Color(1f, 0.5f, 0f, 1f);
+                        Gizmos.DrawWireSphere(transform.position, patrullaje.distanciaDeteccionCercana);
+#if UNITY_EDITOR
+                        UnityEditor.Handles.color = new Color(1f, 0.5f, 0f, 1f);
+                        UnityEditor.Handles.Label(
+                            transform.position + transform.right * patrullaje.distanciaDeteccionCercana,
+                            "Detección\ncercana (inicia)");
+#endif
+                    }
+
+                    // ─── Radio de seguimiento durante persecución ───
+                    if (stateData.StateAsset is UHFPS.Runtime.States.EstadoPersecucionAI persecucion)
+                    {
+                        // Relleno rojo semitransparente
+                        Gizmos.color = new Color(1f, 0f, 0f, 0.1f);
+                        Gizmos.DrawSphere(transform.position, persecucion.radioDeteccionCercana);
+                        // Borde rojo sólido
+                        Gizmos.color = new Color(1f, 0f, 0f, 1f);
+                        Gizmos.DrawWireSphere(transform.position, persecucion.radioDeteccionCercana);
+#if UNITY_EDITOR
+                        UnityEditor.Handles.color = new Color(1f, 0f, 0f, 1f);
+                        UnityEditor.Handles.Label(
+                            transform.position - transform.right * persecucion.radioDeteccionCercana,
+                            "Radio seguimiento\n(durante persec.)");
+#endif
+
+                        // ─── Radio de ataque ───
+                        Gizmos.color = new Color(1f, 0f, 1f, 1f);
+                        Gizmos.DrawWireSphere(transform.position, persecucion.distanciaDeAtaque);
+#if UNITY_EDITOR
+                        UnityEditor.Handles.color = new Color(1f, 0f, 1f, 1f);
+                        UnityEditor.Handles.Label(
+                            transform.position + Vector3.forward * persecucion.distanciaDeAtaque,
+                            "Ataque");
+#endif
+                    }
+                }
+            }
         }
 
         private void OnDrawGizmos()

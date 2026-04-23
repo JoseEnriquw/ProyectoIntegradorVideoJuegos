@@ -18,8 +18,17 @@ namespace UHFPS.Runtime.States
         [Tooltip("Radio extra por si le pasas muy por la espalda mientras te busca")]
         public float radioDeteccionCercana = 1.5f;
 
-        [Tooltip("Ajusta este valor para sincronizar la animación (1 = velocidad real, 0.5 = mitad de velocidad, etc)")]
-        public float multiplicadorVelocidadAnim = 1.0f;
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            // Fuerza a la ventana de escena de Unity a redibujarse cuando cambias 
+            // tus valores en el asset (para que veas crecer/achicarse las esferas al instante)
+            UnityEditor.EditorApplication.delayCall += () =>
+            {
+                if (this != null) UnityEditor.SceneView.RepaintAll();
+            };
+        }
+#endif
 
         // Inicializador
         public override FSMAIState InitState(NPCStateMachine machine, AIStatesGroup group)
@@ -95,8 +104,17 @@ namespace UHFPS.Runtime.States
                     if (InPlayerDistance(asset.distanciaDeAtaque) && coolDownAtaque <= 0f)
                     {
                         agent.isStopped = true;
-                        AtacarJugador();
-                        UpdateAnimator(false, false, true); // Idle falso mientras ataca
+                        
+                        // Si el jugador está en el círculo de sal, nos quedamos parados (no ataca)
+                        if (CirculoDeSal.jugadorProtegido)
+                        {
+                            UpdateAnimator(false, false, true); // Se queda en Idle gruñendo/esperando
+                        }
+                        else
+                        {
+                            AtacarJugador();
+                            UpdateAnimator(false, false, true); // Idle falso mientras ataca
+                        }
                     }
                     else
                     {
@@ -148,7 +166,7 @@ namespace UHFPS.Runtime.States
                 // Le pasamos la magnitud de velocidad actual al parámetro de Multiplicador que configuraste
                 if (agent != null) 
                 {
-                    animator.SetFloat("Speed", agent.velocity.magnitude * asset.multiplicadorVelocidadAnim);
+                    animator.SetFloat("Speed", agent.velocity.magnitude);
                 }
             }
         }
