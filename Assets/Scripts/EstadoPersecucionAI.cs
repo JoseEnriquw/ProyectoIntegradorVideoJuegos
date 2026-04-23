@@ -18,6 +18,18 @@ namespace UHFPS.Runtime.States
         [Tooltip("Radio extra por si le pasas muy por la espalda mientras te busca")]
         public float radioDeteccionCercana = 1.5f;
 
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            // Fuerza a la ventana de escena de Unity a redibujarse cuando cambias 
+            // tus valores en el asset (para que veas crecer/achicarse las esferas al instante)
+            UnityEditor.EditorApplication.delayCall += () =>
+            {
+                if (this != null) UnityEditor.SceneView.RepaintAll();
+            };
+        }
+#endif
+
         // Inicializador
         public override FSMAIState InitState(NPCStateMachine machine, AIStatesGroup group)
         {
@@ -92,8 +104,17 @@ namespace UHFPS.Runtime.States
                     if (InPlayerDistance(asset.distanciaDeAtaque) && coolDownAtaque <= 0f)
                     {
                         agent.isStopped = true;
-                        AtacarJugador();
-                        UpdateAnimator(false, false, true); // Idle falso mientras ataca
+                        
+                        // Si el jugador está en el círculo de sal, nos quedamos parados (no ataca)
+                        if (CirculoDeSal.jugadorProtegido)
+                        {
+                            UpdateAnimator(false, false, true); // Se queda en Idle gruñendo/esperando
+                        }
+                        else
+                        {
+                            AtacarJugador();
+                            UpdateAnimator(false, false, true); // Idle falso mientras ataca
+                        }
                     }
                     else
                     {
