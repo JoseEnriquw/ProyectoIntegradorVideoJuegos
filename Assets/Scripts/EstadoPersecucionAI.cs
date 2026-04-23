@@ -104,8 +104,17 @@ namespace UHFPS.Runtime.States
                     if (InPlayerDistance(asset.distanciaDeAtaque) && coolDownAtaque <= 0f)
                     {
                         agent.isStopped = true;
-                        AtacarJugador();
-                        UpdateAnimator(false, false, true); // Idle falso mientras ataca
+                        
+                        // Si el jugador está en el círculo de sal, nos quedamos parados (no ataca)
+                        if (CirculoDeSal.jugadorProtegido)
+                        {
+                            UpdateAnimator(false, false, true); // Se queda en Idle gruñendo/esperando
+                        }
+                        else
+                        {
+                            AtacarJugador();
+                            UpdateAnimator(false, false, true); // Idle falso mientras ataca
+                        }
                     }
                     else
                     {
