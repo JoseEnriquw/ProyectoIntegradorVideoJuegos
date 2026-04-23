@@ -16,86 +16,70 @@ namespace UHFPS.Runtime
         public bool ConnectEndWithStart;
         public bool ConnectAllWithAll;
 
-        private void Update()
+        private void OnValidate()
         {
-            if (transform.childCount == Waypoints.Count)
-                return;
+            RefreshWaypoints();
+        }
 
-            IList<AIWaypoint> newWaypoints = new List<AIWaypoint>();
+        private void RefreshWaypoints()
+        {
+            Waypoints.Clear();
+
             foreach (Transform t in transform)
             {
-                if(t.gameObject.TryGetComponent(out AIWaypoint waypoint))
-                    newWaypoints.Add(waypoint);
+                if (t.TryGetComponent(out AIWaypoint waypoint))
+                {
+                    Waypoints.Add(waypoint);
+                }
             }
-
-            Waypoints = new(newWaypoints);
         }
 
         void OnDrawGizmosSelected()
         {
-            if (Waypoints.Count > 0)
+            if (Waypoints.Count == 0) return;
+
+            if (ConnectedGizmos && ConnectAllWithAll)
             {
-                if (ConnectedGizmos && ConnectAllWithAll)
+                foreach (var curr in Waypoints)
                 {
-                    foreach (var curr in Waypoints)
+                    foreach (var other in Waypoints)
                     {
-                        Vector3 currPos = curr.transform.position;
-                        foreach (var other in Waypoints)
-                        {
-                            if (curr == other)
-                                continue;
+                        if (curr == other) continue;
 
-                            Vector3 otherPos = other.transform.position;
-                            Gizmos.color = Color.white;
-                            Gizmos.DrawLine(currPos, otherPos);
-                        }
-                    }
-
-                    return;
-                }
-
-                if (Waypoints.Count > 1)
-                {
-                    for (int i = 0; i < Waypoints.Count - 1; i++)
-                    {
-                        AIWaypoint curr = Waypoints[i];
-                        AIWaypoint next = Waypoints[i + 1];
-
-                        if (curr != null && next != null && ConnectedGizmos)
-                        {
-                            Vector3 currPos = curr.transform.position;
-                            Vector3 nextPos = next.transform.position;
-
-                            Gizmos.color = Color.white;
-                            Gizmos.DrawLine(currPos, nextPos);
-                        }
-
-                        if (next != null && (i + 1 >= Waypoints.Count - 1))
-                        {
-                            Vector3 nextPos = next.transform.position;
-
-                            if (ConnectEndWithStart)
-                            {
-                                Vector3 firstPos = Waypoints[0].transform.position;
-                                Gizmos.color = Color.white;
-                                Gizmos.DrawLine(firstPos, nextPos);
-                            }
-                        }
+                        Gizmos.color = Color.white;
+                        Gizmos.DrawLine(curr.transform.position, other.transform.position);
                     }
                 }
+                return;
+            }
+
+            for (int i = 0; i < Waypoints.Count - 1; i++)
+            {
+                if (!ConnectedGizmos) continue;
+
+                Gizmos.color = Color.white;
+                Gizmos.DrawLine(
+                    Waypoints[i].transform.position,
+                    Waypoints[i + 1].transform.position
+                );
+            }
+
+            if (ConnectEndWithStart && Waypoints.Count > 1)
+            {
+                Gizmos.color = Color.white;
+                Gizmos.DrawLine(
+                    Waypoints[Waypoints.Count - 1].transform.position,
+                    Waypoints[0].transform.position
+                );
             }
         }
 
         void OnDrawGizmos()
         {
-            if (Waypoints.Count > 0)
+            foreach (var curr in Waypoints)
             {
-                foreach (var curr in Waypoints)
-                {
-                    Vector3 currPos = curr.transform.position;
-                    Gizmos.color = GroupColor.Alpha(0.5f);
-                    Gizmos.DrawSphere(currPos, 0.1f);
-                }
+                Gizmos.color = GroupColor.Alpha(0.5f);
+                Gizmos.DrawSphere(curr.transform.position, 0.1f);
             }
         }
     }
