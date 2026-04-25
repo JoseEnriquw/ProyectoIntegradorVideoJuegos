@@ -15,6 +15,8 @@ MonoBehaviour:
   AIStates:
   - StateAsset: {fileID: 1612318153953408236}
     IsEnabled: 1
+  - StateAsset: {fileID: 1179669825605504178}
+    IsEnabled: 1
   IdleParameter: Idle
   WalkParameter: Walk
   RunParameter: Run
@@ -25,6 +27,24 @@ MonoBehaviour:
     min: 20
     max: 35
   RangoAtaque: 1.5
+--- !u!114 &1179669825605504178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed38a17368a9014e9a6a3fbb1404538, type: 3}
+  m_Name: ' (UHFPS.Runtime.States.EstadoVolarWaypointsAI)'
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.EstadoVolarWaypointsAI
+  velocidadVuelo: 5
+  distanciaCambio: 0.5
+  tiempoDeArranque: 0.5
+  destruirAlTerminar: 0
+  multiplicadorVelocidadAnim: 1
+  triggerDeVuelo: Start_fly
 --- !u!114 &1612318153953408236
 MonoBehaviour:
   m_ObjectHideFlags: 0
