@@ -67,7 +67,7 @@ namespace UHFPS.Custom
         }
 
         // Dibuja una cajita verde en la escena para que no lo pierdas de vista al editar
-        /*private void OnDrawGizmos()
+        private void OnDrawGizmos()
         {
             Collider col = GetComponent<Collider>();
             if (col != null && col.isTrigger)
@@ -77,6 +77,5 @@ namespace UHFPS.Custom
                 Gizmos.DrawCube(Vector3.zero, col.bounds.size / transform.lossyScale.x);
             }
         }
-        */
     }
 }
