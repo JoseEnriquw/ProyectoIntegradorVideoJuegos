@@ -236,28 +236,19 @@ public class PlayerSymptom : MonoBehaviour
 
         drunkVolume.profile = drunkProfile;
 
-/*
         if (EnableSymptoms && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "IntroHouse")
         {
             StartCoroutine(IntroBlurRoutine());
         }
-*/
-    }
-
-    public void TriggerIntroSymptom()
-    {
-        StartCoroutine(IntroBlurRoutine());
     }
 
     private System.Collections.IEnumerator IntroBlurRoutine()
     {
         // Dale tiempo a la escena a quitar su pantalla de carga/negro inicial.
-        /*
         if (IntroSymptomDelay > 0f)
         {
             yield return new WaitForSeconds(IntroSymptomDelay);
         }
-        */
 
         currentActiveSymptom = SymptomType.Blur;
         // Forzamos un timeAlive muy alto para que el targetWeight sea 1 (intensidad máxima). 

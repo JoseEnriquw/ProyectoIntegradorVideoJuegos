@@ -157,9 +157,6 @@ namespace UHFPS.Runtime
 
         public override void OnDynamicStart(PlayerManager player)
         {
-            if (player == null || player.MainCamera == null)
-                return;
-
             if (DynamicObject.IsLocked)
             {
                 TryUnlock();

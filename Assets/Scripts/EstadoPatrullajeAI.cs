@@ -12,9 +12,11 @@ namespace UHFPS.Runtime.States
         public float distanciaDeParada = 1f;
         public float tiempoEsperaEnPunto = 2f;
 
-        [Header("Configuracion de Persecucion desde Patrulla")]
         [Tooltip("Si el jugador está escondido, no lo detecta. Aquí puedes ajustar un 'oído' para que te sienta si estás pegado a él aunque no te vea de frente.")]
         public float distanciaDeteccionCercana = 1.5f;
+
+        [Tooltip("Ajusta este valor para sincronizar la animación (1 = velocidad real, 0.5 = mitad de velocidad, etc)")]
+        public float multiplicadorVelocidadAnim = 1.0f;
 
         public override FSMAIState InitState(NPCStateMachine machine, AIStatesGroup group)
         {
@@ -47,6 +49,13 @@ namespace UHFPS.Runtime.States
                 this.animator = machine.Animator;
                 
                 this.customGroup = group as CustomNPCStateGroup;
+
+                // Si el NPC tiene asignado manualmente un grupo, lo guardamos desde el inicio.
+                var assigner = machine.GetComponent<NPCWaypointAssigner>();
+                if (assigner != null && assigner.grupoDeWaypoints != null)
+                {
+                    currentGroup = assigner.grupoDeWaypoints;
+                }
             }
 
             public override void OnStateEnter()
@@ -57,8 +66,13 @@ namespace UHFPS.Runtime.States
                 if (agent != null)
                 {
                     agent.speed = asset.velocidadPatrullaje;
-                    
-                    currentGroup = FindClosestWaypointsGroup().Key;
+
+                    // Si currentGroup ya fue asignado manualmente por NPCWaypointAssigner, lo respetamos.
+                    // Si no, buscamos el grupo más cercano como antes.
+                    if (currentGroup == null)
+                    {
+                        currentGroup = FindClosestWaypointsGroup().Key;
+                    }
                     
                     if (currentGroup != null)
                     {
@@ -153,7 +167,7 @@ namespace UHFPS.Runtime.States
                 // Actualizamos el Multiplicador de velocidad de tu animación 
                 if (agent != null)
                 {
-                    animator.SetFloat("Speed", agent.velocity.magnitude);
+                    animator.SetFloat("Speed", agent.velocity.magnitude * asset.multiplicadorVelocidadAnim);
                 }
             }
 
