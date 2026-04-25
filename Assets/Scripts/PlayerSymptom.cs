@@ -18,8 +18,7 @@ public class PlayerSymptom : MonoBehaviour
     [Tooltip("If true, the symptoms will gradually increase over time.")]
     public bool EnableProgression = true;
     [Tooltip("How many minutes it takes to reach the maximum intensity.")]
-    public float MinutesToMaxIntensity = 5f;
-    
+    public float MinutesToMaxIntensity = 5f;    
     [Header("Symptom Types")]
     public bool EnableBlurAndTunnel = true;
     public bool EnableBlackAndWhite = true;
