@@ -11,7 +11,6 @@ public class SurvivalTimerAnnouncement : MonoBehaviour
     [Header("UI References")]
     public CanvasGroup AnnouncementGroup;
     public TMP_Text MessageText;
-
     [Header("Settings")]
     public GString MessageGloc;
     public float DisplayDuration = 5f;

@@ -14,7 +14,6 @@ public class PlayerIntroMovement : MonoBehaviour
     public float WaitBeforeStart = 0.5f;
     [Tooltip("Speed of the initial fade from black.")]
     public float FadeInSpeed = 2f;
-
     [Header("Door Interaction")]
     [Tooltip("The door that the player will open and pass through.")]
     public DynamicObject IntroDoor;

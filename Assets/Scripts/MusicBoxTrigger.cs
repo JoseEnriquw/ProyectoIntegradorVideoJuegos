@@ -13,7 +13,6 @@ public class MusicBoxTrigger : MonoBehaviour
     public bool TriggerOnce = true;
 
     private bool _hasTriggered = false;
-
     private void OnTriggerEnter(Collider other)
     {
         // Check if the music has already been triggered (if TriggerOnce is true)

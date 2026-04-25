@@ -7,7 +7,6 @@ using UHFPS.Tools;
 public class SurvivalTimer : MonoBehaviour
 {
     public static SurvivalTimer Instance { get; private set; }
-
     [Header("Timer Settings")]
     [Tooltip("Initial hours for the countdown.")]
     public float StartingHours = 0f;
