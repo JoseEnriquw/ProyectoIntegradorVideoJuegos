@@ -18,8 +18,7 @@ public class PlayerSymptom : MonoBehaviour
     [Tooltip("If true, the symptoms will gradually increase over time.")]
     public bool EnableProgression = true;
     [Tooltip("How many minutes it takes to reach the maximum intensity.")]
-    public float MinutesToMaxIntensity = 5f;
-    
+    public float MinutesToMaxIntensity = 5f;    
     [Header("Symptom Types")]
     public bool EnableBlurAndTunnel = true;
     public bool EnableBlackAndWhite = true;
@@ -236,19 +235,28 @@ public class PlayerSymptom : MonoBehaviour
 
         drunkVolume.profile = drunkProfile;
 
+/*
         if (EnableSymptoms && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "IntroHouse")
         {
             StartCoroutine(IntroBlurRoutine());
         }
+*/
+    }
+
+    public void TriggerIntroSymptom()
+    {
+        StartCoroutine(IntroBlurRoutine());
     }
 
     private System.Collections.IEnumerator IntroBlurRoutine()
     {
         // Dale tiempo a la escena a quitar su pantalla de carga/negro inicial.
+        /*
         if (IntroSymptomDelay > 0f)
         {
             yield return new WaitForSeconds(IntroSymptomDelay);
         }
+        */
 
         currentActiveSymptom = SymptomType.Blur;
         // Forzamos un timeAlive muy alto para que el targetWeight sea 1 (intensidad máxima). 
