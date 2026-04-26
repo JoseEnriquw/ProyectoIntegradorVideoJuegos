@@ -28,7 +28,7 @@ namespace UHFPS.Runtime.States
             {
                 // Congelamos las físicas del NPC por completo para que no camine solo
                 NavMeshAgent agent = machine.GetComponent<NavMeshAgent>();
-                if (agent != null)
+                if (agent != null && agent.isActiveAndEnabled && agent.isOnNavMesh)
                 {
                     agent.isStopped = true;
                     agent.velocity = Vector3.zero;
