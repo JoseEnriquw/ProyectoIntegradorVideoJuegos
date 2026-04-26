@@ -5,7 +5,6 @@ public class MedicalItemEffect : MonoBehaviour
     [Header("Medical Settings")]
     [Tooltip("Si está marcado, apaga el sistema por completo. Si no, solo resetea los síntomas pero volverán con el tiempo.")]
     public bool isPermanentCure = false;
-
     /// <summary>
     /// Esta función debe ser llamada desde el evento "On Use" del componente InventoryUseEvents de UHFPS.
     /// </summary>
