@@ -59,6 +59,16 @@ public class SurvivalTimerAnnouncement : MonoBehaviour
     private IEnumerator AnnouncementRoutine()
     {
         // Use the localized template if available, otherwise fallback to GString value
+        if (!isLocalized)
+        {
+            string currentVal = MessageGloc.Value;
+            if (!string.IsNullOrEmpty(currentVal) && currentVal != MessageGloc.GlocText)
+            {
+                localizedTemplate = currentVal;
+                isLocalized = true;
+            }
+        }
+
         string template = isLocalized ? localizedTemplate : MessageGloc.Value;
         
         if (string.IsNullOrEmpty(template))
