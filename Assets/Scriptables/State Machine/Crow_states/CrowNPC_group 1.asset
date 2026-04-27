@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8b672febe5180040a28550def7b74d4, type: 3}
+  m_Name: CrowNPC_group 1
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.CustomNPCStateGroup
+  AIStates:
+  - StateAsset: {fileID: 1612318153953408236}
+    IsEnabled: 1
+  - StateAsset: {fileID: 1179669825605504178}
+    IsEnabled: 1
+  IdleParameter: Idle
+  WalkParameter: Walk
+  RunParameter: Run
+  InteractParameter: Interact
+  AttackTrigger: Attack
+  InstakillOnCatch: 0
+  DamageRange:
+    min: 20
+    max: 35
+  RangoAtaque: 1.5
+--- !u!114 &1179669825605504178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ed38a17368a9014e9a6a3fbb1404538, type: 3}
+  m_Name: ' (UHFPS.Runtime.States.EstadoVolarWaypointsAI)'
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.EstadoVolarWaypointsAI
+  velocidadVuelo: 5
+  distanciaCambio: 0.5
+  tiempoDeArranque: 0.5
+  destruirAlTerminar: 1
+  multiplicadorVelocidadAnim: 1
+  triggerDeVuelo: Start_fly
+--- !u!114 &1612318153953408236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0837402268cf50e4f81fdd36dcc20c59, type: 3}
+  m_Name: ' (UHFPS.Runtime.States.EstadoEsperarTriggerAI)'
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.EstadoEsperarTriggerAI
