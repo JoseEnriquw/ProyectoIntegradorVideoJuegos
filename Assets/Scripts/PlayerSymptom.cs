@@ -287,7 +287,7 @@ public class PlayerSymptom : MonoBehaviour
 
     private void ChooseRandomSymptom()
     {
-        if (EnableSymptoms && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "IntroHouse")
+        if (EnableSymptoms && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "1 IntroHouse")
         {
             System.Collections.Generic.List<SymptomType> available = new();
             if (EnableBlurAndTunnel) available.Add(SymptomType.Blur);
@@ -311,7 +311,7 @@ public class PlayerSymptom : MonoBehaviour
 
     void Update()
     {
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "IntroHouse")
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "1 IntroHouse")
             return; // Evitamos que el sistema normal de síntomas interfiera con la secuencia de introducción
                     // Actualización dinámica en tiempo real
         if (symptomBlur != null) symptomBlur.BlurRadius.value = MaxBlurIntensity;
