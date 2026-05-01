@@ -21,6 +21,9 @@ namespace UHFPS.Custom
         [Tooltip("¿El trigger solo debe funcionar la primera vez que el jugador lo use?")]
         public bool activarUnaSolaVez = true;
 
+        [Tooltip("Audio opcional que sonará al mismo tiempo que el NPC cambia de estado (Ej: Graznido de cuervo)")]
+        public AudioSource audioAlActivar;
+
         private bool yaActivado = false;
 
         private void OnTriggerEnter(Collider other)
@@ -58,6 +61,13 @@ namespace UHFPS.Custom
             {
                 npcObjetivo.ChangeState(stateKeyAForzar);
                 yaActivado = true;
+
+                // Si hay un audio asignado, lo reproducimos
+                if (audioAlActivar != null)
+                {
+                    audioAlActivar.Play();
+                }
+
                 Debug.Log($"[Trigger] El NPC {npcObjetivo.name} ha sido forzado al estado {stateKeyAForzar}.");
             }
             else
