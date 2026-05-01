@@ -42,6 +42,17 @@ public class SceneTransitionTrigger : MonoBehaviour
             UnityEngine.SceneManagement.SceneManager.LoadScene(NextSceneName);
         }
     }
+    //public void Transition()
+    //{
+    //    if (string.IsNullOrEmpty(NextSceneName))
+    //    {
+    //        Debug.LogWarning("[SceneTransition] ¡No has configurado el nombre de la escena de destino!");
+    //        return;
+    //    }
+
+    //    Debug.Log("[SceneTransition] Cargando escena: " + NextSceneName);
+    //    UnityEngine.SceneManagement.SceneManager.LoadScene(NextSceneName);
+    //}
 
     /// <summary>
     /// Llama a esta función desde el evento de 'Lectura de Carta' para habilitar el paso.
