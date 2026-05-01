@@ -46,6 +46,12 @@ namespace UHFPS.Runtime.States
                 this.agent = machine.GetComponent<NavMeshAgent>();
                 this.animator = machine.Animator;
                 this.customGroup = group as CustomNPCStateGroup;
+
+                var assigner = machine.GetComponent<NPCWaypointAssigner>();
+                if (assigner != null && assigner.grupoDeWaypoints != null)
+                {
+                    currentGroup = assigner.grupoDeWaypoints;
+                }
             }
 
             public override void OnStateEnter()
@@ -66,8 +72,11 @@ namespace UHFPS.Runtime.States
                     agent.acceleration = 120f;
                     agent.angularSpeed = 720f;
 
-                    var closest = FindClosestWaypointsGroup();
-                    currentGroup = closest.Key;
+                    if (currentGroup == null)
+                    {
+                        var closest = FindClosestWaypointsGroup();
+                        currentGroup = closest.Key;
+                    }
 
                     if (currentGroup != null)
                     {
