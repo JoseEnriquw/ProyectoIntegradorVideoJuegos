@@ -57,35 +57,50 @@ public class SurvivalTimer : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            transform.SetParent(null); // Importante: DontDestroyOnLoad solo funciona en objetos raíz
             DontDestroyOnLoad(gameObject);
+
+            // Initialize timer values on Awake only for the first instance
+            maxTime = (StartingHours * 3600f) + (StartingMinutes * 60f);
+            timeRemaining = maxTime;
+            lastLogTime = timeRemaining;
         }
         else
         {
-            Destroy(gameObject);
-            return;
-        }
+            // Ya existe un timer de la escena anterior.
+            // Le pasamos las nuevas referencias de UI de la nueva escena antes de destruirnos.
+            Instance.TimerSlider = this.TimerSlider;
+            Instance.TimerText = this.TimerText;
+            Instance.HeartbeatImage = this.HeartbeatImage;
+            Instance.RebindUI();
 
-        // Initialize timer values on Awake only for the first instance
-        maxTime = (StartingHours * 3600f) + (StartingMinutes * 60f);
-        timeRemaining = maxTime;
-        lastLogTime = timeRemaining;
+            Destroy(gameObject);
+        }
     }
 
     void Start()
     {
-        Debug.Log($"[SurvivalTimer] Timer started with {TimeFormatted} ({timeRemaining} seconds)");
-        
-        // Initialize UI
+        if (Instance == this)
+        {
+            Debug.Log($"[SurvivalTimer] Timer started with {TimeFormatted} ({timeRemaining} seconds)");
+            RebindUI();
+        }
+    }
+
+    public void RebindUI()
+    {
+        // Re-vinculamos la UI con la de la nueva escena
         if (TimerSlider != null)
         {
             TimerSlider.maxValue = 1f;
-            TimerSlider.value = 1f;
         }
 
         if (HeartbeatImage != null)
         {
             heartbeatMat = HeartbeatImage.material;
         }
+        
+        UpdateUI(); // Forzamos una actualización inmediata para que la UI no se vea vacía
     }
 
     void Update()
@@ -93,7 +108,7 @@ public class SurvivalTimer : MonoBehaviour
         if (!TimerRunning || playerIsDead) return;
 
         // Check if game is paused through UHFPS GameManager
-        if (GameManager.Instance != null && GameManager.Instance.IsPaused) return;
+        if (GameManager.HasReference && GameManager.Instance.IsPaused) return;
 
         if (timeRemaining > 0)
         {

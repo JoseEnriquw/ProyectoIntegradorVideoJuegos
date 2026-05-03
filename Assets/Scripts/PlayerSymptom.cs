@@ -27,7 +27,7 @@ public class PlayerSymptom : MonoBehaviour
     
     [Header("Blur & Tunnel Intensities")]
     [Range(0f, 15f)]
-    public float MaxBlurIntensity = 6f;
+    public float MaxBlurIntensity = 2.5f;
     [Range(0f, 1f)]
     public float MaxTunnelIntensity = 0.6f;
     
@@ -311,9 +311,7 @@ public class PlayerSymptom : MonoBehaviour
 
     void Update()
     {
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "1 IntroHouse")
-            return; // Evitamos que el sistema normal de síntomas interfiera con la secuencia de introducción
-                    // Actualización dinámica en tiempo real
+        // Actualización dinámica en tiempo real
         if (symptomBlur != null) symptomBlur.BlurRadius.value = MaxBlurIntensity;
         if (symptomVignette != null) symptomVignette.intensity.value = MaxTunnelIntensity;
         if (symptomColorAdj != null) symptomColorAdj.saturation.value = MinSaturation;
@@ -342,11 +340,15 @@ public class PlayerSymptom : MonoBehaviour
             if (currentActiveSymptom == SymptomType.None)
             {
                 // Esperar a que pase el tiempo para el próximo síntoma aleatorio
-                timer -= Time.deltaTime;
-                if (timer <= 0f)
+                // Evitamos que el sistema aleatorio corra en la introhouse
+                if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "1 IntroHouse")
                 {
-                    ChooseRandomSymptom();
-                    timeAlive = 0f; // Reiniciar tiempo activo para el nuevo síntoma
+                    timer -= Time.deltaTime;
+                    if (timer <= 0f)
+                    {
+                        ChooseRandomSymptom();
+                        timeAlive = 0f; // Reiniciar tiempo activo para el nuevo síntoma
+                    }
                 }
                 targetWeight = 0f;
             }
