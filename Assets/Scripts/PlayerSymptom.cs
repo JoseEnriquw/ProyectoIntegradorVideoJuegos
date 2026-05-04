@@ -6,7 +6,7 @@ using UHFPS.Rendering; // For DualKawaseBlur, Scanlines
 
 public class PlayerSymptom : MonoBehaviour
 {
-    public enum SymptomType { None, Blur, BlackAndWhite, VHS, Drunk }
+    public enum SymptomType { None, Blur, BlackAndWhite, VHS, Drunk, Whispers }
     [Header("General Settings")]
     public bool EnableSymptoms = true;
 
@@ -24,6 +24,7 @@ public class PlayerSymptom : MonoBehaviour
     public bool EnableBlackAndWhite = true;
     public bool EnableVHSGlitch = true;
     public bool EnableDrunkMotion = true;
+    public bool EnableWhispers = true;
     
     [Header("Blur & Tunnel Intensities")]
     [Range(0f, 15f)]
@@ -67,8 +68,15 @@ public class PlayerSymptom : MonoBehaviour
     public AudioClip[] BlackAndWhiteSounds;
     public AudioClip[] VHSSounds;
     public AudioClip[] DrunkSounds;
+    public AudioClip[] WhispersSounds;
     [Range(0f, 1f)]
     public float SymptomsAudioVolume = 0.8f;
+
+    [Header("Cure Settings")]
+    public AudioClip CureSound;
+    public AudioClip CureSoundSecondary;
+    [Range(0f, 1f)]
+    public float CureSoundVolume = 1f;
 
     [Header("Intro Sequence")]
     [Tooltip("Tiempo que espera al iniciar la escena para lanzar el síntoma (útil para saltar pantallas negras de carga)")]
@@ -78,6 +86,7 @@ public class PlayerSymptom : MonoBehaviour
     private float timer;
     private float timeAlive = 0f;
     private SymptomType currentActiveSymptom = SymptomType.None;
+    private float whispersWeight = 0f;
     private AudioSource symptomAudioSource;
 
     // Utilizamos volúmenes separados internamente para que no haya conflictos de compatibilidad
@@ -123,6 +132,7 @@ public class PlayerSymptom : MonoBehaviour
         symptomAudioSource.spatialBlend = 0f; // Sonido 2D (en la cabeza del jugador)
         symptomAudioSource.volume = SymptomsAudioVolume;
         symptomAudioSource.playOnAwake = false;
+        symptomAudioSource.loop = true;
 
         // --- 1. CONFIGURAR VOLUMEN DE BLUR ---
         blurVolumeObject = new GameObject("SymptomVolume_Blur");
@@ -265,21 +275,13 @@ public class PlayerSymptom : MonoBehaviour
         // ¡Forzamos el volumen visual de inmediato! Así sonido e imagen arrancan violentamente al mismo tiempo.
         if (blurVolume != null) blurVolume.weight = 1f;
 
-        if (BlurSounds != null && BlurSounds.Length > 0)
-        {
-            AudioClip clip = BlurSounds[Random.Range(0, BlurSounds.Length)];
-            if (clip != null)
-            {
-                symptomAudioSource.clip = clip;
-                symptomAudioSource.Play();
-            }
-        }
+        if(EnableBlurAndTunnel )PlaySymptomSound(SymptomType.Blur);
 
         yield return new WaitForSeconds(1.07f);
 
         if (currentActiveSymptom == SymptomType.Blur)
         {
-            RelieveSymptomsTemporarily();
+            RelieveSymptomsTemporarily(false); // No reproducimos el sonido del suero aquí
             if (IntroDialogue != null) IntroDialogue.TriggerDialogue();
             // Quitamos el Stop() brusco aquí. El sonido se desvanecerá naturalmente junto a la visión en Update.
         }
@@ -294,12 +296,15 @@ public class PlayerSymptom : MonoBehaviour
             if (EnableBlackAndWhite) available.Add(SymptomType.BlackAndWhite);
             if (EnableVHSGlitch) available.Add(SymptomType.VHS);
             if (EnableDrunkMotion) available.Add(SymptomType.Drunk);
+            if (EnableWhispers) available.Add(SymptomType.Whispers);
 
             if (available.Count > 0)
             {
                 int index = Random.Range(0, available.Count);
                 currentActiveSymptom = available[index];
                 Debug.Log("[PlayerSymptom] Nuevo síntoma activado: " + currentActiveSymptom);
+
+                PlaySymptomSound(currentActiveSymptom);
             }
             else
             {
@@ -307,6 +312,40 @@ public class PlayerSymptom : MonoBehaviour
             }
         }
        
+    }
+
+    private void PlaySymptomSound(SymptomType symptomType)
+    {
+        AudioClip[] soundArray = null;
+
+        switch (symptomType)
+        {
+            case SymptomType.Blur:
+                soundArray = BlurSounds;
+                break;
+            case SymptomType.BlackAndWhite:
+                soundArray = BlackAndWhiteSounds;
+                break;
+            case SymptomType.VHS:
+                soundArray = VHSSounds;
+                break;
+            case SymptomType.Drunk:
+                soundArray = DrunkSounds;
+                break;
+            case SymptomType.Whispers:
+                soundArray = WhispersSounds;
+                break;
+        }
+
+        if (soundArray != null && soundArray.Length > 0)
+        {
+            AudioClip clip = soundArray[Random.Range(0, soundArray.Length)];
+            if (clip != null)
+            {
+                symptomAudioSource.clip = clip;
+                symptomAudioSource.Play();
+            }
+        }
     }
 
     void Update()
@@ -327,7 +366,7 @@ public class PlayerSymptom : MonoBehaviour
 
         float targetWeight = 0f;
 
-        if (!EnableSymptoms || (!EnableBlurAndTunnel && !EnableBlackAndWhite && !EnableVHSGlitch && !EnableDrunkMotion))
+        if (!EnableSymptoms || (!EnableBlurAndTunnel && !EnableBlackAndWhite && !EnableVHSGlitch && !EnableDrunkMotion && !EnableWhispers))
         {
             // RESET
             timer = TimeBetweenSymptoms;
@@ -395,6 +434,10 @@ public class PlayerSymptom : MonoBehaviour
             if (!EnableDrunkMotion && drunkVolume.weight > 0) drunkVolume.weight = 0f;
         }
 
+        float targetWhispers = (currentActiveSymptom == SymptomType.Whispers) ? targetWeight : 0f;
+        whispersWeight = Mathf.MoveTowards(whispersWeight, targetWhispers, Time.deltaTime * BlurTransitionSpeed);
+        if (!EnableWhispers && whispersWeight > 0) whispersWeight = 0f;
+
         float currentDrunkWeight = drunkVolume != null ? drunkVolume.weight : 0f;
 
         // Físicas del movimiento de borracho: torpeza y forcejeos direccionales
@@ -421,11 +464,13 @@ public class PlayerSymptom : MonoBehaviour
             if (bwVolume != null && bwVolume.weight > maxActiveWeight) maxActiveWeight = bwVolume.weight;
             if (vhsVolume != null && vhsVolume.weight > maxActiveWeight) maxActiveWeight = vhsVolume.weight;
             if (drunkVolume != null && drunkVolume.weight > maxActiveWeight) maxActiveWeight = drunkVolume.weight;
+            if (whispersWeight > maxActiveWeight) maxActiveWeight = whispersWeight;
 
-            symptomAudioSource.volume = maxActiveWeight * SymptomsAudioVolume;
+            // Curva cuadrática (al cuadrado) para que el audio desaparezca más rápido en la cola y sincronice mejor con lo visual
+            symptomAudioSource.volume = Mathf.Pow(maxActiveWeight, 2f) * SymptomsAudioVolume;
             
-            // Pausar completamente para no gastar recursos si no hay síntoma visual
-            if (maxActiveWeight <= 0.001f && symptomAudioSource.isPlaying)
+            // Pausar completamente para no gastar recursos si no hay síntoma activo y su peso visual ya bajó a cero
+            if (currentActiveSymptom == SymptomType.None && maxActiveWeight <= 0.001f && symptomAudioSource.isPlaying)
             {
                 symptomAudioSource.Stop();
                 symptomAudioSource.clip = null;
@@ -467,12 +512,52 @@ public class PlayerSymptom : MonoBehaviour
     /// Alivia temporalmente los síntomas.
     /// Resetea el tiempo para el próximo síntoma.
     /// </summary>
-    public void RelieveSymptomsTemporarily()
+    public void RelieveSymptomsTemporarily(bool playCureSound = true)
     {
         currentActiveSymptom = SymptomType.None;
         timeAlive = 0f;
         timer = Mathf.Max(TimeBetweenSymptoms, 1f); // Aseguramos usar al menos 1 segundo en caso de despiste
+
+        if (playCureSound && (CureSound != null || CureSoundSecondary != null))
+        {
+            StartCoroutine(PlayCureSoundsRoutine());
+        }
+
         Debug.Log($"[PlayerSymptom] Síntomas curados. Esperando {timer} segundos para el próximo!");
+    }
+
+    private System.Collections.IEnumerator PlayCureSoundsRoutine()
+    {
+        float delayForSecond = 0f;
+
+        if (CureSound != null)
+        {
+            GameObject tempAudioObj = new GameObject("CureSoundTemp1");
+            AudioSource tempSource = tempAudioObj.AddComponent<AudioSource>();
+            tempSource.spatialBlend = 0f; // Sonido 2D
+            tempSource.volume = CureSoundVolume;
+            tempSource.clip = CureSound;
+            tempSource.Play();
+            Destroy(tempAudioObj, CureSound.length + 0.1f);
+
+            delayForSecond = CureSound.length;
+        }
+
+        if (delayForSecond > 0f)
+        {
+            yield return new WaitForSeconds(delayForSecond);
+        }
+
+        if (CureSoundSecondary != null)
+        {
+            GameObject tempAudioObj2 = new GameObject("CureSoundTemp2");
+            AudioSource tempSource2 = tempAudioObj2.AddComponent<AudioSource>();
+            tempSource2.spatialBlend = 0f; // Sonido 2D
+            tempSource2.volume = CureSoundVolume;
+            tempSource2.clip = CureSoundSecondary;
+            tempSource2.Play();
+            Destroy(tempAudioObj2, CureSoundSecondary.length + 0.1f);
+        }
     }
 
     void OnDestroy()
