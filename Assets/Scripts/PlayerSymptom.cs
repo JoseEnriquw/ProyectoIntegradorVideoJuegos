@@ -440,6 +440,21 @@ public class PlayerSymptom : MonoBehaviour
 
         float currentDrunkWeight = drunkVolume != null ? drunkVolume.weight : 0f;
 
+        // --- GESTIÓN DE LA HABILIDAD DE CORRER ---
+        if (playerStateMachine != null)
+        {
+            bool hasSymptom = (currentActiveSymptom != SymptomType.None);
+            
+            // Habilitar/Deshabilitar el estado "Run" (correr)
+            playerStateMachine.SetStateEnabled(PlayerStateMachine.RUN_STATE, !hasSymptom);
+
+            // Si está corriendo justo cuando le agarra el síntoma, lo forzamos a dejar de correr
+            if (hasSymptom && playerStateMachine.IsCurrent(PlayerStateMachine.RUN_STATE))
+            {
+                playerStateMachine.ChangeToIdle();
+            }
+        }
+
         // Físicas del movimiento de borracho: torpeza y forcejeos direccionales
         if (EnableDrunkMotion && playerStateMachine != null && currentDrunkWeight > 0f)
         {
