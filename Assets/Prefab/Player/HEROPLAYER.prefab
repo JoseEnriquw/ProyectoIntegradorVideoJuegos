@@ -4099,7 +4099,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1103982259154441552}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0023099696, y: 0.05519758, z: -0.0058707595, w: 0.9984555}
+  m_LocalRotation: {x: 0.0023062564, y: 0.055199362, z: -0.005869493, w: 0.9984555}
   m_LocalPosition: {x: 13.25, y: 1.52, z: 38.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4436,7 +4436,8 @@ MonoBehaviour:
   EnableBlackAndWhite: 1
   EnableVHSGlitch: 1
   EnableDrunkMotion: 1
-  MaxBlurIntensity: 6
+  EnableWhispers: 1
+  MaxBlurIntensity: 2
   MaxTunnelIntensity: 1
   MinSaturation: -100
   MaxScanlinesStrength: 1
@@ -4451,11 +4452,19 @@ MonoBehaviour:
   MaxMotionBlur: 1
   BlurTransitionSpeed: 1
   BlurSounds:
-  - {fileID: 8300000, guid: be68ffee32184e74581917aa064f1c32, type: 3}
-  BlackAndWhiteSounds: []
-  VHSSounds: []
-  DrunkSounds: []
+  - {fileID: 8300000, guid: 807bd6cb603cab5428bfe8b61ee55167, type: 3}
+  BlackAndWhiteSounds:
+  - {fileID: 8300000, guid: 8e5f9dcb6dffc724e8129e6bcc031d1e, type: 3}
+  VHSSounds:
+  - {fileID: 8300000, guid: 56628a9e166917c4bbfa865ad1fe5647, type: 3}
+  DrunkSounds:
+  - {fileID: 8300000, guid: fbed9284d29ca534fab77abcda37cf0f, type: 3}
+  WhispersSounds:
+  - {fileID: 8300000, guid: d89076ba668653e48b48681c124140f9, type: 3}
   SymptomsAudioVolume: 0.8
+  CureSound: {fileID: 8300000, guid: 855df7719db0eac4788b2181dd8bc31d, type: 3}
+  CureSoundSecondary: {fileID: 8300000, guid: 3a54a2fc2b087d243aa0333a629f5809, type: 3}
+  CureSoundVolume: 1
   IntroSymptomDelay: 2
   IntroDialogue: {fileID: 0}
 --- !u!114 &7816669487478243005
