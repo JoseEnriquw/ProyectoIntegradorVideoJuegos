@@ -4084,6 +4084,7 @@ GameObject:
   - component: {fileID: 7816669487478243005}
   - component: {fileID: 8640296335583824991}
   - component: {fileID: 1426395394781492319}
+  - component: {fileID: 8258170527081636672}
   m_Layer: 3
   m_Name: HEROPLAYER
   m_TagString: Player
@@ -4467,6 +4468,21 @@ MonoBehaviour:
   CureSoundVolume: 1
   IntroSymptomDelay: 2
   IntroDialogue: {fileID: 0}
+  PreSymptomVoices:
+  - {fileID: 8300000, guid: 8e5cddff80ec13b4e846b2ed7417a171, type: 3}
+  - {fileID: 8300000, guid: 267d78c570ec2e844bcc756944bedb7a, type: 3}
+  - {fileID: 8300000, guid: be68ffee32184e74581917aa064f1c32, type: 3}
+  PreSymptomVoiceChance: 0.5
+  DuringSymptomVoices:
+  - {fileID: 11400000, guid: 0f3797ed05ac2184faa4396a405b7327, type: 2}
+  - {fileID: 11400000, guid: 9bafcb87a71b2e54d876ee0ad6bb37cd, type: 2}
+  - {fileID: 11400000, guid: d83abe1cb6ef7e940a299d8b84399127, type: 2}
+  - {fileID: 11400000, guid: 76bef4f630ae59841817311fa8ed4a1b, type: 2}
+  - {fileID: 11400000, guid: 0b1e6ec83cf651d428995cf085f40b63, type: 2}
+  - {fileID: 11400000, guid: 2fe4fa85047baaf4f8ddb985d25a6ccf, type: 2}
+  DuringSymptomVoiceChance: 0.5
+  MinDuringSymptomDelay: 5
+  MaxDuringSymptomDelay: 15
 --- !u!114 &7816669487478243005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4555,6 +4571,24 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &8258170527081636672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103982259154441552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b794fe029830acb49a05021f62dcb629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EquiparItemAlInicio
+  itemName: Flashlight
+  escenaEspecifica: 2 Bosque
+  desequiparAlAcabarBateria: 1
+  audioSourceEspecifico: {fileID: 1106651766812792837}
+  dialogoAlEquipar: {fileID: 0}
+  dialogoBateriaAgotada: {fileID: 11400000, guid: 2b738cf3a538d754bb3d88aafa53d500, type: 2}
 --- !u!1 &1114209525893783469
 GameObject:
   m_ObjectHideFlags: 0
@@ -8596,8 +8630,8 @@ Light:
   serializedVersion: 12
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2.5
-  m_Range: 8
+  m_Intensity: 15
+  m_Range: 20
   m_SpotAngle: 80
   m_InnerSpotAngle: 70
   m_CookieSize2D: {x: 10, y: 10}
@@ -16831,7 +16865,7 @@ MonoBehaviour:
   HandleGravityTime: 0.2
   HandleForwardAngle: -100
   FlameChangeSpeed: 3
-  FlameLightIntensity: 1
+  FlameLightIntensity: 8
   FlameAlphaFadeStart: 0.2
   FlameFlickerLimits:
     min: 0.5
@@ -16851,7 +16885,7 @@ MonoBehaviour:
   UseHandleVariation: 1
   InfiniteFuel: 0
   FuelReloadTime: 1
-  FuelLife: 60
+  FuelLife: 120
   FuelPercentage:
     Value: 100
   LanternDrawState: Lantern_Draw
@@ -33776,7 +33810,7 @@ MonoBehaviour:
       Name: Reload Items
       GUID: 401b335b9c9c4c5588e0ec76a2faef23
   FlashlightLight: {fileID: 5010872761066986833}
-  LightIntensity: 2.5
+  LightIntensity: 4
   InfiniteBattery: 0
   BatteryLife: 100
   BatteryPercentage:
