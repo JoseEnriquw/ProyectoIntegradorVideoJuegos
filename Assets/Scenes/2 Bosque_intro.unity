@@ -20,13 +20,13 @@ RenderSettings:
   m_FogDensity: 0.005
   m_LinearFogStart: 0
   m_LinearFogEnd: 400
-  m_AmbientSkyColor: {r: 0.8037735, g: 0.8037735, b: 0.8037735, a: 0.6}
+  m_AmbientSkyColor: {r: 0.15471691, g: 0.15471691, b: 0.15471691, a: 0.6}
   m_AmbientEquatorColor: {r: 0.23579474, g: 0.26282853, b: 0.28235295, a: 0.6}
   m_AmbientGroundColor: {r: 0.09411766, g: 0.08297215, b: 0.068111464, a: 0.6}
   m_AmbientIntensity: 2.89
-  m_AmbientMode: 0
-  m_SubtractiveShadowColor: {r: 0.98490566, g: 0.98490566, b: 0.98490566, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_AmbientMode: 3
+  m_SubtractiveShadowColor: {r: 1, g: 1, b: 1, a: 1}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 26bb5809c37bcd840b65819c7d043158, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -8446,7 +8446,7 @@ Terrain:
   serializedVersion: 6
   m_TerrainData: {fileID: 15600000, guid: 53b5508bd72da294190c88d683ad69d6, type: 2}
   m_TreeDistance: 5000
-  m_TreeBillboardDistance: 50
+  m_TreeBillboardDistance: 209
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
   m_DetailObjectDistance: 80
@@ -9622,7 +9622,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 12
   m_Type: 1
-  m_Color: {r: 1, g: 0.9415095, b: 0.9415095, a: 1}
+  m_Color: {r: 0.04150939, g: 0.04150939, b: 0.04150939, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -9685,13 +9685,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194554255}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5217886, y: 0.47729734, z: -0.47813106, w: 0.52087873}
+  m_LocalRotation: {x: 0.509372, y: -0.4884295, z: -0.4667534, w: -0.53302735}
   m_LocalPosition: {x: -103.32999, y: 20.02, z: -141.09998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 121487589}
-  m_LocalEulerAnglesHint: {x: 90.1, y: 85, z: 0}
+  m_LocalEulerAnglesHint: {x: 272.6, y: 85, z: 0}
 --- !u!114 &1194554258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15549,7 +15549,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1808432450
 Transform:
   m_ObjectHideFlags: 0
@@ -18023,7 +18023,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -1366.677, y: 0}
+  m_SizeDelta: {x: -1596.3105, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2068998861
 MonoBehaviour:
