@@ -36,6 +36,21 @@ public class PlayerIntroMovement : MonoBehaviour
 
     private void Start()
     {
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "1 IntroHouse")
+        {
+            // Fix para el editor: como el Player es un Prefab y está configurado en "Manually" 
+            // (para que la intro funcione en la escena 1), si le damos Play directo a la escena 2,
+            // nunca nadie lo desbloquea ni quita la pantalla negra.
+            // Con esto forzamos que se destrabe y haga el fade-in si no venimos de una pantalla de carga.
+            if (!SaveGameManager.GameActuallyLoad && PlayerPresenceManager.HasReference)
+            {
+                PlayerPresenceManager.Instance.UnlockPlayer();
+            }
+
+            Destroy(this);
+            return;
+        }
+
         if (IntroDoorDialogue != null)
         {
             // We set the dialogue trigger to 'Event' type so it doesn't trigger 

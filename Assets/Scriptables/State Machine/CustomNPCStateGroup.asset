@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.EstadoPatrullajeAI
   velocidadPatrullaje: 1.5
   distanciaDeParada: 1
-  tiempoEsperaEnPunto: 4
+  tiempoEsperaEnPunto: 3
   distanciaDeteccionCercana: 1.5
+  multiplicadorVelocidadAnim: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,7 +43,7 @@ MonoBehaviour:
   DamageRange:
     min: 20
     max: 35
-  RangoAtaque: 1.5
+  RangoAtaque: 1
 --- !u!114 &6608096893714432505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55,7 +56,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f6444d5e576e2740bd836c58f03384a, type: 3}
   m_Name: ' (UHFPS.Runtime.States.EstadoPersecucionAI)'
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.EstadoPersecucionAI
-  velocidadPersecucion: 3.5
+  velocidadPersecucion: 3
   distanciaDeAtaque: 1
-  tiempoParaRendirse: 4
+  tiempoParaRendirse: 3
   radioDeteccionCercana: 2
