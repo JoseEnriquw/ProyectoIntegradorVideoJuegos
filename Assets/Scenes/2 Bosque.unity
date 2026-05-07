@@ -4700,6 +4700,60 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 425724, guid: 953345a209e4fe7428046236259c9c7f, type: 3}
   m_PrefabInstance: {fileID: 202789829}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &203131569
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 203131570}
+  - component: {fileID: 203131571}
+  m_Layer: 6
+  m_Name: Respuesta
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &203131570
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203131569}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 568601497}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &203131571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203131569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463818b2825d6b0439a2f9ff3b9ab45f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.DialogueTrigger
+  TriggerType: 0
+  DialogueType: 0
+  DialogueContinue: 0
+  Dialogue: {fileID: 11400000, guid: 6b5731176a42b674982c8796cb5eb1aa, type: 2}
+  DialogueAudio: {fileID: 917429894}
+  BinderName: 
+  Repeatable: 0
+  RangedDialogue: 0
+  ResetDialogueWhenOut: 0
+  LocalDialogueRange: 0
 --- !u!1 &207610423
 GameObject:
   m_ObjectHideFlags: 0
@@ -5516,8 +5570,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 245807445}
-  - component: {fileID: 245807444}
-  - component: {fileID: 245807443}
   - component: {fileID: 245807442}
   - component: {fileID: 245807441}
   m_Layer: 0
@@ -5540,13 +5592,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.DialogueTrigger
   TriggerType: 0
-  DialogueType: 1
+  DialogueType: 0
   DialogueContinue: 0
   Dialogue: {fileID: 11400000, guid: 787d59718a74b6241820215c266e3573, type: 2}
   DialogueAudio: {fileID: 917429894}
   BinderName: Yo
   Repeatable: 1
-  RangedDialogue: 1
+  RangedDialogue: 0
   ResetDialogueWhenOut: 1
   LocalDialogueRange: 2.7
 --- !u!65 &245807442
@@ -5570,63 +5622,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &245807443
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 245807440}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &245807444
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 245807440}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &245807445
 Transform:
   m_ObjectHideFlags: 0
@@ -6043,8 +6038,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 263920896}
-  - component: {fileID: 263920895}
-  - component: {fileID: 263920894}
   - component: {fileID: 263920893}
   - component: {fileID: 263920892}
   m_Layer: 0
@@ -6067,13 +6060,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.DialogueTrigger
   TriggerType: 0
-  DialogueType: 1
+  DialogueType: 0
   DialogueContinue: 0
   Dialogue: {fileID: 11400000, guid: 731228e13d6dbc54bb13453fb7fb2f6c, type: 2}
   DialogueAudio: {fileID: 917429894}
   BinderName: yo
   Repeatable: 0
-  RangedDialogue: 1
+  RangedDialogue: 0
   ResetDialogueWhenOut: 1
   LocalDialogueRange: 2.7
 --- !u!65 &263920893
@@ -6097,63 +6090,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &263920894
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 263920891}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &263920895
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 263920891}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &263920896
 Transform:
   m_ObjectHideFlags: 0
@@ -11275,7 +11211,7 @@ MonoBehaviour:
   DialogueAudio: {fileID: 917429894}
   BinderName: yo
   Repeatable: 0
-  RangedDialogue: 1
+  RangedDialogue: 0
   ResetDialogueWhenOut: 1
   LocalDialogueRange: 2.7
 --- !u!1001 &463164012
@@ -13890,6 +13826,262 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3465257235179019537, guid: f5c9a9c08a3dba543b46c72331f4e267, type: 3}
   m_PrefabInstance: {fileID: 566914598}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &568601496
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1529955589}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 100.000015
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.582306
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.6019993
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 8.7630005
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.4603553
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.45333272
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.54400903
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.53536594
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -89.098
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 460.658
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -1.154
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+      propertyPath: m_Name
+      value: CartaAbuelo
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 203131570}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 568601501}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 568601500}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 568601499}
+  m_SourcePrefab: {fileID: 100100000, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+--- !u!4 &568601497 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+  m_PrefabInstance: {fileID: 568601496}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &568601498 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 30833a476ffa69644b485364ee93a72f, type: 3}
+  m_PrefabInstance: {fileID: 568601496}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &568601499
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568601498}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.0020397622, y: 0.002932089, z: 0.00000049537294}
+  m_Center: {x: -4.074537e-10, y: -4.0745377e-10, z: -4.31648e-18}
+--- !u!114 &568601500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568601498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1193cc42578b51349ae91df02822e87c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.InteractableItem
+  <UniqueID>k__BackingField:
+    Id: 6c40203a7b5c43e5b40045dab53462d8
+  InteractableType: 2
+  MessageType: 0
+  ExamineType: 2
+  ExamineRotate: 3
+  DisableType: 0
+  PickupItem:
+    m_GUID: 
+    m_Item:
+      Name: 
+      GUID: 
+      Icon: {fileID: 0}
+    m_Section:
+      Name: 
+      GUID: 
+  ItemCustomData:
+    Type: 0
+    JsonData: 
+    ItemAttributes:
+      Items: []
+  InteractTitle:
+    GlocText: '*Carta del Abuelo'
+    NormalText: 
+  ExamineTitle:
+    GlocText: dialogs.bosque.carta.abuelo
+    NormalText: 
+  PaperText:
+    GlocText: 
+    NormalText: 
+  HintMessage:
+    GlocText: 
+    NormalText: 
+  MessageTime: 3
+  Quantity: 1
+  SlotsToExpand: 1
+  ExpandRows: 0
+  UseInventoryTitle: 0
+  ExamineInventoryTitle: 0
+  ShowExamineTitle: 1
+  ShowFloatingIcon: 0
+  TakeFromExamine: 0
+  AllowCursorExamine: 0
+  IsPaper: 0
+  AutoShortcut: 0
+  AutoEquip: 0
+  UseExamineZooming: 1
+  ExamineZoomLimits:
+    min: 0.3
+    max: 0.4
+  ExamineDistance: 0.4
+  UseFaceRotation: 0
+  FaceRotation: {x: 0, y: 0, z: 0}
+  UseControlPoint: 0
+  ControlPoint: {x: 0, y: 0.1, z: 0}
+  CollidersEnable: []
+  CollidersDisable: []
+  ExamineHotspot:
+    HotspotTransform: {fileID: 0}
+    Enabled: 1
+    ResetHotspot: 0
+    HotspotAction:
+      m_PersistentCalls:
+        m_Calls: []
+  PickupSound:
+    audioClip: {fileID: 0}
+    volume: 0
+  ExamineSound:
+    audioClip: {fileID: 0}
+    volume: 0
+  ExamineHintSound:
+    audioClip: {fileID: 0}
+    volume: 0
+  OnTakeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExamineStartEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 568601501}
+        m_TargetAssemblyTypeName: UHFPS.Runtime.DialogueTrigger, Assembly-CSharp
+        m_MethodName: TriggerDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnExamineEndEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 203131571}
+        m_TargetAssemblyTypeName: UHFPS.Runtime.DialogueTrigger, Assembly-CSharp
+        m_MethodName: TriggerDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  IsExamined: 0
+  references:
+    version: 2
+    RefIds: []
+--- !u!114 &568601501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568601498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463818b2825d6b0439a2f9ff3b9ab45f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.DialogueTrigger
+  TriggerType: 1
+  DialogueType: 0
+  DialogueContinue: 1
+  Dialogue: {fileID: 11400000, guid: dbe8e06d840b8e84c802a4f68a76cfd9, type: 2}
+  DialogueAudio: {fileID: 917429894}
+  BinderName: 
+  Repeatable: 1
+  RangedDialogue: 0
+  ResetDialogueWhenOut: 0
+  LocalDialogueRange: 0
 --- !u!1001 &573361180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23891,8 +24083,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 773601908}
-  - component: {fileID: 773601907}
-  - component: {fileID: 773601906}
   - component: {fileID: 773601905}
   - component: {fileID: 773601904}
   m_Layer: 0
@@ -23915,13 +24105,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.DialogueTrigger
   TriggerType: 0
-  DialogueType: 1
+  DialogueType: 0
   DialogueContinue: 0
   Dialogue: {fileID: 11400000, guid: dc070909ffbd29b45b5ee01dec8d4451, type: 2}
   DialogueAudio: {fileID: 917429894}
   BinderName: yo
   Repeatable: 1
-  RangedDialogue: 1
+  RangedDialogue: 0
   ResetDialogueWhenOut: 1
   LocalDialogueRange: 2.7
 --- !u!65 &773601905
@@ -23945,63 +24135,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &773601906
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773601903}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &773601907
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773601903}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &773601908
 Transform:
   m_ObjectHideFlags: 0
@@ -27094,14 +27227,6 @@ PrefabInstance:
     - target: {fileID: 392298473334064942, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
       propertyPath: FlameLightIntensity
       value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 711631138593581972, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
-      propertyPath: IntroDialogue
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 711631138593581972, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
-      propertyPath: TimeBetweenSymptoms
-      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 1103982259154441552, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
       propertyPath: m_Name
@@ -41329,6 +41454,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 568601497}
   - {fileID: 1282707299}
   - {fileID: 23454855}
   - {fileID: 712509666}
@@ -44385,8 +44511,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1653271671}
-  - component: {fileID: 1653271670}
-  - component: {fileID: 1653271669}
   - component: {fileID: 1653271668}
   - component: {fileID: 1653271672}
   m_Layer: 0
@@ -44417,63 +44541,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &1653271669
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653271667}
-  m_Enabled: 0
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_MaskInteraction: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &1653271670
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653271667}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &1653271671
 Transform:
   m_ObjectHideFlags: 0
@@ -44502,13 +44569,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.DialogueTrigger
   TriggerType: 0
-  DialogueType: 1
+  DialogueType: 0
   DialogueContinue: 0
   Dialogue: {fileID: 11400000, guid: 75c053b1545cbec4bb61a19918b09205, type: 2}
   DialogueAudio: {fileID: 917429894}
   BinderName: yo
   Repeatable: 0
-  RangedDialogue: 1
+  RangedDialogue: 0
   ResetDialogueWhenOut: 1
   LocalDialogueRange: 2.7
 --- !u!1001 &1657863607
@@ -44779,15 +44846,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 68687efd6439b9d429d4ca3e3778ffc8, type: 3}
       propertyPath: m_LocalScale.x
-      value: 34.948997
+      value: 33.23475
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 68687efd6439b9d429d4ca3e3778ffc8, type: 3}
       propertyPath: m_LocalScale.y
-      value: 34.948997
+      value: 23.68388
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 68687efd6439b9d429d4ca3e3778ffc8, type: 3}
       propertyPath: m_LocalScale.z
-      value: 34.948997
+      value: 23.894707
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 68687efd6439b9d429d4ca3e3778ffc8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -54662,18 +54729,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 2117787227}
-        m_TargetAssemblyTypeName: UHFPS.Runtime.DialogueTrigger, Assembly-CSharp
-        m_MethodName: TriggerDialogue
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!65 &2117787226
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -54708,13 +54763,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.DialogueTrigger
   TriggerType: 0
-  DialogueType: 1
+  DialogueType: 0
   DialogueContinue: 0
   Dialogue: {fileID: 11400000, guid: 295c5f4ed8f4d5847abd1c84d18ccfeb, type: 2}
   DialogueAudio: {fileID: 917429894}
   BinderName: yo
   Repeatable: 0
-  RangedDialogue: 1
+  RangedDialogue: 0
   ResetDialogueWhenOut: 1
   LocalDialogueRange: 2.7
 --- !u!1001 &2119495030
