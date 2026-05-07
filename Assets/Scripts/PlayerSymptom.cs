@@ -83,6 +83,25 @@ public class PlayerSymptom : MonoBehaviour
     public float IntroSymptomDelay = 2f;
     public DialogueTrigger IntroDialogue;
 
+    [Header("Player Voice Reactions")]
+    [Tooltip("Audios que el PJ puede decir JUSTO ANTES de que arranque el síntoma.")]
+    public AudioClip[] PreSymptomVoices;
+    [Tooltip("Probabilidad (0 a 1) de que diga algo antes del síntoma.")]
+    [Range(0f, 1f)] public float PreSymptomVoiceChance = 0.5f;
+
+    [Tooltip("Diálogos (con subtítulos) que el PJ puede decir MIENTRAS dure el síntoma.")]
+    public UHFPS.Scriptable.DialogueAsset[] DuringSymptomVoices;
+    [Tooltip("Probabilidad (0 a 1) de que diga algo durante el síntoma.")]
+    [Range(0f, 1f)] public float DuringSymptomVoiceChance = 0.5f;
+    public float MinDuringSymptomDelay = 5f;
+    public float MaxDuringSymptomDelay = 15f;
+
+    private AudioSource voiceAudioSource;
+    private bool isStartingSymptom = false;
+    private Coroutine symptomRoutine;
+    private Coroutine duringVoiceRoutine;
+    private DialogueTrigger[] duringSymptomTriggers;
+
     private float timer;
     private float timeAlive = 0f;
     private SymptomType currentActiveSymptom = SymptomType.None;
@@ -133,6 +152,24 @@ public class PlayerSymptom : MonoBehaviour
         symptomAudioSource.volume = SymptomsAudioVolume;
         symptomAudioSource.playOnAwake = false;
         symptomAudioSource.loop = true;
+
+        GameObject voiceObj = new GameObject("PlayerVoiceSource");
+        voiceObj.transform.SetParent(transform);
+        voiceObj.transform.localPosition = Vector3.zero;
+        voiceAudioSource = voiceObj.AddComponent<AudioSource>();
+        voiceAudioSource.spatialBlend = 0f; // 2D (en la cabeza del jugador)
+        voiceAudioSource.playOnAwake = false;
+        voiceAudioSource.loop = false;
+
+        // Instanciar los Triggers ocultos para usar DialogueAssets en el during
+        if (DuringSymptomVoices != null && DuringSymptomVoices.Length > 0)
+        {
+            duringSymptomTriggers = new DialogueTrigger[DuringSymptomVoices.Length];
+            for (int i = 0; i < DuringSymptomVoices.Length; i++)
+            {
+                duringSymptomTriggers[i] = CrearTriggerOculto(DuringSymptomVoices[i], $"DuringSymptom_{i}");
+            }
+        }
 
         // --- 1. CONFIGURAR VOLUMEN DE BLUR ---
         blurVolumeObject = new GameObject("SymptomVolume_Blur");
@@ -255,7 +292,10 @@ public class PlayerSymptom : MonoBehaviour
 
     public void TriggerIntroSymptom()
     {
-        StartCoroutine(IntroBlurRoutine());
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "1 IntroHouse")
+        {
+            StartCoroutine(IntroBlurRoutine());
+        }
     }
 
     private System.Collections.IEnumerator IntroBlurRoutine()
@@ -373,6 +413,7 @@ public class PlayerSymptom : MonoBehaviour
             timeAlive = 0f;
             currentActiveSymptom = SymptomType.None;
             targetWeight = 0f;
+            StopVoiceRoutines();
         }
         else
         {
@@ -382,11 +423,13 @@ public class PlayerSymptom : MonoBehaviour
                 // Evitamos que el sistema aleatorio corra en la introhouse
                 if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "1 IntroHouse")
                 {
-                    timer -= Time.deltaTime;
-                    if (timer <= 0f)
+                    if (!isStartingSymptom)
                     {
-                        ChooseRandomSymptom();
-                        timeAlive = 0f; // Reiniciar tiempo activo para el nuevo síntoma
+                        timer -= Time.deltaTime;
+                        if (timer <= 0f)
+                        {
+                            symptomRoutine = StartCoroutine(StartRandomSymptomRoutine());
+                        }
                     }
                 }
                 targetWeight = 0f;
@@ -518,6 +561,7 @@ public class PlayerSymptom : MonoBehaviour
     /// </summary>
     public void CureSymptomsFully()
     {
+        StopVoiceRoutines();
         EnableSymptoms = false;
         currentActiveSymptom = SymptomType.None;
         timeAlive = 0f;
@@ -529,6 +573,7 @@ public class PlayerSymptom : MonoBehaviour
     /// </summary>
     public void RelieveSymptomsTemporarily(bool playCureSound = true)
     {
+        StopVoiceRoutines();
         currentActiveSymptom = SymptomType.None;
         timeAlive = 0f;
         timer = Mathf.Max(TimeBetweenSymptoms, 1f); // Aseguramos usar al menos 1 segundo en caso de despiste
@@ -575,8 +620,92 @@ public class PlayerSymptom : MonoBehaviour
         }
     }
 
+    private System.Collections.IEnumerator StartRandomSymptomRoutine()
+    {
+        isStartingSymptom = true;
+
+        // 1. Probabilidad de audio PRE-Síntoma
+        if (PreSymptomVoices != null && PreSymptomVoices.Length > 0 && Random.value <= PreSymptomVoiceChance)
+        {
+            AudioClip clip = PreSymptomVoices[Random.Range(0, PreSymptomVoices.Length)];
+            if (clip != null)
+            {
+                voiceAudioSource.clip = clip;
+                voiceAudioSource.Play();
+                // Esperamos a que termine de hablar antes de arrancar el síntoma visual
+                yield return new WaitForSeconds(clip.length);
+            }
+        }
+
+        // 2. Arranca el síntoma
+        ChooseRandomSymptom();
+        timeAlive = 0f; 
+        isStartingSymptom = false;
+
+        // 3. Probabilidad de audio DURANTE el Síntoma
+        if (currentActiveSymptom != SymptomType.None && DuringSymptomVoices != null && DuringSymptomVoices.Length > 0 && Random.value <= DuringSymptomVoiceChance)
+        {
+            float delay = Random.Range(MinDuringSymptomDelay, MaxDuringSymptomDelay);
+            duringVoiceRoutine = StartCoroutine(PlayDuringSymptomVoiceRoutine(delay));
+        }
+    }
+
+    private DialogueTrigger CrearTriggerOculto(UHFPS.Scriptable.DialogueAsset asset, string nombre)
+    {
+        if (asset == null) return null;
+
+        GameObject go = new GameObject($"HiddenDialogue_{nombre}");
+        go.transform.SetParent(transform);
+        
+        DialogueTrigger dt = go.AddComponent<DialogueTrigger>();
+        dt.Dialogue = asset;
+        dt.DialogueAudio = voiceAudioSource;
+        dt.DialogueType = DialogueTrigger.DialogueTypeEnum.Local;
+        dt.TriggerType = DialogueTrigger.TriggerTypeEnum.Event;
+        
+        return dt;
+    }
+
+    private System.Collections.IEnumerator PlayDuringSymptomVoiceRoutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (currentActiveSymptom != SymptomType.None) // Por si se curó mientras esperaba
+        {
+            if (duringSymptomTriggers != null && duringSymptomTriggers.Length > 0)
+            {
+                DialogueTrigger dt = duringSymptomTriggers[Random.Range(0, duringSymptomTriggers.Length)];
+                if (dt != null)
+                {
+                    if (DialogueSystem.Instance != null && DialogueSystem.Instance.IsPlaying)
+                    {
+                        DialogueSystem.Instance.StopDialogue();
+                    }
+                    dt.TriggerDialogue();
+                }
+            }
+        }
+    }
+
+    private void StopVoiceRoutines()
+    {
+        if (symptomRoutine != null) StopCoroutine(symptomRoutine);
+        if (duringVoiceRoutine != null) StopCoroutine(duringVoiceRoutine);
+        isStartingSymptom = false;
+        
+        if (DialogueSystem.Instance != null && DialogueSystem.Instance.IsPlaying)
+        {
+            DialogueSystem.Instance.StopDialogue();
+        }
+        else if (voiceAudioSource != null && voiceAudioSource.isPlaying)
+        {
+            voiceAudioSource.Stop();
+        }
+    }
+
     void OnDestroy()
     {
+        if (voiceAudioSource != null) Destroy(voiceAudioSource.gameObject);
         if (symptomAudioSource != null) Destroy(symptomAudioSource.gameObject);
         if (blurVolumeObject != null) Destroy(blurVolumeObject);
         if (bwVolumeObject != null) Destroy(bwVolumeObject);

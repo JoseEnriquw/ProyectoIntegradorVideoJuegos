@@ -4431,13 +4431,13 @@ MonoBehaviour:
   EnableSymptoms: 1
   TimeBetweenSymptoms: 60
   EnableProgression: 1
-  MinutesToMaxIntensity: 1
+  MinutesToMaxIntensity: 2
   EnableBlurAndTunnel: 1
   EnableBlackAndWhite: 1
   EnableVHSGlitch: 1
   EnableDrunkMotion: 1
   EnableWhispers: 1
-  MaxBlurIntensity: 2
+  MaxBlurIntensity: 1.5
   MaxTunnelIntensity: 1
   MinSaturation: -100
   MaxScanlinesStrength: 1
@@ -4467,6 +4467,21 @@ MonoBehaviour:
   CureSoundVolume: 1
   IntroSymptomDelay: 2
   IntroDialogue: {fileID: 0}
+  PreSymptomVoices:
+  - {fileID: 8300000, guid: 8e5cddff80ec13b4e846b2ed7417a171, type: 3}
+  - {fileID: 8300000, guid: 267d78c570ec2e844bcc756944bedb7a, type: 3}
+  - {fileID: 8300000, guid: be68ffee32184e74581917aa064f1c32, type: 3}
+  PreSymptomVoiceChance: 0.5
+  DuringSymptomVoices:
+  - {fileID: 11400000, guid: 0f3797ed05ac2184faa4396a405b7327, type: 2}
+  - {fileID: 11400000, guid: 9bafcb87a71b2e54d876ee0ad6bb37cd, type: 2}
+  - {fileID: 11400000, guid: d83abe1cb6ef7e940a299d8b84399127, type: 2}
+  - {fileID: 11400000, guid: 76bef4f630ae59841817311fa8ed4a1b, type: 2}
+  - {fileID: 11400000, guid: 0b1e6ec83cf651d428995cf085f40b63, type: 2}
+  - {fileID: 11400000, guid: 2fe4fa85047baaf4f8ddb985d25a6ccf, type: 2}
+  DuringSymptomVoiceChance: 0.5
+  MinDuringSymptomDelay: 5
+  MaxDuringSymptomDelay: 15
 --- !u!114 &7816669487478243005
 MonoBehaviour:
   m_ObjectHideFlags: 0

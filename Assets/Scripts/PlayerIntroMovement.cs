@@ -36,6 +36,12 @@ public class PlayerIntroMovement : MonoBehaviour
 
     private void Start()
     {
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "1 IntroHouse")
+        {
+            Destroy(this);
+            return;
+        }
+
         if (IntroDoorDialogue != null)
         {
             // We set the dialogue trigger to 'Event' type so it doesn't trigger 
