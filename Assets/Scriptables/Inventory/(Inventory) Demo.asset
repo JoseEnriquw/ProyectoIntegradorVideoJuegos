@@ -583,8 +583,8 @@ MonoBehaviour:
       - requiredCurrentAmount: 0
         requiredSecondAmount: 0
         resultItemAmount: 0
-        combineWithID: cf13f3bc791848a8aea27460ef8698b2
-        resultCombineID: 4705720836b0423c85205c0451f666a1
+        combineWithID: 0c35b2be35154de4a4b58e06ed67870c
+        resultCombineID: d77a985710814c96952652f7de601993
         playerItemIndex: 0
         inheritCustomData: 0
         inheritFromSecond: 0
@@ -721,6 +721,112 @@ MonoBehaviour:
           GlocText: item.description.healingpotion
           NormalText: "Una poderosa mezcla elaborada con Aceite Medicinal y Hierba
             Medicinal. Proporciona una r\xE1pida y significativa mejora de salud."
+    - GUID: 0c35b2be35154de4a4b58e06ed67870c
+      SectionGUID: bc38a49db3da43c8928dfbde7c7d1f1c
+      Title: Salt
+      Description: 
+      Width: 1
+      Height: 1
+      Padding: 0
+      Orientation: 0
+      FlipDirection: 0
+      Icon: {fileID: 21300000, guid: 93ae367cdc298bc40922a685728e554b, type: 3}
+      ItemObject:
+        GUID: 67bb9b84bdba41c48b022889613c2e69
+        Object: {fileID: 8126164532107960826, guid: 67bb9b84bdba41c48b022889613c2e69, type: 3}
+      Settings:
+        isUsable: 1
+        isStackable: 1
+        isExaminable: 0
+        isCombinable: 1
+        isDroppable: 0
+        isDiscardable: 1
+        canBindShortcut: 0
+        alwaysShowQuantity: 0
+        applyAttributesOnUse: 0
+      UsableSettings:
+        usableType: 2
+        playerItemIndex: 0
+        healthPoints: 0
+        removeOnUse: 1
+        customData:
+          Type: 0
+          JsonData: 
+          ItemAttributes:
+            Items: []
+      Properties:
+        maxStack: 3
+      CombineSettings:
+      - requiredCurrentAmount: 0
+        requiredSecondAmount: 0
+        resultItemAmount: 0
+        combineWithID: 4361f4a241d64621a30135a552163296
+        resultCombineID: d77a985710814c96952652f7de601993
+        playerItemIndex: 0
+        inheritCustomData: 0
+        inheritFromSecond: 0
+        inheritKey: 
+        customData:
+          Type: 0
+          JsonData: 
+          ItemAttributes:
+            Items: []
+        itemType: 0
+        keepAfterCombine: 0
+        removeSecondItem: 0
+        eventAfterCombine: 0
+        selectAfterCombine: 0
+        haveCustomData: 0
+      LocalizationSettings:
+        titleKey:
+          GlocText: inventoryItems.Salt.Tittle
+          NormalText: 
+        descriptionKey:
+          GlocText: inventoryItems.salt.description
+          NormalText: 
+    - GUID: d77a985710814c96952652f7de601993
+      SectionGUID: bc38a49db3da43c8928dfbde7c7d1f1c
+      Title: Milagrosa
+      Description: 
+      Width: 1
+      Height: 1
+      Padding: 0
+      Orientation: 0
+      FlipDirection: 0
+      Icon: {fileID: 21300000, guid: 536374a5adf6d2d48a1f7fc84f1c60b5, type: 3}
+      ItemObject:
+        GUID: b50a1abbe6d144045a3390cb37e5b7c6
+        Object: {fileID: 2176514173986464246, guid: b50a1abbe6d144045a3390cb37e5b7c6, type: 3}
+      Settings:
+        isUsable: 1
+        isStackable: 1
+        isExaminable: 1
+        isCombinable: 0
+        isDroppable: 1
+        isDiscardable: 1
+        canBindShortcut: 0
+        alwaysShowQuantity: 0
+        applyAttributesOnUse: 0
+      UsableSettings:
+        usableType: 2
+        playerItemIndex: 0
+        healthPoints: 0
+        removeOnUse: 1
+        customData:
+          Type: 0
+          JsonData: 
+          ItemAttributes:
+            Items: []
+      Properties:
+        maxStack: 3
+      CombineSettings: []
+      LocalizationSettings:
+        titleKey:
+          GlocText: 
+          NormalText: 
+        descriptionKey:
+          GlocText: 
+          NormalText: 
   - Section:
       Name: Reload Items
       GUID: 401b335b9c9c4c5588e0ec76a2faef23
