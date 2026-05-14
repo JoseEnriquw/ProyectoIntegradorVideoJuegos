@@ -4439,6 +4439,7 @@ MonoBehaviour:
   EnableVHSGlitch: 1
   EnableDrunkMotion: 1
   EnableWhispers: 1
+  EnableRain: 1
   MaxBlurIntensity: 1.5
   MaxTunnelIntensity: 1
   MinSaturation: -100
@@ -4452,6 +4453,8 @@ MonoBehaviour:
   MaxDrunkSidewaysForce: 50
   DrunkStumbleMultiplier: 35
   MaxMotionBlur: 1
+  MaxRainIntensity: 1
+  RainType: 8
   BlurTransitionSpeed: 1
   BlurSounds:
   - {fileID: 8300000, guid: 807bd6cb603cab5428bfe8b61ee55167, type: 3}
@@ -4463,6 +4466,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fbed9284d29ca534fab77abcda37cf0f, type: 3}
   WhispersSounds:
   - {fileID: 8300000, guid: d89076ba668653e48b48681c124140f9, type: 3}
+  RainSounds:
+  - {fileID: 8300000, guid: 807bd6cb603cab5428bfe8b61ee55167, type: 3}
   SymptomsAudioVolume: 0.8
   CureSound: {fileID: 8300000, guid: 855df7719db0eac4788b2181dd8bc31d, type: 3}
   CureSoundSecondary: {fileID: 8300000, guid: 3a54a2fc2b087d243aa0333a629f5809, type: 3}
@@ -4512,7 +4517,7 @@ MonoBehaviour:
         - m_Target: {fileID: 8640296335583824991}
           m_TargetAssemblyTypeName: MedicalItemEffect, Assembly-CSharp
           m_MethodName: ApplyCure
-          m_Mode: 1
+          m_Mode: 4
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4536,7 +4541,7 @@ MonoBehaviour:
         - m_Target: {fileID: 5586739231898408724}
           m_TargetAssemblyTypeName: ConsumableActions, Assembly-CSharp
           m_MethodName: ConsumeSalt
-          m_Mode: 1
+          m_Mode: 4
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4560,24 +4565,24 @@ MonoBehaviour:
         - m_Target: {fileID: 5586739231898408724}
           m_TargetAssemblyTypeName: ConsumableActions, Assembly-CSharp
           m_MethodName: ConsumeSalt
-          m_Mode: 1
+          m_Mode: 4
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 0
+            m_FloatArgument: 120
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 8640296335583824991}
           m_TargetAssemblyTypeName: MedicalItemEffect, Assembly-CSharp
           m_MethodName: ApplyCure
-          m_Mode: 1
+          m_Mode: 4
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
-            m_FloatArgument: 0
+            m_FloatArgument: 120
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
