@@ -41,21 +41,18 @@ namespace UHFPS.Runtime.States
             
             private bool isWaiting = false;
             private float waitTimer = 0f;
+            // Rotación congelada: la guardamos cuando el NPC llega al waypoint
+            // y la aplicamos cada frame para que no se gire mientras espera.
+            private Quaternion rotacionCongelada;
 
             public EstadoPatrullajeAI_State(NPCStateMachine machine, EstadoPatrullajeAI stateAsset, AIStatesGroup group) : base(machine) 
             { 
                 this.asset = stateAsset;
                 this.agent = machine.GetComponent<NavMeshAgent>();
                 this.animator = machine.Animator;
-                
                 this.customGroup = group as CustomNPCStateGroup;
-
-                // Si el NPC tiene asignado manualmente un grupo, lo guardamos desde el inicio.
-                var assigner = machine.GetComponent<NPCWaypointAssigner>();
-                if (assigner != null && assigner.grupoDeWaypoints != null)
-                {
-                    currentGroup = assigner.grupoDeWaypoints;
-                }
+                // El grupo de waypoints se resuelve en OnStateEnter para garantizar
+                // que todas las referencias de Unity estén inicializadas.
             }
 
             public override void OnStateEnter()
@@ -67,21 +64,28 @@ namespace UHFPS.Runtime.States
                 {
                     agent.speed = asset.velocidadPatrullaje;
 
-                    // Si currentGroup ya fue asignado manualmente por NPCWaypointAssigner, lo respetamos.
-                    // Si no, buscamos el grupo más cercano como antes.
+                    // Siempre re-leemos el assigner en OnStateEnter para evitar problemas
+                    // de orden de inicialización de Unity (el constructor corre antes de Awake/Start).
+                    var assigner = machine.GetComponent<NPCWaypointAssigner>();
+                    if (assigner != null && assigner.grupoDeWaypoints != null)
+                    {
+                        currentGroup = assigner.grupoDeWaypoints;
+                    }
+
                     if (currentGroup == null)
                     {
                         currentGroup = FindClosestWaypointsGroup().Key;
+                        if (currentGroup == null)
+                        {
+                            Debug.LogWarning($"[{machine.name}] EstadoPatrullajeAI: No se encontró un grupo de waypoints. " +
+                                "Asegurate de agregar el componente NPCWaypointAssigner al NPC y arrastrar su ruta.");
+                        }
                     }
                     
                     if (currentGroup != null)
                     {
                         currentWaypointIndex = 0;
                         MoverAlSiguienteWaypoint();
-                    }
-                    else
-                    {
-                        Debug.LogWarning("EstadoPatrullajeAI: No se ha encontrado ningún grupo de waypoints en la escena cercano al NPC.");
                     }
                 }
             }
@@ -106,13 +110,16 @@ namespace UHFPS.Runtime.States
 
                 if (isWaiting)
                 {
-                    // Estamos quietos
+                    // Estamos quietos — bloqueamos la rotación al valor guardado
+                    machine.transform.rotation = rotacionCongelada;
                     UpdateAnimator(isWalking: false, isIdle: true);
 
                     waitTimer -= Time.deltaTime;
                     if (waitTimer <= 0f)
                     {
                         isWaiting = false;
+                        // Devolvemos el control de rotación a UHFPS al reanudar la marcha
+                        machine.RotateAgentManually = true;
                         MoverAlSiguienteWaypoint();
                     }
                 }
@@ -123,12 +130,18 @@ namespace UHFPS.Runtime.States
 
                     if (!agent.pathPending && agent.remainingDistance <= asset.distanciaDeParada)
                     {
+                        // Capturamos la rotación del NPC exactamente al llegar
+                        rotacionCongelada = machine.transform.rotation;
+
                         isWaiting = true;
                         waitTimer = asset.tiempoEsperaEnPunto;
                         
-                        // Freno absoluto: Borramos el camino que calculó el agente
+                        // Freno absoluto: borramos el camino y la velocidad
                         agent.velocity = Vector3.zero;
-                        agent.ResetPath(); 
+                        agent.ResetPath();
+
+                        // Desactivamos el steering de UHFPS para que no nos gire mientras esperamos
+                        machine.RotateAgentManually = false;
                     }
                 }
             }
