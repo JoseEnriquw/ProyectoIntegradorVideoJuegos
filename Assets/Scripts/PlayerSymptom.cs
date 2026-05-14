@@ -146,6 +146,7 @@ public class PlayerSymptom : MonoBehaviour
     private PlayerStateMachine playerStateMachine;
 
     public static PlayerSymptom Instance { get; private set; }
+    public SymptomType CurrentSymptom => currentActiveSymptom;
 
     void Awake()
     {
