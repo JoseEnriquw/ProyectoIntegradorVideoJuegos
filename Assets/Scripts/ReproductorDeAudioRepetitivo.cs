@@ -42,8 +42,16 @@ public class ReproductorDeAudioRepetitivo : MonoBehaviour
     [Header("Eventos Opcionales")]
     public UnityEvent AlTerminarTodasLasRepeticiones;
 
+    [Header("Audio Adicional al Entrar al Trigger")]
+    [Tooltip("Clip que se reproducirá una sola vez cuando el objeto con el tag especificado entre al trigger, independientemente de cómo inicie el audio repetitivo.")]
+    public AudioClip clipUnaVezAlEntrarTrigger;
+
+    [Tooltip("El AudioSource para reproducir el clip de una sola vez. Si está vacío, usará PlayOneShot en el AudioSource principal.")]
+    public AudioSource audioSourceUnaVez;
+
     private Coroutine rutinaActual;
     private bool yaSeReprodujo = false;
+    private bool yaSeReprodujoClipUnaVez = false;
 
     private void Awake()
     {
@@ -78,15 +86,41 @@ public class ReproductorDeAudioRepetitivo : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (comoIniciar != MetodoInicio.TriggerEnter) return;
-        
-        // Si hay tag y no coincide, ignoramos
-        if (!string.IsNullOrEmpty(tagParaTrigger) && !other.CompareTag(tagParaTrigger)) return;
+        Debug.Log($"[ReproductorDeAudio] OnTriggerEnter detectado con el objeto: {other.name} (Tag: {other.tag})");
 
-        // Si ya se reprodujo y está configurado para hacerlo solo una vez, ignoramos
-        if (reproducirSoloUnaVezPorObjeto && yaSeReprodujo) return;
+        // Verificar tag (aplica para ambas lógicas)
+        bool coincideTag = string.IsNullOrEmpty(tagParaTrigger) || other.CompareTag(tagParaTrigger);
+        if (!coincideTag)
+        {
+            Debug.Log($"[ReproductorDeAudio] Ignorado porque el tag ({other.tag}) no coincide con el esperado ({tagParaTrigger})");
+            return;
+        }
 
-        IniciarReproduccion();
+        // 1. Lógica para reproducir el clip adicional "una sola vez" al entrar al trigger
+        if (clipUnaVezAlEntrarTrigger != null && !yaSeReprodujoClipUnaVez)
+        {
+            Debug.Log("[ReproductorDeAudio] Reproduciendo clip 'una sola vez' (monster-roar).");
+            yaSeReprodujoClipUnaVez = true;
+            AudioSource sourceAUsar = audioSourceUnaVez != null ? audioSourceUnaVez : audioSourceEspecifico;
+            
+            if (sourceAUsar != null)
+            {
+                sourceAUsar.PlayOneShot(clipUnaVezAlEntrarTrigger);
+            }
+            else
+            {
+                Debug.LogWarning("[ReproductorDeAudio] No se encontró un AudioSource para reproducir el clip 'una sola vez'.");
+            }
+        }
+
+        // 2. Lógica para el audio repetitivo (solo si está configurado para TriggerEnter)
+        if (comoIniciar == MetodoInicio.TriggerEnter)
+        {
+            // Si ya se reprodujo y está configurado para hacerlo solo una vez, ignoramos
+            if (reproducirSoloUnaVezPorObjeto && yaSeReprodujo) return;
+
+            IniciarReproduccion();
+        }
     }
 
     /// <summary>
@@ -94,6 +128,7 @@ public class ReproductorDeAudioRepetitivo : MonoBehaviour
     /// </summary>
     public void IniciarReproduccion()
     {
+        Debug.Log($"[ReproductorDeAudio] Intentando iniciar reproducción repetitiva en {gameObject.name}");
         if (audioSourceEspecifico == null)
         {
             Debug.LogWarning($"[ReproductorDeAudio] No hay un AudioSource asignado ni encontrado en {gameObject.name}.");
@@ -112,6 +147,7 @@ public class ReproductorDeAudioRepetitivo : MonoBehaviour
         }
 
         yaSeReprodujo = true;
+        Debug.Log($"[ReproductorDeAudio] Comenzando RutinaReproduccion con {ciclos} ciclos y delay inicial de {delayEntreCiclos}s");
         rutinaActual = StartCoroutine(RutinaReproduccion());
     }
 
@@ -168,10 +204,10 @@ public class ReproductorDeAudioRepetitivo : MonoBehaviour
         AlTerminarTodasLasRepeticiones?.Invoke();
     }
 
-    // Dibujamos un Gizmo solo si estamos usando el modo Trigger
+    // Dibujamos un Gizmo solo si estamos usando el modo Trigger o hay un clip para el trigger
     private void OnDrawGizmos()
     {
-        if (comoIniciar == MetodoInicio.TriggerEnter)
+        if (comoIniciar == MetodoInicio.TriggerEnter || clipUnaVezAlEntrarTrigger != null)
         {
             Collider col = GetComponent<Collider>();
             if (col != null && col.isTrigger)
