@@ -57709,6 +57709,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 8300000, guid: f828ceff7c2f48b44bb8119796e046b7, type: 3}
     volume: 0.5
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -76775,6 +76778,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -85464,6 +85470,209 @@ Transform:
   - {fileID: 1653030201}
   m_Father: {fileID: 1412600297}
   m_LocalEulerAnglesHint: {x: -56.633316, y: -4.1287136, z: -0.36005217}
+--- !u!1001 &947091090
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.03527441
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.03527441
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.03527441
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 21.32
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.298
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 44.733
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.10335792
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.28344345
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9474206
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.10663592
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 8.248
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -164.991
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 394.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+      propertyPath: m_Name
+      value: pbottlefinal
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 947091092}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 947091093}
+  m_SourcePrefab: {fileID: 100100000, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+--- !u!1 &947091091 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+  m_PrefabInstance: {fileID: 947091090}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &947091092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947091091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1193cc42578b51349ae91df02822e87c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.InteractableItem
+  <UniqueID>k__BackingField:
+    Id: 5e2c1191f14e4d42b1bd55d3be53d361
+  InteractableType: 2
+  MessageType: 0
+  ExamineType: 2
+  ExamineRotate: 3
+  DisableType: 0
+  PickupItem:
+    m_GUID: 
+    m_Item:
+      Name: 
+      GUID: 
+      Icon: {fileID: 0}
+    m_Section:
+      Name: 
+      GUID: 
+  ItemCustomData:
+    Type: 0
+    JsonData: 
+    ItemAttributes:
+      Items: []
+  InteractTitle:
+    GlocText: 
+    NormalText: 
+  ExamineTitle:
+    GlocText: 
+    NormalText: 
+  PaperText:
+    GlocText: 
+    NormalText: 
+  HintMessage:
+    GlocText: 
+    NormalText: 
+  MessageTime: 3
+  Quantity: 1
+  SlotsToExpand: 1
+  ExpandRows: 0
+  UseInventoryTitle: 0
+  ExamineInventoryTitle: 0
+  ShowExamineTitle: 1
+  ShowFloatingIcon: 0
+  TakeFromExamine: 0
+  AllowCursorExamine: 0
+  IsPaper: 0
+  AutoShortcut: 0
+  AutoEquip: 0
+  UseExamineZooming: 1
+  ExamineZoomLimits:
+    min: 0.3
+    max: 0.4
+  ExamineDistance: 0.4
+  UseFaceRotation: 0
+  FaceRotation: {x: 0, y: 0, z: 0}
+  UseControlPoint: 0
+  ControlPoint: {x: 0, y: 0.1, z: 0}
+  CollidersEnable: []
+  CollidersDisable: []
+  ExamineHotspot:
+    HotspotTransform: {fileID: 0}
+    Enabled: 1
+    ResetHotspot: 0
+    HotspotAction:
+      m_PersistentCalls:
+        m_Calls: []
+  PickupSound:
+    audioClip: {fileID: 0}
+    volume: 0
+  ExamineSound:
+    audioClip: {fileID: 0}
+    volume: 0
+  ExamineHintSound:
+    audioClip: {fileID: 0}
+    volume: 0
+  OnTakeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExamineStartEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExamineEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  IsExamined: 0
+  references:
+    version: 2
+    RefIds: []
+--- !u!65 &947091093
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 947091091}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.7847886, y: 8.076712, z: 4.7112694}
+  m_Center: {x: 0, y: 0.000030517578, z: 0.00012207031}
 --- !u!1 &948537859
 GameObject:
   m_ObjectHideFlags: 0
@@ -131933,6 +132142,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 8300000, guid: 26cc8eb79f8abe840a758ab134a80e31, type: 3}
     volume: 0.5
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -158333,6 +158545,63 @@ PrefabInstance:
       addedObject: {fileID: 1631201916}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59caa5526fa2a2a40bc3f86646a12ce5, type: 3}
+--- !u!1001 &1695406229
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 4c8fcebc480fa084bb310b42cdea3657, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 22.923588
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4c8fcebc480fa084bb310b42cdea3657, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.313
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4c8fcebc480fa084bb310b42cdea3657, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 46.405
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4c8fcebc480fa084bb310b42cdea3657, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4c8fcebc480fa084bb310b42cdea3657, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4c8fcebc480fa084bb310b42cdea3657, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4c8fcebc480fa084bb310b42cdea3657, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4c8fcebc480fa084bb310b42cdea3657, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4c8fcebc480fa084bb310b42cdea3657, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 4c8fcebc480fa084bb310b42cdea3657, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4c8fcebc480fa084bb310b42cdea3657, type: 3}
+      propertyPath: m_Name
+      value: poison green
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4c8fcebc480fa084bb310b42cdea3657, type: 3}
 --- !u!1 &1696071538
 GameObject:
   m_ObjectHideFlags: 0
@@ -193134,7 +193403,7 @@ Transform:
   m_GameObject: {fileID: 2100637921}
   serializedVersion: 2
   m_LocalRotation: {x: 0.005112926, y: 0.58529365, z: -0.0036959113, w: 0.8107969}
-  m_LocalPosition: {x: 460.39035, y: 29.589867, z: 166.15674}
+  m_LocalPosition: {x: 10.430363, y: 2.2598648, z: 49.93674}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -201748,6 +202017,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls:
@@ -206564,6 +206836,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -207692,6 +207967,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 8300000, guid: 26cc8eb79f8abe840a758ab134a80e31, type: 3}
     volume: 0.5
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -216283,6 +216561,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 8300000, guid: fb3ced26da052d543b478f2bee29c94a, type: 3}
     volume: 0.5
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls:
@@ -217413,6 +217694,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls:
@@ -218137,6 +218421,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -220362,6 +220649,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 8300000, guid: 26cc8eb79f8abe840a758ab134a80e31, type: 3}
     volume: 0.5
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -221536,6 +221826,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -222164,6 +222457,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -228544,6 +228840,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -229554,6 +229853,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls:
@@ -232166,6 +232468,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -238642,6 +238947,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -239065,6 +239373,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -241081,6 +241392,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls:
@@ -251257,6 +251571,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -258373,6 +258690,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -260825,6 +261145,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -267108,6 +267431,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -280636,6 +280962,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -282944,6 +283273,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -291810,6 +292142,9 @@ MonoBehaviour:
   unlockSound:
     audioClip: {fileID: 0}
     volume: 0
+  customCloseSpeed: 0
+  customCloseLock: 0
+  customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
       m_Calls: []
@@ -293514,3 +293849,5 @@ SceneRoots:
   - {fileID: 2046592070}
   - {fileID: 555908617}
   - {fileID: 543450653412114966}
+  - {fileID: 947091090}
+  - {fileID: 1695406229}
