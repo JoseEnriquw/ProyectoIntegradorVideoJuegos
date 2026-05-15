@@ -14,6 +14,9 @@ namespace UHFPS.Custom
         [Tooltip("Asigna aquí el objeto raíz de tu NPC (el que tiene el NPC State Machine)")]
         public NPCStateMachine npcObjetivo;
 
+        [Tooltip("(Opcional) Si el NPC está desactivado en la escena, asignalo aquí para activarlo automáticamente cuando se dispare el trigger.")]
+        public GameObject npcGameObject;
+
         [Tooltip("El 'State Key' del estado al que saltará el NPC. Ej: PersecucionAI, PatrullajeAI, etc.")]
         public string stateKeyAForzar = "PersecucionAI";
 
@@ -142,6 +145,13 @@ namespace UHFPS.Custom
 
         private void EjecutarCambioDeEstado()
         {
+            // Si hay un GameObject de NPC desactivado, lo activamos primero
+            if (npcGameObject != null && !npcGameObject.activeSelf)
+            {
+                npcGameObject.SetActive(true);
+                Debug.Log($"[Trigger] NPC '{npcGameObject.name}' activado.");
+            }
+
             npcObjetivo.ChangeState(stateKeyAForzar);
             
             // Si hay un audio asignado (del entorno o del NPC), lo reproducimos
