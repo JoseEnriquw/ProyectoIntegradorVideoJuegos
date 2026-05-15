@@ -11526,11 +11526,7 @@ GameObject:
   - component: {fileID: 462082680}
   - component: {fileID: 462082679}
   - component: {fileID: 462082678}
-  - component: {fileID: 462082677}
-  - component: {fileID: 462082676}
-  - component: {fileID: 462082681}
-  - component: {fileID: 462082682}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11555,400 +11551,6 @@ Transform:
   - {fileID: 1109082392}
   m_Father: {fileID: 207610424}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &462082676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462082674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44e2230d6857bf14995464535978be6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DynamicTitle:
-    ReflectType: 0
-    Instance: {fileID: 0}
-    ReflectName: 
-    ReflectDerived: 0
-  DynamicUseTitle:
-    ReflectType: 1
-    Instance: {fileID: 462082677}
-    ReflectName: IsOpened
-    ReflectDerived: 0
-  DynamicExamineTitle:
-    ReflectType: 0
-    Instance: {fileID: 0}
-    ReflectName: 
-    ReflectDerived: 0
-  OverrideTitle: 1
-  OverrideUseTitle: 1
-  OverrideExamineTitle: 0
-  UseTitleDynamic: 0
-  UseUseTitleDynamic: 1
-  UseExamineTitleDynamic: 0
-  Title:
-    GlocText: objects.door
-    NormalText: Door
-  TrueTitle:
-    GlocText: 
-    NormalText: 
-  FalseTitle:
-    GlocText: 
-    NormalText: 
-  UseTitle:
-    GlocText: 
-    NormalText: 
-  TrueUseTitle:
-    GlocText: interactions.close
-    NormalText: Close
-  FalseUseTitle:
-    GlocText: interactions.open
-    NormalText: Open
-  ExamineTitle:
-    GlocText: 
-    NormalText: 
-  TrueExamineTitle:
-    GlocText: 
-    NormalText: 
-  FalseExamineTitle:
-    GlocText: 
-    NormalText: 
---- !u!114 &462082677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462082674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ddc39b34b857144a9bdc90423afbb96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dynamicType: 0
-  transformType: 0
-  dynamicStatus: 0
-  interactType: 0
-  statusChange: 2
-  target: {fileID: 462082675}
-  audioSource: {fileID: 0}
-  animator: {fileID: 0}
-  joint: {fileID: 0}
-  rigidbody: {fileID: 0}
-  inventory: {fileID: 0}
-  gameManager: {fileID: 0}
-  unlockScript:
-    _object: {fileID: 0}
-  barricadeScript:
-    _object: {fileID: 0}
-  unlockItem:
-    m_GUID: 
-    m_Item:
-      Name: 
-      GUID: 
-      Icon: {fileID: 0}
-    m_Section:
-      Name: 
-      GUID: 
-  lockedText:
-    GlocText: 
-    NormalText: 
-  jammedText:
-    GlocText: 
-    NormalText: 
-  keepUnlockItem: 0
-  showLockedText: 0
-  showJammedText: 0
-  isBarricaded: 0
-  ignoreColliders: []
-  ignorePlayerCollider: 0
-  useTrigger1: Open
-  useTrigger2: Close
-  useTrigger3: OpenSide
-  openable:
-    <DynamicObject>k__BackingField: {fileID: 462082677}
-    openLimits:
-      min: -20
-      max: 0
-    startingAngle: -20
-    targetHinge: 2
-    targetForward: 0
-    frameForward: 4
-    useLocalAxes: 1
-    startingAngleFlip: 0
-    targetHingeMirror: 1
-    targetForwardMirror: 0
-    openCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    closeCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    openSpeed: 10
-    damper: 1
-    dragSoundPlay: 0.2
-    flipOpenDirection: 0
-    bothSidesOpen: 0
-    dragSounds: 0
-    playCloseSound: 1
-    flipMouse: 0
-    flipAngle: 0
-    showGizmos: 1
-    useLockedMotion: 0
-    lockedPattern:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    lockedMotionAmount: 0
-    lockedMotionTime: 0
-    dragSound:
-      audioClip: {fileID: 0}
-      volume: 0
-  pullable:
-    <DynamicObject>k__BackingField: {fileID: 462082677}
-    openLimits:
-      min: 0
-      max: 0
-    pullAxis: 4
-    openCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    openSpeed: 1
-    damping: 1
-    dragSoundPlay: 0.2
-    dragSounds: 1
-    flipMouse: 0
-  switchable:
-    <DynamicObject>k__BackingField: {fileID: 462082677}
-    switchLimits:
-      min: 0
-      max: 0
-    startingAngle: 0
-    targetHinge: 2
-    targetForward: 0
-    useLocalAxes: 0
-    startingAngleFlip: 0
-    targetHingeMirror: 0
-    targetForwardMirror: 0
-    rootObject: {fileID: 0}
-    switchOnCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    switchOffCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    switchSpeed: 1
-    damping: 1
-    flipSwitchDirection: 0
-    flipMouse: 0
-    flipAngle: 0
-    lockOnSwitch: 1
-    showGizmos: 1
-  rotable:
-    <DynamicObject>k__BackingField: {fileID: 462082677}
-    rotationLimit: 360
-    rotateAroundAxis: 4
-    rotateCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    rotationSpeed: 2
-    mouseMultiplier: 1
-    damping: 1
-    holdToRotate: 1
-    lockOnRotate: 0
-    showGizmos: 1
-  useSound1:
-    audioClip: {fileID: 8300000, guid: debe77de513022b40bef8ae736120b02, type: 3}
-    volume: 0.5
-  useSound2:
-    audioClip: {fileID: 8300000, guid: 78fbfe8c3cad9c24b8f8c403a66c71df, type: 3}
-    volume: 0.5
-  lockedSound:
-    audioClip: {fileID: 0}
-    volume: 0
-  unlockSound:
-    audioClip: {fileID: 0}
-    volume: 0
-  customCloseSpeed: 0
-  customCloseLock: 0
-  customCloseSound: {fileID: 0}
-  useEvent1:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 462082682}
-        m_TargetAssemblyTypeName: UHFPS.Runtime.DialogueTrigger, Assembly-CSharp
-        m_MethodName: TriggerDialogue
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  useEvent2:
-    m_PersistentCalls:
-      m_Calls: []
-  onValueChange:
-    m_PersistentCalls:
-      m_Calls: []
-  lockedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  unlockedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  lockPlayer: 0
-  isInteractLocked: 0
 --- !u!65 &462082678
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -12027,42 +11629,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 462082674}
   m_Mesh: {fileID: 2619086233303812490, guid: 395b3f9b5107d154d8e9dae057b01c73, type: 3}
---- !u!114 &462082681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462082674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05d70b8d8d005f94fa674abc20e12ec8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PuertaTrampa
-  "fuenteVozDue\xF1o": {fileID: 42357966}
-  tiempoDeCierre: 0.2
---- !u!114 &462082682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 462082674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 463818b2825d6b0439a2f9ff3b9ab45f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.DialogueTrigger
-  TriggerType: 0
-  DialogueType: 0
-  DialogueContinue: 0
-  Dialogue: {fileID: 11400000, guid: bc9def2e6b4558740af800bbbaf34635, type: 2}
-  DialogueAudio: {fileID: 917429894}
-  BinderName: yo
-  Repeatable: 0
-  RangedDialogue: 0
-  ResetDialogueWhenOut: 1
-  LocalDialogueRange: 2.7
 --- !u!1001 &463164012
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23499,31 +23065,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4197611636204759026, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 484.16
+      value: 551.56
       objectReference: {fileID: 0}
     - target: {fileID: 4197611636204759026, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.62
+      value: 18.6
       objectReference: {fileID: 0}
     - target: {fileID: 4197611636204759026, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 262.61
+      value: 186.62
       objectReference: {fileID: 0}
     - target: {fileID: 4197611636204759026, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8919278
+      value: 0.5556719
       objectReference: {fileID: 0}
     - target: {fileID: 4197611636204759026, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.000067060144
+      value: 0.00013061795
       objectReference: {fileID: 0}
     - target: {fileID: 4197611636204759026, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.45217788
+      value: 0.8314017
       objectReference: {fileID: 0}
     - target: {fileID: 4197611636204759026, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00013227716
+      value: 0.00008729922
       objectReference: {fileID: 0}
     - target: {fileID: 4197611636204759026, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -23531,11 +23097,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4197611636204759026, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -53.767
+      value: 112.486
       objectReference: {fileID: 0}
     - target: {fileID: 4197611636204759026, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -0.017
+      value: 0.018
       objectReference: {fileID: 0}
     - target: {fileID: 5010872761066986833, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
       propertyPath: m_Range
@@ -44107,31 +43673,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4538282176171970600, guid: 95af4357eda9cae4aa85a3b7cc128a1e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -58.83969
+      value: 8.560181
       objectReference: {fileID: 0}
     - target: {fileID: 4538282176171970600, guid: 95af4357eda9cae4aa85a3b7cc128a1e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.780003
+      value: 18.760002
       objectReference: {fileID: 0}
     - target: {fileID: 4538282176171970600, guid: 95af4357eda9cae4aa85a3b7cc128a1e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -230.38962
+      value: -306.37952
       objectReference: {fileID: 0}
     - target: {fileID: 4538282176171970600, guid: 95af4357eda9cae4aa85a3b7cc128a1e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.8919278
+      value: 0.5556719
       objectReference: {fileID: 0}
     - target: {fileID: 4538282176171970600, guid: 95af4357eda9cae4aa85a3b7cc128a1e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.000067060144
+      value: 0.00013061795
       objectReference: {fileID: 0}
     - target: {fileID: 4538282176171970600, guid: 95af4357eda9cae4aa85a3b7cc128a1e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.45217788
+      value: 0.8314017
       objectReference: {fileID: 0}
     - target: {fileID: 4538282176171970600, guid: 95af4357eda9cae4aa85a3b7cc128a1e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.00013227716
+      value: 0.00008729922
       objectReference: {fileID: 0}
     - target: {fileID: 5640332654354044173, guid: 95af4357eda9cae4aa85a3b7cc128a1e, type: 3}
       propertyPath: m_SizeDelta.x
