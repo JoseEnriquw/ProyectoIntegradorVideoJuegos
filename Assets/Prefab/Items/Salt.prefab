@@ -10,27 +10,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f05c81df7ea166b479bacd46d1cc7e00, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.076340646
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f05c81df7ea166b479bacd46d1cc7e00, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.076340646
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f05c81df7ea166b479bacd46d1cc7e00, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.076340646
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f05c81df7ea166b479bacd46d1cc7e00, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 139.7
+      value: 147.613
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f05c81df7ea166b479bacd46d1cc7e00, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.1
+      value: 2.453
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f05c81df7ea166b479bacd46d1cc7e00, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 117.5
+      value: 101.997
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f05c81df7ea166b479bacd46d1cc7e00, type: 3}
       propertyPath: m_LocalRotation.w
@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.32825
       objectReference: {fileID: 0}
+    - target: {fileID: 1151388028547126963, guid: f05c81df7ea166b479bacd46d1cc7e00, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.9
+      objectReference: {fileID: 0}
     - target: {fileID: 8164078558771037576, guid: f05c81df7ea166b479bacd46d1cc7e00, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -122,13 +126,13 @@ MonoBehaviour:
   MessageType: 2
   ExamineType: 1
   ExamineRotate: 3
-  DisableType: 0
+  DisableType: 1
   PickupItem:
     m_GUID: 0c35b2be35154de4a4b58e06ed67870c
     m_Item:
       Name: Salt
       GUID: 0c35b2be35154de4a4b58e06ed67870c
-      Icon: {fileID: 2800000, guid: 93331e4b06d73794dbfd6aec03483dc0, type: 3}
+      Icon: {fileID: 2800000, guid: 93ae367cdc298bc40922a685728e554b, type: 3}
     m_Section:
       Name: Healing Items
       GUID: bc38a49db3da43c8928dfbde7c7d1f1c
@@ -160,8 +164,8 @@ MonoBehaviour:
   TakeFromExamine: 0
   AllowCursorExamine: 0
   IsPaper: 0
-  AutoShortcut: 1
-  AutoEquip: 1
+  AutoShortcut: 0
+  AutoEquip: 0
   UseExamineZooming: 1
   ExamineZoomLimits:
     min: 0.3

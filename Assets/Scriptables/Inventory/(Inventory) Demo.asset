@@ -737,10 +737,10 @@ MonoBehaviour:
       Settings:
         isUsable: 1
         isStackable: 1
-        isExaminable: 0
+        isExaminable: 1
         isCombinable: 1
         isDroppable: 0
-        isDiscardable: 1
+        isDiscardable: 0
         canBindShortcut: 0
         alwaysShowQuantity: 0
         applyAttributesOnUse: 0
@@ -760,7 +760,7 @@ MonoBehaviour:
       - requiredCurrentAmount: 0
         requiredSecondAmount: 0
         resultItemAmount: 0
-        combineWithID: 4361f4a241d64621a30135a552163296
+        combineWithID: a776f2b59be446cd8c8784353b90c320
         resultCombineID: d77a985710814c96952652f7de601993
         playerItemIndex: 0
         inheritCustomData: 0
@@ -780,23 +780,24 @@ MonoBehaviour:
       LocalizationSettings:
         titleKey:
           GlocText: inventoryItems.Salt.Tittle
-          NormalText: 
+          NormalText: Sal de Epecuen
         descriptionKey:
           GlocText: inventoryItems.salt.description
-          NormalText: 
+          NormalText: Cristales extraidos del lago Epecuen, sus propiedades ayudan
+            a extender  la existencia
     - GUID: d77a985710814c96952652f7de601993
       SectionGUID: bc38a49db3da43c8928dfbde7c7d1f1c
-      Title: Milagrosa
+      Title: Super Suero
       Description: 
       Width: 1
       Height: 1
       Padding: 0
       Orientation: 0
       FlipDirection: 0
-      Icon: {fileID: 21300000, guid: 536374a5adf6d2d48a1f7fc84f1c60b5, type: 3}
+      Icon: {fileID: 21300000, guid: fc84531c96b6c224fb5a28cf0c88332a, type: 3}
       ItemObject:
-        GUID: b50a1abbe6d144045a3390cb37e5b7c6
-        Object: {fileID: 2176514173986464246, guid: b50a1abbe6d144045a3390cb37e5b7c6, type: 3}
+        GUID: 47f78f48dc07eff45976dc33b116196e
+        Object: {fileID: 4191610285616278730, guid: 47f78f48dc07eff45976dc33b116196e, type: 3}
       Settings:
         isUsable: 1
         isStackable: 1
@@ -827,6 +828,73 @@ MonoBehaviour:
         descriptionKey:
           GlocText: 
           NormalText: 
+    - GUID: a776f2b59be446cd8c8784353b90c320
+      SectionGUID: bc38a49db3da43c8928dfbde7c7d1f1c
+      Title: Suero
+      Description: Effective, fast-acting drug. It is used to alleviate a variety
+        of illnesses, increase the speed of recovery, and boost health at critical
+        moments.
+      Width: 1
+      Height: 1
+      Padding: 0
+      Orientation: 0
+      FlipDirection: 0
+      Icon: {fileID: 21300000, guid: 47d8e78dd8e3c6e4ebf442550a18c2fe, type: 3}
+      ItemObject:
+        GUID: 061618acf8459f34bb03bf93931470ad
+        Object: {fileID: 7354007625842433576, guid: 061618acf8459f34bb03bf93931470ad, type: 3}
+      Settings:
+        isUsable: 1
+        isStackable: 1
+        isExaminable: 1
+        isCombinable: 1
+        isDroppable: 0
+        isDiscardable: 0
+        canBindShortcut: 0
+        alwaysShowQuantity: 0
+        applyAttributesOnUse: 0
+      UsableSettings:
+        usableType: 2
+        playerItemIndex: 0
+        healthPoints: 0
+        removeOnUse: 0
+        customData:
+          Type: 0
+          JsonData: 
+          ItemAttributes:
+            Items: []
+      Properties:
+        maxStack: 3
+      CombineSettings:
+      - requiredCurrentAmount: 0
+        requiredSecondAmount: 0
+        resultItemAmount: 0
+        combineWithID: 0c35b2be35154de4a4b58e06ed67870c
+        resultCombineID: d77a985710814c96952652f7de601993
+        playerItemIndex: 0
+        inheritCustomData: 0
+        inheritFromSecond: 0
+        inheritKey: 
+        customData:
+          Type: 0
+          JsonData: 
+          ItemAttributes:
+            Items: []
+        itemType: 0
+        keepAfterCombine: 0
+        removeSecondItem: 0
+        eventAfterCombine: 0
+        selectAfterCombine: 0
+        haveCustomData: 0
+      LocalizationSettings:
+        titleKey:
+          GlocText: item.title.medicaloil
+          NormalText: Aceite Medicinal
+        descriptionKey:
+          GlocText: item.description.medicaloil
+          NormalText: "Medicamento eficaz y de acci\xF3n r\xE1pida. Se utiliza para
+            aliviar diversas enfermedades, aumentar la velocidad de recuperaci\xF3n
+            y potenciar la salud en momentos cr\xEDticos."
   - Section:
       Name: Reload Items
       GUID: 401b335b9c9c4c5588e0ec76a2faef23
