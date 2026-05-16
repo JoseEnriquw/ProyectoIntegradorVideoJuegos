@@ -76,6 +76,9 @@ namespace UHFPS.Custom
         [Min(0f)]
         public float delayGiroEscape = 0.2f;
 
+        [Tooltip("(Opcional) GameObjects que se activan justo después de completar el giro de escape. Ideal para triggers con diálogos, luces, efectos, etc.")]
+        public GameObject[] objetosActivarAlGirar;
+
         private bool yaActivado = false;
         private Coroutine freezeCoroutine;
 
@@ -99,9 +102,18 @@ namespace UHFPS.Custom
             
             DialogueTrigger dt = go.AddComponent<DialogueTrigger>();
             dt.Dialogue = asset;
-            dt.DialogueAudio = audioSourcePJ;
             dt.DialogueType = DialogueTrigger.DialogueTypeEnum.Local;
             dt.TriggerType = DialogueTrigger.TriggerTypeEnum.Event;
+
+            // Solo asignamos el AudioSource si está configurado en el Inspector
+            if (audioSourcePJ != null)
+            {
+                dt.DialogueAudio = audioSourcePJ;
+            }
+            else
+            {
+                Debug.LogWarning($"[Trigger] '{nombre}': No hay AudioSource del PJ asignado. El diálogo se mostrará sin audio.");
+            }
             
             return dt;
         }
@@ -248,6 +260,7 @@ namespace UHFPS.Custom
 
                 yield return StartCoroutine(GirarCamaraHacia(objetivoDeEscape, duracionGiroEscape));
                 Debug.Log($"[Trigger] === GIRO DE ESCAPE COMPLETADO ===");
+                ActivarObjetoPostGiro();
             }
             else if (girarHaciaEscape && objetivoDeEscape == null)
             {
@@ -281,17 +294,28 @@ namespace UHFPS.Custom
         /// </summary>
         private IEnumerator RutinaSinFreeze()
         {
+            Debug.Log("[Trigger] RutinaSinFreeze: INICIO de la rutina.");
+
             // 1. Diálogo post-aparición (si hay)
             if (triggerDialogoAparecer != null)
             {
+                Debug.Log("[Trigger] RutinaSinFreeze: Paso 1 — Preparando diálogo post-aparición.");
+
                 if (delayDialogoAparecer > 0f)
                     yield return new WaitForSeconds(delayDialogoAparecer);
 
                 if (congelarDuranteDialogoAparecer)
                     PlayerPresenceManager.Instance.FreezePlayer(true, false);
 
-                triggerDialogoAparecer.TriggerDialogue();
-                Debug.Log("[Trigger] Reproduciendo diálogo post-aparición del NPC.");
+                try
+                {
+                    triggerDialogoAparecer.TriggerDialogue();
+                    Debug.Log("[Trigger] RutinaSinFreeze: Diálogo disparado correctamente.");
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogError($"[Trigger] Error al disparar diálogo: {e.Message}");
+                }
 
                 if (congelarDuranteDialogoAparecer)
                 {
@@ -299,11 +323,17 @@ namespace UHFPS.Custom
                     PlayerPresenceManager.Instance.FreezePlayer(false);
                 }
             }
+            else
+            {
+                Debug.Log("[Trigger] RutinaSinFreeze: Paso 1 — Sin diálogo post-aparición configurado (dialogoAlAparecer está vacío).");
+            }
 
             // 2. Giro de escape (si está activado)
+            Debug.Log($"[Trigger] RutinaSinFreeze: Paso 2 — girarHaciaEscape={girarHaciaEscape}, objetivoDeEscape={(objetivoDeEscape != null ? objetivoDeEscape.name : "NULL")}, objetosActivarAlGirar={objetosActivarAlGirar?.Length ?? 0}");
+
             if (girarHaciaEscape && objetivoDeEscape != null)
             {
-                Debug.Log($"[Trigger] === GIRO DE ESCAPE (sin freeze) INICIANDO ===");
+                Debug.Log("[Trigger] === GIRO DE ESCAPE (sin freeze) INICIANDO ===");
 
                 // Congelamos brevemente al jugador para que el giro se vea limpio
                 PlayerPresenceManager.Instance.FreezePlayer(true, false);
@@ -316,11 +346,29 @@ namespace UHFPS.Custom
                 // Liberamos al jugador
                 PlayerPresenceManager.Instance.LookController.LookLocked = false;
                 PlayerPresenceManager.Instance.FreezePlayer(false);
-                Debug.Log($"[Trigger] === GIRO DE ESCAPE (sin freeze) COMPLETADO ===");
+                Debug.Log("[Trigger] === GIRO DE ESCAPE (sin freeze) COMPLETADO ===");
+
+                ActivarObjetoPostGiro();
             }
             else if (girarHaciaEscape)
             {
                 Debug.LogWarning("[Trigger] 'Girar Hacia Escape' activado pero falta asignar 'Objetivo De Escape' en el Inspector.");
+            }
+
+            Debug.Log("[Trigger] RutinaSinFreeze: FIN de la rutina.");
+        }
+
+        private void ActivarObjetoPostGiro()
+        {
+            if (objetosActivarAlGirar == null || objetosActivarAlGirar.Length == 0) return;
+
+            foreach (var obj in objetosActivarAlGirar)
+            {
+                if (obj != null)
+                {
+                    obj.SetActive(true);
+                    Debug.Log($"[Trigger] Objeto '{obj.name}' activado después del giro de escape.");
+                }
             }
         }
 
