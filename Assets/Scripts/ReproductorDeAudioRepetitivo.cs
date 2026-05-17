@@ -42,16 +42,8 @@ public class ReproductorDeAudioRepetitivo : MonoBehaviour
     [Header("Eventos Opcionales")]
     public UnityEvent AlTerminarTodasLasRepeticiones;
 
-    [Header("Audio Adicional al Entrar al Trigger")]
-    [Tooltip("Clip que se reproducirá una sola vez cuando el objeto con el tag especificado entre al trigger, independientemente de cómo inicie el audio repetitivo.")]
-    public AudioClip clipUnaVezAlEntrarTrigger;
-
-    [Tooltip("El AudioSource para reproducir el clip de una sola vez. Si está vacío, usará PlayOneShot en el AudioSource principal.")]
-    public AudioSource audioSourceUnaVez;
-
     private Coroutine rutinaActual;
     private bool yaSeReprodujo = false;
-    private bool yaSeReprodujoClipUnaVez = false;
 
     private void Awake()
     {
@@ -96,24 +88,7 @@ public class ReproductorDeAudioRepetitivo : MonoBehaviour
             return;
         }
 
-        // 1. Lógica para reproducir el clip adicional "una sola vez" al entrar al trigger
-        if (clipUnaVezAlEntrarTrigger != null && !yaSeReprodujoClipUnaVez)
-        {
-            Debug.Log("[ReproductorDeAudio] Reproduciendo clip 'una sola vez' (monster-roar).");
-            yaSeReprodujoClipUnaVez = true;
-            AudioSource sourceAUsar = audioSourceUnaVez != null ? audioSourceUnaVez : audioSourceEspecifico;
-            
-            if (sourceAUsar != null)
-            {
-                sourceAUsar.PlayOneShot(clipUnaVezAlEntrarTrigger);
-            }
-            else
-            {
-                Debug.LogWarning("[ReproductorDeAudio] No se encontró un AudioSource para reproducir el clip 'una sola vez'.");
-            }
-        }
-
-        // 2. Lógica para el audio repetitivo (solo si está configurado para TriggerEnter)
+        // Lógica para el audio repetitivo (solo si está configurado para TriggerEnter)
         if (comoIniciar == MetodoInicio.TriggerEnter)
         {
             // Si ya se reprodujo y está configurado para hacerlo solo una vez, ignoramos
@@ -204,10 +179,10 @@ public class ReproductorDeAudioRepetitivo : MonoBehaviour
         AlTerminarTodasLasRepeticiones?.Invoke();
     }
 
-    // Dibujamos un Gizmo solo si estamos usando el modo Trigger o hay un clip para el trigger
+    // Dibujamos un Gizmo solo si estamos usando el modo Trigger
     private void OnDrawGizmos()
     {
-        if (comoIniciar == MetodoInicio.TriggerEnter || clipUnaVezAlEntrarTrigger != null)
+        if (comoIniciar == MetodoInicio.TriggerEnter)
         {
             Collider col = GetComponent<Collider>();
             if (col != null && col.isTrigger)
