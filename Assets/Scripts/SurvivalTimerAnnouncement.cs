@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using TMPro;
 using System.Collections;
 using UHFPS.Tools;
@@ -15,6 +16,8 @@ public class SurvivalTimerAnnouncement : MonoBehaviour
     public GString MessageGloc;
     public float DisplayDuration = 5f;
     public float FadeSpeed = 2f;
+    [Tooltip("Event triggered after the announcement completely disappears.")]
+    public UnityEvent OnAnnouncementHidden;
 
     private string localizedTemplate;
     private bool isLocalized = false;
@@ -104,6 +107,10 @@ public class SurvivalTimerAnnouncement : MonoBehaviour
         yield return CanvasGroupFader.StartFade(AnnouncementGroup, false, FadeSpeed, () =>
         {
             AnnouncementGroup.gameObject.SetActive(false);
+            if (OnAnnouncementHidden != null)
+            {
+                OnAnnouncementHidden.Invoke();
+            }
         });
     }
 }

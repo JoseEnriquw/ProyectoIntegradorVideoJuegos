@@ -4085,6 +4085,7 @@ GameObject:
   - component: {fileID: 8640296335583824991}
   - component: {fileID: 1426395394781492319}
   - component: {fileID: 8258170527081636672}
+  - component: {fileID: 5586739231898408724}
   m_Layer: 3
   m_Name: HEROPLAYER
   m_TagString: Player
@@ -4438,6 +4439,7 @@ MonoBehaviour:
   EnableVHSGlitch: 1
   EnableDrunkMotion: 1
   EnableWhispers: 1
+  EnableRain: 1
   MaxBlurIntensity: 1.5
   MaxTunnelIntensity: 1
   MinSaturation: -100
@@ -4451,6 +4453,8 @@ MonoBehaviour:
   MaxDrunkSidewaysForce: 50
   DrunkStumbleMultiplier: 35
   MaxMotionBlur: 1
+  MaxRainIntensity: 1
+  RainType: 8
   BlurTransitionSpeed: 1
   BlurSounds:
   - {fileID: 8300000, guid: 807bd6cb603cab5428bfe8b61ee55167, type: 3}
@@ -4462,6 +4466,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fbed9284d29ca534fab77abcda37cf0f, type: 3}
   WhispersSounds:
   - {fileID: 8300000, guid: d89076ba668653e48b48681c124140f9, type: 3}
+  RainSounds:
+  - {fileID: 8300000, guid: 807bd6cb603cab5428bfe8b61ee55167, type: 3}
   SymptomsAudioVolume: 0.8
   CureSound: {fileID: 8300000, guid: 855df7719db0eac4788b2181dd8bc31d, type: 3}
   CureSoundSecondary: {fileID: 8300000, guid: 3a54a2fc2b087d243aa0333a629f5809, type: 3}
@@ -4511,12 +4517,72 @@ MonoBehaviour:
         - m_Target: {fileID: 8640296335583824991}
           m_TargetAssemblyTypeName: MedicalItemEffect, Assembly-CSharp
           m_MethodName: ApplyCure
-          m_Mode: 1
+          m_Mode: 4
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
             m_IntArgument: 0
             m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Item:
+      m_GUID: 0c35b2be35154de4a4b58e06ed67870c
+      m_Item:
+        Name: Salt
+        GUID: 0c35b2be35154de4a4b58e06ed67870c
+        Icon: {fileID: 2800000, guid: 93331e4b06d73794dbfd6aec03483dc0, type: 3}
+      m_Section:
+        Name: Healing Items
+        GUID: bc38a49db3da43c8928dfbde7c7d1f1c
+    OnUse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5586739231898408724}
+          m_TargetAssemblyTypeName: ConsumableActions, Assembly-CSharp
+          m_MethodName: ConsumeSalt
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Item:
+      m_GUID: d77a985710814c96952652f7de601993
+      m_Item:
+        Name: Milagrosa
+        GUID: d77a985710814c96952652f7de601993
+        Icon: {fileID: 2800000, guid: 536374a5adf6d2d48a1f7fc84f1c60b5, type: 3}
+      m_Section:
+        Name: Healing Items
+        GUID: bc38a49db3da43c8928dfbde7c7d1f1c
+    OnUse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5586739231898408724}
+          m_TargetAssemblyTypeName: ConsumableActions, Assembly-CSharp
+          m_MethodName: ConsumeSalt
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 120
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 8640296335583824991}
+          m_TargetAssemblyTypeName: MedicalItemEffect, Assembly-CSharp
+          m_MethodName: ApplyCure
+          m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 120
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
@@ -4589,6 +4655,19 @@ MonoBehaviour:
   audioSourceEspecifico: {fileID: 1106651766812792837}
   dialogoAlEquipar: {fileID: 0}
   dialogoBateriaAgotada: {fileID: 11400000, guid: 2b738cf3a538d754bb3d88aafa53d500, type: 2}
+--- !u!114 &5586739231898408724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103982259154441552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 365f55d10a0210048a6024401055fff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConsumableActions
+  SaltTimeBonus: 60
 --- !u!1 &1114209525893783469
 GameObject:
   m_ObjectHideFlags: 0

@@ -583,8 +583,8 @@ MonoBehaviour:
       - requiredCurrentAmount: 0
         requiredSecondAmount: 0
         resultItemAmount: 0
-        combineWithID: cf13f3bc791848a8aea27460ef8698b2
-        resultCombineID: 4705720836b0423c85205c0451f666a1
+        combineWithID: 0c35b2be35154de4a4b58e06ed67870c
+        resultCombineID: d77a985710814c96952652f7de601993
         playerItemIndex: 0
         inheritCustomData: 0
         inheritFromSecond: 0
@@ -721,6 +721,180 @@ MonoBehaviour:
           GlocText: item.description.healingpotion
           NormalText: "Una poderosa mezcla elaborada con Aceite Medicinal y Hierba
             Medicinal. Proporciona una r\xE1pida y significativa mejora de salud."
+    - GUID: 0c35b2be35154de4a4b58e06ed67870c
+      SectionGUID: bc38a49db3da43c8928dfbde7c7d1f1c
+      Title: Salt
+      Description: 
+      Width: 1
+      Height: 1
+      Padding: 0
+      Orientation: 0
+      FlipDirection: 0
+      Icon: {fileID: 21300000, guid: 93ae367cdc298bc40922a685728e554b, type: 3}
+      ItemObject:
+        GUID: 67bb9b84bdba41c48b022889613c2e69
+        Object: {fileID: 8126164532107960826, guid: 67bb9b84bdba41c48b022889613c2e69, type: 3}
+      Settings:
+        isUsable: 1
+        isStackable: 1
+        isExaminable: 1
+        isCombinable: 1
+        isDroppable: 0
+        isDiscardable: 0
+        canBindShortcut: 0
+        alwaysShowQuantity: 0
+        applyAttributesOnUse: 0
+      UsableSettings:
+        usableType: 2
+        playerItemIndex: 0
+        healthPoints: 0
+        removeOnUse: 1
+        customData:
+          Type: 0
+          JsonData: 
+          ItemAttributes:
+            Items: []
+      Properties:
+        maxStack: 3
+      CombineSettings:
+      - requiredCurrentAmount: 0
+        requiredSecondAmount: 0
+        resultItemAmount: 0
+        combineWithID: a776f2b59be446cd8c8784353b90c320
+        resultCombineID: d77a985710814c96952652f7de601993
+        playerItemIndex: 0
+        inheritCustomData: 0
+        inheritFromSecond: 0
+        inheritKey: 
+        customData:
+          Type: 0
+          JsonData: 
+          ItemAttributes:
+            Items: []
+        itemType: 0
+        keepAfterCombine: 0
+        removeSecondItem: 0
+        eventAfterCombine: 0
+        selectAfterCombine: 0
+        haveCustomData: 0
+      LocalizationSettings:
+        titleKey:
+          GlocText: inventoryItems.Salt.Tittle
+          NormalText: Sal de Epecuen
+        descriptionKey:
+          GlocText: inventoryItems.salt.description
+          NormalText: Cristales extraidos del lago Epecuen, sus propiedades ayudan
+            a extender  la existencia
+    - GUID: d77a985710814c96952652f7de601993
+      SectionGUID: bc38a49db3da43c8928dfbde7c7d1f1c
+      Title: Super Suero
+      Description: 
+      Width: 1
+      Height: 1
+      Padding: 0
+      Orientation: 0
+      FlipDirection: 0
+      Icon: {fileID: 21300000, guid: fc84531c96b6c224fb5a28cf0c88332a, type: 3}
+      ItemObject:
+        GUID: 47f78f48dc07eff45976dc33b116196e
+        Object: {fileID: 4191610285616278730, guid: 47f78f48dc07eff45976dc33b116196e, type: 3}
+      Settings:
+        isUsable: 1
+        isStackable: 1
+        isExaminable: 1
+        isCombinable: 0
+        isDroppable: 1
+        isDiscardable: 1
+        canBindShortcut: 0
+        alwaysShowQuantity: 0
+        applyAttributesOnUse: 0
+      UsableSettings:
+        usableType: 2
+        playerItemIndex: 0
+        healthPoints: 0
+        removeOnUse: 1
+        customData:
+          Type: 0
+          JsonData: 
+          ItemAttributes:
+            Items: []
+      Properties:
+        maxStack: 3
+      CombineSettings: []
+      LocalizationSettings:
+        titleKey:
+          GlocText: 
+          NormalText: 
+        descriptionKey:
+          GlocText: 
+          NormalText: 
+    - GUID: a776f2b59be446cd8c8784353b90c320
+      SectionGUID: bc38a49db3da43c8928dfbde7c7d1f1c
+      Title: Suero
+      Description: Effective, fast-acting drug. It is used to alleviate a variety
+        of illnesses, increase the speed of recovery, and boost health at critical
+        moments.
+      Width: 1
+      Height: 1
+      Padding: 0
+      Orientation: 0
+      FlipDirection: 0
+      Icon: {fileID: 21300000, guid: 47d8e78dd8e3c6e4ebf442550a18c2fe, type: 3}
+      ItemObject:
+        GUID: 061618acf8459f34bb03bf93931470ad
+        Object: {fileID: 7354007625842433576, guid: 061618acf8459f34bb03bf93931470ad, type: 3}
+      Settings:
+        isUsable: 1
+        isStackable: 1
+        isExaminable: 1
+        isCombinable: 1
+        isDroppable: 0
+        isDiscardable: 0
+        canBindShortcut: 0
+        alwaysShowQuantity: 0
+        applyAttributesOnUse: 0
+      UsableSettings:
+        usableType: 2
+        playerItemIndex: 0
+        healthPoints: 0
+        removeOnUse: 0
+        customData:
+          Type: 0
+          JsonData: 
+          ItemAttributes:
+            Items: []
+      Properties:
+        maxStack: 3
+      CombineSettings:
+      - requiredCurrentAmount: 0
+        requiredSecondAmount: 0
+        resultItemAmount: 0
+        combineWithID: 0c35b2be35154de4a4b58e06ed67870c
+        resultCombineID: d77a985710814c96952652f7de601993
+        playerItemIndex: 0
+        inheritCustomData: 0
+        inheritFromSecond: 0
+        inheritKey: 
+        customData:
+          Type: 0
+          JsonData: 
+          ItemAttributes:
+            Items: []
+        itemType: 0
+        keepAfterCombine: 0
+        removeSecondItem: 0
+        eventAfterCombine: 0
+        selectAfterCombine: 0
+        haveCustomData: 0
+      LocalizationSettings:
+        titleKey:
+          GlocText: item.title.medicaloil
+          NormalText: Aceite Medicinal
+        descriptionKey:
+          GlocText: item.description.medicaloil
+          NormalText: "Medicamento eficaz y de acci\xF3n r\xE1pida. Se utiliza para
+            aliviar diversas enfermedades, aumentar la velocidad de recuperaci\xF3n
+            y potenciar la salud en momentos cr\xEDticos."
   - Section:
       Name: Reload Items
       GUID: 401b335b9c9c4c5588e0ec76a2faef23
@@ -1643,6 +1817,49 @@ MonoBehaviour:
           NormalText: "Una peque\xF1a y colorida bolita de vidrio usada frecuentemente
             en juegos. Puede lanzarse o rodarse para resolver rompecabezas y activar
             mecanismos."
+    - GUID: 63222201383e4a10a55a77f592958ade
+      SectionGUID: be7f17ba3cb145e6883bea6a70f0deb7
+      Title: LockpickTools
+      Description: 
+      Width: 1
+      Height: 1
+      Padding: 0
+      Orientation: 0
+      FlipDirection: 0
+      Icon: {fileID: 21300000, guid: 03830137119a4c74bb36000faee0dfeb, type: 3}
+      ItemObject:
+        GUID: 
+        Object: {fileID: 0}
+      Settings:
+        isUsable: 1
+        isStackable: 1
+        isExaminable: 1
+        isCombinable: 0
+        isDroppable: 0
+        isDiscardable: 0
+        canBindShortcut: 0
+        alwaysShowQuantity: 0
+        applyAttributesOnUse: 0
+      UsableSettings:
+        usableType: 0
+        playerItemIndex: 0
+        healthPoints: 0
+        removeOnUse: 0
+        customData:
+          Type: 0
+          JsonData: 
+          ItemAttributes:
+            Items: []
+      Properties:
+        maxStack: 5
+      CombineSettings: []
+      LocalizationSettings:
+        titleKey:
+          GlocText: item.title.lockpick
+          NormalText: 
+        descriptionKey:
+          GlocText: item.description.lockpick
+          NormalText: 
   - Section:
       Name: Crafting
       GUID: 21af113af789404382a2532d30591873
@@ -1730,7 +1947,7 @@ MonoBehaviour:
         isUsable: 0
         isStackable: 1
         isExaminable: 0
-        isCombinable: 0
+        isCombinable: 1
         isDroppable: 0
         isDiscardable: 1
         canBindShortcut: 0
@@ -1748,7 +1965,27 @@ MonoBehaviour:
             Items: []
       Properties:
         maxStack: 64
-      CombineSettings: []
+      CombineSettings:
+      - requiredCurrentAmount: 0
+        requiredSecondAmount: 0
+        resultItemAmount: 0
+        combineWithID: 29901ad3ad2a4edf828062ef0684be91
+        resultCombineID: 63222201383e4a10a55a77f592958ade
+        playerItemIndex: 0
+        inheritCustomData: 0
+        inheritFromSecond: 0
+        inheritKey: 
+        customData:
+          Type: 0
+          JsonData: 
+          ItemAttributes:
+            Items: []
+        itemType: 0
+        keepAfterCombine: 0
+        removeSecondItem: 0
+        eventAfterCombine: 0
+        selectAfterCombine: 0
+        haveCustomData: 0
       LocalizationSettings:
         titleKey:
           GlocText: item.title.scrap
