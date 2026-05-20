@@ -78,15 +78,24 @@ public class ReproductorDeAudioRepetitivo : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (comoIniciar != MetodoInicio.TriggerEnter) return;
-        
-        // Si hay tag y no coincide, ignoramos
-        if (!string.IsNullOrEmpty(tagParaTrigger) && !other.CompareTag(tagParaTrigger)) return;
+        Debug.Log($"[ReproductorDeAudio] OnTriggerEnter detectado con el objeto: {other.name} (Tag: {other.tag})");
 
-        // Si ya se reprodujo y está configurado para hacerlo solo una vez, ignoramos
-        if (reproducirSoloUnaVezPorObjeto && yaSeReprodujo) return;
+        // Verificar tag (aplica para ambas lógicas)
+        bool coincideTag = string.IsNullOrEmpty(tagParaTrigger) || other.CompareTag(tagParaTrigger);
+        if (!coincideTag)
+        {
+            Debug.Log($"[ReproductorDeAudio] Ignorado porque el tag ({other.tag}) no coincide con el esperado ({tagParaTrigger})");
+            return;
+        }
 
-        IniciarReproduccion();
+        // Lógica para el audio repetitivo (solo si está configurado para TriggerEnter)
+        if (comoIniciar == MetodoInicio.TriggerEnter)
+        {
+            // Si ya se reprodujo y está configurado para hacerlo solo una vez, ignoramos
+            if (reproducirSoloUnaVezPorObjeto && yaSeReprodujo) return;
+
+            IniciarReproduccion();
+        }
     }
 
     /// <summary>
@@ -94,6 +103,7 @@ public class ReproductorDeAudioRepetitivo : MonoBehaviour
     /// </summary>
     public void IniciarReproduccion()
     {
+        Debug.Log($"[ReproductorDeAudio] Intentando iniciar reproducción repetitiva en {gameObject.name}");
         if (audioSourceEspecifico == null)
         {
             Debug.LogWarning($"[ReproductorDeAudio] No hay un AudioSource asignado ni encontrado en {gameObject.name}.");
@@ -112,6 +122,7 @@ public class ReproductorDeAudioRepetitivo : MonoBehaviour
         }
 
         yaSeReprodujo = true;
+        Debug.Log($"[ReproductorDeAudio] Comenzando RutinaReproduccion con {ciclos} ciclos y delay inicial de {delayEntreCiclos}s");
         rutinaActual = StartCoroutine(RutinaReproduccion());
     }
 
