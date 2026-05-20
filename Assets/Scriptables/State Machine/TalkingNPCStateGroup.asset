@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.EstadoPatrullajeAI
   velocidadPatrullaje: 1.5
   distanciaDeParada: 1
-  tiempoEsperaEnPunto: 3
+  tiempoEsperaEnPunto: 5
   distanciaDeteccionCercana: 1.5
   multiplicadorVelocidadAnim: 1
 --- !u!114 &11400000
@@ -27,16 +27,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8b672febe5180040a28550def7b74d4, type: 3}
-  m_Name: CustomNPCStateGroup
+  m_Name: TalkingNPCStateGroup
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.CustomNPCStateGroup
   AIStates:
   - StateAsset: {fileID: -628444004351628532}
     IsEnabled: 1
   - StateAsset: {fileID: 6608096893714432505}
-    IsEnabled: 1
+    IsEnabled: 0
   - StateAsset: {fileID: 8755880265959894010}
     IsEnabled: 0
-  IdleParameter: Idle
+  IdleParameter: Talking
   WalkParameter: Walk
   RunParameter: Run
   InteractParameter: Interact
