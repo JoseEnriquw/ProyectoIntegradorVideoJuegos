@@ -37,6 +37,10 @@ MonoBehaviour:
     IsEnabled: 1
   - StateAsset: {fileID: 939958431482384129}
     IsEnabled: 1
+  - StateAsset: {fileID: 6449222181580468689}
+    IsEnabled: 1
+  - StateAsset: {fileID: 3523052337272286326}
+    IsEnabled: 1
   IdleParameter: Idle
   WalkParameter: Walk
   RunParameter: Run
@@ -61,6 +65,41 @@ MonoBehaviour:
   SeePlayerDamage: 10
   HidingCloseDistance: 2
   PatrolTime: 5
+--- !u!114 &3523052337272286326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b136286159dadf4eb91a93d62e05f72, type: 3}
+  m_Name: ' (UHFPS.Runtime.States.EstadoPatrullajeAI)'
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.EstadoPatrullajeAI
+  velocidadPatrullaje: 1.5
+  distanciaDeParada: 1
+  tiempoEsperaEnPunto: 2
+  distanciaDeteccionCercana: 1.5
+  multiplicadorVelocidadAnim: 1
+--- !u!114 &6449222181580468689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd9c414ed94eb24d972694e47da2b6a, type: 3}
+  m_Name: ' (UHFPS.Runtime.States.EstadoIrYAnimarAI)'
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.EstadoIrYAnimarAI
+  nombreDelPuntoDestino: PuntoPickup
+  velocidadMovimiento: 1.5
+  distanciaDeParada: 0.5
+  parametroAnimacion: pickup
+  tiempoDeAnimacion: 3
+  estadoPostAnimacion: PatrullajeAI
 --- !u!114 &8407762149507097960
 MonoBehaviour:
   m_ObjectHideFlags: 0
