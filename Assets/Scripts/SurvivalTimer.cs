@@ -36,6 +36,11 @@ public class SurvivalTimer : MonoBehaviour
     /// <summary>
     /// Returns the current remaining time in seconds.
     /// </summary>
+    public void start() { 
+        QualitySettings.vSyncCount = 0; // Disable VSync for more accurate timing (optional)
+       Application.targetFrameRate = -1; // Set a target frame rate (optional)
+
+    }
     public float TimeRemaining => timeRemaining;
 
     /// <summary>
