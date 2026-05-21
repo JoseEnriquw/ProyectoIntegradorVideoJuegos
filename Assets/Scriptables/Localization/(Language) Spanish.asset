@@ -1125,6 +1125,18 @@ MonoBehaviour:
     SectionId: 80976153
     Key: objectives.entry.town
     Value: Ingresa al pueblo
+  - EntryId: 85946524
+    SectionId: 87764078
+    Key: objetives_ingreso_pueblo.ingreso_pueblo
+    Value: Ingresa al pueblo
+  - EntryId: 27438961
+    SectionId: 87764078
+    Key: objetives_ingreso_pueblo.Forest.town.first
+    Value: null
+  - EntryId: 54476905
+    SectionId: 87764078
+    Key: objetives_ingreso_pueblo.Forest.town.second
+    Value: null
   - EntryId: 19316762
     SectionId: 12708451
     Key: subobjetives.inspect.room
@@ -1203,79 +1215,81 @@ MonoBehaviour:
   - EntryId: 22915260
     SectionId: 11930759
     Key: dialogs_pueblo.limite.carretera
-    Value: null
+    Value: "No creo que el pueblo quede por ac\xE1\u2026"
   - EntryId: 16471321
     SectionId: 11930759
     Key: dialogs_pueblo.desequipar.linterna
-    Value: null
+    Value: Uh esta linterna ya no funciona, tendre que descartarla.
   - EntryId: 27943259
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.Olvido
-    Value: null
+    Value: "Este lugar qued\xF3 en el olvido\u2026"
   - EntryId: 75171280
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.posteluz
-    Value: null
+    Value: "\xBFUna l\xE1mpara a kerosene? \xBFNo hay luz por ac\xE1?"
   - EntryId: 51158971
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.nene.che
-    Value: null
+    Value: "\xA1Che, nene!"
   - EntryId: 80669082
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.nene.para
-    Value: null
+    Value: "Eh, par\xE1\u2026 no te vayas."
   - EntryId: 79278245
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.arvol.caida
-    Value: null
+    Value: "\xA1Mierda! No tengo tiempo para esto\u2026 tengo que encontrar otro
+      camino."
   - EntryId: 43885748
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.niebla
-    Value: null
+    Value: "Esto no estaba antes\u2026 \xBFqu\xE9 est\xE1 pasando?"
   - EntryId: 91080227
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.firshouse
-    Value: null
+    Value: "\xBFHola? \xBFHay alguien ah\xED?"
   - EntryId: 51662929
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.secondhouse
-    Value: null
+    Value: "\xBFOtra caba\xF1a?"
   - EntryId: 78003352
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.silla
-    Value: null
+    Value: "Ac\xE1 hubo alguien hace poco\u2026"
   - EntryId: 32551320
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.medicina
-    Value: null
+    Value: "Son los mismos frascos\u2026 los de casa\u2026\u201D  \u201CCapaz\u2026
+      era esto lo que manten\xEDa con vida a pap\xE1."
   - EntryId: 86614006
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.linternakero
-    Value: null
+    Value: "Bueno\u2026 luz. No es mucho, pero sirve."
   - EntryId: 77694860
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.foto.abuelo
-    Value: null
+    Value: "Esta es la misma foto\u2026 \xBFes mi abuelo? Tengo que encontrarlo."
   - EntryId: 27680312
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.golpepuerta
-    Value: null
+    Value: "\xBFQui\xE9n anda ah\xED\u2026?"
   - EntryId: 77776079
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.lider
-    Value: null
+    Value: "Ese tipo\u2026 me daba cosa."
   - EntryId: 90674968
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.advertencia1
-    Value: null
+    Value: "Extra\xF1os no son bienvenidos"
   - EntryId: 40298081
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.advertencia2
-    Value: null
+    Value: El lider es nuestra salvacion
   - EntryId: 12090252
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.advertencia3
-    Value: null
+    Value: Quien no obedece sera castigado
   - EntryId: 30153132
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.cercaentrada
@@ -1329,10 +1343,6 @@ MonoBehaviour:
     SectionId: 55496470
     Key: dialog_ingreso_pueblo.intro_ingreso2
     Value: Hay gente custodiando la entrada, debo buscar otra manera de ingresar..
-  - EntryId: 63575913
-    SectionId: 55496470
-    Key: dialog_ingreso_pueblo.hacha
-    Value: "Con esto podr\xEDa romper aquella caja"
   - EntryId: 68139067
     SectionId: 55496470
     Key: dialog_ingreso_pueblo.feria_cerrado
@@ -1343,3 +1353,36 @@ MonoBehaviour:
     Key: dialog_ingreso_pueblo.maizal
     Value: "Est\xE1 plagado de estas criaturas\u2026  Voy a tener que perderme entre
       el maizal para evitarlos"
+  - EntryId: 42857841
+    SectionId: 55496470
+    Key: "dialog_ingreso_pueblo.Persecuci\xF3n1"
+    Value: 'Que es eso lpm.. '
+  - EntryId: 63575913
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.esconderse
+    Value: "Ese ba\xF1o\u2026 por favor que est\xE9 abierto!"
+  - EntryId: 49913073
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.voces_forasteros
+    Value: Un intruso... hay que encontrarlo y avisarle al lider que tenemos visita...
+  - EntryId: 60315446
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.lluvia
+    Value: Lo que faltaba, se largo nomas..
+  - EntryId: 57025345
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.puente
+    Value: "No puede ser, el puente se desplom\xF3, tendr\xE9 que buscar algo que
+      me ayude a subi"
+  - EntryId: 13376603
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.granero
+    Value: Como puede ser que se hayan prendido las luces, quien anda ahi!
+  - EntryId: 88846228
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.combustible_granero
+    Value: Este generador no funciona.. Tendre que buscar el combustible
+  - EntryId: 75148231
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.esconderse_granero
+    Value: Alguien viene! tengo que esconderme debajo de la mesa.
