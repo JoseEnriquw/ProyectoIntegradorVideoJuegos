@@ -15654,6 +15654,14 @@ MonoBehaviour:
   audioSourcePJ: {fileID: 917429894}
   primerDialogo: {fileID: 11400000, guid: 3fbef454c1b6d154f9ad34e56c7afe5e, type: 2}
   segundoDialogo: {fileID: 11400000, guid: 0735e58578088ab45ae54aa880ef8c20, type: 2}
+  dialogoAlAparecer: {fileID: 0}
+  delayDialogoAparecer: 0.5
+  congelarDuranteDialogoAparecer: 0
+  girarHaciaEscape: 0
+  objetivoDeEscape: {fileID: 0}
+  duracionGiroEscape: 0.5
+  delayGiroEscape: 0.2
+  objetosActivarAlGirar: []
 --- !u!1001 &616073038
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22310,6 +22318,14 @@ MonoBehaviour:
   audioSourcePJ: {fileID: 0}
   primerDialogo: {fileID: 0}
   segundoDialogo: {fileID: 0}
+  dialogoAlAparecer: {fileID: 0}
+  delayDialogoAparecer: 0.5
+  congelarDuranteDialogoAparecer: 0
+  girarHaciaEscape: 0
+  objetivoDeEscape: {fileID: 0}
+  duracionGiroEscape: 0.5
+  delayGiroEscape: 0.2
+  objetosActivarAlGirar: []
 --- !u!65 &893459519
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23098,15 +23114,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4197611636204759026, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 510.77014
+      value: 457.37
       objectReference: {fileID: 0}
     - target: {fileID: 4197611636204759026, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 19.99
+      value: 27.42
       objectReference: {fileID: 0}
     - target: {fileID: 4197611636204759026, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 183.48813
+      value: 157.29
       objectReference: {fileID: 0}
     - target: {fileID: 4197611636204759026, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -43989,15 +44005,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4538282176171970600, guid: 95af4357eda9cae4aa85a3b7cc128a1e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -32.22986
+      value: -85.630005
       objectReference: {fileID: 0}
     - target: {fileID: 4538282176171970600, guid: 95af4357eda9cae4aa85a3b7cc128a1e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 20.150002
+      value: 27.580002
       objectReference: {fileID: 0}
     - target: {fileID: 4538282176171970600, guid: 95af4357eda9cae4aa85a3b7cc128a1e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -309.51187
+      value: -335.71002
       objectReference: {fileID: 0}
     - target: {fileID: 4538282176171970600, guid: 95af4357eda9cae4aa85a3b7cc128a1e, type: 3}
       propertyPath: m_LocalRotation.w
