@@ -15402,8 +15402,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3185843442028640310}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0023099696, y: 0.05519758, z: -0.0058707595, w: 0.9984555}
-  m_LocalPosition: {x: -406.18964, y: 3.329865, z: -396.75327}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 8.776978, y: 20.810001, z: -121.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16060,7 +16060,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3850075978677811279}
         m_TargetAssemblyTypeName: UHFPS.Runtime.GameManager, Assembly-CSharp
-        m_MethodName: RestartGame
+        m_MethodName: LoadWorldLastState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22665,403 +22665,259 @@ MonoBehaviour:
   SavingIcon: {fileID: 2296533076690793377}
   Debugging: 1
   worldSaveables:
-  - Token: FuseboxPuzzle.c93034150a9b01c4887beae3da5e3e02
+  - Token: InteractableItem.35e7fe72ffd65c24f9d47c490a323aad
     Instance: {fileID: 0}
-  - Token: InteractableItem.b93669b4998b20c489d03a13e74034e5
+  - Token: InteractableLight.fd563bb0e74ad8340a8c536ca0e6e998
     Instance: {fileID: 0}
-  - Token: SimpleLight.5c81cdca33af20f4796c86ce96a7aca3
+  - Token: DraggableItem.e11f6deecdf7d8f4cbb3fa6f005108bb
     Instance: {fileID: 0}
-  - Token: InteractableItem.d1029e53a9d0fcf4eaf30bacc0ea5cec
+  - Token: InteractableLight.53444638246217f469b34fae714c37a8
     Instance: {fileID: 0}
-  - Token: JumpscareTrigger.4f0bd60f6159a2841bb2b514ca03a809
+  - Token: SimpleSwitcher.419feacfe7dfc1144a1c7925fd3926b9
     Instance: {fileID: 0}
-  - Token: JumpscareTrigger.d43549ac5178b2e429390e5753682dc5
+  - Token: InteractableItem.762222f1aac0e934c91489bef58ce2f9
     Instance: {fileID: 0}
-  - Token: DynamicObject.9287a7a71d7c9c0479e4a8fe5f48bd0b
+  - Token: CutsceneTrigger.2d25bdba4d263f646a3c9f6a79f78bd2
     Instance: {fileID: 0}
-  - Token: SimpleLight.3dc38ae9ceb330447928e83d2da48b2f
+  - Token: ObjectiveTrigger.8583976a94e0a61438b4dd40c71bcc5c
     Instance: {fileID: 0}
-  - Token: InteractableItem.13b2e804ebc8d52428bfd8fa266b2a46
+  - Token: BreakableCrate.fcf37929382792041bf6605f3e5f8acc
     Instance: {fileID: 0}
-  - Token: CustomInteractEvent.e23eca712e9ae1548a768df96154e3ee
+  - Token: CutsceneTrigger.b8f7937e4a553574e95c3cc3b97565de
     Instance: {fileID: 0}
-  - Token: InteractableItem.a764ae50c1fade34392141d8b6a4a7f6
+  - Token: DynamicObject.382c105ec578c844cb0c7fb82f977a3c
     Instance: {fileID: 0}
-  - Token: InteractableItem.260983aa2f0665a49b6e93d387dc4fd3
+  - Token: SaveableObject.418af2a3b67af9f44a9b1fccbb2f8b0a
     Instance: {fileID: 0}
-  - Token: DynamicObject.c706eab96fbf46648b84f2f4daecfd5d
+  - Token: DialogueTrigger.ae732717bb2a4934e9a0e156370bf282
     Instance: {fileID: 0}
-  - Token: InteractableItem.d0450084379249040b0c3ad616e29df3
+  - Token: DialogueTrigger.c9e0e1caf021d014197805bb832106b9
     Instance: {fileID: 0}
-  - Token: SimpleLight.0af76fafeb1aad74d847a50477ee23da
+  - Token: InteractableItem.19a5d77e6a68f5349a8ac0482fdb9edc
     Instance: {fileID: 0}
-  - Token: InteractableItem.dda60cf3c76c95f4cb6cd9c854589ebb
+  - Token: InteractableItem.5b35031e7b09d6f428515f1d82859da6
     Instance: {fileID: 0}
-  - Token: InteractableItem.25f318c00b535f44ea64074f8c2ef561
+  - Token: InteractableItem.4ae8aaa37a084c84995b3ccd4e4bc180
     Instance: {fileID: 0}
-  - Token: CustomInteractEvent.b5db1b9a077382b438474c766f128bf7
+  - Token: DialogueTrigger.d3052830bb1737d428e0455f38b62b9f
     Instance: {fileID: 0}
-  - Token: DynamicObject.15dc6b8d9a0010f429743b5c540c82cf
+  - Token: InteractableItem.20f4d514092572e42a0819de40eb696b
     Instance: {fileID: 0}
-  - Token: KeycardPuzzle.33ac497be7779af4db1865f2644f52a2
+  - Token: InteractableItem.84fd8eaa5a9eb63459f675c86b86b936
     Instance: {fileID: 0}
-  - Token: BreakableCrate.8945e328af20f084b9da04a11df774cb
+  - Token: DialogueTrigger.26c49a43b55f87a45917d0b73e74a11c
     Instance: {fileID: 0}
-  - Token: ElectricalCircuitPuzzle.7a404a6f2b9cd074a994575531bb3209
+  - Token: DynamicObject.354e6f383ebb3cd4b8fb6a2feedecd55
     Instance: {fileID: 0}
-  - Token: InteractableItem.3f0867a4cbc31f5409fa10f6b223a002
+  - Token: InteractableItem.dd306506b24e4f14caa3840706a6b45e
     Instance: {fileID: 0}
-  - Token: InteractableItem.182ee6137fc06c441a50bae68d7ea4f5
+  - Token: InteractableItem.3b6e2eacce8eb664c836d4c7c6648183
     Instance: {fileID: 0}
-  - Token: SimpleLight.8e8b59d3a2114f64387bb441815bfc56
+  - Token: InteractableItem.5e210d5163c47af4b887d758b48c9dc5
     Instance: {fileID: 0}
-  - Token: InteractableItem.2a33148d434cbee4cace7ed867f5b40e
+  - Token: InteractableItem.9df2d2acbd264274a83f9d697e38b4ac
     Instance: {fileID: 0}
-  - Token: LeversPuzzle.25a3421af4f971c4b8009d29f31991ab
+  - Token: DraggableItem.3653328169a663348843db537344de43
     Instance: {fileID: 0}
-  - Token: InteractableItem.6763f8c74def5704ab193d1adec42eb7
+  - Token: InteractableItem.73ccf6e800dacb7478b3a9d44eb5ca86
     Instance: {fileID: 0}
-  - Token: JumpscareTrigger.dd5cf384d2982af49bdf6bdf09da2584
+  - Token: InteractableItem.0cbadc34caf23fe4abfe79b7e55c811e
     Instance: {fileID: 0}
-  - Token: SaveableObject.7d244bff06771ce48a23e81abcd5c998
+  - Token: InteractableItem.25789d0a39488a9429d1c9e5eddfb68b
     Instance: {fileID: 0}
-  - Token: ObjectiveTrigger.c90d99791fd18df41b4f7381e1e987e1
+  - Token: JumpscareTrigger.b160a60829f6f3f4dbfa5c122b0e04b6
     Instance: {fileID: 0}
-  - Token: DynamicObject.6f69e013610fe5248b0774185f00f99c
+  - Token: InteractableItem.af6c7e53ea0ea064dad6016cadd0c8c7
     Instance: {fileID: 0}
-  - Token: DynamicObject.4b1da87451566ea459c58e00f8a7314e
+  - Token: DialogueTrigger.758dbbbe1d936bc4b8cb0cf2bf9384ad
     Instance: {fileID: 0}
-  - Token: DraggableItem.ee7bf511f2565804a9014a588aaeb019
+  - Token: BreakableCrate.9cb5cfa037521ec45b29d5aec74e64fc
     Instance: {fileID: 0}
-  - Token: ElectricalCircuitPuzzle.ddb6963b0718ed84c85ac76c4c25b246
+  - Token: BreakableCrate.0ffcc37acc3f39240aa7034a4062cc83
     Instance: {fileID: 0}
-  - Token: SimpleLight.3c4ab139f7236a2429c8448c49db9923
+  - Token: DialogueTrigger.74aaf16062957c54898e15e6fdc3be42
     Instance: {fileID: 0}
-  - Token: InteractableItem.251109ae3f9fbb544917c313576534d2
+  - Token: Radio.3426a33f89f798040be5002bdcfa740b
     Instance: {fileID: 0}
-  - Token: InteractableItem.ff4dbdeb6aab4a846a1b791c4d35839a
+  - Token: DraggableItem.438a1394713d29a46b1de460c1687cb8
     Instance: {fileID: 0}
-  - Token: DraggableItem.36b652fd2c1fdca4a974efe9315bac2d
+  - Token: DraggableItem.2b9b7ccb9fb057b478c1025bb5ecf086
     Instance: {fileID: 0}
-  - Token: DraggableItem.69407a9a5bf10344cb6e32656fc07c17
+  - Token: InteractableItem.f0d0842096381134a80a2fa7345a7352
     Instance: {fileID: 0}
-  - Token: InteractableItem.47283e8bf7c17a74cb46c7139e504d7a
+  - Token: DialogueTrigger.7bfb678eb4a1ff140900b1c46228fec3
     Instance: {fileID: 0}
-  - Token: ThermometerTemp.b71069dcafd0c114b80c108c71bde6ef
+  - Token: DynamicObject.eea8fc98675f39745a112b9d03adc11d
     Instance: {fileID: 0}
-  - Token: InteractableLight.e17447e77624f334ea195f1ae4b59b65
+  - Token: DraggableItem.4328ad52ade08244fac30981f65100a6
     Instance: {fileID: 0}
-  - Token: JumpscareTrigger.8b06d536ae9da7940af32b4c87e74f67
+  - Token: DraggableItem.97517d70deaf31a459aa364ffcc41964
     Instance: {fileID: 0}
-  - Token: DynamicObject.f90ca20323da2804d9244899e0b1476d
+  - Token: DraggableItem.c974d0756dd9ef848bb7d1c87261b177
     Instance: {fileID: 0}
-  - Token: DynamicObject.d86e343250cf93d43bf9b3427895d1a8
+  - Token: DynamicObject.8ab4fa87dd68ccc47b2acc5f683e0462
     Instance: {fileID: 0}
-  - Token: JumpscareTrigger.272b14781ad74a54196ee67cc7a8b880
+  - Token: InteractableItem.fe93a80842637ff4fa41bc683afbd6c5
     Instance: {fileID: 0}
-  - Token: InteractableItem.3923b11fa9ee16f46b422a5378504d28
+  - Token: DynamicObject.013ec6e5100a23c4ab4637caefcd1fb7
     Instance: {fileID: 0}
-  - Token: DynamicObject.b6a0da7d39522de4abfaa1ed33440845
+  - Token: ObjectiveTrigger.9f07e1ba7a4e3b949b0d08dbeb4821f9
     Instance: {fileID: 0}
-  - Token: InteractableItem.c50b04b4eaed4ae46905b4fec8e49c00
+  - Token: AutosaveTrigger.9c6d6034b464239429d18f605caaf52b
     Instance: {fileID: 0}
-  - Token: InteractableItem.a2fea8acc45bae541b259c4859c8b030
+  - Token: InteractableItem.ae8f110520e1d6b479e8d96b2befba50
     Instance: {fileID: 0}
-  - Token: DynamicObject.bcc0f0ecac7397c4eb2be4f8f386c86e
+  - Token: InteractableItem.f5f76c7910703b4419aaa462f1fe70e9
     Instance: {fileID: 0}
-  - Token: InteractableItem.a10cab95394b9ca46ba487d0c120ccab
+  - Token: DynamicObject.4956639ea1d930a4bb2d0be3d188b15c
     Instance: {fileID: 0}
-  - Token: LeversPuzzleOrderLights.1fb67870a1cbb364b91c27c6b9f72d15
+  - Token: DynamicObject.867fcf6c76a2b164cbe5fa08e71566a7
     Instance: {fileID: 0}
-  - Token: NPCHealth.ea0b23c8ba007d04d9baa5f4bf5e377f
+  - Token: InteractableItem.5b623ea442b0fdd4aa46c50febc631fd
     Instance: {fileID: 0}
-  - Token: InteractableItem.fe70ae4912177dd4aacac3605aa5b8c3
+  - Token: InteractableItem.7f2a0d11b211610448ec91c99a55f364
     Instance: {fileID: 0}
-  - Token: InteractableItem.cb32087ea36977548a3d101721f35834
+  - Token: DialogueTrigger.3c3d74b7979155b47a4874766fbacde1
     Instance: {fileID: 0}
-  - Token: SimpleLight.66c6e7492f74d344eb1b0c8fec9f8cc6
+  - Token: InteractableItem.0f9d6cb19bcd5274c9be6ea5e4e40f3c
     Instance: {fileID: 0}
-  - Token: SimpleSwitcher.8ef6fa811905bbf479a709abd4ffd577
+  - Token: DraggableItem.905c97885036e4f4fa69333c1a0154f3
     Instance: {fileID: 0}
-  - Token: InteractableItem.ee7d9a1c246711a49a16c757154b40fe
+  - Token: AutosaveTrigger.5d3feeedfb53edb46b241d5f898741d6
     Instance: {fileID: 0}
-  - Token: InteractableItem.099b0972efc063a49afedafb5602edc7
+  - Token: CustomInteractEvent.bcd9b89239a34104da62341753057b4a
     Instance: {fileID: 0}
-  - Token: DynamicObject.f4faec14ff055b64582bf8ca2a3ee08b
+  - Token: DraggableItem.1c98a8dff10149e4399183b1ba51e795
     Instance: {fileID: 0}
-  - Token: SimpleLight.617191268c18f0b4397d06ba152bc395
+  - Token: InteractableItem.1160fed5f6acb604a935ba7329906c77
     Instance: {fileID: 0}
-  - Token: DynamicObject.63530f498f5b953459d0923799deae1e
+  - Token: ObjectiveTrigger.11a3d6f8378f6b546b3d6ff4a2eba2bb
     Instance: {fileID: 0}
-  - Token: InteractableItem.0bf765e1e1944a34ea4c63ea928f8bf5
+  - Token: DynamicObject.8bac3c1ef7764324d93372a128011e52
     Instance: {fileID: 0}
-  - Token: BarricadeObject.41c975a7d98151a41a8cc33f04f4f12c
+  - Token: DraggableItem.026d29ca3968ad040bb97a04298ca1ae
     Instance: {fileID: 0}
-  - Token: ObjectiveTrigger.14b1c9ad5f8c6a247923537f243ac947
+  - Token: InteractableItem.10a9ef745747c864294abb07d36cfc7a
     Instance: {fileID: 0}
-  - Token: InteractableItem.9efb08a90bd96134991e07559c1c0855
+  - Token: InteractableItem.64a5b27427d222d4b9a471cba3271d4c
     Instance: {fileID: 0}
-  - Token: DynamicObject.5107094a7edf213428c2271f41bf4d17
+  - Token: DraggableItem.ae1b7249c8a219340ab9db4204a458ca
     Instance: {fileID: 0}
-  - Token: InteractableItem.880e69680d02af64baf905fbd490180b
+  - Token: DialogueTrigger.df5232641ad06d545abb9934ebf04263
     Instance: {fileID: 0}
-  - Token: MazePuzzle.4c9359bbabccdf04f82e0055a2ed1ae6
+  - Token: DraggableItem.574f1a7e36331364ba7a9e336df49828
     Instance: {fileID: 0}
-  - Token: TimedInteractEvent.57a592e015705b84587b75ba4af3553d
+  - Token: DialogueTrigger.e6566c9477c4dbf47a86ff59874b57c8
     Instance: {fileID: 0}
-  - Token: InteractableItem.ada1178f980049946bf072d321964203
+  - Token: InteractableItem.e9e917ac2c307c74aa9efcff9c0c1d5e
     Instance: {fileID: 0}
-  - Token: KeypadPuzzle.f3b1f4b09d9789c49ae3ac6435cb1e35
+  - Token: BreakableCrate.227e34d60be3fa34d8ef95073fe50982
     Instance: {fileID: 0}
-  - Token: HintTrigger.8e3ba925cf10eba49b7e7f9db7f5fee8
+  - Token: InteractableItem.8f94de860b229634486f6d6a06ce2211
     Instance: {fileID: 0}
-  - Token: InteractableItem.e8577247a6be62945937e67ff0c04a93
+  - Token: DraggableItem.89b448ebaef70154cb1b4706cdfcf7d0
     Instance: {fileID: 0}
-  - Token: CustomInteractEvent.60bc3ad6029e82b4294c04a102754395
+  - Token: InteractableItem.da20fecb18d849443bfb3b01c7bea654
     Instance: {fileID: 0}
-  - Token: InteractableItem.bdb2660bf7108a3438408cbc359508b2
+  - Token: EMFAnomaly.80f9b0ffb202ca248bcf6118ed7316b4
     Instance: {fileID: 0}
-  - Token: CRTMonitor.29011b8192aaf964d879b2b6ec1329fb
+  - Token: DynamicObject.c0e46b4e6ad312149a47919fd3f2835b
     Instance: {fileID: 0}
-  - Token: LookAtTrigger.3a5c89e89d95f2b43895277b78c629a0
+  - Token: DraggableItem.6838748f04d6c714e96d4311a07775e4
     Instance: {fileID: 0}
-  - Token: InteractableItem.c46d58a6e5435cd48b3bc61027b1cb27
+  - Token: DraggableItem.89f2672f505407540806db7153fa8196
     Instance: {fileID: 0}
-  - Token: CustomInteractEvent.d340c2049bf24a44e9919b8d8fd9b44f
+  - Token: CutsceneTrigger.9abaacfdbfbd1cd448ab70237d7fae57
     Instance: {fileID: 0}
-  - Token: DraggableItem.99d60a620af2e874aa697ec3292582d9
+  - Token: BreakableCrate.60a98ea5ec3cf2548ba2d06052d8accc
     Instance: {fileID: 0}
-  - Token: BreakableCrate.ad6ca9474867c37489fe154d1b5df056
+  - Token: DynamicObject.b833116f7b144b449839d221237af9ad
     Instance: {fileID: 0}
-  - Token: PadlockPuzzle.a0323f4566b25f64d8a976515c17a99e
+  - Token: ObjectiveTrigger.2217f535f935b9b47960119d6963dbcd
     Instance: {fileID: 0}
-  - Token: InteractableItem.aff014106d372ea4d89754b5def3ffa4
+  - Token: SimpleLight.0e1d6e41ee808b24188e52ec8902cc42
     Instance: {fileID: 0}
-  - Token: CustomInteractEvent.3fe557dca20de4444b37ee0478f165ab
+  - Token: InteractableItem.3ea22183986ae8b49832b48186e7d2cb
     Instance: {fileID: 0}
-  - Token: DynamicObject.732f0158476f63548a93d93e368d53a0
+  - Token: ObjectiveTrigger.8b3a36517d6013f41ab9838f64a5151a
     Instance: {fileID: 0}
-  - Token: DraggableItem.cd1a070562c27ed4fbc785a32c49558e
+  - Token: BreakableCrate.130b72ed9c6adfc4d9c3a4f0d532ae70
     Instance: {fileID: 0}
-  - Token: InteractableItem.ee2292c6da641af4298a2a70349d5159
+  - Token: InteractableItem.2c6e923f051f48f45a563d7f11e0105f
     Instance: {fileID: 0}
-  - Token: InteractableItem.afd5e65451021444e8fd43afa9066aa7
+  - Token: DynamicObject.f2a97276f4ab7964d94417b04497e7f6
     Instance: {fileID: 0}
-  - Token: InteractableItem.3abfd8bc60d37b04e925d737de2540fd
+  - Token: DynamicBrokenFix.a5bddb528677aa84a980d2bf6b43a8e2
     Instance: {fileID: 0}
-  - Token: DynamicObject.2b62caec8ab333940a95dbab58002c22
+  - Token: InteractableItem.da48ffe0820fc5644b0f8c772c8cd494
     Instance: {fileID: 0}
-  - Token: DynamicObject.c9257b870392014499bd9123883ef3ad
+  - Token: DialogueTrigger.e1948d318a1f3ae43956a314616c9876
     Instance: {fileID: 0}
-  - Token: SaveableObject.0471ecb5beffffa47b43b20c0b2e6122
+  - Token: InteractableItem.e89a7a125aea0444796f7355e793abbe
     Instance: {fileID: 0}
-  - Token: DraggableItem.ee241ec18cf41ff4698b0442e4a0964b
+  - Token: DialogueTrigger.e2fa91fd01c5e3f4ab26027e33d79409
     Instance: {fileID: 0}
-  - Token: TimedInteractEvent.a77f8374541c52046a1a41e6332c47c5
+  - Token: InteractableItem.301ce6e1ca58e1b46a047311178474a7
     Instance: {fileID: 0}
-  - Token: InteractableLight.a7087aeec909d00439c66f74d95f5921
+  - Token: DynamicObject.4d8e84ae878162a48a3de11201bb9136
     Instance: {fileID: 0}
-  - Token: DialogueTrigger.6b02e9b8e45662d4b8065dca3f1bdf77
+  - Token: InteractableItem.93815765436246948b32e49b387ebca6
     Instance: {fileID: 0}
-  - Token: ObjectiveTrigger.1765bcdec24bfbf4787524b93c2eaee7
+  - Token: DraggableItem.e1108845471897a44b27267337859cc5
     Instance: {fileID: 0}
-  - Token: PowerGenerator.619229471e628c145bdf9e9d8c1dd8fa
+  - Token: InteractableItem.1f401d9c20fec7b45b67e61642dbe50f
     Instance: {fileID: 0}
-  - Token: DynamicObject.18e83b558eae65e4a87eab58251476ae
+  - Token: SimpleLight.4c1dec49ba90b05419571ee24de4989d
     Instance: {fileID: 0}
-  - Token: InteractableItem.3228aa339219e3e48b94db1a02725046
+  - Token: DynamicObject.5b255b140094a534483225339bf92c1d
     Instance: {fileID: 0}
-  - Token: InteractableItem.552543b2bf315984ab427741769a159a
+  - Token: InteractableItem.71e86051b4569314da81a7507c0eee8e
     Instance: {fileID: 0}
-  - Token: EMFAnomaly.133851f28e97c364d9ed0a90a7b043e2
+  - Token: InteractableItem.097fb1d8579137e47ab630f979b53570
     Instance: {fileID: 0}
-  - Token: InteractableItem.e0844754ce618724390f2733207ac03c
+  - Token: InteractableItem.9d02d8871b5243f47ac8a11cf766ee84
     Instance: {fileID: 0}
-  - Token: InteractableItem.5cf6c14af5a00144696a86ae422e5979
+  - Token: JumpscareTrigger.9899b71b992c57140853a14e43451b8e
     Instance: {fileID: 0}
-  - Token: InteractableItem.d3b09bfd64a7e5041b83ce46fab48087
+  - Token: InteractableItem.721ec392e5479b540a97286c2e04d3ef
     Instance: {fileID: 0}
-  - Token: InteractableItem.68017992d698236478dac7f97b4de22a
+  - Token: DialogueTrigger.d4df8ff6aff013a46999a9b3cfd7a4c0
     Instance: {fileID: 0}
-  - Token: CustomInteractEvent.cc6f2cdd4a2654d4e99c42c9ba140c04
+  - Token: DialogueTrigger.9841e6f00c20b8947b66b957eed2475b
     Instance: {fileID: 0}
-  - Token: SimpleLight.1b13de1835228e74caf123f1e1564f77
+  - Token: DraggableItem.5bfb4b1b0e804934683b7efaaf986b6a
     Instance: {fileID: 0}
-  - Token: ThermometerTemp.7cd0ec22992707a49af159e9ddbfa685
+  - Token: InteractableItem.f0977f27862a624439fd6b17bbe23c29
     Instance: {fileID: 0}
-  - Token: InteractableItem.45296ced02990ad42926bf30dec0e5ce
+  - Token: CustomInteractEvent.55bf2f06c58f3ab45ae1b6d7464d56df
     Instance: {fileID: 0}
-  - Token: DynamicObject.8cc020fc45d1b5f4992ab44a968881b9
+  - Token: PowerGenerator.577b9cd47c4d6ed43a9576e0f6258514
     Instance: {fileID: 0}
-  - Token: InteractableItem.a9e5ce80402d41c4ea2c711011acca02
+  - Token: BreakableCrate.cb92fc570303f7f4ba8912a0feb132c0
     Instance: {fileID: 0}
-  - Token: InteractableItem.56b8015699d82934781b5c3e02b4ea74
+  - Token: InteractableItem.8f35e95ed6063ca45966bfc971028f90
     Instance: {fileID: 0}
-  - Token: ObjectiveTrigger.35ece301dcd3afe48a6cf10acc2c573b
+  - Token: InteractableItem.286018781efddd34db441a1960f0755f
     Instance: {fileID: 0}
-  - Token: DynamicObject.4bde08afbee9d464ead43f1ab3f930ec
+  - Token: DraggableItem.e3c2062f3e7d97a4a82ffb21bfd45585
     Instance: {fileID: 0}
-  - Token: SimpleLight.f02f83ca412587549874f453f2a31dab
+  - Token: InteractableItem.f4463a8c4df200d4cba01d5e75ac73a1
     Instance: {fileID: 0}
-  - Token: ItemsContainer.426ed3ca2bdaac448aae4ec65c5ab40c
+  - Token: CutsceneTrigger.e6d1a12950e12ca40bed11dd90a74f1e
     Instance: {fileID: 0}
-  - Token: SimpleLight.ede3e00ce820ad14387d5e37af71bb80
+  - Token: BreakableCrate.8c83c31b563a62e42afcb4c57222609c
     Instance: {fileID: 0}
-  - Token: InteractableLight.d1fbcb58312993349a6694066a407b56
+  - Token: DialogueTrigger.b18dc46a5459487469defb4f14b9ac9a
     Instance: {fileID: 0}
-  - Token: InteractableItem.8966c5a32b0e1af4da1aabcbef6def3b
+  - Token: InteractableItem.50134061cdaf6cb458d51ef039ad7af6
     Instance: {fileID: 0}
-  - Token: InteractableItem.bd4fa7a00efaf7d4ea5f3486671a1fdd
+  - Token: DynamicObject.17e9d20c3b0e06946b2a1122efbdb682
     Instance: {fileID: 0}
-  - Token: InteractableItem.dfa633e5071ce174a96a217e8768131d
+  - Token: BreakableCrate.c3ba8279716db7a4eaa314efcdde0ccc
     Instance: {fileID: 0}
-  - Token: CustomInteractEvent.a12c325e2ed93224e85504f84bef878a
+  - Token: DraggableItem.72f70c7832ccf3b49af04f9a3463f713
     Instance: {fileID: 0}
-  - Token: InteractableItem.0ac5738e6fa9d71418a7e67f33906288
-    Instance: {fileID: 0}
-  - Token: SimpleLight.9848bc208864c0945a5e0fd37e95f692
-    Instance: {fileID: 0}
-  - Token: DialogueTrigger.683341141060d6645ab962dee22a1675
-    Instance: {fileID: 0}
-  - Token: InteractableItem.cb81b79076d7ec04badd680e8f45bbe0
-    Instance: {fileID: 0}
-  - Token: InteractableItem.f91e691a49f6f9b45bc6bbbf1489c68a
-    Instance: {fileID: 0}
-  - Token: EMFAnomaly.445caf020d503b941b2cebd91b826e1e
-    Instance: {fileID: 0}
-  - Token: DynamicObject.9e3706aae5a73464e9dee30098049fcb
-    Instance: {fileID: 0}
-  - Token: InteractableItem.48d033d7da7beba4982b9b5096120db1
-    Instance: {fileID: 0}
-  - Token: InteractableItem.3571e637ad8202242849225411608b2c
-    Instance: {fileID: 0}
-  - Token: DynamicObject.272c57cdaf567304a8e73a9548197605
-    Instance: {fileID: 0}
-  - Token: UVFlashlightReveal.63bf30bec0393814f9747948bba1e6bb
-    Instance: {fileID: 0}
-  - Token: SafePuzzle.6210b19bdd3ed9544baff6bd6d604127
-    Instance: {fileID: 0}
-  - Token: InteractableItem.5d0d04cc8d6a91040bad1b624ccc618b
-    Instance: {fileID: 0}
-  - Token: DynamicBrokenFix.ba63b870c58a11c4e98a89d21d8787ab
-    Instance: {fileID: 0}
-  - Token: InteractableItem.92db82baa3d78ae4f892e5b0ab248679
-    Instance: {fileID: 0}
-  - Token: ItemsStorage.a332b1f5293ac8840bd5cf9cba971118
-    Instance: {fileID: 0}
-  - Token: InteractableItem.1d6875d63a0f84a4eae7a2cd90ac8931
-    Instance: {fileID: 0}
-  - Token: ObjectiveTrigger.8e3123328ee2d4d45b28634c9f212126
-    Instance: {fileID: 0}
-  - Token: LeversPuzzle.0f00b1a41fbc8964e8d31b98d6cdeae1
-    Instance: {fileID: 0}
-  - Token: VCRPlayer.620d0b74a3d236347998e0b5b4977805
-    Instance: {fileID: 0}
-  - Token: SimpleLight.90ee5c525f33e6e4faffaea2facac379
-    Instance: {fileID: 0}
-  - Token: SimpleLight.ce298f2c02bade6458ddab481aa8c478
-    Instance: {fileID: 0}
-  - Token: DynamicObject.ac4a61208f54e5d4091749b4fb02c24d
-    Instance: {fileID: 0}
-  - Token: InteractableItem.9d77fc92d0213f346a38e2f1a7304adc
-    Instance: {fileID: 0}
-  - Token: InteractableItem.5b98ee2b4081c4443bf1f0ef4836f63c
-    Instance: {fileID: 0}
-  - Token: CustomInteractEvent.19157afdc6a54414380512a7858a4197
-    Instance: {fileID: 0}
-  - Token: InteractableItem.b6795aa7146c7e34ebb2c3e12ca4aa84
-    Instance: {fileID: 0}
-  - Token: InteractableItem.17bed6f2939d6494a8a7d91cc40b9069
-    Instance: {fileID: 0}
-  - Token: CustomInteractEvent.0e6e6e4c0f4cf3c4892ccb80c04e31a8
-    Instance: {fileID: 0}
-  - Token: SimpleLight.d149d8e691953654a80839e3d53b8d69
-    Instance: {fileID: 0}
-  - Token: CustomInteractEvent.51b75f8cf303d054f81e936dc7380337
-    Instance: {fileID: 0}
-  - Token: EMFAnomaly.d3c62645e9827134a992e71d6c18a980
-    Instance: {fileID: 0}
-  - Token: InteractableItem.b98395bd6eef4a548b07085bdd03eb56
-    Instance: {fileID: 0}
-  - Token: DynamicObject.312edff85e0ac1f489533fbb61e4170d
-    Instance: {fileID: 0}
-  - Token: InteractableItem.281ef8e60c371fb439afdc983612dfc9
-    Instance: {fileID: 0}
-  - Token: InteractableLight.a2e749133c3a6c846b50f0b0edd68582
-    Instance: {fileID: 0}
-  - Token: InteractableItem.ee32dd08aa726084e8b7423b9fd62b60
-    Instance: {fileID: 0}
-  - Token: InteractableItem.c8cdac33f58b8854da8abc5aea53fbd5
-    Instance: {fileID: 0}
-  - Token: BarricadeObject.6dd5a570016c7ab4aa5267922f337348
-    Instance: {fileID: 0}
-  - Token: JumpscareTrigger.eb4e9b48fcf8e324f9a17720296c3551
-    Instance: {fileID: 0}
-  - Token: InteractableItem.d5fbdc7b9339e704bbb7ba21fe45fb43
-    Instance: {fileID: 0}
-  - Token: CustomInteractEvent.4f0ff213f2d704a4dbe28a9a033f1315
-    Instance: {fileID: 0}
-  - Token: CutsceneTrigger.91a37ebeaeb6cd343b07dbdf960c5851
-    Instance: {fileID: 0}
-  - Token: CustomInteractEvent.abf58c032ed5dc647a69e79921a14d7c
-    Instance: {fileID: 0}
-  - Token: NPCHealth.d4d6d3f7c493be64e9930fc8162f74e0
-    Instance: {fileID: 0}
-  - Token: CutsceneTrigger.8d85364d0609d9142b877a0cabe4f16e
-    Instance: {fileID: 0}
-  - Token: DialogueTrigger.dde019bf35d25044d978cc2eb8dd1c73
-    Instance: {fileID: 0}
-  - Token: InteractableItem.e1955ba5be3573745a226d23c95c0932
-    Instance: {fileID: 0}
-  - Token: DraggableItem.49238588293c12c4aa9ff8693b24dd42
-    Instance: {fileID: 0}
-  - Token: Radio.0b427e37f1444fd4b86d91adf954106e
-    Instance: {fileID: 0}
-  - Token: BarricadeObject.7e83dab388ba15b4bb658aa4ec11236d
-    Instance: {fileID: 0}
-  - Token: InteractableItem.3c7b474992f958a4b8e6f2591a9cdcd4
-    Instance: {fileID: 0}
-  - Token: DynamicObject.0a35e34a5e9a4fd42ac5b32e80ca9865
-    Instance: {fileID: 0}
-  - Token: InteractableItem.21819b88d4327b146a9fa7f3141283e4
-    Instance: {fileID: 0}
-  - Token: InteractableItem.cc2fa31afaf239348bb6874ae024ec59
-    Instance: {fileID: 0}
-  - Token: InteractableItem.a690b325b27155d4a910e3f0526f14fd
-    Instance: {fileID: 0}
-  - Token: DynamicObject.5c8a036ff27b1c447b326068376acd28
-    Instance: {fileID: 0}
-  - Token: BarricadeObject.548bb777e26684f438790c1ffd17d907
-    Instance: {fileID: 0}
-  - Token: ObjectiveTrigger.0e4de17ea14900c42a9e0255b09dc8a1
-    Instance: {fileID: 0}
-  - Token: DraggableItem.2ec88deb4062fe54b8f23aa7875b18a5
-    Instance: {fileID: 0}
-  - Token: InteractableItem.3549aedb89355fa42a0a2ad66608ab72
-    Instance: {fileID: 0}
-  - Token: EMFAnomaly.a0a5bce78de361040a87d0cae7824fc0
-    Instance: {fileID: 0}
-  - Token: InteractableItem.63b7059b170f4834ebeb8d5a268248b7
-    Instance: {fileID: 0}
-  - Token: InteractableItem.11ec22a6414ecd74292485300439470f
-    Instance: {fileID: 0}
-  - Token: SimpleLight.e98134b965333a44aab8eb256acd28b4
-    Instance: {fileID: 0}
-  - Token: InteractableItem.499957924bd55674e879d9c0afd98d98
-    Instance: {fileID: 0}
-  - Token: DynamicObject.b65c375a3f8f0b24b9d3cb876fdcf582
-    Instance: {fileID: 0}
-  - Token: InteractableItem.733a58e925f0b514ba1165aabd13940d
-    Instance: {fileID: 0}
-  - Token: SimpleLight.2f80983683f5d6642a3c8bf3a2b94d72
-    Instance: {fileID: 0}
-  - Token: SafeKeypadPuzzle.5750a535f6a86cf47ad75256f37b569f
-    Instance: {fileID: 0}
-  - Token: InteractableItem.62817cd9124bdf241a15cd46a999cd47
-    Instance: {fileID: 0}
-  - Token: LeversPuzzle.4d0703502a22bf64793e14c57769a9e9
-    Instance: {fileID: 0}
-  - Token: InteractableItem.b381254c65eb5584b8813bbfd5f5f194
+  - Token: DynamicObject.340515011cf49b04b9f94edb021c462c
     Instance: {fileID: 0}
   runtimeSaveables: []
 --- !u!114 &4568796304371888785

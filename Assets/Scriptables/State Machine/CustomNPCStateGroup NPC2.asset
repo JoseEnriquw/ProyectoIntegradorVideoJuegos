@@ -27,7 +27,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8b672febe5180040a28550def7b74d4, type: 3}
-  m_Name: CustomNPCStateGroup
+  m_Name: CustomNPCStateGroup NPC2
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.CustomNPCStateGroup
   AIStates:
   - StateAsset: {fileID: -628444004351628532}
@@ -98,11 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bd9c414ed94eb24d972694e47da2b6a, type: 3}
   m_Name: ' (UHFPS.Runtime.States.EstadoIrYAnimarAI)'
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.EstadoIrYAnimarAI
-  nombreDelPuntoDestino: DistraccionGuardia
+  nombreDelPuntoDestino: NPC_pickupplace
   velocidadMovimiento: 1.5
-  distanciaDeParada: 1
+  distanciaDeParada: 0.5
   parametroAnimacion: pickup
-  tiempoDeAnimacion: 20
+  tiempoDeAnimacion: 10
   estadoPostAnimacion: PatrullajeAI
   nombresObjetosADesaparecer:
   - Piel_De_Sapo_melon_retopo
