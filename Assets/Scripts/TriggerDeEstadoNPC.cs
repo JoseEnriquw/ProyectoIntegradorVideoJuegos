@@ -29,6 +29,9 @@ namespace UHFPS.Custom
         [Tooltip("Audio opcional que sonará al mismo tiempo que el NPC cambia de estado (Ej: Graznido de cuervo)")]
         public AudioSource audioAlActivar;
 
+        [Tooltip("Tiempo en segundos que espera ANTES de hacer que el NPC cambie de estado (útil si el objeto cae y quieres esperar un rato).")]
+        public float retrasoAntesDeActivar = 0f;
+
         [Header("Freeze del Jugador")]
         [Tooltip("¿Debe el trigger congelar al jugador temporalmente?")]
         public bool congelarJugador = false;
@@ -165,7 +168,11 @@ namespace UHFPS.Custom
             {
                 yaActivado = true;
 
-                if (congelarJugador)
+                if (retrasoAntesDeActivar > 0f && !congelarJugador)
+                {
+                    StartCoroutine(RutinaDeRetraso());
+                }
+                else if (congelarJugador)
                 {
                     if (freezeCoroutine != null)
                         StopCoroutine(freezeCoroutine);
@@ -184,6 +191,12 @@ namespace UHFPS.Custom
             {
                 Debug.LogWarning("Se intentó disparar el estado del NPC pero no hay ninguno asignado.");
             }
+        }
+
+        private IEnumerator RutinaDeRetraso()
+        {
+            yield return new WaitForSeconds(retrasoAntesDeActivar);
+            EjecutarCambioDeEstado();
         }
 
         private void EjecutarCambioDeEstado()

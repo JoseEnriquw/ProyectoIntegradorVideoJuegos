@@ -4503,11 +4503,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.InventoryUseEvents
   UseEvents:
   - Item:
-      m_GUID: 4361f4a241d64621a30135a552163296
+      m_GUID: a776f2b59be446cd8c8784353b90c320
       m_Item:
-        Name: Medical Oil
-        GUID: 4361f4a241d64621a30135a552163296
-        Icon: {fileID: 2800000, guid: 599331f07ca38f74792556254a78fe15, type: 3}
+        Name: Suero
+        GUID: a776f2b59be446cd8c8784353b90c320
+        Icon: {fileID: 2800000, guid: 47d8e78dd8e3c6e4ebf442550a18c2fe, type: 3}
       m_Section:
         Name: Healing Items
         GUID: bc38a49db3da43c8928dfbde7c7d1f1c
@@ -4553,9 +4553,9 @@ MonoBehaviour:
   - Item:
       m_GUID: d77a985710814c96952652f7de601993
       m_Item:
-        Name: Milagrosa
+        Name: Super Suero
         GUID: d77a985710814c96952652f7de601993
-        Icon: {fileID: 2800000, guid: 536374a5adf6d2d48a1f7fc84f1c60b5, type: 3}
+        Icon: {fileID: 2800000, guid: fc84531c96b6c224fb5a28cf0c88332a, type: 3}
       m_Section:
         Name: Healing Items
         GUID: bc38a49db3da43c8928dfbde7c7d1f1c
@@ -4611,15 +4611,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d38472897bb6a944bad983c93a6eb7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerIntroMovement
-  MoveDuration: 2.5
-  MoveSpeed: 1.5
   WaitBeforeStart: 0.5
   FadeInSpeed: 2
   IntroDoor: {fileID: 0}
+  InitialDialogue: {fileID: 0}
   IntroDoorDialogue: {fileID: 0}
-  WaitBeforeOpen: 0.2
-  OpenDelay: 0.8
-  DoorMoveDuration: 2
   CloseDelay: 0.5
   ShowAnnouncementAtEnd: 0
   OnIntroEnd:

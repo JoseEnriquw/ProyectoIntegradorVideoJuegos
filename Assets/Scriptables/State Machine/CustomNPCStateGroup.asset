@@ -34,6 +34,8 @@ MonoBehaviour:
     IsEnabled: 1
   - StateAsset: {fileID: 6608096893714432505}
     IsEnabled: 1
+  - StateAsset: {fileID: 8755880265959894010}
+    IsEnabled: 0
   IdleParameter: Idle
   WalkParameter: Walk
   RunParameter: Run
@@ -84,3 +86,27 @@ MonoBehaviour:
   distanciaDeAtaque: 1
   tiempoParaRendirse: 3
   radioDeteccionCercana: 2
+--- !u!114 &8755880265959894010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd9c414ed94eb24d972694e47da2b6a, type: 3}
+  m_Name: ' (UHFPS.Runtime.States.EstadoIrYAnimarAI)'
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.EstadoIrYAnimarAI
+  nombreDelPuntoDestino: NPC_pickupplace
+  velocidadMovimiento: 1.5
+  distanciaDeParada: 0.5
+  parametroAnimacion: pickup
+  tiempoDeAnimacion: 10
+  estadoPostAnimacion: PatrullajeAI
+  nombresObjetosADesaparecer:
+  - Piel_De_Sapo_melon_retopo
+  - Piel_De_Sapo_melon_retopo_1
+  - Piel_De_Sapo_melon_retopo_2
+  - Piel_De_Sapo_melon_retopo_3
+  - Piel_De_Sapo_melon_retopo_4
