@@ -89,10 +89,20 @@ namespace UHFPS.Runtime.States
                 coolDownAtaque = 0f;
 
                 // Resolvemos los AudioSources aquí para garantizar que Unity ya los inicializó.
-                AudioSource[] sources = machine.GetComponents<AudioSource>();
+                AudioSource[] sources = machine.GetComponentsInChildren<AudioSource>();
                 if (sources.Length >= 1) audioSourcePrincipal = sources[0];
                 if (sources.Length >= 2) audioSourceLoop      = sources[1];
                 else                     audioSourceLoop      = sources.Length > 0 ? sources[0] : null;
+
+                // Si el usuario olvidó poner un AudioSource, le agregamos uno en runtime para que no se rompa el código
+                if (audioSourcePrincipal == null)
+                {
+                    audioSourcePrincipal = machine.gameObject.AddComponent<AudioSource>();
+                    audioSourcePrincipal.spatialBlend = 1f; // Sonido 3D
+                    audioSourcePrincipal.maxDistance = 20f;
+                    audioSourceLoop = audioSourcePrincipal;
+                    Debug.LogWarning($"[EstadoPersecucionAI] No se encontró AudioSource en {machine.name}, se agregó uno automáticamente en 3D.");
+                }
 
                 if (customGroup != null)
                 {
