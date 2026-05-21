@@ -2,14 +2,16 @@ using UnityEngine;
 
 public class RainIndoorsStopper : MonoBehaviour
 {
-    [Tooltip("El Particle System de lluvia que está en el jugador.")]
+    [Tooltip("El GameObject de la lluvia que quieres apagar entero al entrar.")]
+    public GameObject rainObject;
+
+    [Tooltip("Si ya tenías el ParticleSystem aquí, lo apagaremos entero (no hace falta ponerlo arriba si ya está aquí).")]
     public ParticleSystem rainParticleSystem;
 
     [Tooltip("El AudioSource del sonido de la lluvia (opcional).")]
     public AudioSource rainAudioSource;
 
     private float originalVolume;
-
     private int playerCollidersInside = 0;
 
     private void Start()
@@ -22,20 +24,21 @@ public class RainIndoorsStopper : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Objeto entró al granero: " + other.gameObject.name);
-
         if (other.CompareTag("Player") || other.gameObject.name.ToLower().Contains("player") || other.GetComponentInChildren<Camera>() != null)
         {
             playerCollidersInside++;
             
-            // Solo apagamos la lluvia si es el PRIMER collider del jugador que entra
             if (playerCollidersInside == 1)
             {
-                Debug.Log("¡Jugador detectado! Apagando lluvia...");
-                if (rainParticleSystem != null)
+                Debug.Log("¡Jugador entró! Apagando GameObject de lluvia...");
+                
+                if (rainObject != null)
                 {
-                    var emission = rainParticleSystem.emission;
-                    emission.enabled = false;
+                    rainObject.SetActive(false);
+                }
+                else if (rainParticleSystem != null)
+                {
+                    rainParticleSystem.gameObject.SetActive(false);
                 }
 
                 if (rainAudioSource != null)
@@ -52,17 +55,19 @@ public class RainIndoorsStopper : MonoBehaviour
         {
             playerCollidersInside--;
             
-            // Por seguridad, si baja de 0 lo dejamos en 0
             if (playerCollidersInside < 0) playerCollidersInside = 0;
 
-            // Solo encendemos la lluvia si YA NO QUEDAN colliders del jugador adentro
             if (playerCollidersInside == 0)
             {
-                Debug.Log("¡Jugador salió! Encendiendo lluvia...");
-                if (rainParticleSystem != null)
+                Debug.Log("¡Jugador salió! Encendiendo GameObject de lluvia...");
+                
+                if (rainObject != null)
                 {
-                    var emission = rainParticleSystem.emission;
-                    emission.enabled = true;
+                    rainObject.SetActive(true);
+                }
+                else if (rainParticleSystem != null)
+                {
+                    rainParticleSystem.gameObject.SetActive(true);
                 }
 
                 if (rainAudioSource != null)
