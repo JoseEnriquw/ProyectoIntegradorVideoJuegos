@@ -17841,6 +17841,109 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3465257235179019537, guid: f5c9a9c08a3dba543b46c72331f4e267, type: 3}
   m_PrefabInstance: {fileID: 661846581}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &670435675 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2079766775558949811, guid: e8127e10ad001594db6f4a05e93c8afe, type: 3}
+  m_PrefabInstance: {fileID: 6120975253796978518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &670435677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670435675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1193cc42578b51349ae91df02822e87c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.InteractableItem
+  <UniqueID>k__BackingField:
+    Id: 9685175fea924765a10979aa84e37b4e
+  InteractableType: 2
+  MessageType: 0
+  ExamineType: 1
+  ExamineRotate: 0
+  DisableType: 0
+  PickupItem:
+    m_GUID: 
+    m_Item:
+      Name: 
+      GUID: 
+      Icon: {fileID: 0}
+    m_Section:
+      Name: 
+      GUID: 
+  ItemCustomData:
+    Type: 0
+    JsonData: 
+    ItemAttributes:
+      Items: []
+  InteractTitle:
+    GlocText: 
+    NormalText: 
+  ExamineTitle:
+    GlocText: 
+    NormalText: 
+  PaperText:
+    GlocText: 
+    NormalText: 
+  HintMessage:
+    GlocText: 
+    NormalText: 
+  MessageTime: 3
+  Quantity: 1
+  SlotsToExpand: 1
+  ExpandRows: 0
+  UseInventoryTitle: 0
+  ExamineInventoryTitle: 0
+  ShowExamineTitle: 1
+  ShowFloatingIcon: 0
+  TakeFromExamine: 0
+  AllowCursorExamine: 0
+  IsPaper: 0
+  AutoShortcut: 0
+  AutoEquip: 0
+  UseExamineZooming: 1
+  ExamineZoomLimits:
+    min: 0.3
+    max: 0.4
+  ExamineDistance: 0.4
+  UseFaceRotation: 0
+  FaceRotation: {x: 0, y: 0, z: 0}
+  UseControlPoint: 0
+  ControlPoint: {x: 0, y: 0.1, z: 0}
+  CollidersEnable: []
+  CollidersDisable: []
+  ExamineHotspot:
+    HotspotTransform: {fileID: 0}
+    Enabled: 1
+    ResetHotspot: 0
+    HotspotAction:
+      m_PersistentCalls:
+        m_Calls: []
+  PickupSound:
+    audioClip: {fileID: 0}
+    volume: 0
+  ExamineSound:
+    audioClip: {fileID: 8300000, guid: cc7f52af5043eae4ca56b9cf16a56ac6, type: 3}
+    volume: 0
+  ExamineHintSound:
+    audioClip: {fileID: 0}
+    volume: 0
+  OnTakeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExamineStartEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnExamineEndEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  IsExamined: 0
+  references:
+    version: 2
+    RefIds: []
 --- !u!1001 &670648642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38379,7 +38482,19 @@ MonoBehaviour:
   customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1948238336}
+        m_TargetAssemblyTypeName: ReproductorDeAudioRepetitivo, Assembly-CSharp
+        m_MethodName: DetenerReproduccion
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   useEvent2:
     m_PersistentCalls:
       m_Calls: []
@@ -51278,7 +51393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReproductorDeAudioRepetitivo
   audioSourceEspecifico: {fileID: 1948238335}
   clipDeAudio: {fileID: 8300000, guid: f2702ab46191da84ba2b0c6a9ddb921e, type: 3}
-  ciclos: 5
+  ciclos: 3
   delayEntreCiclos: 20
   reproduccionesPorCiclo: 3
   delayEntreReproducciones: 1.8
@@ -54553,7 +54668,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3465257235179019537, guid: f5c9a9c08a3dba543b46c72331f4e267, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -65.161
+      value: -65.16
       objectReference: {fileID: 0}
     - target: {fileID: 3465257235179019537, guid: f5c9a9c08a3dba543b46c72331f4e267, type: 3}
       propertyPath: m_LocalPosition.y
@@ -57237,7 +57352,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2079766775558949811, guid: e8127e10ad001594db6f4a05e93c8afe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 670435677}
   m_SourcePrefab: {fileID: 100100000, guid: e8127e10ad001594db6f4a05e93c8afe, type: 3}
 --- !u!65 &6501817894720531502
 BoxCollider:
