@@ -1133,19 +1133,19 @@ MonoBehaviour:
   - EntryId: 44907926
     SectionId: 80976153
     Key: objectives.entry.town
-    Value: 
-  - EntryId: 85946524
-    SectionId: 87764078
-    Key: objetives_ingreso_pueblo.ingreso_pueblo
-    Value: Enter the village
-  - EntryId: 27438961
-    SectionId: 87764078
-    Key: objetives_ingreso_pueblo.Forest.town.first
-    Value: null
-  - EntryId: 54476905
-    SectionId: 87764078
-    Key: objetives_ingreso_pueblo.Forest.town.second
-    Value: null
+    Value: ' Enter the village'
+  - EntryId: 92195999
+    SectionId: 80976153
+    Key: objectives.ingreso_alternativo
+    Value: Find an alternative way to enter the town
+  - EntryId: 27499283
+    SectionId: 80976153
+    Key: objectives.objectives.Forest.town.first
+    Value: ' Enter the village'
+  - EntryId: 17072527
+    SectionId: 80976153
+    Key: objectives.Forest.town.second
+    Value: ' Find another way'
   - EntryId: 19316762
     SectionId: 12708451
     Key: subobjetives.inspect.room
@@ -1162,6 +1162,34 @@ MonoBehaviour:
     SectionId: 12708451
     Key: subobjetives.read.letter
     Value: null
+  - EntryId: 15986859
+    SectionId: 12708451
+    Key: subobjetives.ingresar_feria
+    Value: Find a way to get into the fair
+  - EntryId: 60912577
+    SectionId: 12708451
+    Key: subobjetives.abre_reja
+    Value: Use the lock pick to open the gate
+  - EntryId: 31846754
+    SectionId: 12708451
+    Key: subobjetives.sube_puente
+    Value: Find a way to cross the bridge
+  - EntryId: 48902055
+    SectionId: 12708451
+    Key: subobjetives.ir_granero
+    Value: head to the barn
+  - EntryId: 24610715
+    SectionId: 12708451
+    Key: subobjetives.distrae_epecuenses
+    Value: Distract the guard
+  - EntryId: 15318123
+    SectionId: 12708451
+    Key: subobjetives.encuentra_combustible
+    Value: Find the fuel on the way to the slaughterhouse
+  - EntryId: 71018563
+    SectionId: 12708451
+    Key: subobjetives.al_pueblo
+    Value: Address the people
   - EntryId: 88446583
     SectionId: 38271540
     Key: dialogs.mission1.picture.frame
@@ -1221,83 +1249,84 @@ MonoBehaviour:
   - EntryId: 85472762
     SectionId: 38271540
     Key: dialogs.suero
-    Value: 
+    Value: These are the vitamins I always gave myself.
   - EntryId: 22915260
     SectionId: 11930759
     Key: dialogs_pueblo.limite.carretera
-    Value: null
+    Value: " I don't think the town is around here\u2026"
   - EntryId: 16471321
     SectionId: 11930759
     Key: dialogs_pueblo.desequipar.linterna
-    Value: null
+    Value: Uh, this flashlight doesn't work anymore, I'll have to throw it away.
   - EntryId: 27943259
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.Olvido
-    Value: null
+    Value: " This place has been forgotten\u2026"
   - EntryId: 75171280
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.posteluz
-    Value: null
+    Value: A kerosene lamp? Is there no electricity around here?
   - EntryId: 51158971
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.nene.che
-    Value: null
+    Value: Hey, kid!
   - EntryId: 80669082
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.nene.para
-    Value: null
+    Value: " Hey, wait\u2026 don't go."
   - EntryId: 79278245
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.arvol.caida
-    Value: null
+    Value: Damn! I don't have time for this... I have to find another way.
   - EntryId: 43885748
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.niebla
-    Value: null
+    Value: "This wasn't here before\u2026 what's going on?"
   - EntryId: 91080227
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.firshouse
-    Value: null
+    Value: ' Hello? Is anyone there?'
   - EntryId: 51662929
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.secondhouse
-    Value: null
+    Value: Another cabin?
   - EntryId: 78003352
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.silla
-    Value: null
+    Value: "Someone was here recently\u2026"
   - EntryId: 32551320
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.medicina
-    Value: null
+    Value: '"They''re the same jars... the ones from home..." "Maybe... this is what
+      kept Dad alive."'
   - EntryId: 86614006
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.linternakero
-    Value: null
+    Value: "Well\u2026 light. It's not much, but it helps."
   - EntryId: 77694860
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.foto.abuelo
-    Value: null
+    Value: "This is the same photo\u2026 is that my grandfather? I have to find him."
   - EntryId: 27680312
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.golpepuerta
-    Value: null
+    Value: Who's there...?
   - EntryId: 77776079
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.lider
-    Value: null
+    Value: That guy... he gave me the creeps.
   - EntryId: 90674968
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.advertencia1
-    Value: null
+    Value: ' Strangers are not welcome'
   - EntryId: 40298081
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.advertencia2
-    Value: null
+    Value: The leader is our salvation
   - EntryId: 12090252
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.advertencia3
-    Value: null
+    Value: Those who disobey will be punished.
   - EntryId: 30153132
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.cercaentrada
@@ -1395,3 +1424,21 @@ MonoBehaviour:
     SectionId: 55496470
     Key: dialog_ingreso_pueblo.esconderse_granero
     Value: Someone's coming! I have to hide under the table.
+  - EntryId: 12293059
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.nota_gauchito
+    Value: '"Gauchito Gil," a popular Argentine saint widely venerated, though not
+      recognized by the Church. People ask him for protection during travels, health,
+      work, and good fortune; for this reason, travelers leave red shrines as a sign
+      of faith and gratitude.'
+  - EntryId: 72492651
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.nota_sanla
+    Value: "\u201CSan La Muerte\u201D is a pagan or folk saint. What distinguishes
+      him from any other saint is that he can be asked to perform evil or harm: for
+      his devotees, he has the ability to protect against an enemy and the power
+      to punish them for their ill intentions."
+  - EntryId: 62613490
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.crafteo_ganzua
+    Value: By combining 2 pieces of scrap metal we get the lockpick.

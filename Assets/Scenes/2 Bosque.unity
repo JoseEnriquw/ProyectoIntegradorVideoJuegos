@@ -17714,6 +17714,32 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3465257235179019537, guid: f5c9a9c08a3dba543b46c72331f4e267, type: 3}
   m_PrefabInstance: {fileID: 661846581}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &670435675 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2079766775558949811, guid: e8127e10ad001594db6f4a05e93c8afe, type: 3}
+  m_PrefabInstance: {fileID: 6120975253796978518}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &670435681
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670435675}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4845536, y: 0.13432121, z: 0.32040334}
+  m_Center: {x: -0.14974852, y: 0.013482094, z: 0.019973872}
 --- !u!1001 &670648642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37932,7 +37958,19 @@ MonoBehaviour:
   customCloseSound: {fileID: 0}
   useEvent1:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1948238336}
+        m_TargetAssemblyTypeName: ReproductorDeAudioRepetitivo, Assembly-CSharp
+        m_MethodName: DetenerReproduccion
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   useEvent2:
     m_PersistentCalls:
       m_Calls: []
@@ -50476,7 +50514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ReproductorDeAudioRepetitivo
   audioSourceEspecifico: {fileID: 1948238335}
   clipDeAudio: {fileID: 8300000, guid: f2702ab46191da84ba2b0c6a9ddb921e, type: 3}
-  ciclos: 5
+  ciclos: 3
   delayEntreCiclos: 20
   reproduccionesPorCiclo: 3
   delayEntreReproducciones: 1.8
@@ -53751,7 +53789,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3465257235179019537, guid: f5c9a9c08a3dba543b46c72331f4e267, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -65.161
+      value: -65.16
       objectReference: {fileID: 0}
     - target: {fileID: 3465257235179019537, guid: f5c9a9c08a3dba543b46c72331f4e267, type: 3}
       propertyPath: m_LocalPosition.y
@@ -56388,6 +56426,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 959354015820092372, guid: e8127e10ad001594db6f4a05e93c8afe, type: 3}
+      propertyPath: m_Convex
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2079766775558949811, guid: e8127e10ad001594db6f4a05e93c8afe, type: 3}
       propertyPath: m_Name
       value: Tutorial_recipe
@@ -56432,10 +56474,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 959354015820092372, guid: e8127e10ad001594db6f4a05e93c8afe, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2079766775558949811, guid: e8127e10ad001594db6f4a05e93c8afe, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 670435681}
   m_SourcePrefab: {fileID: 100100000, guid: e8127e10ad001594db6f4a05e93c8afe, type: 3}
 --- !u!65 &6501817894720531502
 BoxCollider:

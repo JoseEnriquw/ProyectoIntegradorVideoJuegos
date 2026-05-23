@@ -31,15 +31,55 @@ MonoBehaviour:
   - ObjectiveKey: entry.town
     ObjectiveTitle:
       GlocText: objectives.entry.town
-      NormalText: objectives.entry.town
+      NormalText: Ingresa al pueblo
     SubObjectives: []
-  - ObjectiveKey: Forest.town.first
+  - ObjectiveKey: objectives.Forest.town.first
     ObjectiveTitle:
-      GlocText: objectives.Forest.town.first
-      NormalText: 
+      GlocText: objectives.objectives.Forest.town.first
+      NormalText: objectives.Forest.town.first
     SubObjectives: []
   - ObjectiveKey: Forest.town.second
     ObjectiveTitle:
       GlocText: objectives.Forest.town.second
-      NormalText: 
+      NormalText: Encuentra otro camino
     SubObjectives: []
+  - ObjectiveKey: ingreso_alternativo
+    ObjectiveTitle:
+      GlocText: objectives.ingreso_alternativo
+      NormalText: Encuentra una forma alternativa de Ingresar al pueblo
+    SubObjectives:
+    - SubObjectiveKey: ingresar_feria
+      CompleteCount: 0
+      ObjectiveText:
+        GlocText: subobjetives.ingresar_feria
+        NormalText: Encuentra una manera de ingresar a la feria
+    - SubObjectiveKey: abre_reja
+      CompleteCount: 0
+      ObjectiveText:
+        GlocText: subobjetives.abre_reja
+        NormalText: "Utiliza la ganz\xFAa para abrir la reja"
+    - SubObjectiveKey: sube_puente
+      CompleteCount: 0
+      ObjectiveText:
+        GlocText: subobjetives.sube_puente
+        NormalText: Busca el modo de pasar por el puente
+    - SubObjectiveKey: ir_granero
+      CompleteCount: 0
+      ObjectiveText:
+        GlocText: subobjetives.ir_granero
+        NormalText: "dir\xEDgete al granero"
+    - SubObjectiveKey: distrae_epecuenses
+      CompleteCount: 0
+      ObjectiveText:
+        GlocText: subobjetives.distrae_epecuenses
+        NormalText: Distrae al guardia
+    - SubObjectiveKey: encuentra_combustible
+      CompleteCount: 0
+      ObjectiveText:
+        GlocText: subobjetives.encuentra_combustible
+        NormalText: Encuentra el combustible camino al matadero
+    - SubObjectiveKey: al_pueblo
+      CompleteCount: 0
+      ObjectiveText:
+        GlocText: subobjetives.al_pueblo
+        NormalText: Dirigete al pueblo
