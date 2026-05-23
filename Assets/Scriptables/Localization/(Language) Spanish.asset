@@ -224,22 +224,45 @@ MonoBehaviour:
     Value: Has muerto
   - EntryId: 75562718
     SectionId: 22328812
-    Key: loading.description.demoscene
-    Value: "En esta escena de demostraci\xF3n, podr\xE1s presenciar y explorar todas
-      las impresionantes funciones del kit. Esta escena ha sido dise\xF1ada especialmente
-      para mostrar el pleno potencial del recurso, para que puedas probar todas sus
-      capacidades."
+    Key: loading.description.Bosque
+    Value: "Quien dude de El\xEDas Varel, duda del mism\xEDsimo reino celestial"
   - EntryId: 48298615
     SectionId: 22328812
     Key: loading.description.demoscene2
-    Value: "En esta escena de demostraci\xF3n interactiva, tendr\xE1s la oportunidad
-      de experimentar de primera mano el sistema de ascensor, mostrando su funcionamiento
-      fluido e integraci\xF3n junto con las dem\xE1s caracter\xEDsticas del kit."
+    Value: 
   - EntryId: 99899103
     SectionId: 22328812
     Key: loading.description.demoscene3
-    Value: "Est\xE1 lloviendo afuera, puedes probar c\xF3mo funciona el efecto de
-      gotas de lluvia cuando est\xE1s bajo techo o no."
+    Value: 
+  - EntryId: 84350534
+    SectionId: 22328812
+    Key: loading.Titulo.Bosque
+    Value: 'Salvacion '
+  - EntryId: 99418907
+    SectionId: 22328812
+    Key: loading.introhouse.tittle
+    Value: La Enfermedad
+  - EntryId: 13613296
+    SectionId: 22328812
+    Key: loading.introhouse.description
+    Value: "Las aguas de Epecu\xE9n reclamar\xE1n a sus hijos. "
+  - EntryId: 85061767
+    SectionId: 22328812
+    Key: loading.intropueblo.tittle
+    Value: Libro de las Revelaciones
+  - EntryId: 40147657
+    SectionId: 22328812
+    Key: loading.intropueblo.descripcion
+    Value: Y la verdad fue ocultada bajo las aguas, pues los hombres no estaban preparados
+      para contemplarla.
+  - EntryId: 14231941
+    SectionId: 22328812
+    Key: loading.bosque1.tittle
+    Value: Salmos de la Sal
+  - EntryId: 37512338
+    SectionId: 22328812
+    Key: loading.bosque1.description
+    Value: La carne se corrompe, mas la sal preserva a los elegidos.
   - EntryId: 61351216
     SectionId: 59169988
     Key: titles.putaway
@@ -296,7 +319,7 @@ MonoBehaviour:
     SectionId: 59169988
     Key: titles.TimerAnnouncement
     Value: Tienes {0} hasta que la enfermedad te mate, deberas encontrar la cura
-      antes.
+      antes.   Podras ver el tiempo presionando Tab
   - EntryId: 94577514
     SectionId: 69673941
     Key: interactions.use
@@ -517,6 +540,14 @@ MonoBehaviour:
     SectionId: 11317371
     Key: objects.Books
     Value: Libros
+  - EntryId: 78599394
+    SectionId: 11317371
+    Key: objects.Folletos
+    Value: Folletos de Epecuen
+  - EntryId: 74328446
+    SectionId: 11317371
+    Key: objects.house_medicine
+    Value: Suero
   - EntryId: 94725535
     SectionId: 78183135
     Key: controls.name.exit
@@ -968,16 +999,16 @@ MonoBehaviour:
       y reparaciones."
   - EntryId: 31030455
     SectionId: 90694169
-    Key: tips.tip1
-    Value: Este es el primer ejemplo de un consejo.
+    Key: tips.intro.tip1
+    Value: Toma los sueros para controlar los sintomas
   - EntryId: 69403660
     SectionId: 90694169
-    Key: tips.tip2
-    Value: Este es el segundo ejemplo de un consejo.
+    Key: tips.intro.tip2
+    Value: La sal  alarga tu tiempo
   - EntryId: 75937617
     SectionId: 90694169
-    Key: tips.tip3
-    Value: Este es el tercer ejemplo de un consejo.
+    Key: tips.intro.tip3
+    Value: Evita a los aldeanos
   - EntryId: 35326416
     SectionId: 70584943
     Key: options.language
@@ -1094,6 +1125,18 @@ MonoBehaviour:
     SectionId: 80976153
     Key: objectives.entry.town
     Value: Ingresa al pueblo
+  - EntryId: 92195999
+    SectionId: 80976153
+    Key: objectives.ingreso_alternativo
+    Value: Encuentra una forma alternativa de Ingresar al pueblo
+  - EntryId: 27499283
+    SectionId: 80976153
+    Key: objectives.objectives.Forest.town.first
+    Value: Ingresa al pueblo
+  - EntryId: 17072527
+    SectionId: 80976153
+    Key: objectives.Forest.town.second
+    Value: Encuentra otro camino
   - EntryId: 19316762
     SectionId: 12708451
     Key: subobjetives.inspect.room
@@ -1110,6 +1153,34 @@ MonoBehaviour:
     SectionId: 12708451
     Key: subobjetives.read.letter
     Value: Lee la carta
+  - EntryId: 15986859
+    SectionId: 12708451
+    Key: subobjetives.ingresar_feria
+    Value: Encuentra una manera de ingresar a la feria
+  - EntryId: 60912577
+    SectionId: 12708451
+    Key: subobjetives.abre_reja
+    Value: "Utiliza la ganz\xFAa para abrir la reja"
+  - EntryId: 31846754
+    SectionId: 12708451
+    Key: subobjetives.sube_puente
+    Value: Busca el modo de pasar por el puente
+  - EntryId: 48902055
+    SectionId: 12708451
+    Key: subobjetives.ir_granero
+    Value: "dir\xEDgete al granero"
+  - EntryId: 24610715
+    SectionId: 12708451
+    Key: subobjetives.distrae_epecuenses
+    Value: Distrae al guardia
+  - EntryId: 15318123
+    SectionId: 12708451
+    Key: subobjetives.encuentra_combustible
+    Value: Encuentra el combustible camino al matadero
+  - EntryId: 71018563
+    SectionId: 12708451
+    Key: subobjetives.al_pueblo
+    Value: Dirigete al pueblo
   - EntryId: 88446583
     SectionId: 38271540
     Key: dialogs.mission1.picture.frame
@@ -1156,3 +1227,208 @@ MonoBehaviour:
     Value: "Mi padre muri\xF3 antes de poder decirme algo importante\u2026dijo que
       era un secreto de familia\u2026 Desde entonces\u2026 no puedo dejar de pensar
       en eso."
+  - EntryId: 63534897
+    SectionId: 38271540
+    Key: dialogs.PostAbuelo
+    Value: "Esa ciudad de nuevo... \xBFEl sab\xEDa de la enfermedad? Ser\xE1 mejor
+      pegarle una visita."
+  - EntryId: 83540004
+    SectionId: 38271540
+    Key: dialogs.dolorcabeza
+    Value: Ay estos dolores de cabeza...
+  - EntryId: 85472762
+    SectionId: 38271540
+    Key: dialogs.suero
+    Value: Estas son las vitaminas que me daba siempre
+  - EntryId: 22915260
+    SectionId: 11930759
+    Key: dialogs_pueblo.limite.carretera
+    Value: "No creo que el pueblo quede por ac\xE1\u2026"
+  - EntryId: 16471321
+    SectionId: 11930759
+    Key: dialogs_pueblo.desequipar.linterna
+    Value: Uh esta linterna ya no funciona, tendre que descartarla.
+  - EntryId: 27943259
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.Olvido
+    Value: "Este lugar qued\xF3 en el olvido\u2026"
+  - EntryId: 75171280
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.posteluz
+    Value: "\xBFUna l\xE1mpara a kerosene? \xBFNo hay luz por ac\xE1?"
+  - EntryId: 51158971
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.nene.che
+    Value: "\xA1Che, nene!"
+  - EntryId: 80669082
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.nene.para
+    Value: "Eh, par\xE1\u2026 no te vayas."
+  - EntryId: 79278245
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.arvol.caida
+    Value: "\xA1Mierda! No tengo tiempo para esto\u2026 tengo que encontrar otro
+      camino."
+  - EntryId: 43885748
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.niebla
+    Value: "Esto no estaba antes\u2026 \xBFqu\xE9 est\xE1 pasando?"
+  - EntryId: 91080227
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.firshouse
+    Value: "\xBFHola? \xBFHay alguien ah\xED?"
+  - EntryId: 51662929
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.secondhouse
+    Value: "\xBFOtra caba\xF1a?"
+  - EntryId: 78003352
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.silla
+    Value: "Ac\xE1 hubo alguien hace poco\u2026"
+  - EntryId: 32551320
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.medicina
+    Value: "Son los mismos frascos\u2026 los de casa\u2026\u201D  \u201CCapaz\u2026
+      era esto lo que manten\xEDa con vida a pap\xE1."
+  - EntryId: 86614006
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.linternakero
+    Value: "Bueno\u2026 luz. No es mucho, pero sirve."
+  - EntryId: 77694860
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.foto.abuelo
+    Value: "Esta es la misma foto\u2026 \xBFes mi abuelo? Tengo que encontrarlo."
+  - EntryId: 27680312
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.golpepuerta
+    Value: "\xBFQui\xE9n anda ah\xED\u2026?"
+  - EntryId: 77776079
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.lider
+    Value: "Ese tipo\u2026 me daba cosa."
+  - EntryId: 90674968
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.advertencia1
+    Value: "Extra\xF1os no son bienvenidos"
+  - EntryId: 40298081
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.advertencia2
+    Value: El lider es nuestra salvacion
+  - EntryId: 12090252
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.advertencia3
+    Value: Quien no obedece sera castigado
+  - EntryId: 30153132
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.cercaentrada
+    Value: null
+  - EntryId: 19299357
+    SectionId: 65177942
+    Key: dialogsSintomas.sintoma.A1
+    Value: "\xBFQu\xE9 mierda me est\xE1 pasando\u2026?"
+  - EntryId: 82958904
+    SectionId: 65177942
+    Key: dialogsSintomas.sintoma.A2
+    Value: "No, otra vez no\u2026"
+  - EntryId: 64040201
+    SectionId: 65177942
+    Key: dialogsSintomas.sintoma.A3
+    Value: "Al final\u2026 me est\xE1 pasando lo mismo que a mi viejo"
+  - EntryId: 93875838
+    SectionId: 65177942
+    Key: dialogsSintomas.sintoma.A4
+    Value: "Me est\xE1 agarrando de nuevo\u2026"
+  - EntryId: 78044263
+    SectionId: 65177942
+    Key: dialogsSintomas.sintoma.A5
+    Value: "Me tengo que clavar ese suero\u2026 ya"
+  - EntryId: 78132164
+    SectionId: 65177942
+    Key: dialogsSintomas.sintoma.A6
+    Value: "No aguanto m\xE1s\u2026 necesito un suero."
+  - EntryId: 59629219
+    SectionId: 65177942
+    Key: dialogsSintomas.bosque.carta.abuelo
+    Value: null
+  - EntryId: 97409758
+    SectionId: 65177942
+    Key: dialogsSintomas.bosque.respuesta.carta.abuelo
+    Value: null
+  - EntryId: 58631134
+    SectionId: 50914226
+    Key: inventoryItems.Salt.Tittle
+    Value: Sal de Epecuen
+  - EntryId: 14815089
+    SectionId: 50914226
+    Key: inventoryItems.salt.description
+    Value: Cristales extraidos del lago Epecuen, sus propiedades ayudan a extender 
+      la existencia
+  - EntryId: 71713302
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.intro_ingreso1
+    Value: Este lugar me da miedo
+  - EntryId: 57736921
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.intro_ingreso2
+    Value: Hay gente custodiando la entrada, debo buscar otra manera de ingresar..
+  - EntryId: 68139067
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.feria_cerrado
+    Value: "Mmm, parece que por ac\xE1 no puedo seguir avanzando. Voy a ver si hay
+      otra entrada por la cerca."
+  - EntryId: 91826483
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.maizal
+    Value: "Est\xE1 plagado de estas criaturas\u2026  Voy a tener que perderme entre
+      el maizal para evitarlos"
+  - EntryId: 42857841
+    SectionId: 55496470
+    Key: "dialog_ingreso_pueblo.Persecuci\xF3n1"
+    Value: 'Que es eso lpm.. '
+  - EntryId: 63575913
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.esconderse
+    Value: "Ese ba\xF1o\u2026 por favor que est\xE9 abierto!"
+  - EntryId: 49913073
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.voces_forasteros
+    Value: Un intruso... hay que encontrarlo y avisarle al lider que tenemos visita...
+  - EntryId: 60315446
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.lluvia
+    Value: Lo que faltaba, se largo nomas..
+  - EntryId: 57025345
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.puente
+    Value: "No puede ser, el puente se desplom\xF3, tendr\xE9 que buscar algo que
+      me ayude a subi"
+  - EntryId: 13376603
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.granero
+    Value: Como puede ser que se hayan prendido las luces, quien anda ahi!
+  - EntryId: 88846228
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.combustible_granero
+    Value: Este generador no funciona.. Tendre que buscar el combustible
+  - EntryId: 75148231
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.esconderse_granero
+    Value: Alguien viene! tengo que esconderme debajo de la mesa.
+  - EntryId: 12293059
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.nota_gauchito
+    Value: "El \u201Cgauchito Gil\u201D, un santo popular argentino muy venerado,
+      aunque no reconocido por la Iglesia. La gente le pide protecci\xF3n para viajar,
+      salud, trabajo y suerte, por eso viajeros dejan santuarios rojos como se\xF1al
+      de fe y agradecimiento."
+  - EntryId: 72492651
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.nota_sanla
+    Value: "\u201CSan La Muerte\u201D es un santo pagano o de culto popular. Lo que
+      lo diferencia de cualquier otro santo es que a \xE9l se le puede pedir que
+      se realice un mal o un da\xF1o: para sus devotos, tiene la capacidad de protecci\xF3n
+      contra un enemigo y el poder de castigarlo por sus malas intenciones."
+  - EntryId: 62613490
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.crafteo_ganzua
+    Value: "Combinando 2 chatarras conseguimos la ganz\xFAa. "

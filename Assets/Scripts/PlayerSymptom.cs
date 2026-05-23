@@ -2,11 +2,12 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UHFPS.Runtime;
-using UHFPS.Rendering; // For DualKawaseBlur, Scanlines
+using UHFPS.Rendering;
+using System.Collections.Generic; // For DualKawaseBlur, Scanlines
 
 public class PlayerSymptom : MonoBehaviour
 {
-    public enum SymptomType { None, Blur, BlackAndWhite, VHS, Drunk }
+    public enum SymptomType { None, Blur, BlackAndWhite, VHS, Drunk, Whispers, Rain }
     [Header("General Settings")]
     public bool EnableSymptoms = true;
 
@@ -24,10 +25,12 @@ public class PlayerSymptom : MonoBehaviour
     public bool EnableBlackAndWhite = true;
     public bool EnableVHSGlitch = true;
     public bool EnableDrunkMotion = true;
+    public bool EnableWhispers = true;
+    public bool EnableRain = true;
     
     [Header("Blur & Tunnel Intensities")]
     [Range(0f, 15f)]
-    public float MaxBlurIntensity = 6f;
+    public float MaxBlurIntensity = 2.5f;
     [Range(0f, 1f)]
     public float MaxTunnelIntensity = 0.6f;
     
@@ -59,6 +62,11 @@ public class PlayerSymptom : MonoBehaviour
     [Range(0f, 1f)]
     public float MaxMotionBlur = 1f; // Difumina el giro creando estela de "velocidad"
     
+    [Header("Rain (Film Grain) Intensities")]
+    [Range(0f, 1f)]
+    public float MaxRainIntensity = 1f;
+    public FilmGrainLookup RainType = FilmGrainLookup.Large01;
+
     // Restauramos el nombre original de la variable para recuperar el ajuste de velocidad
     public float BlurTransitionSpeed = 1f;
 
@@ -67,17 +75,45 @@ public class PlayerSymptom : MonoBehaviour
     public AudioClip[] BlackAndWhiteSounds;
     public AudioClip[] VHSSounds;
     public AudioClip[] DrunkSounds;
+    public AudioClip[] WhispersSounds;
+    public AudioClip[] RainSounds;
     [Range(0f, 1f)]
     public float SymptomsAudioVolume = 0.8f;
+
+    [Header("Cure Settings")]
+    public AudioClip CureSound;
+    public AudioClip CureSoundSecondary;
+    [Range(0f, 1f)]
+    public float CureSoundVolume = 1f;
 
     [Header("Intro Sequence")]
     [Tooltip("Tiempo que espera al iniciar la escena para lanzar el síntoma (útil para saltar pantallas negras de carga)")]
     public float IntroSymptomDelay = 2f;
     public DialogueTrigger IntroDialogue;
 
+    [Header("Player Voice Reactions")]
+    [Tooltip("Audios que el PJ puede decir JUSTO ANTES de que arranque el síntoma.")]
+    public AudioClip[] PreSymptomVoices;
+    [Tooltip("Probabilidad (0 a 1) de que diga algo antes del síntoma.")]
+    [Range(0f, 1f)] public float PreSymptomVoiceChance = 0.5f;
+
+    [Tooltip("Diálogos (con subtítulos) que el PJ puede decir MIENTRAS dure el síntoma.")]
+    public UHFPS.Scriptable.DialogueAsset[] DuringSymptomVoices;
+    [Tooltip("Probabilidad (0 a 1) de que diga algo durante el síntoma.")]
+    [Range(0f, 1f)] public float DuringSymptomVoiceChance = 0.5f;
+    public float MinDuringSymptomDelay = 5f;
+    public float MaxDuringSymptomDelay = 15f;
+
+    private AudioSource voiceAudioSource;
+    private bool isStartingSymptom = false;
+    private Coroutine symptomRoutine;
+    private Coroutine duringVoiceRoutine;
+    private DialogueTrigger[] duringSymptomTriggers;
+
     private float timer;
     private float timeAlive = 0f;
     private SymptomType currentActiveSymptom = SymptomType.None;
+    private float whispersWeight = 0f;
     private AudioSource symptomAudioSource;
 
     // Utilizamos volúmenes separados internamente para que no haya conflictos de compatibilidad
@@ -100,14 +136,34 @@ public class PlayerSymptom : MonoBehaviour
     private Volume drunkVolume;
     private MotionBlur symptomMotionBlur;
 
+    private GameObject rainVolumeObject;
+    private Volume rainVolume;
+    private FilmGrain symptomGrain;
+    private ColorAdjustments symptomRainColorAdj;
+    private Scanlines symptomRainScanlines;
+    private ParticleSystem rainParticleSystem;
+
     private PlayerStateMachine playerStateMachine;
 
     public static PlayerSymptom Instance { get; private set; }
+    public SymptomType CurrentSymptom => currentActiveSymptom;
 
     void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+    }
+
+    [ContextMenu("Forzar Síntoma: Lluvia")]
+    public void DebugForceRain()
+    {
+        if (!Application.isPlaying) return;
+        StopVoiceRoutines();
+        currentActiveSymptom = SymptomType.Rain;
+        timeAlive = MinutesToMaxIntensity * 60f; 
+        if (rainVolume != null) rainVolume.weight = 1f;
+        PlaySymptomSound(SymptomType.Rain);
+        Debug.Log("[PlayerSymptom] Debug: Lluvia forzada.");
     }
 
     void Start()
@@ -123,6 +179,25 @@ public class PlayerSymptom : MonoBehaviour
         symptomAudioSource.spatialBlend = 0f; // Sonido 2D (en la cabeza del jugador)
         symptomAudioSource.volume = SymptomsAudioVolume;
         symptomAudioSource.playOnAwake = false;
+        symptomAudioSource.loop = true;
+
+        GameObject voiceObj = new GameObject("PlayerVoiceSource");
+        voiceObj.transform.SetParent(transform);
+        voiceObj.transform.localPosition = Vector3.zero;
+        voiceAudioSource = voiceObj.AddComponent<AudioSource>();
+        voiceAudioSource.spatialBlend = 0f; // 2D (en la cabeza del jugador)
+        voiceAudioSource.playOnAwake = false;
+        voiceAudioSource.loop = false;
+
+        // Instanciar los Triggers ocultos para usar DialogueAssets en el during
+        if (DuringSymptomVoices != null && DuringSymptomVoices.Length > 0)
+        {
+            duringSymptomTriggers = new DialogueTrigger[DuringSymptomVoices.Length];
+            for (int i = 0; i < DuringSymptomVoices.Length; i++)
+            {
+                duringSymptomTriggers[i] = CrearTriggerOculto(DuringSymptomVoices[i], $"DuringSymptom_{i}");
+            }
+        }
 
         // --- 1. CONFIGURAR VOLUMEN DE BLUR ---
         blurVolumeObject = new GameObject("SymptomVolume_Blur");
@@ -235,6 +310,76 @@ public class PlayerSymptom : MonoBehaviour
 
         drunkVolume.profile = drunkProfile;
 
+        // --- 5. CONFIGURAR VOLUMEN DE LLUVIA (FILM GRAIN + BW) ---
+        rainVolumeObject = new GameObject("SymptomVolume_Rain");
+        rainVolumeObject.transform.SetParent(transform);
+        rainVolumeObject.transform.localPosition = Vector3.zero;
+        rainVolumeObject.layer = 0; 
+
+        rainVolume = rainVolumeObject.AddComponent<Volume>();
+        rainVolume.isGlobal = true;
+        rainVolume.priority = 52; 
+        rainVolume.weight = 0f; 
+
+        VolumeProfile rainProfile = ScriptableObject.CreateInstance<VolumeProfile>();
+        symptomGrain = rainProfile.Add<FilmGrain>(true);
+        symptomGrain.active = true;
+        symptomGrain.type.overrideState = true;
+        symptomGrain.intensity.overrideState = true;
+
+        symptomRainColorAdj = rainProfile.Add<ColorAdjustments>(true);
+        symptomRainColorAdj.active = true;
+        symptomRainColorAdj.saturation.overrideState = true;
+        symptomRainColorAdj.saturation.value = -100f;
+
+        symptomRainScanlines = rainProfile.Add<Scanlines>(true);
+        symptomRainScanlines.active = true;
+        symptomRainScanlines.ScanlinesStrength.overrideState = true;
+        symptomRainScanlines.GlitchIntensity.overrideState = true;
+
+        rainVolume.profile = rainProfile;
+
+        // --- 6. CONFIGURAR SISTEMA DE PARTÍCULAS (RAYONES BLANCOS) ---
+        GameObject psObj = new GameObject("Symptom_RainParticles");
+        
+        Camera mainCam = Camera.main != null ? Camera.main : FindObjectOfType<Camera>();
+        if (mainCam != null) psObj.transform.SetParent(mainCam.transform);
+        else psObj.transform.SetParent(transform);
+
+        psObj.transform.localPosition = new Vector3(0, 0, 0.3f); // Muy cerca de la cámara
+        psObj.transform.localRotation = Quaternion.identity;
+
+        rainParticleSystem = psObj.AddComponent<ParticleSystem>();
+        var main = rainParticleSystem.main;
+        main.startLifetime = 0.1f;
+        main.startSpeed = 0f;
+        main.startSize3D = true; // Habilitar dimensiones separadas
+        main.startSizeX = new ParticleSystem.MinMaxCurve(0.1f, 0.3f); // Más largas
+        main.startSizeY = 0.001f; // Mucho más finas (hilo blanco)
+        main.startColor = Color.white;
+        main.simulationSpace = ParticleSystemSimulationSpace.Local;
+        main.maxParticles = 100;
+
+        var emission = rainParticleSystem.emission;
+        emission.enabled = false;
+        emission.rateOverTime = 60;
+
+        var shape = rainParticleSystem.shape;
+        shape.shapeType = ParticleSystemShapeType.Rectangle;
+        shape.scale = new Vector3(1.2f, 0.8f, 0.1f);
+
+        var renderer = psObj.GetComponent<ParticleSystemRenderer>();
+        renderer.renderMode = ParticleSystemRenderMode.Billboard;
+        renderer.alignment = ParticleSystemRenderSpace.View;
+        
+        // Fix para el color rosa en URP: Asignar un material Unlit básico
+        Shader shader = Shader.Find("Universal Render Pipeline/Particles/Unlit");
+        if (shader == null) shader = Shader.Find("Sprites/Default");
+        renderer.material = new Material(shader);
+        renderer.material.color = Color.white;
+        
+        rainParticleSystem.Stop();
+
 /*
         if (EnableSymptoms && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "IntroHouse")
         {
@@ -245,7 +390,10 @@ public class PlayerSymptom : MonoBehaviour
 
     public void TriggerIntroSymptom()
     {
-        StartCoroutine(IntroBlurRoutine());
+        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "1 IntroHouse")
+        {
+            StartCoroutine(IntroBlurRoutine());
+        }
     }
 
     private System.Collections.IEnumerator IntroBlurRoutine()
@@ -265,21 +413,13 @@ public class PlayerSymptom : MonoBehaviour
         // ¡Forzamos el volumen visual de inmediato! Así sonido e imagen arrancan violentamente al mismo tiempo.
         if (blurVolume != null) blurVolume.weight = 1f;
 
-        if (BlurSounds != null && BlurSounds.Length > 0)
-        {
-            AudioClip clip = BlurSounds[Random.Range(0, BlurSounds.Length)];
-            if (clip != null)
-            {
-                symptomAudioSource.clip = clip;
-                symptomAudioSource.Play();
-            }
-        }
+        if(EnableBlurAndTunnel )PlaySymptomSound(SymptomType.Blur);
 
         yield return new WaitForSeconds(1.07f);
 
         if (currentActiveSymptom == SymptomType.Blur)
         {
-            RelieveSymptomsTemporarily();
+            RelieveSymptomsTemporarily(0f, false); // No reproducimos el sonido del suero aquí
             if (IntroDialogue != null) IntroDialogue.TriggerDialogue();
             // Quitamos el Stop() brusco aquí. El sonido se desvanecerá naturalmente junto a la visión en Update.
         }
@@ -287,19 +427,23 @@ public class PlayerSymptom : MonoBehaviour
 
     private void ChooseRandomSymptom()
     {
-        if (EnableSymptoms && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "IntroHouse")
+        if (EnableSymptoms && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "1 IntroHouse")
         {
             System.Collections.Generic.List<SymptomType> available = new();
             if (EnableBlurAndTunnel) available.Add(SymptomType.Blur);
             if (EnableBlackAndWhite) available.Add(SymptomType.BlackAndWhite);
             if (EnableVHSGlitch) available.Add(SymptomType.VHS);
             if (EnableDrunkMotion) available.Add(SymptomType.Drunk);
+            if (EnableWhispers) available.Add(SymptomType.Whispers);
+            if (EnableRain) available.Add(SymptomType.Rain);
 
             if (available.Count > 0)
             {
                 int index = Random.Range(0, available.Count);
                 currentActiveSymptom = available[index];
                 Debug.Log("[PlayerSymptom] Nuevo síntoma activado: " + currentActiveSymptom);
+
+                PlaySymptomSound(currentActiveSymptom);
             }
             else
             {
@@ -309,11 +453,47 @@ public class PlayerSymptom : MonoBehaviour
        
     }
 
+    private void PlaySymptomSound(SymptomType symptomType)
+    {
+        AudioClip[] soundArray = null;
+
+        switch (symptomType)
+        {
+            case SymptomType.Blur:
+                soundArray = BlurSounds;
+                break;
+            case SymptomType.BlackAndWhite:
+                soundArray = BlackAndWhiteSounds;
+                break;
+            case SymptomType.VHS:
+                soundArray = VHSSounds;
+                break;
+            case SymptomType.Drunk:
+                soundArray = DrunkSounds;
+                break;
+            case SymptomType.Whispers:
+                soundArray = WhispersSounds;
+                break;
+            case SymptomType.Rain:
+                soundArray = RainSounds;
+                break;
+        }
+
+        if (soundArray != null && soundArray.Length > 0)
+        {
+            AudioClip clip = soundArray[Random.Range(0, soundArray.Length)];
+            if (clip != null)
+            {
+                symptomAudioSource.clip = clip;
+                symptomAudioSource.Play();
+            }
+        }
+    }
+
     void Update()
     {
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "IntroHouse")
-            return; // Evitamos que el sistema normal de síntomas interfiera con la secuencia de introducción
-                    // Actualización dinámica en tiempo real
+        float targetWeight = 0f;
+        // Actualización dinámica en tiempo real
         if (symptomBlur != null) symptomBlur.BlurRadius.value = MaxBlurIntensity;
         if (symptomVignette != null) symptomVignette.intensity.value = MaxTunnelIntensity;
         if (symptomColorAdj != null) symptomColorAdj.saturation.value = MinSaturation;
@@ -327,26 +507,47 @@ public class PlayerSymptom : MonoBehaviour
         if (symptomLensDistortion != null) symptomLensDistortion.intensity.value = MaxLensDistortion;
         if (symptomMotionBlur != null) symptomMotionBlur.intensity.value = MaxMotionBlur;
 
-        float targetWeight = 0f;
+        if (symptomGrain != null)
+        {
+            symptomGrain.type.value = RainType;
+            symptomGrain.intensity.value = MaxRainIntensity;
+        }
+        if (symptomRainColorAdj != null) symptomRainColorAdj.saturation.value = MinSaturation;
 
-        if (!EnableSymptoms || (!EnableBlurAndTunnel && !EnableBlackAndWhite && !EnableVHSGlitch && !EnableDrunkMotion))
+        if (symptomRainScanlines != null)
+        {
+            symptomRainScanlines.ScanlinesStrength.value = 0.2f; 
+            symptomRainScanlines.GlitchIntensity.value = 0.1f;
+        }
+
+
+        targetWeight = 0f;
+
+        if (!EnableSymptoms || (!EnableBlurAndTunnel && !EnableBlackAndWhite && !EnableVHSGlitch && !EnableDrunkMotion && !EnableWhispers && !EnableRain))
         {
             // RESET
             timer = TimeBetweenSymptoms;
             timeAlive = 0f;
             currentActiveSymptom = SymptomType.None;
             targetWeight = 0f;
+            StopVoiceRoutines();
         }
         else
         {
             if (currentActiveSymptom == SymptomType.None)
             {
                 // Esperar a que pase el tiempo para el próximo síntoma aleatorio
-                timer -= Time.deltaTime;
-                if (timer <= 0f)
+                // Evitamos que el sistema aleatorio corra en la introhouse
+                if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "1 IntroHouse")
                 {
-                    ChooseRandomSymptom();
-                    timeAlive = 0f; // Reiniciar tiempo activo para el nuevo síntoma
+                    if (!isStartingSymptom)
+                    {
+                        timer -= Time.deltaTime;
+                        if (timer <= 0f)
+                        {
+                            symptomRoutine = StartCoroutine(StartRandomSymptomRoutine());
+                        }
+                    }
                 }
                 targetWeight = 0f;
             }
@@ -361,6 +562,34 @@ public class PlayerSymptom : MonoBehaviour
                     progressMultiplier = Mathf.Clamp01(timeAlive / limitSeconds);
                 }
                 targetWeight = progressMultiplier;
+            }
+        }
+
+        // Control del sistema de partículas de lluvia
+        if (rainParticleSystem != null)
+        {
+            bool isRainActive = (currentActiveSymptom == SymptomType.Rain && targetWeight > 0.1f);
+            var emission = rainParticleSystem.emission;
+            
+            if (isRainActive && !rainParticleSystem.isPlaying)
+            {
+                rainParticleSystem.Play();
+                emission.enabled = true;
+            }
+            else if (!isRainActive && rainParticleSystem.isPlaying)
+            {
+                rainParticleSystem.Stop();
+                emission.enabled = false;
+            }
+
+            if (isRainActive)
+            {
+                emission.rateOverTime = 60f * targetWeight;
+                
+                // Forzamos rotación horizontal (0 o 180) con una pequeña variación aleatoria
+                var main = rainParticleSystem.main;
+                float angle = (Random.value > 0.5f) ? 0f : 180f;
+                main.startRotation = (angle + Random.Range(-5f, 5f)) * Mathf.Deg2Rad;
             }
         }
 
@@ -393,7 +622,33 @@ public class PlayerSymptom : MonoBehaviour
             if (!EnableDrunkMotion && drunkVolume.weight > 0) drunkVolume.weight = 0f;
         }
 
+        float targetRain = (currentActiveSymptom == SymptomType.Rain) ? targetWeight : 0f;
+        if (rainVolume != null)
+        {
+            rainVolume.weight = Mathf.MoveTowards(rainVolume.weight, targetRain, Time.deltaTime * BlurTransitionSpeed);
+            if (!EnableRain && rainVolume.weight > 0) rainVolume.weight = 0f;
+        }
+
+        float targetWhispers = (currentActiveSymptom == SymptomType.Whispers) ? targetWeight : 0f;
+        whispersWeight = Mathf.MoveTowards(whispersWeight, targetWhispers, Time.deltaTime * BlurTransitionSpeed);
+        if (!EnableWhispers && whispersWeight > 0) whispersWeight = 0f;
+
         float currentDrunkWeight = drunkVolume != null ? drunkVolume.weight : 0f;
+
+        // --- GESTIÓN DE LA HABILIDAD DE CORRER ---
+        if (playerStateMachine != null)
+        {
+            bool hasSymptom = (currentActiveSymptom != SymptomType.None);
+            
+            // Habilitar/Deshabilitar el estado "Run" (correr)
+            playerStateMachine.SetStateEnabled(PlayerStateMachine.RUN_STATE, !hasSymptom);
+
+            // Si está corriendo justo cuando le agarra el síntoma, lo forzamos a dejar de correr
+            if (hasSymptom && playerStateMachine.IsCurrent(PlayerStateMachine.RUN_STATE))
+            {
+                playerStateMachine.ChangeToIdle();
+            }
+        }
 
         // Físicas del movimiento de borracho: torpeza y forcejeos direccionales
         if (EnableDrunkMotion && playerStateMachine != null && currentDrunkWeight > 0f)
@@ -419,11 +674,14 @@ public class PlayerSymptom : MonoBehaviour
             if (bwVolume != null && bwVolume.weight > maxActiveWeight) maxActiveWeight = bwVolume.weight;
             if (vhsVolume != null && vhsVolume.weight > maxActiveWeight) maxActiveWeight = vhsVolume.weight;
             if (drunkVolume != null && drunkVolume.weight > maxActiveWeight) maxActiveWeight = drunkVolume.weight;
+            if (rainVolume != null && rainVolume.weight > maxActiveWeight) maxActiveWeight = rainVolume.weight;
+            if (whispersWeight > maxActiveWeight) maxActiveWeight = whispersWeight;
 
-            symptomAudioSource.volume = maxActiveWeight * SymptomsAudioVolume;
+            // Curva cuadrática (al cuadrado) para que el audio desaparezca más rápido en la cola y sincronice mejor con lo visual
+            symptomAudioSource.volume = Mathf.Pow(maxActiveWeight, 2f) * SymptomsAudioVolume;
             
-            // Pausar completamente para no gastar recursos si no hay síntoma visual
-            if (maxActiveWeight <= 0.001f && symptomAudioSource.isPlaying)
+            // Pausar completamente para no gastar recursos si no hay síntoma activo y su peso visual ya bajó a cero
+            if (currentActiveSymptom == SymptomType.None && maxActiveWeight <= 0.001f && symptomAudioSource.isPlaying)
             {
                 symptomAudioSource.Stop();
                 symptomAudioSource.clip = null;
@@ -456,6 +714,7 @@ public class PlayerSymptom : MonoBehaviour
     /// </summary>
     public void CureSymptomsFully()
     {
+        StopVoiceRoutines();
         EnableSymptoms = false;
         currentActiveSymptom = SymptomType.None;
         timeAlive = 0f;
@@ -463,22 +722,171 @@ public class PlayerSymptom : MonoBehaviour
 
     /// <summary>
     /// Alivia temporalmente los síntomas.
-    /// Resetea el tiempo para el próximo síntoma.
+    /// extraWaitTime: tiempo adicional que se suma al TimeBetweenSymptoms base.
     /// </summary>
-    public void RelieveSymptomsTemporarily()
+    public void RelieveSymptomsTemporarily(float extraWaitTime = 0f, bool playCureSound = true)
     {
+        StopVoiceRoutines();
         currentActiveSymptom = SymptomType.None;
         timeAlive = 0f;
-        timer = Mathf.Max(TimeBetweenSymptoms, 1f); // Aseguramos usar al menos 1 segundo en caso de despiste
-        Debug.Log($"[PlayerSymptom] Síntomas curados. Esperando {timer} segundos para el próximo!");
+        
+        // Sumamos el tiempo base más el extra que venga del objeto curativo
+        timer = Mathf.Max(TimeBetweenSymptoms + extraWaitTime, 1f); 
+        isStartingSymptom = false; // Reset por si estaba en proceso de aviso
+
+        if (playCureSound && (CureSound != null || CureSoundSecondary != null))
+        {
+            StartCoroutine(PlayCureSoundsRoutine());
+        }
+
+        Debug.Log($"[PlayerSymptom] Síntomas curados. Esperando {timer} segundos para el próximo síntoma.");
+    }
+
+    private System.Collections.IEnumerator PlayCureSoundsRoutine()
+    {
+        float delayForSecond = 0f;
+
+        if (CureSound != null)
+        {
+            GameObject tempAudioObj = new GameObject("CureSoundTemp1");
+            AudioSource tempSource = tempAudioObj.AddComponent<AudioSource>();
+            tempSource.spatialBlend = 0f; // Sonido 2D
+            tempSource.volume = CureSoundVolume;
+            tempSource.clip = CureSound;
+            tempSource.Play();
+            Destroy(tempAudioObj, CureSound.length + 0.1f);
+
+            delayForSecond = CureSound.length;
+        }
+
+        if (delayForSecond > 0f)
+        {
+            yield return new WaitForSeconds(delayForSecond);
+        }
+
+        if (CureSoundSecondary != null)
+        {
+            GameObject tempAudioObj2 = new GameObject("CureSoundTemp2");
+            AudioSource tempSource2 = tempAudioObj2.AddComponent<AudioSource>();
+            tempSource2.spatialBlend = 0f; // Sonido 2D
+            tempSource2.volume = CureSoundVolume;
+            tempSource2.clip = CureSoundSecondary;
+            tempSource2.Play();
+            Destroy(tempAudioObj2, CureSoundSecondary.length + 0.1f);
+        }
+    }
+
+    private System.Collections.IEnumerator StartRandomSymptomRoutine()
+    {
+        isStartingSymptom = true;
+
+        // --- 1. AUDIO PRE-SÍNTOMA ---
+        if (PreSymptomVoices != null && PreSymptomVoices.Length > 0 && Random.value <= PreSymptomVoiceChance)
+        {
+            AudioClip clip = PreSymptomVoices[Random.Range(0, PreSymptomVoices.Length)];
+            if (clip != null)
+            {
+                voiceAudioSource.clip = clip;
+                voiceAudioSource.Play();
+                yield return new WaitForSeconds(clip.length);
+            }
+        }
+
+        // --- 2. AVISO VISUAL (LLUVIA AL MÁXIMO POR 2 SEGUNDOS) ---
+        currentActiveSymptom = SymptomType.Rain;
+        timeAlive = MinutesToMaxIntensity * 60f; // Forzamos 100% de intensidad
+        yield return new WaitForSeconds(2f);
+
+        // --- 3. ELEGIR SÍNTOMA REAL ---
+        List<SymptomType> availableSymptoms = new List<SymptomType>();
+        if (EnableBlurAndTunnel) availableSymptoms.Add(SymptomType.Blur);
+        if (EnableBlackAndWhite) availableSymptoms.Add(SymptomType.BlackAndWhite);
+        if (EnableVHSGlitch) availableSymptoms.Add(SymptomType.VHS);
+        if (EnableDrunkMotion) availableSymptoms.Add(SymptomType.Drunk);
+        if (EnableWhispers) availableSymptoms.Add(SymptomType.Whispers);
+        // Descomenta si quieres que la lluvia también sea un síntoma de larga duración:
+        // if (EnableRain) availableSymptoms.Add(SymptomType.Rain);
+
+        if (availableSymptoms.Count > 0)
+        {
+            currentActiveSymptom = availableSymptoms[Random.Range(0, availableSymptoms.Count)];
+            timeAlive = 0f;
+            PlaySymptomSound(currentActiveSymptom);
+        }
+
+        isStartingSymptom = false;
+
+        // --- 4. AUDIO DURANTE EL SÍNTOMA ---
+        if (currentActiveSymptom != SymptomType.None && DuringSymptomVoices != null && DuringSymptomVoices.Length > 0 && Random.value <= DuringSymptomVoiceChance)
+        {
+            float delay = Random.Range(MinDuringSymptomDelay, MaxDuringSymptomDelay);
+            duringVoiceRoutine = StartCoroutine(PlayDuringSymptomVoiceRoutine(delay));
+        }
+
+        symptomRoutine = null;
+    }
+
+    private DialogueTrigger CrearTriggerOculto(UHFPS.Scriptable.DialogueAsset asset, string nombre)
+    {
+        if (asset == null) return null;
+
+        GameObject go = new GameObject($"HiddenDialogue_{nombre}");
+        go.transform.SetParent(transform);
+        
+        DialogueTrigger dt = go.AddComponent<DialogueTrigger>();
+        dt.Dialogue = asset;
+        dt.DialogueAudio = voiceAudioSource;
+        dt.DialogueType = DialogueTrigger.DialogueTypeEnum.Local;
+        dt.TriggerType = DialogueTrigger.TriggerTypeEnum.Event;
+        
+        return dt;
+    }
+
+    private System.Collections.IEnumerator PlayDuringSymptomVoiceRoutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (currentActiveSymptom != SymptomType.None) // Por si se curó mientras esperaba
+        {
+            if (duringSymptomTriggers != null && duringSymptomTriggers.Length > 0)
+            {
+                DialogueTrigger dt = duringSymptomTriggers[Random.Range(0, duringSymptomTriggers.Length)];
+                if (dt != null)
+                {
+                    if (DialogueSystem.Instance != null && DialogueSystem.Instance.IsPlaying)
+                    {
+                        DialogueSystem.Instance.StopDialogue();
+                    }
+                    dt.TriggerDialogue();
+                }
+            }
+        }
+    }
+
+    private void StopVoiceRoutines()
+    {
+        if (symptomRoutine != null) StopCoroutine(symptomRoutine);
+        if (duringVoiceRoutine != null) StopCoroutine(duringVoiceRoutine);
+        isStartingSymptom = false;
+        
+        if (DialogueSystem.Instance != null && DialogueSystem.Instance.IsPlaying)
+        {
+            DialogueSystem.Instance.StopDialogue();
+        }
+        else if (voiceAudioSource != null && voiceAudioSource.isPlaying)
+        {
+            voiceAudioSource.Stop();
+        }
     }
 
     void OnDestroy()
     {
+        if (voiceAudioSource != null) Destroy(voiceAudioSource.gameObject);
         if (symptomAudioSource != null) Destroy(symptomAudioSource.gameObject);
         if (blurVolumeObject != null) Destroy(blurVolumeObject);
         if (bwVolumeObject != null) Destroy(bwVolumeObject);
         if (vhsVolumeObject != null) Destroy(vhsVolumeObject);
         if (drunkVolumeObject != null) Destroy(drunkVolumeObject);
+        if (rainVolumeObject != null) Destroy(rainVolumeObject);
     }
 }

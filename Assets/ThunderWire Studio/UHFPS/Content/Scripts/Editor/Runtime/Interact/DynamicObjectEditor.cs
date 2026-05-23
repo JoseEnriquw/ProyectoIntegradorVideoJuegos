@@ -149,6 +149,14 @@ namespace UHFPS.Editors
             }
 
             EditorGUILayout.Space();
+            using (new EditorDrawing.BorderBoxScope(new GUIContent("Custom Close Settings")))
+            {
+                Properties.Draw("customCloseSpeed");
+                Properties.Draw("customCloseLock");
+                Properties.Draw("customCloseSound");
+            }
+
+            EditorGUILayout.Space();
             if (EditorDrawing.BeginFoldoutBorderLayoutClean(Properties["useEvent1"], new GUIContent("Events")))
             {
                 Properties.Draw("useEvent1", new GUIContent("OnOpen"));

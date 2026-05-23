@@ -224,21 +224,45 @@ MonoBehaviour:
     Value: You have died
   - EntryId: 75562718
     SectionId: 22328812
-    Key: loading.description.demoscene
-    Value: In this demo scene, you will be able to witness and explore all the impressive
-      features that come with the kit. This scene has been specially designed to
-      showcase the full potential of the asset, so you can fully test its capabilities.
+    Key: loading.description.Bosque
+    Value: ' Whoever doubts Elias Varel, doubts the very kingdom of heaven.'
   - EntryId: 48298615
     SectionId: 22328812
     Key: loading.description.demoscene2
-    Value: In this interactive demo scene, you will have the opportunity to engage
-      firsthand with the elevator system, showcasing its seamless operation and integration
-      along with the other great features of the kit.
+    Value: 
   - EntryId: 99899103
     SectionId: 22328812
     Key: loading.description.demoscene3
-    Value: It's raining outside, you can test how the raindrop effect works when
-      you're sheltered under a roof or not.
+    Value: 
+  - EntryId: 84350534
+    SectionId: 22328812
+    Key: loading.Titulo.Bosque
+    Value: Salvation
+  - EntryId: 99418907
+    SectionId: 22328812
+    Key: loading.introhouse.tittle
+    Value: ' The disease'
+  - EntryId: 13613296
+    SectionId: 22328812
+    Key: loading.introhouse.description
+    Value: " The waters of Epecu\xE9n will reclaim their children."
+  - EntryId: 85061767
+    SectionId: 22328812
+    Key: loading.intropueblo.tittle
+    Value: ' Book of Revelation'
+  - EntryId: 40147657
+    SectionId: 22328812
+    Key: loading.intropueblo.descripcion
+    Value: And the truth was hidden beneath the waters, for men were not ready to
+      behold it.
+  - EntryId: 14231941
+    SectionId: 22328812
+    Key: loading.bosque1.tittle
+    Value: Psalms of Salt
+  - EntryId: 37512338
+    SectionId: 22328812
+    Key: loading.bosque1.description
+    Value: The flesh spoils, but salt preserves the chosen ones.
   - EntryId: 61351216
     SectionId: 59169988
     Key: titles.putaway
@@ -294,7 +318,8 @@ MonoBehaviour:
   - EntryId: 98041823
     SectionId: 59169988
     Key: titles.TimerAnnouncement
-    Value: 
+    Value: Tienes {0} hasta que la enfermedad te mate, deberas encontrar la cura
+      antes.
   - EntryId: 94577514
     SectionId: 69673941
     Key: interactions.use
@@ -515,6 +540,14 @@ MonoBehaviour:
     SectionId: 11317371
     Key: objects.Books
     Value: Books
+  - EntryId: 78599394
+    SectionId: 11317371
+    Key: objects.Folletos
+    Value: ' Epecuen brochures'
+  - EntryId: 74328446
+    SectionId: 11317371
+    Key: objects.house_medicine
+    Value: 
   - EntryId: 94725535
     SectionId: 78183135
     Key: controls.name.exit
@@ -975,16 +1008,16 @@ MonoBehaviour:
     Value: A collection of miscellaneous metal pieces. Useful for crafting and repairs.
   - EntryId: 31030455
     SectionId: 90694169
-    Key: tips.tip1
-    Value: This is the first example of a tip.
+    Key: tips.intro.tip1
+    Value: ' Take the IV fluids to control the symptoms.'
   - EntryId: 69403660
     SectionId: 90694169
-    Key: tips.tip2
-    Value: This is the second example of a tip.
+    Key: tips.intro.tip2
+    Value: ' Salt lengthens your time'
   - EntryId: 75937617
     SectionId: 90694169
-    Key: tips.tip3
-    Value: This is the third example of a tip.
+    Key: tips.intro.tip3
+    Value: Avoid the villagers
   - EntryId: 35326416
     SectionId: 70584943
     Key: options.language
@@ -1100,7 +1133,19 @@ MonoBehaviour:
   - EntryId: 44907926
     SectionId: 80976153
     Key: objectives.entry.town
-    Value: 
+    Value: ' Enter the village'
+  - EntryId: 92195999
+    SectionId: 80976153
+    Key: objectives.ingreso_alternativo
+    Value: Find an alternative way to enter the town
+  - EntryId: 27499283
+    SectionId: 80976153
+    Key: objectives.objectives.Forest.town.first
+    Value: ' Enter the village'
+  - EntryId: 17072527
+    SectionId: 80976153
+    Key: objectives.Forest.town.second
+    Value: ' Find another way'
   - EntryId: 19316762
     SectionId: 12708451
     Key: subobjetives.inspect.room
@@ -1117,6 +1162,34 @@ MonoBehaviour:
     SectionId: 12708451
     Key: subobjetives.read.letter
     Value: null
+  - EntryId: 15986859
+    SectionId: 12708451
+    Key: subobjetives.ingresar_feria
+    Value: Find a way to get into the fair
+  - EntryId: 60912577
+    SectionId: 12708451
+    Key: subobjetives.abre_reja
+    Value: Use the lock pick to open the gate
+  - EntryId: 31846754
+    SectionId: 12708451
+    Key: subobjetives.sube_puente
+    Value: Find a way to cross the bridge
+  - EntryId: 48902055
+    SectionId: 12708451
+    Key: subobjetives.ir_granero
+    Value: head to the barn
+  - EntryId: 24610715
+    SectionId: 12708451
+    Key: subobjetives.distrae_epecuenses
+    Value: Distract the guard
+  - EntryId: 15318123
+    SectionId: 12708451
+    Key: subobjetives.encuentra_combustible
+    Value: Find the fuel on the way to the slaughterhouse
+  - EntryId: 71018563
+    SectionId: 12708451
+    Key: subobjetives.al_pueblo
+    Value: Address the people
   - EntryId: 88446583
     SectionId: 38271540
     Key: dialogs.mission1.picture.frame
@@ -1164,3 +1237,208 @@ MonoBehaviour:
     Value: "My father died before he could tell me something important\u2026 he said
       it was a family secret\u2026 Since then\u2026 I haven\u2019t been able to stop
       thinking about it."
+  - EntryId: 63534897
+    SectionId: 38271540
+    Key: dialogs.PostAbuelo
+    Value: That city again... Did he know about the illness? I'd better pay him a
+      visit.
+  - EntryId: 83540004
+    SectionId: 38271540
+    Key: dialogs.dolorcabeza
+    Value: Oh, these headaches...
+  - EntryId: 85472762
+    SectionId: 38271540
+    Key: dialogs.suero
+    Value: These are the vitamins I always gave myself.
+  - EntryId: 22915260
+    SectionId: 11930759
+    Key: dialogs_pueblo.limite.carretera
+    Value: " I don't think the town is around here\u2026"
+  - EntryId: 16471321
+    SectionId: 11930759
+    Key: dialogs_pueblo.desequipar.linterna
+    Value: Uh, this flashlight doesn't work anymore, I'll have to throw it away.
+  - EntryId: 27943259
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.Olvido
+    Value: " This place has been forgotten\u2026"
+  - EntryId: 75171280
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.posteluz
+    Value: A kerosene lamp? Is there no electricity around here?
+  - EntryId: 51158971
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.nene.che
+    Value: Hey, kid!
+  - EntryId: 80669082
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.nene.para
+    Value: " Hey, wait\u2026 don't go."
+  - EntryId: 79278245
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.arvol.caida
+    Value: Damn! I don't have time for this... I have to find another way.
+  - EntryId: 43885748
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.niebla
+    Value: "This wasn't here before\u2026 what's going on?"
+  - EntryId: 91080227
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.firshouse
+    Value: ' Hello? Is anyone there?'
+  - EntryId: 51662929
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.secondhouse
+    Value: Another cabin?
+  - EntryId: 78003352
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.silla
+    Value: "Someone was here recently\u2026"
+  - EntryId: 32551320
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.medicina
+    Value: '"They''re the same jars... the ones from home..." "Maybe... this is what
+      kept Dad alive."'
+  - EntryId: 86614006
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.linternakero
+    Value: "Well\u2026 light. It's not much, but it helps."
+  - EntryId: 77694860
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.foto.abuelo
+    Value: "This is the same photo\u2026 is that my grandfather? I have to find him."
+  - EntryId: 27680312
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.golpepuerta
+    Value: Who's there...?
+  - EntryId: 77776079
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.lider
+    Value: That guy... he gave me the creeps.
+  - EntryId: 90674968
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.advertencia1
+    Value: ' Strangers are not welcome'
+  - EntryId: 40298081
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.advertencia2
+    Value: The leader is our salvation
+  - EntryId: 12090252
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.advertencia3
+    Value: Those who disobey will be punished.
+  - EntryId: 30153132
+    SectionId: 11930759
+    Key: dialogs_pueblo.bosque.cercaentrada
+    Value: null
+  - EntryId: 19299357
+    SectionId: 65177942
+    Key: dialogsSintomas.sintoma.A1
+    Value: " What the hell is happening to me\u2026?"
+  - EntryId: 82958904
+    SectionId: 65177942
+    Key: dialogsSintomas.sintoma.A2
+    Value: "No, not again\u2026"
+  - EntryId: 64040201
+    SectionId: 65177942
+    Key: dialogsSintomas.sintoma.A3
+    Value: "In the end\u2026 the same thing is happening to me as to my old man"
+  - EntryId: 93875838
+    SectionId: 65177942
+    Key: dialogsSintomas.sintoma.A4
+    Value: "it 's got me again\u2026"
+  - EntryId: 78044263
+    SectionId: 65177942
+    Key: dialogsSintomas.sintoma.A5
+    Value: "I have to get that IV drip in now\u2026"
+  - EntryId: 78132164
+    SectionId: 65177942
+    Key: dialogsSintomas.sintoma.A6
+    Value: ' I can''t take it anymore... I need an IV drip.'
+  - EntryId: 59629219
+    SectionId: 65177942
+    Key: dialogsSintomas.bosque.carta.abuelo
+    Value: null
+  - EntryId: 97409758
+    SectionId: 65177942
+    Key: dialogsSintomas.bosque.respuesta.carta.abuelo
+    Value: null
+  - EntryId: 58631134
+    SectionId: 50914226
+    Key: inventoryItems.Salt.Tittle
+    Value: Epecuen's salt
+  - EntryId: 14815089
+    SectionId: 50914226
+    Key: inventoryItems.salt.description
+    Value: ' Crystals extracted from Lake Epecuen, their properties help to extend
+      life'
+  - EntryId: 71713302
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.intro_ingreso1
+    Value: This place scares me
+  - EntryId: 57736921
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.intro_ingreso2
+    Value: There are people guarding the entrance, I need to find another way in..
+  - EntryId: 68139067
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.feria_cerrado
+    Value: Hmm, it seems I can't go any further this way. I'll see if there's another
+      entrance through the fence
+  - EntryId: 91826483
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.maizal
+    Value: "Est\xE1 plagado de estas criaturas\u2026  Voy a tener que perderme entre
+      el maizal para evitarlos"
+  - EntryId: 42857841
+    SectionId: 55496470
+    Key: "dialog_ingreso_pueblo.Persecuci\xF3n1"
+    Value: What the hell is that?
+  - EntryId: 63575913
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.esconderse
+    Value: That bathroom... please let it be open!
+  - EntryId: 49913073
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.voces_forasteros
+    Value: An intruder... we have to find him and warn the leader that we have a
+      visitor...
+  - EntryId: 60315446
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.lluvia
+    Value: That was the last straw, he just left.
+  - EntryId: 57025345
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.puente
+    Value: No way, the bridge collapsed, I'll have to find something to help me get
+      back up.
+  - EntryId: 13376603
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.granero
+    Value: How could the lights have turned on? Who's there?
+  - EntryId: 88846228
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.combustible_granero
+    Value: This generator isn't working. I'll have to find some fuel.
+  - EntryId: 75148231
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.esconderse_granero
+    Value: Someone's coming! I have to hide under the table.
+  - EntryId: 12293059
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.nota_gauchito
+    Value: '"Gauchito Gil," a popular Argentine saint widely venerated, though not
+      recognized by the Church. People ask him for protection during travels, health,
+      work, and good fortune; for this reason, travelers leave red shrines as a sign
+      of faith and gratitude.'
+  - EntryId: 72492651
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.nota_sanla
+    Value: "\u201CSan La Muerte\u201D is a pagan or folk saint. What distinguishes
+      him from any other saint is that he can be asked to perform evil or harm: for
+      his devotees, he has the ability to protect against an enemy and the power
+      to punish them for their ill intentions."
+  - EntryId: 62613490
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.crafteo_ganzua
+    Value: By combining 2 pieces of scrap metal we get the lockpick.

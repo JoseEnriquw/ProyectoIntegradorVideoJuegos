@@ -46,6 +46,8 @@ namespace UHFPS.Runtime.States
                 this.agent = machine.GetComponent<NavMeshAgent>();
                 this.animator = machine.Animator;
                 this.customGroup = group as CustomNPCStateGroup;
+                // El grupo de waypoints se resuelve en OnStateEnter para garantizar
+                // que todas las referencias de Unity estén inicializadas.
             }
 
             public override void OnStateEnter()
@@ -66,8 +68,24 @@ namespace UHFPS.Runtime.States
                     agent.acceleration = 120f;
                     agent.angularSpeed = 720f;
 
-                    var closest = FindClosestWaypointsGroup();
-                    currentGroup = closest.Key;
+                    // Siempre re-leemos el assigner en OnStateEnter para evitar problemas
+                    // de orden de inicialización de Unity (el constructor corre antes de Awake/Start).
+                    var assigner = machine.GetComponent<NPCWaypointAssigner>();
+                    if (assigner != null && assigner.grupoDeWaypoints != null)
+                    {
+                        currentGroup = assigner.grupoDeWaypoints;
+                    }
+
+                    if (currentGroup == null)
+                    {
+                        var closest = FindClosestWaypointsGroup();
+                        currentGroup = closest.Key;
+                        if (currentGroup == null)
+                        {
+                            Debug.LogWarning($"[{machine.name}] EstadoCorrerWaypointsAI: No se encontró grupo de waypoints. " +
+                                "Asegurate de agregar NPCWaypointAssigner al NPC y arrastrar su ruta.");
+                        }
+                    }
 
                     if (currentGroup != null)
                     {

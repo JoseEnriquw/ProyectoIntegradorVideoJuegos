@@ -43,7 +43,17 @@ namespace UHFPS.Runtime.States
         {
             private EstadoPersecucionAI asset;
             private CustomNPCStateGroup customGroup;
-            
+
+            // ── Audio ──────────────────────────────────────────────────
+            // AudioSource principal: PlayOneShot para sonidos cortos (alerta, ataque, pérdida).
+            // AudioSource secundario (opcional): loop de tensión durante la persecución.
+            private AudioSource audioSourcePrincipal;
+            private AudioSource audioSourceLoop;
+
+            // Timer para los sonidos periódicos durante la persecución
+            private float timerSonidoPersecucion;
+            // ──────────────────────────────────────────────────────────
+
             private float timerNoVisto;
             private bool atacando;
             private float coolDownAtaque;
@@ -52,6 +62,8 @@ namespace UHFPS.Runtime.States
             {
                 this.asset = stateAsset;
                 this.customGroup = group as CustomNPCStateGroup;
+                // Los AudioSources se resuelven en OnStateEnter para evitar el
+                // mismo problema de orden de inicialización que tenían los waypoints.
             }
 
             public override Transition[] OnGetTransitions()
@@ -76,7 +88,41 @@ namespace UHFPS.Runtime.States
                 atacando = false;
                 coolDownAtaque = 0f;
 
-                // Empezamos la persecución
+                // Resolvemos los AudioSources aquí para garantizar que Unity ya los inicializó.
+                AudioSource[] sources = machine.GetComponentsInChildren<AudioSource>();
+                if (sources.Length >= 1) audioSourcePrincipal = sources[0];
+                if (sources.Length >= 2) audioSourceLoop      = sources[1];
+                else                     audioSourceLoop      = sources.Length > 0 ? sources[0] : null;
+
+                // Si el usuario olvidó poner un AudioSource, le agregamos uno en runtime para que no se rompa el código
+                if (audioSourcePrincipal == null)
+                {
+                    audioSourcePrincipal = machine.gameObject.AddComponent<AudioSource>();
+                    audioSourcePrincipal.spatialBlend = 1f; // Sonido 3D
+                    audioSourcePrincipal.maxDistance = 20f;
+                    audioSourceLoop = audioSourcePrincipal;
+                    Debug.LogWarning($"[EstadoPersecucionAI] No se encontró AudioSource en {machine.name}, se agregó uno automáticamente en 3D.");
+                }
+
+                if (customGroup != null)
+                {
+                    // ① Sonido de ALERTA al detectar (one-shot aleatorio)
+                    ReproducirOneShot(customGroup.sonidosAlerta, customGroup.volumenAlerta);
+
+                    // ② Iniciar timer para sonidos periódicos
+                    timerSonidoPersecucion = Random.Range(customGroup.intervaloSonidoMin, customGroup.intervaloSonidoMax);
+
+                    // ③ Sonido ambiental en LOOP durante la persecución
+                    if (customGroup.usarSonidoLoop && customGroup.sonidoLoop != null && audioSourceLoop != null)
+                    {
+                        audioSourceLoop.clip   = customGroup.sonidoLoop;
+                        audioSourceLoop.loop   = true;
+                        audioSourceLoop.volume = customGroup.volumenLoop;
+                        audioSourceLoop.Play();
+                    }
+                }
+
+                // Empezamos la animación de carrera
                 UpdateAnimator(isWalking: false, isRunning: true, isIdle: false);
             }
 
@@ -84,8 +130,20 @@ namespace UHFPS.Runtime.States
             {
                 machine.RotateAgentManually = false;
                 if (agent.isOnNavMesh) agent.ResetPath();
-                
-                // Limpiamos estados y DEVOLVEMOS la velocidad a la normalidad por las dudas
+
+                // ⑤ Sonido al PERDER al jugador (frustración, renuncia)
+                if (customGroup != null)
+                    ReproducirOneShot(customGroup.sonidosPerdidaVista, customGroup.volumenPerdidaVista);
+
+                // Detener el loop de tensión
+                if (audioSourceLoop != null && audioSourceLoop.isPlaying &&
+                    customGroup != null && customGroup.usarSonidoLoop)
+                {
+                    audioSourceLoop.Stop();
+                    audioSourceLoop.loop = false;
+                }
+
+                // Limpiamos animaciones y velocidad
                 UpdateAnimator(false, false, false); 
                 if (animator != null) animator.speed = 1f;
             }
@@ -95,6 +153,17 @@ namespace UHFPS.Runtime.States
                 if (IsPlayerDead) return;
 
                 coolDownAtaque -= Time.deltaTime;
+
+                // ② Tick del timer de sonidos periódicos durante la persecución
+                if (customGroup != null && customGroup.repetirDurantePersecucion)
+                {
+                    timerSonidoPersecucion -= Time.deltaTime;
+                    if (timerSonidoPersecucion <= 0f)
+                    {
+                        ReproducirOneShot(customGroup.sonidosPersecucion, customGroup.volumenPersecucion);
+                        timerSonidoPersecucion = Random.Range(customGroup.intervaloSonidoMin, customGroup.intervaloSonidoMax);
+                    }
+                }
 
                 if (SeesPlayerOrClose(asset.radioDeteccionCercana))
                 {
@@ -139,12 +208,16 @@ namespace UHFPS.Runtime.States
             {
                 if (customGroup == null) return;
                 
-                machine.transform.rotation = Quaternion.Slerp(machine.transform.rotation, Quaternion.LookRotation(PlayerPosition - machine.transform.position), Time.deltaTime * 10f);
+                machine.transform.rotation = Quaternion.Slerp(machine.transform.rotation,
+                    Quaternion.LookRotation(PlayerPosition - machine.transform.position), Time.deltaTime * 10f);
 
-                if(!string.IsNullOrEmpty(customGroup.AttackTrigger) && animator != null)
+                if (!string.IsNullOrEmpty(customGroup.AttackTrigger) && animator != null)
                 {
                     animator.SetTrigger(customGroup.AttackTrigger);
                 }
+
+                // ④ Sonido de ATAQUE
+                ReproducirOneShot(customGroup.sonidosAtaque, customGroup.volumenAtaque);
 
                 if (customGroup.InstakillOnCatch)
                     playerHealth.ApplyDamage(9999, machine.transform);
@@ -152,6 +225,15 @@ namespace UHFPS.Runtime.States
                     playerHealth.ApplyDamage(customGroup.DamageRange.Random(), machine.transform);
 
                 coolDownAtaque = 2f; 
+            }
+
+            // ─── Helper: elige un clip al azar del array y lo reproduce ───────────
+            private void ReproducirOneShot(AudioClip[] array, float volumen)
+            {
+                if (audioSourcePrincipal == null || customGroup == null) return;
+                AudioClip clip = customGroup.ObtenerSonidoAleatorio(array);
+                if (clip != null)
+                    audioSourcePrincipal.PlayOneShot(clip, volumen);
             }
 
             private void UpdateAnimator(bool isWalking, bool isRunning, bool isIdle)

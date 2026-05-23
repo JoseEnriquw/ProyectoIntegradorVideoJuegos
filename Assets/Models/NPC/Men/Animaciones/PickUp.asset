@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5368498110662406824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd9c414ed94eb24d972694e47da2b6a, type: 3}
+  m_Name: ' (UHFPS.Runtime.States.EstadoIrYAnimarAI)'
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.EstadoIrYAnimarAI
+  nombreDelPuntoDestino: NPC_pickupplace
+  velocidadMovimiento: 1.5
+  distanciaDeParada: 0.5
+  parametroAnimacion: pickup
+  tiempoDeAnimacion: 3
+  estadoPostAnimacion: PatrullajeAI
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8b672febe5180040a28550def7b74d4, type: 3}
+  m_Name: PickUp
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.CustomNPCStateGroup
+  AIStates:
+  - StateAsset: {fileID: -5368498110662406824}
+    IsEnabled: 1
+  IdleParameter: Idle
+  WalkParameter: Walk
+  RunParameter: Run
+  InteractParameter: Interact
+  AttackTrigger: Attack
+  sonidosAlerta: []
+  volumenAlerta: 1
+  repetirDurantePersecucion: 1
+  intervaloSonidoMin: 3
+  intervaloSonidoMax: 7
+  sonidosPersecucion: []
+  volumenPersecucion: 0.85
+  usarSonidoLoop: 0
+  sonidoLoop: {fileID: 0}
+  volumenLoop: 0.6
+  sonidosAtaque: []
+  volumenAtaque: 1
+  sonidosPerdidaVista: []
+  volumenPerdidaVista: 0.9
+  InstakillOnCatch: 0
+  DamageRange:
+    min: 20
+    max: 35
+  RangoAtaque: 1.5

@@ -66,6 +66,15 @@ namespace UHFPS.Runtime
         public SoundClip lockedSound;
         public SoundClip unlockSound;
 
+        // custom close settings
+        [Header("Custom Close Settings")]
+        [Tooltip("Velocidad personalizada para el cierre custom. 0 = usar la velocidad original.")]
+        public float customCloseSpeed = 0f;
+        [Tooltip("Si es true, la puerta se trabará automáticamente al terminar de cerrarse.")]
+        public bool customCloseLock = false;
+        [Tooltip("Sonido personalizado que se reproducirá al llamar SetCloseStateCustom().")]
+        public AudioClip customCloseSound;
+
         // events
         public UnityEvent useEvent1;
         public UnityEvent useEvent2;
@@ -229,6 +238,52 @@ namespace UHFPS.Runtime
                 return;
 
             CurrentDynamic?.OnDynamicClose();
+        }
+
+        /// <summary>
+        /// Cierra la puerta con velocidad, bloqueo y audio personalizados.
+        /// Configura los campos 'Custom Close Settings' en el Inspector.
+        /// Puedes llamar esta función directamente desde un Unity Event.
+        /// </summary>
+        public void SetCloseStateCustom()
+        {
+            if (interactType == InteractType.Mouse || IsLocked || IsJammed)
+                return;
+
+            // 1. Si se configuró una velocidad custom, la aplicamos temporalmente
+            float velocidadOriginal = openable.openSpeed;
+            if (customCloseSpeed > 0f)
+                openable.openSpeed = customCloseSpeed;
+
+            // 2. Ejecutamos el cierre usando la infraestructura existente del paquete
+            CurrentDynamic?.OnDynamicClose();
+
+            // 3. Reproducimos el audio custom usando el AudioSource del propio DynamicObject
+            if (customCloseSound != null && audioSource != null)
+                audioSource.PlayOneShot(customCloseSound);
+
+            // 4. Si hay que trabar, calculamos el tiempo exacto y lo hacemos en corrutina
+            if (customCloseLock || customCloseSpeed > 0f)
+            {
+                StartCoroutine(FinalizarCierreCustom(velocidadOriginal));
+            }
+        }
+
+        private System.Collections.IEnumerator FinalizarCierreCustom(float velocidadOriginal)
+        {
+            // Calculamos cuánto tarda en cerrarse con la velocidad custom
+            float gradosTotales = Mathf.Abs(openable.openLimits.max - openable.openLimits.min);
+            float velocidadReal = Mathf.Max(0.1f, (customCloseSpeed > 0f ? customCloseSpeed : openable.openSpeed) * 10f);
+            float tiempoDeCierre = gradosTotales / velocidadReal;
+
+            yield return new UnityEngine.WaitForSeconds(tiempoDeCierre + 0.05f);
+
+            // Restauramos la velocidad original de la puerta
+            openable.openSpeed = velocidadOriginal;
+
+            // Si se configuró para trabar, aplicamos el bloqueo
+            if (customCloseLock)
+                SetLockedStatus(true);
         }
 
         /// <summary>
