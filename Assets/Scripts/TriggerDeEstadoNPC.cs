@@ -456,16 +456,5 @@ namespace UHFPS.Custom
             Debug.Log($"[Trigger] GirarCamaraHacia: FINAL LookRotation=({lookCtrl.LookRotation.x:F1}, {lookCtrl.LookRotation.y:F1})");
         }
 
-        // Dibuja una cajita verde en la escena para que no lo pierdas de vista al editar
-        private void OnDrawGizmos()
-        {
-            Collider col = GetComponent<Collider>();
-            if (col != null && col.isTrigger)
-            {
-                Gizmos.color = new Color(0.2f, 0.8f, 0.2f, 0.4f);
-                Gizmos.matrix = transform.localToWorldMatrix;
-                Gizmos.DrawCube(Vector3.zero, col.bounds.size / transform.lossyScale.x);
-            }
-        }
     }
 }
