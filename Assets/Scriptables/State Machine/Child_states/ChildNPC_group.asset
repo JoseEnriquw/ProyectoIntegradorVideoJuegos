@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.EstadoCorrerWaypointsAI
   velocidadCarrera: 5
   distanciaCambio: 0.5
-  tiempoDeArranque: 3.4
+  tiempoDeArranque: 5
   destruirAlTerminar: 1
   multiplicadorVelocidadAnim: 1
 --- !u!114 &11400000
@@ -39,6 +39,20 @@ MonoBehaviour:
   RunParameter: Run
   InteractParameter: Interact
   AttackTrigger: Attack
+  sonidosAlerta: []
+  volumenAlerta: 1
+  repetirDurantePersecucion: 1
+  intervaloSonidoMin: 3
+  intervaloSonidoMax: 7
+  sonidosPersecucion: []
+  volumenPersecucion: 0.85
+  usarSonidoLoop: 0
+  sonidoLoop: {fileID: 0}
+  volumenLoop: 0.6
+  sonidosAtaque: []
+  volumenAtaque: 1
+  sonidosPerdidaVista: []
+  volumenPerdidaVista: 0.9
   InstakillOnCatch: 0
   DamageRange:
     min: 20
@@ -56,3 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0837402268cf50e4f81fdd36dcc20c59, type: 3}
   m_Name: ' (UHFPS.Runtime.States.EstadoEsperarTriggerAI)'
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.EstadoEsperarTriggerAI
+  LookAtPlayerCamera: 1
+  IgnoreYAxis: 1
+  RotationSpeed: 5
+  RotationOffset: 180
