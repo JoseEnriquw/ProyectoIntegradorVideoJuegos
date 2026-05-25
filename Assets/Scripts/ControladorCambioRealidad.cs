@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering; // Requerido para manipular Volumes de Post-Processing de URP
+using UnityEngine.Rendering.Universal; // Requerido para URP Decal Projector
 
 /// <summary>
 /// Controlador premium para cambiar de realidad con efecto de dissolve sincronizado, Post-Processing dinámico y SFX.
@@ -76,6 +77,10 @@ public class ControladorCambioRealidad : MonoBehaviour
     private List<Renderer> renderersLindos = new List<Renderer>();
     private List<Renderer> renderersPodridos = new List<Renderer>();
 
+    // Listas internas de decales para no hacer GetComponent en tiempo de ejecución
+    private List<DecalProjector> decalsLindos = new List<DecalProjector>();
+    private List<DecalProjector> decalsPodridos = new List<DecalProjector>();
+
     private void Awake()
     {
         propBlock = new MaterialPropertyBlock();
@@ -84,6 +89,10 @@ public class ControladorCambioRealidad : MonoBehaviour
         // Pre-cachear los renderers para optimizar rendimiento
         CachearRenderers(objetosLindos, renderersLindos);
         CachearRenderers(objetosPodridos, renderersPodridos);
+
+        // Pre-cachear los decales para optimizar rendimiento
+        CachearDecals(objetosLindos, decalsLindos);
+        CachearDecals(objetosPodridos, decalsPodridos);
 
         // Asegurar la existencia de un AudioSource
         if (audioSource == null)
@@ -141,6 +150,10 @@ public class ControladorCambioRealidad : MonoBehaviour
         ActualizarMaterialesInstantaneo(renderersLindos, esMundoPodrido ? 1f : 0f);
         ActualizarMaterialesInstantaneo(renderersPodridos, esMundoPodrido ? 0f : 1f);
 
+        // Aplicar la opacidad (fade) inicial de los decales
+        AplicarFadeDecals(decalsLindos, esMundoPodrido ? 0f : 1f);
+        AplicarFadeDecals(decalsPodridos, esMundoPodrido ? 1f : 0f);
+
         // Establecer pesos de post-procesado iniciales
         if (volumenLindo != null) volumenLindo.weight = esMundoPodrido ? 0f : 1f;
         if (volumenPodrido != null) volumenPodrido.weight = esMundoPodrido ? 1f : 0f;
@@ -180,6 +193,9 @@ public class ControladorCambioRealidad : MonoBehaviour
         List<Renderer> renderersAEntrar = aPodrida ? renderersPodridos : renderersLindos;
         List<Renderer> renderersASalir = aPodrida ? renderersLindos : renderersPodridos;
 
+        List<DecalProjector> decalsAEntrar = aPodrida ? decalsPodridos : decalsLindos;
+        List<DecalProjector> decalsASalir = aPodrida ? decalsLindos : decalsPodridos;
+
         // 2. Activar físicamente los objetos que van a entrar ANTES de que empiece el dissolve
         // para que puedan renderizarse a medida que se materializan.
         foreach (var obj in aActivar)
@@ -190,6 +206,9 @@ public class ControladorCambioRealidad : MonoBehaviour
         // Inicializar estados iniciales de la transición
         AplicarDissolve(renderersAEntrar, 1f); // Empiezan invisibles
         AplicarDissolve(renderersASalir, 0f);  // Empiezan visibles
+
+        AplicarFadeDecals(decalsAEntrar, 0f);  // Empiezan invisibles (opacity = 0)
+        AplicarFadeDecals(decalsASalir, 1f);   // Empiezan visibles (opacity = 1)
 
         // 3. Reproducir el efecto de sonido de la transición
         AudioClip sfxSeleccionado = aPodrida ? sfxMundoPodrido : sfxMundoLindo;
@@ -209,11 +228,13 @@ public class ControladorCambioRealidad : MonoBehaviour
             // Curva suave de transición
             float tSuave = Mathf.SmoothStep(0f, 1f, t);
 
-            // Los que salen: se disuelven (0 -> 1)
+            // Los que salen: se disuelven (0 -> 1) y se les baja la opacidad (1 -> 0)
             AplicarDissolve(renderersASalir, tSuave);
+            AplicarFadeDecals(decalsASalir, 1f - tSuave);
 
-            // Los que entran: se materializan (1 -> 0)
+            // Los que entran: se materializan (1 -> 0) y se les sube la opacidad (0 -> 1)
             AplicarDissolve(renderersAEntrar, 1f - tSuave);
+            AplicarFadeDecals(decalsAEntrar, tSuave);
 
             // Interpolación de Volúmenes Lindo <-> Podrido
             if (aPodrida)
@@ -240,6 +261,9 @@ public class ControladorCambioRealidad : MonoBehaviour
         // Garantizar valores exactos finales
         AplicarDissolve(renderersASalir, 1f);
         AplicarDissolve(renderersAEntrar, 0f);
+
+        AplicarFadeDecals(decalsASalir, 0f);
+        AplicarFadeDecals(decalsAEntrar, 1f);
 
         if (volumenLindo != null) volumenLindo.weight = aPodrida ? 0f : 1f;
         if (volumenPodrido != null) volumenPodrido.weight = aPodrida ? 1f : 0f;
@@ -275,5 +299,27 @@ public class ControladorCambioRealidad : MonoBehaviour
     private void ActualizarMaterialesInstantaneo(List<Renderer> renderers, float valorDissolve)
     {
         AplicarDissolve(renderers, valorDissolve);
+    }
+
+    private void CachearDecals(List<GameObject> objetos, List<DecalProjector> listaDestino)
+    {
+        foreach (var obj in objetos)
+        {
+            if (obj != null)
+            {
+                listaDestino.AddRange(obj.GetComponentsInChildren<DecalProjector>(true));
+            }
+        }
+    }
+
+    private void AplicarFadeDecals(List<DecalProjector> decals, float fadeValor)
+    {
+        for (int i = 0; i < decals.Count; i++)
+        {
+            if (decals[i] != null)
+            {
+                decals[i].fadeFactor = fadeValor;
+            }
+        }
     }
 }
