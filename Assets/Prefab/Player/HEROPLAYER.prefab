@@ -4431,7 +4431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSymptom
   EnableSymptoms: 1
-  TimeBetweenSymptoms: 60
+  TimeBetweenSymptoms: 120
   EnableProgression: 1
   MinutesToMaxIntensity: 2
   EnableBlurAndTunnel: 1
@@ -8706,7 +8706,7 @@ Light:
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 15
-  m_Range: 20
+  m_Range: 30
   m_SpotAngle: 80
   m_InnerSpotAngle: 70
   m_CookieSize2D: {x: 10, y: 10}
@@ -33885,9 +33885,9 @@ MonoBehaviour:
       Name: Reload Items
       GUID: 401b335b9c9c4c5588e0ec76a2faef23
   FlashlightLight: {fileID: 5010872761066986833}
-  LightIntensity: 4
+  LightIntensity: 15
   InfiniteBattery: 0
-  BatteryLife: 100
+  BatteryLife: 200
   BatteryPercentage:
     Value: 100
   BatteryLowPercent:
