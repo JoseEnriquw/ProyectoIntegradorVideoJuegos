@@ -5660,8 +5660,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 711631138593581972, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
+      propertyPath: FatigueSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 855df7719db0eac4788b2181dd8bc31d, type: 3}
+    - target: {fileID: 711631138593581972, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
       propertyPath: EnableSymptoms
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 711631138593581972, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
+      propertyPath: CureSoundSecondary
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 711631138593581972, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
+      propertyPath: FatigueRecoveryTime
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1103982259154441552, guid: 4457a51292b8cf24e9c3d6aec9e4088b, type: 3}
       propertyPath: m_Name
@@ -15232,6 +15244,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6631972}
     - target: {fileID: 1083956963184345169, guid: 2985d0262be271d4b96499f95e67af39, type: 3}
+      propertyPath: LowTimeAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: 39087e47a827d804986fefa6f3fa6cee, type: 3}
+    - target: {fileID: 1083956963184345169, guid: 2985d0262be271d4b96499f95e67af39, type: 3}
       propertyPath: StartingHours
       value: 0
       objectReference: {fileID: 0}
@@ -15241,7 +15257,7 @@ PrefabInstance:
       objectReference: {fileID: 102076081}
     - target: {fileID: 1083956963184345169, guid: 2985d0262be271d4b96499f95e67af39, type: 3}
       propertyPath: StartingMinutes
-      value: 30
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7046460313313181008, guid: 2985d0262be271d4b96499f95e67af39, type: 3}
       propertyPath: m_Name

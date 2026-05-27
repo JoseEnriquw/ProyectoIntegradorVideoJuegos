@@ -23,6 +23,15 @@ public class SurvivalTimer : MonoBehaviour
     public float LowTimePulse = 5f;
     [Tooltip("How fast the heartbeat is when time is full.")]
     public float NormalPulse = 1f;
+
+    [Header("Low Time Audio Settings")]
+    [Tooltip("Audio clip to play when the remaining time is low.")]
+    public AudioClip LowTimeAudio;
+    [Tooltip("Maximum volume for the low time audio at 0 seconds.")]
+    [Range(0f, 1f)]
+    public float LowTimeAudioVolume = 0.8f;
+    [Tooltip("Time in minutes remaining when the low time audio starts playing.")]
+    public float WarningTimeMinutes = 10f;
     
     [Header("Status")]
     public bool TimerRunning = true;
@@ -32,6 +41,7 @@ public class SurvivalTimer : MonoBehaviour
     private float lastLogTime;
     private bool playerIsDead = false;
     private Material heartbeatMat;
+    private AudioSource lowTimeAudioSource;
 
     /// <summary>
     /// Returns the current remaining time in seconds.
@@ -88,6 +98,18 @@ public class SurvivalTimer : MonoBehaviour
         if (Instance == this)
         {
             Debug.Log($"[SurvivalTimer] Timer started with {TimeFormatted} ({timeRemaining} seconds)");
+            
+            // Setup dynamic AudioSource for low time warning
+            GameObject audioObj = new GameObject("LowTimeAudioSource");
+            audioObj.transform.SetParent(transform);
+            audioObj.transform.localPosition = Vector3.zero;
+            lowTimeAudioSource = audioObj.AddComponent<AudioSource>();
+            lowTimeAudioSource.spatialBlend = 0f; // 2D Sound
+            lowTimeAudioSource.volume = 0f; // Starts muted
+            lowTimeAudioSource.clip = LowTimeAudio;
+            lowTimeAudioSource.loop = true;
+            lowTimeAudioSource.playOnAwake = false;
+
             RebindUI();
         }
     }
@@ -110,6 +132,9 @@ public class SurvivalTimer : MonoBehaviour
 
     void Update()
     {
+        // Update low time audio always to allow smooth fade out/ins under all conditions (e.g. death, pause, time changes)
+        UpdateLowTimeAudio();
+
         if (!TimerRunning || playerIsDead) return;
 
         // Check if game is paused through UHFPS GameManager
@@ -196,5 +221,47 @@ public class SurvivalTimer : MonoBehaviour
         if (timeRemaining < 0) timeRemaining = 0;
         if (timeRemaining > maxTime) maxTime = timeRemaining; // Expand max if time added beyond start
         lastLogTime = timeRemaining; // Reset log sync
+    }
+
+    private void UpdateLowTimeAudio()
+    {
+        if (lowTimeAudioSource == null || LowTimeAudio == null) return;
+
+        // Check pause state
+        bool isPaused = GameManager.HasReference && GameManager.Instance.IsPaused;
+
+        float thresholdSeconds = WarningTimeMinutes * 60f;
+        float targetVolume = 0f;
+
+        if (timeRemaining <= thresholdSeconds && timeRemaining > 0 && TimerRunning && !playerIsDead && !isPaused)
+        {
+            float progress = 1f - (timeRemaining / thresholdSeconds); // 0 at threshold, 1 at 0 seconds
+            targetVolume = progress * LowTimeAudioVolume;
+
+            if (!lowTimeAudioSource.isPlaying)
+            {
+                lowTimeAudioSource.clip = LowTimeAudio;
+                lowTimeAudioSource.Play();
+            }
+        }
+
+        // Smoothly transition volume to avoid sudden changes (fade in/out)
+        lowTimeAudioSource.volume = Mathf.MoveTowards(lowTimeAudioSource.volume, targetVolume, Time.deltaTime * 0.5f);
+
+        // Manage pause/resume states
+        if (isPaused && lowTimeAudioSource.isPlaying)
+        {
+            lowTimeAudioSource.Pause();
+        }
+        else if (!isPaused && !lowTimeAudioSource.isPlaying && targetVolume > 0f)
+        {
+            lowTimeAudioSource.UnPause();
+        }
+
+        // Stop playing to free resources when faded out
+        if (targetVolume <= 0f && lowTimeAudioSource.volume <= 0.001f && lowTimeAudioSource.isPlaying)
+        {
+            lowTimeAudioSource.Stop();
+        }
     }
 }
