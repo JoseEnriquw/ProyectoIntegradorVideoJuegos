@@ -28,7 +28,8 @@ namespace UHFPS.Runtime
                 return;
             }
 
-            int language = GameLocalization.Instance.CurrentLanguageIndex;
+            int language = GameLocalization.Instance.DefaultLanguage;
+            GameLocalization.Instance.ChangeLanguage(language);
             Behaviour.SetOptionValue(language);
         }
 
@@ -117,9 +118,32 @@ namespace UHFPS.Runtime
                 }
             }
 
-            Options.CurrentResolution.SilentValue = Screen.currentResolution;
-            int value = resolutions.IndexOf(Options.CurrentResolution.Value);
-            Behaviour.SetOptionValue(value);
+            // Fallback / First Run: adapt to current screen resolution automatically
+            int screenWidth = Screen.currentResolution.width;
+            int screenHeight = Screen.currentResolution.height;
+            int defaultIndex = resolutions.FindIndex(x => x.width == screenWidth && x.height == screenHeight);
+            
+            // If the exact width/height resolution is not found in the supported list,
+            // fallback to the highest supported resolution.
+            if (defaultIndex <= -1 && resolutions.Count > 0)
+            {
+                if (resolutions[0].width >= resolutions[resolutions.Count - 1].width)
+                    defaultIndex = 0;
+                else
+                    defaultIndex = resolutions.Count - 1;
+            }
+
+            if (defaultIndex >= 0 && defaultIndex < resolutions.Count)
+            {
+                Options.CurrentResolution.SilentValue = Screen.currentResolution;
+                Options.CurrentResolution.Value = resolutions[defaultIndex];
+                Behaviour.SetOptionValue(defaultIndex);
+            }
+            else
+            {
+                Options.CurrentResolution.SilentValue = Screen.currentResolution;
+                Behaviour.SetOptionValue(0);
+            }
         }
 
         public override void OnBuildOption(OptionBehaviour behaviour)
