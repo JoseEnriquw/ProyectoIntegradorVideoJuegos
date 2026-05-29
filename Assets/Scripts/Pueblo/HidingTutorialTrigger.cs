@@ -38,6 +38,10 @@ public class HidingTutorialTrigger : MonoBehaviour
     [Tooltip("Margen interno (padding) para el contenedor de texto en la imagen (izq, inf, der, sup).")]
     public Vector4 textPadding = new Vector4(60f, 60f, 60f, 120f);
 
+    [Header("Input Customization")]
+    [Tooltip("Tecla para cerrar/salir del popup.")]
+    public KeyCode closeKey = KeyCode.Escape;
+
     [Header("UI Layout Customization")]
     [Tooltip("Tamaño de la imagen en pantalla (por defecto es 16:9).")]
     public Vector2 imageSize = new Vector2(1024, 576);
@@ -126,6 +130,15 @@ public class HidingTutorialTrigger : MonoBehaviour
             popupShown = true;
             ShowTutorialPopup();
         }
+    }
+
+    private string GetButtonTextWithShortcut(string originalVal)
+    {
+        if (closeKey != KeyCode.None)
+        {
+            return $"{originalVal} ({closeKey.ToString()})";
+        }
+        return originalVal;
     }
 
     private void ShowTutorialPopup()
@@ -222,12 +235,16 @@ public class HidingTutorialTrigger : MonoBehaviour
                 {
                     btnTxt = btn.GetComponentInChildren<TextMeshProUGUI>(true);
                 }
-                if (btnTxt != null && buttonText != null && !string.IsNullOrEmpty(buttonText.Value))
+                if (btnTxt != null)
                 {
-                    btnTxt.text = buttonText.Value;
-                    buttonText.SubscribeGloc(val => {
-                        if (btnTxt != null) btnTxt.text = val;
-                    });
+                    string baseTxt = (buttonText != null && !string.IsNullOrEmpty(buttonText.Value)) ? buttonText.Value : "ACEPTAR";
+                    btnTxt.text = GetButtonTextWithShortcut(baseTxt);
+                    if (buttonText != null)
+                    {
+                        buttonText.SubscribeGloc(val => {
+                            if (btnTxt != null) btnTxt.text = GetButtonTextWithShortcut(val);
+                        });
+                    }
                 }
             }
             else
@@ -408,15 +425,15 @@ public class HidingTutorialTrigger : MonoBehaviour
 
         if (buttonText != null && !string.IsNullOrEmpty(buttonText.Value))
         {
-            btnText.text = buttonText.Value;
+            btnText.text = GetButtonTextWithShortcut(buttonText.Value);
             buttonText.SubscribeGloc(val => {
                 if (btnText != null)
-                    btnText.text = val;
+                    btnText.text = GetButtonTextWithShortcut(val);
             });
         }
         else
         {
-            btnText.text = "ACEPTAR";
+            btnText.text = GetButtonTextWithShortcut("ACEPTAR");
         }
 
         return canvasObj;
@@ -455,5 +472,16 @@ public class HidingTutorialTrigger : MonoBehaviour
 
         // 5. Fire custom events
         OnPopupDismissed?.Invoke();
+    }
+
+    private void Update()
+    {
+        if (popupCanvasInstance != null && closeKey != KeyCode.None)
+        {
+            if (Input.GetKeyDown(closeKey))
+            {
+                OnContinuePressed();
+            }
+        }
     }
 }
