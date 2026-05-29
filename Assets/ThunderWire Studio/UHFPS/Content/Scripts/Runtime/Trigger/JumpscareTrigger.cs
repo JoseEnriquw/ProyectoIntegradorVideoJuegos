@@ -38,6 +38,12 @@ namespace UHFPS.Runtime
         public float LookAtDuration;
         [Tooltip("If enabled, the player will be locked during the jumpscare look at.")]
         public bool LockPlayer;
+        [Tooltip("If enabled, the player will walk towards the look at target during the jumpscare.")]
+        public bool WalkTowardsLookAt;
+        [Tooltip("The speed at which the player walks towards the look at target.")]
+        public float WalkSpeed = 2f;
+        [Tooltip("The distance at which the player will stop walking towards the target.")]
+        public float StopDistance = 1.5f;
         [Tooltip("If enabled, the jumpscare will end when TriggerJumpscareEnded function is called.")]
         public bool EndJumpscareManually;
 

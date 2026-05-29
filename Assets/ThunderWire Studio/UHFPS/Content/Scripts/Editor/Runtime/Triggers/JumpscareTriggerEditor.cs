@@ -99,6 +99,9 @@ namespace UHFPS.Editors
                             Properties.Draw("LookAtTarget");
                             Properties.Draw("LookAtDuration");
                             Properties.Draw("LockPlayer");
+                            Properties.Draw("WalkTowardsLookAt");
+                            Properties.Draw("WalkSpeed");
+                            Properties.Draw("StopDistance");
                             Properties.Draw("EndJumpscareManually");
                         }
                         EditorDrawing.EndBorderHeaderLayout();

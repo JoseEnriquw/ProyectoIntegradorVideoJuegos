@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UHFPS.Rendering;
@@ -50,6 +50,10 @@ namespace UHFPS.Runtime
         private float directTimer;
 
         private bool isPlayerLocked;
+        private bool walkTowardsTarget;
+        private float walkSpeed;
+        private float stopDistance;
+        private Transform lookAtTarget;
 
         private bool influenceFear;
         private bool tentaclesFaded;
@@ -86,6 +90,25 @@ namespace UHFPS.Runtime
 
             if (influenceFear && showTentacles)
                 UpdateFearTentacles();
+
+            if (walkTowardsTarget && lookAtTarget != null && playerManager != null && playerManager.PlayerCollider != null)
+            {
+                Vector3 direction = lookAtTarget.position - playerManager.transform.position;
+                direction.y = 0; // Keep movement horizontal
+                
+                if (direction.sqrMagnitude > stopDistance * stopDistance)
+                {
+                    Vector3 move = direction.normalized * walkSpeed * Time.deltaTime;
+                    move.y += Physics.gravity.y * Time.deltaTime;
+                    playerManager.PlayerCollider.Move(move);
+                }
+                else
+                {
+                    // Apply only gravity if we reached the target
+                    Vector3 gravityMove = new Vector3(0, Physics.gravity.y * Time.deltaTime, 0);
+                    playerManager.PlayerCollider.Move(gravityMove);
+                }
+            }
         }
 
         // --------------------------------------------------------------------
@@ -123,6 +146,10 @@ namespace UHFPS.Runtime
             else if ((jumpscare.JumpscareType == JumpscareTypeEnum.Indirect || jumpscare.JumpscareType == JumpscareTypeEnum.Audio) && jumpscare.LookAtJumpscare)
             {
                 isPlayerLocked = jumpscare.LockPlayer;
+                walkTowardsTarget = jumpscare.WalkTowardsLookAt;
+                walkSpeed = jumpscare.WalkSpeed;
+                stopDistance = jumpscare.StopDistance;
+                lookAtTarget = jumpscare.LookAtTarget;
 
                 lookController.LerpRotation(jumpscare.LookAtTarget, jumpscare.LookAtDuration, isPlayerLocked);
 
@@ -166,6 +193,8 @@ namespace UHFPS.Runtime
         /// </summary>
         public void EndJumpscareEffect()
         {
+            walkTowardsTarget = false;
+
             // Only unlock if we actually locked the player.
             if (!isPlayerLocked)
                 return;
