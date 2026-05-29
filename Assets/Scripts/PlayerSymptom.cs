@@ -12,8 +12,14 @@ public class PlayerSymptom : MonoBehaviour
     public bool EnableSymptoms = true;
 
     [Header("Timing Settings")]
-    [Tooltip("Time in seconds before a new random symptom appears (e.g., 180 para 3 minutos).")]
+    [Tooltip("Time in seconds before a new random symptom appears (used if UseRandomTimeRange is false).")]
     public float TimeBetweenSymptoms = 180f;
+    [Tooltip("¿Usar un rango de tiempo aleatorio en minutos entre síntomas?")]
+    public bool UseRandomTimeRange = true;
+    [Tooltip("Tiempo mínimo en minutos antes de que aparezca un nuevo síntoma.")]
+    public float MinMinutesBetweenSymptoms = 1f;
+    [Tooltip("Tiempo máximo en minutos antes de que aparezca un nuevo síntoma.")]
+    public float MaxMinutesBetweenSymptoms = 3f;
 
     [Header("Progression Settings")]
     [Tooltip("If true, the symptoms will gradually increase over time.")]
@@ -104,6 +110,16 @@ public class PlayerSymptom : MonoBehaviour
     public float MinDuringSymptomDelay = 5f;
     public float MaxDuringSymptomDelay = 15f;
 
+    [Header("Fatigue Settings")]
+    [Tooltip("Tiempo máximo (en segundos) que el jugador puede correr antes de cansarse.")]
+    public float MaxSprintDuration = 5f;
+    [Tooltip("Tiempo de recuperación (en segundos) que debe pasar para volver a correr después de cansarse.")]
+    public float FatigueRecoveryTime = 3f;
+    [Tooltip("Sonido de cansancio que se reproduce cuando el jugador se agota por correr.")]
+    public AudioClip FatigueSound;
+    [Tooltip("Volumen del sonido de cansancio.")]
+    [Range(0f, 1f)] public float FatigueVolume = 0.8f;
+
     private AudioSource voiceAudioSource;
     private bool isStartingSymptom = false;
     private Coroutine symptomRoutine;
@@ -115,6 +131,10 @@ public class PlayerSymptom : MonoBehaviour
     private SymptomType currentActiveSymptom = SymptomType.None;
     private float whispersWeight = 0f;
     private AudioSource symptomAudioSource;
+
+    private float sprintDurationElapsed = 0f;
+    private float fatigueCooldownTimer = 0f;
+    private bool isFatigued = false;
 
     // Utilizamos volúmenes separados internamente para que no haya conflictos de compatibilidad
     private GameObject blurVolumeObject;
@@ -168,7 +188,7 @@ public class PlayerSymptom : MonoBehaviour
 
     void Start()
     {
-        timer = TimeBetweenSymptoms;
+        timer = GetRandomTimeBetweenSymptoms();
         playerStateMachine = GetComponent<PlayerStateMachine>();
 
         // --- 0. CONFIGURAR FUENTE DE AUDIO ---
@@ -526,7 +546,7 @@ public class PlayerSymptom : MonoBehaviour
         if (!EnableSymptoms || (!EnableBlurAndTunnel && !EnableBlackAndWhite && !EnableVHSGlitch && !EnableDrunkMotion && !EnableWhispers && !EnableRain))
         {
             // RESET
-            timer = TimeBetweenSymptoms;
+            timer = GetRandomTimeBetweenSymptoms();
             timeAlive = 0f;
             currentActiveSymptom = SymptomType.None;
             targetWeight = 0f;
@@ -635,18 +655,67 @@ public class PlayerSymptom : MonoBehaviour
 
         float currentDrunkWeight = drunkVolume != null ? drunkVolume.weight : 0f;
 
-        // --- GESTIÓN DE LA HABILIDAD DE CORRER ---
+        // --- GESTIÓN DE LA HABILIDAD DE CORRER Y CANSANCIO ---
         if (playerStateMachine != null)
         {
             bool hasSymptom = (currentActiveSymptom != SymptomType.None);
-            
-            // Habilitar/Deshabilitar el estado "Run" (correr)
-            playerStateMachine.SetStateEnabled(PlayerStateMachine.RUN_STATE, !hasSymptom);
 
-            // Si está corriendo justo cuando le agarra el síntoma, lo forzamos a dejar de correr
-            if (hasSymptom && playerStateMachine.IsCurrent(PlayerStateMachine.RUN_STATE))
+            if (EnableSymptoms)
             {
-                playerStateMachine.ChangeToIdle();
+                // Si el síntoma está activo en general, controlamos el cansancio al correr
+                bool isRunning = playerStateMachine.IsCurrent(PlayerStateMachine.RUN_STATE);
+
+                if (isRunning)
+                {
+                    sprintDurationElapsed += Time.deltaTime;
+                    if (sprintDurationElapsed >= MaxSprintDuration)
+                    {
+                        isFatigued = true;
+                        fatigueCooldownTimer = 0f;
+                        PlayFatigueSound();
+                        
+                        // Forzamos a dejar de correr
+                        playerStateMachine.ChangeToIdle();
+                    }
+                }
+                else
+                {
+                    if (isFatigued)
+                    {
+                        fatigueCooldownTimer += Time.deltaTime;
+                        if (fatigueCooldownTimer >= FatigueRecoveryTime)
+                        {
+                            isFatigued = false;
+                            sprintDurationElapsed = 0f;
+                        }
+                    }
+                    else
+                    {
+                        // Recuperación gradual del cansancio cuando no está corriendo
+                        sprintDurationElapsed = Mathf.Max(0f, sprintDurationElapsed - Time.deltaTime);
+                    }
+                }
+
+                // El jugador puede correr si no tiene síntoma activo Y no está fatigado
+                bool canRun = !hasSymptom && !isFatigued;
+                playerStateMachine.SetStateEnabled(PlayerStateMachine.RUN_STATE, canRun);
+
+                if (!canRun && playerStateMachine.IsCurrent(PlayerStateMachine.RUN_STATE))
+                {
+                    playerStateMachine.ChangeToIdle();
+                }
+            }
+            else
+            {
+                // Comportamiento por defecto si el sistema de síntomas está desactivado
+                isFatigued = false;
+                sprintDurationElapsed = 0f;
+                playerStateMachine.SetStateEnabled(PlayerStateMachine.RUN_STATE, !hasSymptom);
+
+                if (hasSymptom && playerStateMachine.IsCurrent(PlayerStateMachine.RUN_STATE))
+                {
+                    playerStateMachine.ChangeToIdle();
+                }
             }
         }
 
@@ -731,7 +800,7 @@ public class PlayerSymptom : MonoBehaviour
         timeAlive = 0f;
         
         // Sumamos el tiempo base más el extra que venga del objeto curativo
-        timer = Mathf.Max(TimeBetweenSymptoms + extraWaitTime, 1f); 
+        timer = Mathf.Max(GetRandomTimeBetweenSymptoms() + extraWaitTime, 1f); 
         isStartingSymptom = false; // Reset por si estaba en proceso de aviso
 
         if (playCureSound && (CureSound != null || CureSoundSecondary != null))
@@ -877,6 +946,23 @@ public class PlayerSymptom : MonoBehaviour
         {
             voiceAudioSource.Stop();
         }
+    }
+
+    private void PlayFatigueSound()
+    {
+        if (FatigueSound != null && voiceAudioSource != null)
+        {
+            voiceAudioSource.PlayOneShot(FatigueSound, FatigueVolume);
+        }
+    }
+
+    private float GetRandomTimeBetweenSymptoms()
+    {
+        if (UseRandomTimeRange)
+        {
+            return Random.Range(MinMinutesBetweenSymptoms, MaxMinutesBetweenSymptoms) * 60f;
+        }
+        return TimeBetweenSymptoms;
     }
 
     void OnDestroy()
