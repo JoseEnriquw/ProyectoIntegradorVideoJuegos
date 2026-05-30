@@ -44,6 +44,7 @@ namespace UHFPS.Runtime
         private float targetBlood;
         private float bloodTime;
         private float eyesTime;
+        private float symptomBloodWeight;
 
         private int lastDamageSound;
         private Vector3 lastPosition;
@@ -87,7 +88,17 @@ namespace UHFPS.Runtime
             }
 
             bloodWeight = Mathf.MoveTowards(bloodWeight, targetBlood, Time.deltaTime * (bloodTime > 0 ? BloodFadeInSpeed : BloodFadeOutSpeed));
-            gameManager.HealthPPVolume.weight = bloodWeight;
+
+            float targetSymptomBlood = 0f;
+            if (PlayerSymptom.Instance != null && PlayerSymptom.Instance.CurrentSymptom != PlayerSymptom.SymptomType.None)
+            {
+                targetSymptomBlood = 1f;
+            }
+
+            symptomBloodWeight = Mathf.MoveTowards(symptomBloodWeight, targetSymptomBlood, Time.deltaTime * (targetSymptomBlood > 0f ? BloodFadeInSpeed : BloodFadeOutSpeed));
+
+            float finalWeight = Mathf.Max(bloodWeight, symptomBloodWeight);
+            gameManager.HealthPPVolume.weight = finalWeight;
 
             if (IsDead && eyeBlink != null)
             {
