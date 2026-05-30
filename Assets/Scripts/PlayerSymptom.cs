@@ -861,12 +861,7 @@ public class PlayerSymptom : MonoBehaviour
             }
         }
 
-        // --- 2. AVISO VISUAL (LLUVIA AL MÁXIMO POR 2 SEGUNDOS) ---
-        currentActiveSymptom = SymptomType.Rain;
-        timeAlive = MinutesToMaxIntensity * 60f; // Forzamos 100% de intensidad
-        yield return new WaitForSeconds(2f);
-
-        // --- 3. ELEGIR SÍNTOMA REAL ---
+        // --- 2. ELEGIR SÍNTOMA REAL ---
         List<SymptomType> availableSymptoms = new List<SymptomType>();
         if (EnableBlurAndTunnel) availableSymptoms.Add(SymptomType.Blur);
         if (EnableBlackAndWhite) availableSymptoms.Add(SymptomType.BlackAndWhite);

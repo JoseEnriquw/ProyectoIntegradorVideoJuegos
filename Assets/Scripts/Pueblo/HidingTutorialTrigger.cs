@@ -10,6 +10,7 @@ public class HidingTutorialTrigger : MonoBehaviour
 {
     private DialogueTrigger dialogueTrigger;
     private bool popupShown = false;
+    private bool popupShownByPanel = false;
     private GameObject popupCanvasInstance;
 
     [Header("Tutorial Customization")]
@@ -66,10 +67,27 @@ public class HidingTutorialTrigger : MonoBehaviour
     [Tooltip("Nombre del GameObject del texto del Botón en el Prefab (si se deja vacío, buscará en el Botón).")]
     public string prefabButtonTextName = "Label";
 
+    [Header("Popup Reutilizable Customization (Nueva Versión)")]
+    [Tooltip("El título localizado que se mostrará arriba (ej. GUARDAR PARTIDA).")]
+    public GString popupTitleText;
+
+    [Tooltip("Icono temático/circular decorativo para la columna izquierda.")]
+    public Sprite popupTopicIcon;
+
+    [Tooltip("Instrucción del atajo/tecla (ej. '[E] para esconderse / salir').")]
+    public GString popupKeyPrompt;
+
+    [Tooltip("Texto de advertencia localizado para la esquina inferior izquierda.")]
+    public GString popupWarningText;
+
+    [Tooltip("Sprite de vista previa del objeto/mecánica para la columna derecha.")]
+    public Sprite popupPreviewSprite;
+
     [Header("Custom Callback Events")]
     [Tooltip("Eventos que se ejecutarán cuando el jugador presione ACEPTAR y se cierre el cartel.")]
     public UnityEngine.Events.UnityEvent OnPopupDismissed;
 
+    /* Comentado temporalmente para probar el script genérico PopupInfoTrigger
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
     private static void Initialize()
     {
@@ -102,6 +120,7 @@ public class HidingTutorialTrigger : MonoBehaviour
             }
         }
     }
+    */
 
     private DialogueTrigger.TriggerTypeEnum originalTriggerType;
 
@@ -119,6 +138,13 @@ public class HidingTutorialTrigger : MonoBehaviour
             originalTriggerType = dialogueTrigger.TriggerType;
             dialogueTrigger.TriggerType = DialogueTrigger.TriggerTypeEnum.Event;
         }
+
+        // Suscribir los textos de localización del popup a la base de datos de idiomas
+        if (popupTitleText != null) popupTitleText.SubscribeGloc();
+        if (tutorialText != null) tutorialText.SubscribeGloc();
+        if (popupKeyPrompt != null) popupKeyPrompt.SubscribeGloc();
+        if (popupWarningText != null) popupWarningText.SubscribeGloc();
+        if (buttonText != null) buttonText.SubscribeGloc();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -143,6 +169,40 @@ public class HidingTutorialTrigger : MonoBehaviour
 
     private void ShowTutorialPopup()
     {
+        // Si el panel de información reutilizable global existe en la escena, delegar la lógica
+        if (PopupInfoPanel.Instance != null)
+        {
+            string title = popupTitleText != null ? popupTitleText.Value : string.Empty;
+            Sprite icon = popupTopicIcon;
+            string description = tutorialText != null ? tutorialText.Value : string.Empty;
+            string keyPrompt = popupKeyPrompt != null ? popupKeyPrompt.Value : string.Empty;
+            string warning = popupWarningText != null ? popupWarningText.Value : string.Empty;
+            
+            Sprite preview = popupPreviewSprite;
+            if (preview == null)
+            {
+                preview = tutorialSprite;
+                if (preview == null && !string.IsNullOrEmpty(spriteResourceName))
+                {
+                    preview = Resources.Load<Sprite>(spriteResourceName);
+                }
+            }
+
+            string btnLabel = buttonText != null ? buttonText.Value : "ACEPTAR";
+
+            string keyLetter = "";
+            if (closeKey != KeyCode.None && closeKey != KeyCode.Escape)
+            {
+                keyLetter = closeKey.ToString();
+            }
+
+            popupShownByPanel = true;
+            PopupInfoPanel.Instance.Show(title, icon, description, keyLetter, keyPrompt, warning, preview, btnLabel, OnContinuePressed);
+            return;
+        }
+
+        popupShownByPanel = false;
+
         // 1. Freeze player and pause physics/game updates
         if (GameManager.Instance != null)
         {
@@ -447,14 +507,18 @@ public class HidingTutorialTrigger : MonoBehaviour
             Destroy(popupCanvasInstance);
         }
 
-        // 2. Resume game time and update loops
-        Time.timeScale = 1f;
-
-        // 3. Unfreeze player controls and hide cursor
-        if (GameManager.Instance != null)
+        // 2. Resume game time and update loops (solo si no se usó el PopupInfoPanel global)
+        if (!popupShownByPanel)
         {
-            GameManager.Instance.FreezePlayer(false, false);
+            Time.timeScale = 1f;
+
+            // 3. Unfreeze player controls and hide cursor
+            if (GameManager.Instance != null)
+            {
+                GameManager.Instance.FreezePlayer(false, false);
+            }
         }
+        popupShownByPanel = false;
 
         // 4. Restore the dialogue trigger type and trigger it
         try
@@ -476,11 +540,19 @@ public class HidingTutorialTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (popupCanvasInstance != null && closeKey != KeyCode.None)
+        bool isAnyPopupActive = popupCanvasInstance != null || (popupShown && PopupInfoPanel.Instance != null && PopupInfoPanel.Instance.IsShown);
+        if (isAnyPopupActive && closeKey != KeyCode.None)
         {
             if (Input.GetKeyDown(closeKey))
             {
-                OnContinuePressed();
+                if (PopupInfoPanel.Instance != null && PopupInfoPanel.Instance.IsShown)
+                {
+                    PopupInfoPanel.Instance.Dismiss();
+                }
+                else
+                {
+                    OnContinuePressed();
+                }
             }
         }
     }
