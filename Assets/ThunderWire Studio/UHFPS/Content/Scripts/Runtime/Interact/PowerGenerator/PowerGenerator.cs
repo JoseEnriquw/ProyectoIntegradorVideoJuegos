@@ -115,7 +115,20 @@ namespace UHFPS.Runtime
         public void SwitchGenerator(bool state)
         {
             if (CurrentFuelLiters <= 0f)
+            {
+                if (state)
+                {
+                    if (GameManager.HasReference)
+                    {
+                        GameManager.Instance.ShowHintMessage("Este generador no tiene combustible.", 2f);
+                    }
+                    if (Switcher != null)
+                    {
+                        Switcher.SetSwitcherState(false);
+                    }
+                }
                 return;
+            }
 
             if (!generatorRunning && state) StartGenerator();
             else if(generatorRunning && !state) StopGenerator();
