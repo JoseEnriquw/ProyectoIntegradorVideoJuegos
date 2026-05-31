@@ -4338,8 +4338,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22
-  m_fontSizeBase: 22
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4419,7 +4419,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 40}
+  m_AnchoredPosition: {x: 28, y: 39.99997}
   m_SizeDelta: {x: 260, y: 60}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &1699284237225398379
@@ -4443,7 +4443,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.12, g: 0.12, b: 0.12, a: 1}
+  m_Color: {r: 0.9716981, g: 0.050418302, b: 0.050418302, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9340,7 +9340,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1864093305353017151}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -14024,8 +14024,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -41.600006}
-  m_SizeDelta: {x: 40, y: 40}
+  m_AnchoredPosition: {x: 50, y: -41.600006}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5222503578868622416
 CanvasRenderer:
@@ -14048,14 +14048,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9215687, g: 0.29411766, b: 0.2784314, a: 1}
+  m_Color: {r: 0.514151, g: 0.514151, b: 0.514151, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: dfc8391a285a74aae8edc2341151cee5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e1ce866e4056e0d4cacb071f6fa0fb7b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -15833,7 +15833,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.05, y: 0.02}
   m_AnchorMax: {x: 0.95, y: 0.15}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 45, y: -82}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4010077799781101807
@@ -15891,8 +15891,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3185843442028640310}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0023099696, y: 0.05519758, z: -0.0058707595, w: 0.9984555}
-  m_LocalPosition: {x: -407.2296, y: 4.849865, z: -326.87326}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 63, y: 16.16, z: -166}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -23194,259 +23194,309 @@ MonoBehaviour:
   SavingIcon: {fileID: 2296533076690793377}
   Debugging: 1
   worldSaveables:
-  - Token: InteractableItem.35e7fe72ffd65c24f9d47c490a323aad
-    Instance: {fileID: 0}
-  - Token: InteractableLight.fd563bb0e74ad8340a8c536ca0e6e998
-    Instance: {fileID: 0}
-  - Token: DraggableItem.e11f6deecdf7d8f4cbb3fa6f005108bb
-    Instance: {fileID: 0}
-  - Token: InteractableLight.53444638246217f469b34fae714c37a8
-    Instance: {fileID: 0}
-  - Token: SimpleSwitcher.419feacfe7dfc1144a1c7925fd3926b9
-    Instance: {fileID: 0}
-  - Token: InteractableItem.762222f1aac0e934c91489bef58ce2f9
-    Instance: {fileID: 0}
-  - Token: CutsceneTrigger.2d25bdba4d263f646a3c9f6a79f78bd2
-    Instance: {fileID: 0}
-  - Token: ObjectiveTrigger.8583976a94e0a61438b4dd40c71bcc5c
-    Instance: {fileID: 0}
-  - Token: BreakableCrate.fcf37929382792041bf6605f3e5f8acc
-    Instance: {fileID: 0}
-  - Token: CutsceneTrigger.b8f7937e4a553574e95c3cc3b97565de
-    Instance: {fileID: 0}
-  - Token: DynamicObject.382c105ec578c844cb0c7fb82f977a3c
-    Instance: {fileID: 0}
-  - Token: SaveableObject.418af2a3b67af9f44a9b1fccbb2f8b0a
-    Instance: {fileID: 0}
-  - Token: DialogueTrigger.ae732717bb2a4934e9a0e156370bf282
-    Instance: {fileID: 0}
-  - Token: DialogueTrigger.c9e0e1caf021d014197805bb832106b9
-    Instance: {fileID: 0}
-  - Token: InteractableItem.19a5d77e6a68f5349a8ac0482fdb9edc
-    Instance: {fileID: 0}
-  - Token: InteractableItem.5b35031e7b09d6f428515f1d82859da6
-    Instance: {fileID: 0}
-  - Token: InteractableItem.4ae8aaa37a084c84995b3ccd4e4bc180
-    Instance: {fileID: 0}
-  - Token: DialogueTrigger.d3052830bb1737d428e0455f38b62b9f
-    Instance: {fileID: 0}
-  - Token: InteractableItem.20f4d514092572e42a0819de40eb696b
-    Instance: {fileID: 0}
-  - Token: InteractableItem.84fd8eaa5a9eb63459f675c86b86b936
-    Instance: {fileID: 0}
   - Token: DialogueTrigger.26c49a43b55f87a45917d0b73e74a11c
-    Instance: {fileID: 0}
-  - Token: DynamicObject.354e6f383ebb3cd4b8fb6a2feedecd55
-    Instance: {fileID: 0}
-  - Token: InteractableItem.dd306506b24e4f14caa3840706a6b45e
-    Instance: {fileID: 0}
-  - Token: InteractableItem.3b6e2eacce8eb664c836d4c7c6648183
-    Instance: {fileID: 0}
-  - Token: InteractableItem.5e210d5163c47af4b887d758b48c9dc5
-    Instance: {fileID: 0}
-  - Token: InteractableItem.9df2d2acbd264274a83f9d697e38b4ac
-    Instance: {fileID: 0}
-  - Token: DraggableItem.3653328169a663348843db537344de43
-    Instance: {fileID: 0}
-  - Token: InteractableItem.73ccf6e800dacb7478b3a9d44eb5ca86
-    Instance: {fileID: 0}
-  - Token: InteractableItem.0cbadc34caf23fe4abfe79b7e55c811e
-    Instance: {fileID: 0}
-  - Token: InteractableItem.25789d0a39488a9429d1c9e5eddfb68b
-    Instance: {fileID: 0}
-  - Token: JumpscareTrigger.b160a60829f6f3f4dbfa5c122b0e04b6
-    Instance: {fileID: 0}
-  - Token: InteractableItem.af6c7e53ea0ea064dad6016cadd0c8c7
-    Instance: {fileID: 0}
-  - Token: DialogueTrigger.758dbbbe1d936bc4b8cb0cf2bf9384ad
-    Instance: {fileID: 0}
-  - Token: BreakableCrate.9cb5cfa037521ec45b29d5aec74e64fc
-    Instance: {fileID: 0}
-  - Token: BreakableCrate.0ffcc37acc3f39240aa7034a4062cc83
-    Instance: {fileID: 0}
-  - Token: DialogueTrigger.74aaf16062957c54898e15e6fdc3be42
-    Instance: {fileID: 0}
-  - Token: Radio.3426a33f89f798040be5002bdcfa740b
-    Instance: {fileID: 0}
-  - Token: DraggableItem.438a1394713d29a46b1de460c1687cb8
-    Instance: {fileID: 0}
-  - Token: DraggableItem.2b9b7ccb9fb057b478c1025bb5ecf086
-    Instance: {fileID: 0}
-  - Token: InteractableItem.f0d0842096381134a80a2fa7345a7352
-    Instance: {fileID: 0}
-  - Token: DialogueTrigger.7bfb678eb4a1ff140900b1c46228fec3
-    Instance: {fileID: 0}
-  - Token: DynamicObject.eea8fc98675f39745a112b9d03adc11d
-    Instance: {fileID: 0}
-  - Token: DraggableItem.4328ad52ade08244fac30981f65100a6
-    Instance: {fileID: 0}
-  - Token: DraggableItem.97517d70deaf31a459aa364ffcc41964
-    Instance: {fileID: 0}
-  - Token: DraggableItem.c974d0756dd9ef848bb7d1c87261b177
-    Instance: {fileID: 0}
-  - Token: DynamicObject.8ab4fa87dd68ccc47b2acc5f683e0462
-    Instance: {fileID: 0}
-  - Token: InteractableItem.fe93a80842637ff4fa41bc683afbd6c5
-    Instance: {fileID: 0}
-  - Token: DynamicObject.013ec6e5100a23c4ab4637caefcd1fb7
-    Instance: {fileID: 0}
-  - Token: ObjectiveTrigger.9f07e1ba7a4e3b949b0d08dbeb4821f9
-    Instance: {fileID: 0}
-  - Token: AutosaveTrigger.9c6d6034b464239429d18f605caaf52b
-    Instance: {fileID: 0}
-  - Token: InteractableItem.ae8f110520e1d6b479e8d96b2befba50
-    Instance: {fileID: 0}
-  - Token: InteractableItem.f5f76c7910703b4419aaa462f1fe70e9
-    Instance: {fileID: 0}
-  - Token: DynamicObject.4956639ea1d930a4bb2d0be3d188b15c
-    Instance: {fileID: 0}
-  - Token: DynamicObject.867fcf6c76a2b164cbe5fa08e71566a7
-    Instance: {fileID: 0}
-  - Token: InteractableItem.5b623ea442b0fdd4aa46c50febc631fd
-    Instance: {fileID: 0}
-  - Token: InteractableItem.7f2a0d11b211610448ec91c99a55f364
-    Instance: {fileID: 0}
-  - Token: DialogueTrigger.3c3d74b7979155b47a4874766fbacde1
-    Instance: {fileID: 0}
-  - Token: InteractableItem.0f9d6cb19bcd5274c9be6ea5e4e40f3c
-    Instance: {fileID: 0}
-  - Token: DraggableItem.905c97885036e4f4fa69333c1a0154f3
-    Instance: {fileID: 0}
-  - Token: AutosaveTrigger.5d3feeedfb53edb46b241d5f898741d6
-    Instance: {fileID: 0}
-  - Token: CustomInteractEvent.bcd9b89239a34104da62341753057b4a
-    Instance: {fileID: 0}
-  - Token: DraggableItem.1c98a8dff10149e4399183b1ba51e795
-    Instance: {fileID: 0}
-  - Token: InteractableItem.1160fed5f6acb604a935ba7329906c77
-    Instance: {fileID: 0}
-  - Token: ObjectiveTrigger.11a3d6f8378f6b546b3d6ff4a2eba2bb
-    Instance: {fileID: 0}
-  - Token: DynamicObject.8bac3c1ef7764324d93372a128011e52
-    Instance: {fileID: 0}
-  - Token: DraggableItem.026d29ca3968ad040bb97a04298ca1ae
-    Instance: {fileID: 0}
-  - Token: InteractableItem.10a9ef745747c864294abb07d36cfc7a
-    Instance: {fileID: 0}
-  - Token: InteractableItem.64a5b27427d222d4b9a471cba3271d4c
-    Instance: {fileID: 0}
-  - Token: DraggableItem.ae1b7249c8a219340ab9db4204a458ca
-    Instance: {fileID: 0}
-  - Token: DialogueTrigger.df5232641ad06d545abb9934ebf04263
-    Instance: {fileID: 0}
-  - Token: DraggableItem.574f1a7e36331364ba7a9e336df49828
-    Instance: {fileID: 0}
-  - Token: DialogueTrigger.e6566c9477c4dbf47a86ff59874b57c8
-    Instance: {fileID: 0}
-  - Token: InteractableItem.e9e917ac2c307c74aa9efcff9c0c1d5e
-    Instance: {fileID: 0}
-  - Token: BreakableCrate.227e34d60be3fa34d8ef95073fe50982
-    Instance: {fileID: 0}
-  - Token: InteractableItem.8f94de860b229634486f6d6a06ce2211
-    Instance: {fileID: 0}
-  - Token: DraggableItem.89b448ebaef70154cb1b4706cdfcf7d0
-    Instance: {fileID: 0}
-  - Token: InteractableItem.da20fecb18d849443bfb3b01c7bea654
-    Instance: {fileID: 0}
-  - Token: EMFAnomaly.80f9b0ffb202ca248bcf6118ed7316b4
-    Instance: {fileID: 0}
-  - Token: DynamicObject.c0e46b4e6ad312149a47919fd3f2835b
-    Instance: {fileID: 0}
-  - Token: DraggableItem.6838748f04d6c714e96d4311a07775e4
-    Instance: {fileID: 0}
-  - Token: DraggableItem.89f2672f505407540806db7153fa8196
-    Instance: {fileID: 0}
-  - Token: CutsceneTrigger.9abaacfdbfbd1cd448ab70237d7fae57
-    Instance: {fileID: 0}
-  - Token: BreakableCrate.60a98ea5ec3cf2548ba2d06052d8accc
-    Instance: {fileID: 0}
-  - Token: DynamicObject.b833116f7b144b449839d221237af9ad
-    Instance: {fileID: 0}
-  - Token: ObjectiveTrigger.2217f535f935b9b47960119d6963dbcd
-    Instance: {fileID: 0}
-  - Token: SimpleLight.0e1d6e41ee808b24188e52ec8902cc42
-    Instance: {fileID: 0}
-  - Token: InteractableItem.3ea22183986ae8b49832b48186e7d2cb
-    Instance: {fileID: 0}
-  - Token: ObjectiveTrigger.8b3a36517d6013f41ab9838f64a5151a
-    Instance: {fileID: 0}
-  - Token: BreakableCrate.130b72ed9c6adfc4d9c3a4f0d532ae70
-    Instance: {fileID: 0}
-  - Token: InteractableItem.2c6e923f051f48f45a563d7f11e0105f
-    Instance: {fileID: 0}
-  - Token: DynamicObject.f2a97276f4ab7964d94417b04497e7f6
-    Instance: {fileID: 0}
-  - Token: DynamicBrokenFix.a5bddb528677aa84a980d2bf6b43a8e2
-    Instance: {fileID: 0}
-  - Token: InteractableItem.da48ffe0820fc5644b0f8c772c8cd494
-    Instance: {fileID: 0}
-  - Token: DialogueTrigger.e1948d318a1f3ae43956a314616c9876
-    Instance: {fileID: 0}
-  - Token: InteractableItem.e89a7a125aea0444796f7355e793abbe
-    Instance: {fileID: 0}
-  - Token: DialogueTrigger.e2fa91fd01c5e3f4ab26027e33d79409
-    Instance: {fileID: 0}
-  - Token: InteractableItem.301ce6e1ca58e1b46a047311178474a7
-    Instance: {fileID: 0}
-  - Token: DynamicObject.4d8e84ae878162a48a3de11201bb9136
     Instance: {fileID: 0}
   - Token: InteractableItem.93815765436246948b32e49b387ebca6
     Instance: {fileID: 0}
-  - Token: DraggableItem.e1108845471897a44b27267337859cc5
-    Instance: {fileID: 0}
-  - Token: InteractableItem.1f401d9c20fec7b45b67e61642dbe50f
-    Instance: {fileID: 0}
-  - Token: SimpleLight.4c1dec49ba90b05419571ee24de4989d
-    Instance: {fileID: 0}
-  - Token: DynamicObject.5b255b140094a534483225339bf92c1d
+  - Token: SimpleLight.0e1d6e41ee808b24188e52ec8902cc42
     Instance: {fileID: 0}
   - Token: InteractableItem.71e86051b4569314da81a7507c0eee8e
     Instance: {fileID: 0}
-  - Token: InteractableItem.097fb1d8579137e47ab630f979b53570
+  - Token: SaveableObject.d07d4ba237fb8504e913d59705a4f487
     Instance: {fileID: 0}
-  - Token: InteractableItem.9d02d8871b5243f47ac8a11cf766ee84
+  - Token: InteractableItem.7fb813716ceba834a9a4cb539d24e3ea
     Instance: {fileID: 0}
-  - Token: JumpscareTrigger.9899b71b992c57140853a14e43451b8e
-    Instance: {fileID: 0}
-  - Token: InteractableItem.721ec392e5479b540a97286c2e04d3ef
-    Instance: {fileID: 0}
-  - Token: DialogueTrigger.d4df8ff6aff013a46999a9b3cfd7a4c0
-    Instance: {fileID: 0}
-  - Token: DialogueTrigger.9841e6f00c20b8947b66b957eed2475b
-    Instance: {fileID: 0}
-  - Token: DraggableItem.5bfb4b1b0e804934683b7efaaf986b6a
-    Instance: {fileID: 0}
-  - Token: InteractableItem.f0977f27862a624439fd6b17bbe23c29
-    Instance: {fileID: 0}
-  - Token: CustomInteractEvent.55bf2f06c58f3ab45ae1b6d7464d56df
-    Instance: {fileID: 0}
-  - Token: PowerGenerator.577b9cd47c4d6ed43a9576e0f6258514
-    Instance: {fileID: 0}
-  - Token: BreakableCrate.cb92fc570303f7f4ba8912a0feb132c0
-    Instance: {fileID: 0}
-  - Token: InteractableItem.8f35e95ed6063ca45966bfc971028f90
-    Instance: {fileID: 0}
-  - Token: InteractableItem.286018781efddd34db441a1960f0755f
-    Instance: {fileID: 0}
-  - Token: DraggableItem.e3c2062f3e7d97a4a82ffb21bfd45585
-    Instance: {fileID: 0}
-  - Token: InteractableItem.f4463a8c4df200d4cba01d5e75ac73a1
-    Instance: {fileID: 0}
-  - Token: CutsceneTrigger.e6d1a12950e12ca40bed11dd90a74f1e
-    Instance: {fileID: 0}
-  - Token: BreakableCrate.8c83c31b563a62e42afcb4c57222609c
-    Instance: {fileID: 0}
-  - Token: DialogueTrigger.b18dc46a5459487469defb4f14b9ac9a
-    Instance: {fileID: 0}
-  - Token: InteractableItem.50134061cdaf6cb458d51ef039ad7af6
-    Instance: {fileID: 0}
-  - Token: DynamicObject.17e9d20c3b0e06946b2a1122efbdb682
+  - Token: DialogueTrigger.df5232641ad06d545abb9934ebf04263
     Instance: {fileID: 0}
   - Token: BreakableCrate.c3ba8279716db7a4eaa314efcdde0ccc
     Instance: {fileID: 0}
+  - Token: InteractableItem.b5283abae5b8fdc4b88841050b2a2486
+    Instance: {fileID: 0}
+  - Token: AutosaveTrigger.d4f95b1240ff59748a247b41d33e1d9e
+    Instance: {fileID: 0}
+  - Token: DynamicObject.9717d17fd8cad964db485bb8a62900fa
+    Instance: {fileID: 0}
+  - Token: SimpleSwitcher.e4b94ef4a80c0974b938ef2df56f89a1
+    Instance: {fileID: 0}
+  - Token: ActivadorDesactivadorDeObjetos.ebf79284033798e4e840787c5e39ed4a
+    Instance: {fileID: 0}
+  - Token: InteractableItem.0cbadc34caf23fe4abfe79b7e55c811e
+    Instance: {fileID: 0}
+  - Token: DraggableItem.e11f6deecdf7d8f4cbb3fa6f005108bb
+    Instance: {fileID: 0}
+  - Token: AutosaveTrigger.9c6d6034b464239429d18f605caaf52b
+    Instance: {fileID: 0}
+  - Token: SaveableObject.c59830f347e232e419713c67189ef73e
+    Instance: {fileID: 0}
+  - Token: ObjectiveTrigger.d5a9b3cbee346e548a42fa08eebf656b
+    Instance: {fileID: 0}
+  - Token: SaveableObject.fb1300090d26ee748b45110ea2000696
+    Instance: {fileID: 0}
+  - Token: BreakableCrate.9cb5cfa037521ec45b29d5aec74e64fc
+    Instance: {fileID: 0}
+  - Token: InteractableItem.1f401d9c20fec7b45b67e61642dbe50f
+    Instance: {fileID: 0}
+  - Token: InteractableItem.30aa7ad143709d64694a505101949cf6
+    Instance: {fileID: 0}
+  - Token: DynamicObject.354e6f383ebb3cd4b8fb6a2feedecd55
+    Instance: {fileID: 0}
+  - Token: ActivadorDesactivadorDeObjetos.45ce6820510af8b46a13bb90fe838f1b
+    Instance: {fileID: 0}
+  - Token: BreakableCrate.227e34d60be3fa34d8ef95073fe50982
+    Instance: {fileID: 0}
+  - Token: SaveableObject.e68897473e4e65d4a9bbd0979978567a
+    Instance: {fileID: 0}
+  - Token: SaveableObject.d5e45208c5bf512418620a9a19f20b91
+    Instance: {fileID: 0}
+  - Token: DraggableItem.e1108845471897a44b27267337859cc5
+    Instance: {fileID: 0}
+  - Token: DynamicObject.8ab4fa87dd68ccc47b2acc5f683e0462
+    Instance: {fileID: 0}
+  - Token: DynamicObject.8bac3c1ef7764324d93372a128011e52
+    Instance: {fileID: 0}
+  - Token: InteractableItem.0cb6c044eaa69b14ab75cfb2578446be
+    Instance: {fileID: 0}
+  - Token: InteractableItem.473d53a9ffc57294aa2e7cceb830089b
+    Instance: {fileID: 0}
+  - Token: DialogueTrigger.d4df8ff6aff013a46999a9b3cfd7a4c0
+    Instance: {fileID: 0}
+  - Token: SaveableObject.0699fb696d4464448a271e8cbb1b0d78
+    Instance: {fileID: 0}
+  - Token: ObjectiveTrigger.7125056a8ac41284d9bb0b9bb280dea1
+    Instance: {fileID: 0}
+  - Token: DialogueTrigger.ae732717bb2a4934e9a0e156370bf282
+    Instance: {fileID: 0}
+  - Token: InteractableItem.f0d0842096381134a80a2fa7345a7352
+    Instance: {fileID: 0}
+  - Token: CutsceneTrigger.2d25bdba4d263f646a3c9f6a79f78bd2
+    Instance: {fileID: 0}
+  - Token: InteractableItem.a468eb8704c65f540b72ffeb658c0af3
+    Instance: {fileID: 0}
+  - Token: InteractableItem.286018781efddd34db441a1960f0755f
+    Instance: {fileID: 0}
+  - Token: ObjectiveTrigger.6a20ff1e5053145428e92945729f82b0
+    Instance: {fileID: 0}
+  - Token: DraggableItem.1c98a8dff10149e4399183b1ba51e795
+    Instance: {fileID: 0}
+  - Token: InteractableItem.3070c76811f11db44b206d544155b133
+    Instance: {fileID: 0}
   - Token: DraggableItem.72f70c7832ccf3b49af04f9a3463f713
     Instance: {fileID: 0}
+  - Token: InteractableItem.b41b3c20a25625744b65545f83f0ae5d
+    Instance: {fileID: 0}
+  - Token: DynamicObject.382c105ec578c844cb0c7fb82f977a3c
+    Instance: {fileID: 0}
+  - Token: InteractableItem.8f35e95ed6063ca45966bfc971028f90
+    Instance: {fileID: 0}
+  - Token: InteractableLight.53444638246217f469b34fae714c37a8
+    Instance: {fileID: 0}
+  - Token: ActivadorDesactivadorDeObjetos.cc39fd88f7c2cf7419b7aeecd7180095
+    Instance: {fileID: 0}
+  - Token: InteractableItem.af6c7e53ea0ea064dad6016cadd0c8c7
+    Instance: {fileID: 0}
+  - Token: SaveableObject.0fa2004865bad3d428070fadca46fdab
+    Instance: {fileID: 0}
+  - Token: DraggableItem.5bfb4b1b0e804934683b7efaaf986b6a
+    Instance: {fileID: 0}
+  - Token: InteractableItem.218ff774e86dcbb4abfd34493ed7684c
+    Instance: {fileID: 0}
+  - Token: SaveableObject.4341e30fa6598494e936e78e8b3ba1de
+    Instance: {fileID: 0}
+  - Token: DialogueTrigger.3c3d74b7979155b47a4874766fbacde1
+    Instance: {fileID: 0}
+  - Token: CutsceneTrigger.9abaacfdbfbd1cd448ab70237d7fae57
+    Instance: {fileID: 0}
+  - Token: DialogueTrigger.b18dc46a5459487469defb4f14b9ac9a
+    Instance: {fileID: 0}
+  - Token: ObjectiveTrigger.cbfc85688a194d3428ca6fdb8a35575d
+    Instance: {fileID: 0}
+  - Token: InteractableItem.721ec392e5479b540a97286c2e04d3ef
+    Instance: {fileID: 0}
+  - Token: InteractableItem.050158ec3889b714fb33ef512343f620
+    Instance: {fileID: 0}
+  - Token: JumpscareTrigger.b160a60829f6f3f4dbfa5c122b0e04b6
+    Instance: {fileID: 0}
+  - Token: InteractableItem.a1b46dd45662f8f48a956635f18e588d
+    Instance: {fileID: 0}
+  - Token: InteractableItem.b8e539a026819a34c917f75fd365ff3d
+    Instance: {fileID: 0}
+  - Token: ObjectiveTrigger.c22d800bbc5283346bdf40366fc92007
+    Instance: {fileID: 0}
+  - Token: SaveableObject.77a8c74e85ccc4e46bc719d9c8443f9b
+    Instance: {fileID: 0}
+  - Token: InteractableItem.c00bd6c8b8b2c2d439a601ac4e626b09
+    Instance: {fileID: 0}
+  - Token: InteractableItem.f0977f27862a624439fd6b17bbe23c29
+    Instance: {fileID: 0}
+  - Token: DraggableItem.89f2672f505407540806db7153fa8196
+    Instance: {fileID: 0}
+  - Token: DynamicObject.f2a97276f4ab7964d94417b04497e7f6
+    Instance: {fileID: 0}
+  - Token: InteractableItem.7aad03cf7b0a50142825c41190359a1c
+    Instance: {fileID: 0}
+  - Token: SaveableObject.72bcfd617727f274681a3c0b287677e4
+    Instance: {fileID: 0}
+  - Token: AutosaveTrigger.d975128007a07794cbcc554839917a53
+    Instance: {fileID: 0}
+  - Token: ActivadorDesactivadorDeObjetos.6a0b50925d02f9a40becdc4e37aac455
+    Instance: {fileID: 0}
+  - Token: SaveableObject.e9a61928d655a0c4fbe0d6c23e31713a
+    Instance: {fileID: 0}
+  - Token: ObjectiveTrigger.773036033b08a024b807b51d3d2e5668
+    Instance: {fileID: 0}
+  - Token: InteractableItem.d9c1212d9653da44dae41910ad7b511e
+    Instance: {fileID: 0}
+  - Token: ObjectiveTrigger.ad6d9e47b296a5e4f91bab33da58a6e8
+    Instance: {fileID: 0}
+  - Token: DraggableItem.89b448ebaef70154cb1b4706cdfcf7d0
+    Instance: {fileID: 0}
+  - Token: ObjectiveTrigger.8e4a53c4403a61b4893482ed5f919a70
+    Instance: {fileID: 0}
+  - Token: InteractableItem.1740e1811325c35448a79503d71054c2
+    Instance: {fileID: 0}
+  - Token: InteractableItem.4ae8aaa37a084c84995b3ccd4e4bc180
+    Instance: {fileID: 0}
+  - Token: InteractableItem.2c6e923f051f48f45a563d7f11e0105f
+    Instance: {fileID: 0}
+  - Token: CustomInteractEvent.55bf2f06c58f3ab45ae1b6d7464d56df
+    Instance: {fileID: 0}
+  - Token: InteractableItem.1ba301d04fc042e4dacb8915c4b86b6d
+    Instance: {fileID: 0}
+  - Token: InteractableItem.2023fb43a87c7ca4f992b21c9b0b3a26
+    Instance: {fileID: 0}
+  - Token: InteractableItem.0ca91a7f82ab23e40b9082d7f910218f
+    Instance: {fileID: 0}
+  - Token: InteractableItem.f0a87a0ce920f484e8d691dceee7f741
+    Instance: {fileID: 0}
+  - Token: SaveableObject.94247b44d443bdd408214a6b4efd75a8
+    Instance: {fileID: 0}
+  - Token: InteractableItem.da48ffe0820fc5644b0f8c772c8cd494
+    Instance: {fileID: 0}
+  - Token: ObjectiveTrigger.11a3d6f8378f6b546b3d6ff4a2eba2bb
+    Instance: {fileID: 0}
+  - Token: DraggableItem.905c97885036e4f4fa69333c1a0154f3
+    Instance: {fileID: 0}
+  - Token: DialogueTrigger.9841e6f00c20b8947b66b957eed2475b
+    Instance: {fileID: 0}
   - Token: DynamicObject.340515011cf49b04b9f94edb021c462c
+    Instance: {fileID: 0}
+  - Token: SaveableObject.e7ec01b3e44787c41ac64c99c162fd83
+    Instance: {fileID: 0}
+  - Token: InteractableItem.35e7fe72ffd65c24f9d47c490a323aad
+    Instance: {fileID: 0}
+  - Token: InteractableItem.19a5d77e6a68f5349a8ac0482fdb9edc
+    Instance: {fileID: 0}
+  - Token: SaveableObject.0d5b2942aceacef46bded16902bd9a0d
+    Instance: {fileID: 0}
+  - Token: SaveableObject.418af2a3b67af9f44a9b1fccbb2f8b0a
+    Instance: {fileID: 0}
+  - Token: DynamicObject.013ec6e5100a23c4ab4637caefcd1fb7
+    Instance: {fileID: 0}
+  - Token: InteractableItem.a15af411670d31d438238909548754a0
+    Instance: {fileID: 0}
+  - Token: InteractableItem.814747f22c0d8024bb36130c07e19907
+    Instance: {fileID: 0}
+  - Token: SaveableObject.e10cdf7eb83b64840a2bceab9baae571
+    Instance: {fileID: 0}
+  - Token: ActivadorDesactivadorDeObjetos.9f163226e9bdbe64ea7ed027c6471735
+    Instance: {fileID: 0}
+  - Token: DynamicObject.17e9d20c3b0e06946b2a1122efbdb682
+    Instance: {fileID: 0}
+  - Token: ObjectiveTrigger.239e3b45493aa3c41adcb00e24e8fa7d
+    Instance: {fileID: 0}
+  - Token: DraggableItem.438a1394713d29a46b1de460c1687cb8
+    Instance: {fileID: 0}
+  - Token: ActivadorDesactivadorDeObjetos.d5d3157b4f46f9a4ea005a4c70a1b64b
+    Instance: {fileID: 0}
+  - Token: SaveableObject.4c2b53f028b200f498d6638d4b69806f
+    Instance: {fileID: 0}
+  - Token: SimpleSwitcher.ad5b9f523cd11ff4b9a112e4a16c9b95
+    Instance: {fileID: 0}
+  - Token: BreakableCrate.fcf37929382792041bf6605f3e5f8acc
+    Instance: {fileID: 0}
+  - Token: DraggableItem.2b9b7ccb9fb057b478c1025bb5ecf086
+    Instance: {fileID: 0}
+  - Token: SaveableObject.a8366ab0b3aac26498a909c208285802
+    Instance: {fileID: 0}
+  - Token: InteractableItem.35e1322754f5e674a856a52e206f457a
+    Instance: {fileID: 0}
+  - Token: InteractableItem.3e044def749b37d4285e824e987ddd4f
+    Instance: {fileID: 0}
+  - Token: DraggableItem.e3c2062f3e7d97a4a82ffb21bfd45585
+    Instance: {fileID: 0}
+  - Token: ObjectiveTrigger.faeea2ebac174a444a78747a1076d0dc
+    Instance: {fileID: 0}
+  - Token: ObjectiveTrigger.11de42b11cf229a469217e2ab8a8716d
+    Instance: {fileID: 0}
+  - Token: JumpscareTrigger.9899b71b992c57140853a14e43451b8e
+    Instance: {fileID: 0}
+  - Token: ObjectiveTrigger.8583976a94e0a61438b4dd40c71bcc5c
+    Instance: {fileID: 0}
+  - Token: AutosaveTrigger.3cc866d99d69f5c46abf4e284b56e853
+    Instance: {fileID: 0}
+  - Token: ObjectiveTrigger.9eadea8396353414ba2a50d2357692b2
+    Instance: {fileID: 0}
+  - Token: ObjectiveTrigger.3148cb1fc62bd9042ac07d40214ea987
+    Instance: {fileID: 0}
+  - Token: InteractableLight.fd563bb0e74ad8340a8c536ca0e6e998
+    Instance: {fileID: 0}
+  - Token: DynamicObject.5b255b140094a534483225339bf92c1d
+    Instance: {fileID: 0}
+  - Token: ObjectiveTrigger.141b3b50aa52fd84bbee3ea510acff43
+    Instance: {fileID: 0}
+  - Token: InteractableItem.9d02d8871b5243f47ac8a11cf766ee84
+    Instance: {fileID: 0}
+  - Token: DialogueTrigger.cbd45a3dc50c4c24d91cf67303b917c6
+    Instance: {fileID: 0}
+  - Token: InteractableItem.fe93a80842637ff4fa41bc683afbd6c5
+    Instance: {fileID: 0}
+  - Token: ObjectiveTrigger.9f07e1ba7a4e3b949b0d08dbeb4821f9
+    Instance: {fileID: 0}
+  - Token: InteractableItem.fb872682b789a0048a29d080542f90a4
+    Instance: {fileID: 0}
+  - Token: PowerGenerator.e7b908dbd4b14ab429e28bd08a963782
+    Instance: {fileID: 0}
+  - Token: InteractableItem.d5131d5e5ac10e345b6ad1033c14a314
+    Instance: {fileID: 0}
+  - Token: DialogueTrigger.c9e0e1caf021d014197805bb832106b9
+    Instance: {fileID: 0}
+  - Token: ObjectiveTrigger.82760c50a851fd547bc89ca42e2e9f83
+    Instance: {fileID: 0}
+  - Token: InteractableItem.f6794243cfddf7f4d9891f28da9aa60f
+    Instance: {fileID: 0}
+  - Token: DialogueTrigger.e6566c9477c4dbf47a86ff59874b57c8
+    Instance: {fileID: 0}
+  - Token: SaveableObject.2c5fe104950249949ad24f8f24bea159
+    Instance: {fileID: 0}
+  - Token: DialogueTrigger.758dbbbe1d936bc4b8cb0cf2bf9384ad
+    Instance: {fileID: 0}
+  - Token: DraggableItem.026d29ca3968ad040bb97a04298ca1ae
+    Instance: {fileID: 0}
+  - Token: DraggableItem.3653328169a663348843db537344de43
+    Instance: {fileID: 0}
+  - Token: DialogueTrigger.7bfb678eb4a1ff140900b1c46228fec3
+    Instance: {fileID: 0}
+  - Token: DialogueTrigger.e2fa91fd01c5e3f4ab26027e33d79409
+    Instance: {fileID: 0}
+  - Token: InteractableItem.9df2d2acbd264274a83f9d697e38b4ac
+    Instance: {fileID: 0}
+  - Token: SaveableObject.26d6d389a3f9ecc4ea17e16746141285
+    Instance: {fileID: 0}
+  - Token: DynamicObject.ec24d967d3db8964191d2751ea6714cd
+    Instance: {fileID: 0}
+  - Token: DialogueTrigger.74aaf16062957c54898e15e6fdc3be42
+    Instance: {fileID: 0}
+  - Token: ActivadorDesactivadorDeObjetos.e88dfd4aabc112f4fa5dbd5593691cbd
+    Instance: {fileID: 0}
+  - Token: InteractableItem.a7e7faf473ccedf4ab93d11baa27a2da
+    Instance: {fileID: 0}
+  - Token: InteractableItem.d37a27fa3ffa8dd4887d25546d712db4
+    Instance: {fileID: 0}
+  - Token: BreakableCrate.0ffcc37acc3f39240aa7034a4062cc83
+    Instance: {fileID: 0}
+  - Token: DialogueTrigger.93e8900ce6f82094a929e039259dd54b
+    Instance: {fileID: 0}
+  - Token: SaveableObject.82e48f60806cc98478fb342445beb378
     Instance: {fileID: 0}
   runtimeSaveables: []
 --- !u!114 &4568796304371888785
@@ -31918,7 +31968,7 @@ RectTransform:
   m_GameObject: {fileID: 6066661593155103413}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.2572064, y: 4.2572064, z: 4.2572064}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8410959830893390652}
@@ -31926,7 +31976,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -1469, y: -855.0166}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6955532493585812244
 CanvasRenderer:
@@ -35393,14 +35443,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.06, g: 0.06, b: 0.06, a: 0.98}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.98}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: c1913af653e27d44a870e87855db6ea8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -38236,7 +38286,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.05, y: 0.35}
   m_AnchorMax: {x: 0.95, y: 0.55}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 65, y: -99}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8058707755476545835
@@ -38294,8 +38344,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -38333,7 +38383,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -21.863647, y: 0, z: 53.740128, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -38484,8 +38534,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.65}
   m_AnchorMax: {x: 0.5, y: 0.65}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 120, y: 120}
+  m_AnchoredPosition: {x: 16, y: -73}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &633581323459096650
 CanvasRenderer:
@@ -41138,7 +41188,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 230, y: -41.600006}
+  m_AnchoredPosition: {x: 290, y: -41.600006}
   m_SizeDelta: {x: 350, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6977203083757926865
@@ -41178,8 +41228,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4283190502
-  m_fontColor: {r: 0.9, g: 0.3, b: 0.3, a: 1}
+    rgba: 4278453343
+  m_fontColor: {r: 0.3726415, g: 0.017577427, b: 0.017577427, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -41196,8 +41246,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -41647,7 +41697,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.85}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 19, y: -39}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3417097313641988361
@@ -41705,8 +41755,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 40
-  m_fontSizeBase: 40
+  m_fontSize: 55
+  m_fontSizeBase: 55
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -41744,7 +41794,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 6.881073, y: 0, z: -1.9891663, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -47953,7 +48003,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.52, y: 0.15}
   m_AnchorMax: {x: 0.98, y: 0.95}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -57}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8727478566987854015
@@ -48755,7 +48805,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.05, y: 0.2}
   m_AnchorMax: {x: 0.95, y: 0.3}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 212, y: -70}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8930412048518568015
