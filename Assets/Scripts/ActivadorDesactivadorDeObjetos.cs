@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Newtonsoft.Json.Linq;
 using UHFPS.Runtime;
 
 /// <summary>
@@ -9,7 +10,7 @@ using UHFPS.Runtime;
 /// y desactivar otro (o conjunto de objetos) simultáneamente.
 /// Soporta retrasos (delays), disparadores por trigger, interacción del jugador (UHFPS) y llamados manuales.
 /// </summary>
-public class ActivadorDesactivadorDeObjetos : MonoBehaviour, IInteractStart
+public class ActivadorDesactivadorDeObjetos : MonoBehaviour, IInteractStart, ISaveable
 {
     public enum ModoEjecucion { Manual, AlIniciar, AlHabilitar, AlEntrarTrigger, AlSalirTrigger, AlInteractuar }
 
@@ -191,6 +192,21 @@ public class ActivadorDesactivadorDeObjetos : MonoBehaviour, IInteractStart
                 Gizmos.matrix = transform.localToWorldMatrix;
                 Gizmos.DrawCube(Vector3.zero, col.bounds.size / transform.lossyScale.x);
             }
+        }
+    }
+
+    public StorableCollection OnSave()
+    {
+        StorableCollection storableCollection = new();
+        storableCollection.Add("yaSeEjecuto", yaSeEjecuto);
+        return storableCollection;
+    }
+
+    public void OnLoad(JToken data)
+    {
+        if (data["yaSeEjecuto"] != null)
+        {
+            yaSeEjecuto = (bool)data["yaSeEjecuto"];
         }
     }
 }

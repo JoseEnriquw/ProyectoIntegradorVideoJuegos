@@ -239,6 +239,8 @@ public static class SetupPopupPanel
         warningIconRect.sizeDelta = new Vector2(40, 40);
 
         Image warningIconImg = warningIconObj.GetComponent<Image>();
+        warningIconImg.type = Image.Type.Simple;
+        warningIconImg.preserveAspect = true;
         warningIconImg.color = new Color(0.9f, 0.2f, 0.2f, 1f); // Rojo para advertencias
         
         Sprite warningOutlineSprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UIOutline.psd");
