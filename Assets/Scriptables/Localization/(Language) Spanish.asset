@@ -548,6 +548,10 @@ MonoBehaviour:
     SectionId: 11317371
     Key: objects.house_medicine
     Value: Suero
+  - EntryId: 14974152
+    SectionId: 11317371
+    Key: objects.switch
+    Value: Manija
   - EntryId: 94725535
     SectionId: 78183135
     Key: controls.name.exit
@@ -1168,7 +1172,11 @@ MonoBehaviour:
   - EntryId: 48902055
     SectionId: 12708451
     Key: subobjetives.ir_granero
-    Value: "dir\xEDgete al granero"
+    Value: "Dir\xEDgete al granero"
+  - EntryId: 34926202
+    SectionId: 12708451
+    Key: subobjetives.ir_casa_lider
+    Value: Dirigete a la casa abandonada
   - EntryId: 24610715
     SectionId: 12708451
     Key: subobjetives.distrae_epecuenses
@@ -1349,11 +1357,16 @@ MonoBehaviour:
   - EntryId: 59629219
     SectionId: 65177942
     Key: dialogsSintomas.bosque.carta.abuelo
-    Value: null
+    Value: "Esto no curar\xE1 la enfermedad, pero al menos servir\xE1 para calmar
+      los s\xEDntomas y dar un poco de alivio mientras el cuerpo resista... Sigo
+      trabajando en encontrar una cura de verdad, una que cambie el destino\u2026
+      y creo que estoy a punto de lograrlo.."
   - EntryId: 97409758
     SectionId: 65177942
     Key: dialogsSintomas.bosque.respuesta.carta.abuelo
-    Value: null
+    Value: "Vi a mi padre consumirse d\xEDa tras d\xEDa\u2026 vi c\xF3mo esa enfermedad
+      le robaba la voz, la fuerza\u2026 la vida. No pienso quedarme de brazos cruzados
+      esperando el mismo final."
   - EntryId: 58631134
     SectionId: 50914226
     Key: inventoryItems.Salt.Tittle
@@ -1401,7 +1414,7 @@ MonoBehaviour:
     SectionId: 55496470
     Key: dialog_ingreso_pueblo.puente
     Value: "No puede ser, el puente se desplom\xF3, tendr\xE9 que buscar algo que
-      me ayude a subi"
+      me ayude a subir"
   - EntryId: 13376603
     SectionId: 55496470
     Key: dialog_ingreso_pueblo.granero
@@ -1432,3 +1445,75 @@ MonoBehaviour:
     SectionId: 55496470
     Key: dialog_ingreso_pueblo.crafteo_ganzua
     Value: "Combinando 2 chatarras conseguimos la ganz\xFAa. "
+  - EntryId: 10387736
+    SectionId: 55496470
+    Key: dialog_ingreso_pueblo.distraccion_guardia
+    Value: Debo encontrar una manera de distraer al guardia de la entrada..
+  - EntryId: 21320959
+    SectionId: 32159731
+    Key: popups.banio_title
+    Value: Esconderse
+  - EntryId: 63664189
+    SectionId: 32159731
+    Key: popups.banio_description
+    Value: Puedes esconderte en un lugar para evitar que te encuentren los enemigos
+  - EntryId: 70620009
+    SectionId: 32159731
+    Key: popups.banio_keyprompt
+    Value: para entrar
+  - EntryId: 81562794
+    SectionId: 32159731
+    Key: popups.banio_warning
+    Value: Ten cuidado, pueden encontrarte
+  - EntryId: 50821281
+    SectionId: 32159731
+    Key: popups.button
+    Value: Aceptar
+  - EntryId: 62678960
+    SectionId: 32159731
+    Key: popups.save_tittle
+    Value: Guardar Partida
+  - EntryId: 80935025
+    SectionId: 32159731
+    Key: popups.save_description
+    Value: Puedes guardar la partida en estos altares
+  - EntryId: 45363174
+    SectionId: 32159731
+    Key: popups.save_keyprompt
+    Value: para guardar
+  - EntryId: 70256467
+    SectionId: 32159731
+    Key: popups.save_warning
+    Value: Guarda con frecuencia. Nunca sabes lo que puede pasar
+  - EntryId: 37702840
+    SectionId: 32159731
+    Key: popups.distract_tittle
+    Value: Distraer
+  - EntryId: 30141880
+    SectionId: 32159731
+    Key: popups.distract_description
+    Value: Presione E para tirar las frutas del puesto y distraer a los guardias
+  - EntryId: 94943902
+    SectionId: 32159731
+    Key: popups.distract_keyprompt
+    Value: para tirar las frutas
+  - EntryId: 29783268
+    SectionId: 32159731
+    Key: popups.distract_warning
+    Value: "Haz ruido para llamar la atenci\xF3n"
+  - EntryId: 52557168
+    SectionId: 32159731
+    Key: popups.ganzua_title
+    Value: Ganzua
+  - EntryId: 96331818
+    SectionId: 32159731
+    Key: popups.ganzua_description
+    Value: Puedes abrir puertas, rejas, etc..
+  - EntryId: 91936423
+    SectionId: 32159731
+    Key: popups.ganzua_keyprompt
+    Value: para interactuar con la cerradura
+  - EntryId: 28881396
+    SectionId: 32159731
+    Key: popups.ganzua_warning
+    Value: Ten cuidado como las usas, se pueden romper

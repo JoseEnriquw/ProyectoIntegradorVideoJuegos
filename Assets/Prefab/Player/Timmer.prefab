@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7046460313313181008}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -21.57037, y: 2.49593, z: 7.81743}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -44,11 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: def16f5882deec24b9ff8217e5b784ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SurvivalTimer
-  StartingHours: 1
-  StartingMinutes: 0
+  StartingHours: 0
+  StartingMinutes: 5
   TimerSlider: {fileID: 0}
   TimerText: {fileID: 0}
   HeartbeatImage: {fileID: 0}
   LowTimePulse: 5
   NormalPulse: 1
+  LowTimeAudio: {fileID: 8300000, guid: 39087e47a827d804986fefa6f3fa6cee, type: 3}
+  LowTimeAudioVolume: 0.8
+  WarningTimeMinutes: 10
   TimerRunning: 1

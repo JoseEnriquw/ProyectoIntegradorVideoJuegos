@@ -53,6 +53,21 @@ namespace UHFPS.Custom
         [Tooltip("Segundo diálogo: se reproduce justo antes de liberar al jugador.")]
         public DialogueAsset segundoDialogo;
 
+        [Header("Audio Intermedio")]
+        [Tooltip("Audio intermedio que se reproduce después del evento principal y antes del segundo diálogo.")]
+        public AudioClip audioIntermedio;
+
+        [Tooltip("AudioSource a utilizar para el audio intermedio. Si está vacío, se usará audioSourcePJ.")]
+        public AudioSource audioSourceIntermedio;
+
+        [Tooltip("Tiempo de retraso ANTES de que suene el audio intermedio (para separarlo de los otros eventos).")]
+        [Min(0f)]
+        public float retrasoAntesAudioIntermedio = 0f;
+
+        [Tooltip("Tiempo de espera LUEGO del audio intermedio. Si es 0, esperará la duración exacta del clip de audio antes de lanzar el 2do diálogo.")]
+        [Min(0f)]
+        public float duracionAudioIntermedio = 0f;
+
         [Header("Diálogo al Aparecer el NPC")]
         [Tooltip("Diálogo del PJ que se dispara justo después de que el NPC aparece en escena.")]
         public DialogueAsset dialogoAlAparecer;
@@ -84,6 +99,7 @@ namespace UHFPS.Custom
 
         private bool yaActivado = false;
         private Coroutine freezeCoroutine;
+        private bool audioIntermedioTerminado = false;
 
         private DialogueTrigger triggerPrimerDialogo;
         private DialogueTrigger triggerSegundoDialogo;
@@ -168,6 +184,12 @@ namespace UHFPS.Custom
             {
                 yaActivado = true;
 
+                // Lanzamos la rutina de audio de forma totalmente independiente
+                if (audioIntermedio != null)
+                {
+                    StartCoroutine(RutinaAudioIndependiente());
+                }
+
                 if (retrasoAntesDeActivar > 0f && !congelarJugador)
                 {
                     StartCoroutine(RutinaDeRetraso());
@@ -197,6 +219,44 @@ namespace UHFPS.Custom
         {
             yield return new WaitForSeconds(retrasoAntesDeActivar);
             EjecutarCambioDeEstado();
+        }
+
+        private IEnumerator RutinaAudioIndependiente()
+        {
+            audioIntermedioTerminado = false;
+
+            if (retrasoAntesAudioIntermedio > 0f)
+            {
+                yield return new WaitForSeconds(retrasoAntesAudioIntermedio);
+            }
+
+            AudioSource sourceToUse = audioSourceIntermedio != null ? audioSourceIntermedio : audioSourcePJ;
+            if (sourceToUse != null)
+            {
+                // Si el sistema de diálogo está reproduciendo, lo pausamos para evitar que se superponga
+                if (DialogueSystem.Instance != null && DialogueSystem.Instance.IsPlaying)
+                {
+                    DialogueSystem.Instance.StopDialogue();
+                }
+
+                sourceToUse.clip = audioIntermedio;
+                sourceToUse.Play();
+                
+                float esperaAudio = duracionAudioIntermedio > 0f ? duracionAudioIntermedio : audioIntermedio.length;
+                yield return new WaitForSeconds(esperaAudio);
+                
+                // Cortamos el audio si se especificó una duración y sigue sonando
+                if (duracionAudioIntermedio > 0f && sourceToUse.isPlaying && sourceToUse.clip == audioIntermedio)
+                {
+                    sourceToUse.Stop();
+                }
+            }
+            else
+            {
+                Debug.LogWarning("[Trigger] No se pudo reproducir 'audioIntermedio' porque no hay un AudioSource asignado.");
+            }
+
+            audioIntermedioTerminado = true;
         }
 
         private void EjecutarCambioDeEstado()
@@ -282,6 +342,15 @@ namespace UHFPS.Custom
             else
             {
                 Debug.Log($"[Trigger] Giro de escape desactivado (girarHaciaEscape={girarHaciaEscape}, objetivo={(objetivoDeEscape != null ? objetivoDeEscape.name : "NULL")})");
+            }
+
+            // 4.5 Esperamos a que el audio intermedio haya terminado de reproducirse (independiente)
+            if (audioIntermedio != null)
+            {
+                while (!audioIntermedioTerminado)
+                {
+                    yield return null;
+                }
             }
 
             // 5. Justo antes de liberar el control, disparamos el segundo audio
@@ -456,16 +525,5 @@ namespace UHFPS.Custom
             Debug.Log($"[Trigger] GirarCamaraHacia: FINAL LookRotation=({lookCtrl.LookRotation.x:F1}, {lookCtrl.LookRotation.y:F1})");
         }
 
-        // Dibuja una cajita verde en la escena para que no lo pierdas de vista al editar
-        private void OnDrawGizmos()
-        {
-            Collider col = GetComponent<Collider>();
-            if (col != null && col.isTrigger)
-            {
-                Gizmos.color = new Color(0.2f, 0.8f, 0.2f, 0.4f);
-                Gizmos.matrix = transform.localToWorldMatrix;
-                Gizmos.DrawCube(Vector3.zero, col.bounds.size / transform.lossyScale.x);
-            }
-        }
     }
 }

@@ -27,10 +27,26 @@ namespace UHFPS.Runtime
         private int currentLanguageIndex;
         public int CurrentLanguageIndex => currentLanguageIndex;
 
+        private void Awake()
+        {
+            if (DefaultLanguage == 0)
+            {
+                DefaultLanguage = 1; // Default to Spanish (index 1)
+            }
+        }
+
         private IDictionary<string, string> _languageDict;
         public IDictionary<string, string> LanguageDict
         {
-            get => _languageDict ??= GenerateLangDictionary(DefaultLanguage);
+            get
+            {
+                if (_languageDict == null)
+                {
+                    if (DefaultLanguage == 0) DefaultLanguage = 1;
+                    _languageDict = GenerateLangDictionary(DefaultLanguage);
+                }
+                return _languageDict;
+            }
             private set => _languageDict = value;
         }
 
@@ -88,6 +104,7 @@ namespace UHFPS.Runtime
         public LocalizationLanguage GetDefaultLocalization()
         {
             int language = DefaultLanguage;
+            if (language == 0) language = 1; // Default to Spanish
 
             if (LocalizationTable == null || LocalizationTable.Languages.Count == 0)
             {
