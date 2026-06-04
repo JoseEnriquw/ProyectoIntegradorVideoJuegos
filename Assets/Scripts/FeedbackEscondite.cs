@@ -60,7 +60,7 @@ public class FeedbackEscondite : MonoBehaviour
 
         if (vignetteImage != null)
         {
-            vignetteImage.color = new Color(0.5f, 0f, 0f, 0f);
+            vignetteImage.color = new Color(vignetteImage.color.r, vignetteImage.color.g, vignetteImage.color.b, 0f);
             vignetteImage.gameObject.SetActive(false);
         }
     }
@@ -152,7 +152,7 @@ public class FeedbackEscondite : MonoBehaviour
             float targetAlpha = Mathf.Lerp(0.05f, maxVignetteAlpha, factorTension) * oscilacion;
             currentVignetteAlpha = Mathf.Lerp(currentVignetteAlpha, targetAlpha, Time.deltaTime * 5f);
 
-            vignetteImage.color = new Color(0.4f, 0f, 0f, currentVignetteAlpha);
+            vignetteImage.color = new Color(vignetteImage.color.r, vignetteImage.color.g, vignetteImage.color.b, currentVignetteAlpha);
         }
     }
 
@@ -169,7 +169,7 @@ public class FeedbackEscondite : MonoBehaviour
         if (vignetteImage != null && vignetteImage.gameObject.activeSelf)
         {
             currentVignetteAlpha = Mathf.Lerp(currentVignetteAlpha, 0f, Time.deltaTime * 4f);
-            vignetteImage.color = new Color(0.4f, 0f, 0f, currentVignetteAlpha);
+            vignetteImage.color = new Color(vignetteImage.color.r, vignetteImage.color.g, vignetteImage.color.b, currentVignetteAlpha);
 
             if (currentVignetteAlpha < 0.01f) vignetteImage.gameObject.SetActive(false);
         }
