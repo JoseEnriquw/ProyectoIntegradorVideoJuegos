@@ -29,7 +29,8 @@ public class PlayerIntroMovement : MonoBehaviour
 
     private void Start()
     {
-        if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name != "1 IntroHouse")
+        string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        if (sceneName != "1 IntroHouse" && sceneName != "1 IntroCutScene")
         {
             // Fix para el editor: como el Player es un Prefab y está configurado en "Manually" 
             // (para que la intro funcione en la escena 1), si le damos Play directo a la escena 2,
@@ -44,11 +45,23 @@ public class PlayerIntroMovement : MonoBehaviour
             return;
         }
 
+        // Auto-asignar el DialogueTrigger "Intro" de la escena si está vacío en el inspector
+        if (InitialDialogue == null)
+        {
+            foreach (var dt in FindObjectsOfType<DialogueTrigger>())
+            {
+                if (dt.name == "Intro")
+                {
+                    InitialDialogue = dt;
+                    break;
+                }
+            }
+        }
+
         if (IntroDoorDialogue != null)
         {
             // We set the dialogue trigger to 'Event' type so it doesn't trigger 
             // on its own via the Interact type, and instead fire it from the locked event.
-            // We DON'T disable the component because its Start() needs to run to initialize data.
             IntroDoorDialogue.TriggerType = DialogueTrigger.TriggerTypeEnum.Event;
 
             if (IntroDoor != null)
@@ -67,7 +80,13 @@ public class PlayerIntroMovement : MonoBehaviour
 
     private IEnumerator IntroRoutine()
     {
-        // 1. Initial Setup - Ensure player is frozen
+        // Deshabilitar la tecla Escape (menú de pausa) e Inventario durante toda la cinemática
+        if (GameManager.HasReference)
+        {
+            GameManager.Instance.LockInput(true);
+        }
+
+        // 1. Initial Setup - Ensure player is frozen and cursor is hidden/locked
         if (PlayerPresenceManager.HasReference)
         {
             PlayerPresenceManager.Instance.FreezePlayer(true);
@@ -79,7 +98,6 @@ public class PlayerIntroMovement : MonoBehaviour
         // 2. Fade In from Black
         if (GameManager.HasReference)
         {
-            // We start the background fade to visible (true)
             yield return GameManager.Instance.StartBackgroundFade(true, fadeSpeed: FadeInSpeed);
         }
 
@@ -98,14 +116,39 @@ public class PlayerIntroMovement : MonoBehaviour
             IntroDoor.SetCloseState();
 
             // Wait for the door to physically close before locking it
-            // Note: We use a fixed wait because IsOpened returns the target state immediately in UHFPS
             yield return new WaitForSeconds(1.5f);
 
             // 4.1 Block the door
             IntroDoor.SetLockedStatus(true);
         }
 
-        // 5. Unlock Player control and HUD
+        // ESPERAR a que termine el diálogo inicial antes de continuar
+        if (DialogueSystem.HasReference)
+        {
+            yield return new WaitUntil(() => !DialogueSystem.Instance.IsPlaying);
+        }
+
+        // Esperar 1 segundo de pausa después de finalizar el audio/subtítulo
+        yield return new WaitForSeconds(1.0f);
+
+        // 5. Activar el Trigger de Cambio de Escena (CinematicSceneLoader) de forma automática
+        var sceneLoader = FindObjectOfType<CinematicSceneLoader>();
+        if (sceneLoader != null)
+        {
+            Debug.Log("[PlayerIntroMovement] Diálogo terminado. Iniciando fundido a negro...");
+            
+            // Fundido suave a negro (fadeOut = false) con velocidad 5
+            if (GameManager.HasReference)
+            {
+                yield return GameManager.Instance.StartBackgroundFade(false, fadeSpeed: 5f);
+            }
+
+            Debug.Log("[PlayerIntroMovement] Fundido completado. Cargando siguiente escena a través de CinematicSceneLoader...");
+            sceneLoader.LoadNextScene();
+            yield break; // Finaliza la corrutina aquí ya que cambiamos de escena
+        }
+
+        // 6. Si no hay scene loader, liberar al jugador y desbloquear controles (comportamiento por defecto)
         if (OnIntroEnd != null)
         {
             OnIntroEnd.Invoke();
@@ -116,13 +159,17 @@ public class PlayerIntroMovement : MonoBehaviour
             PlayerPresenceManager.Instance.UnlockPlayer();
         }
 
-        // 6. Trigger Announcement if requested
+        // Habilitar de nuevo la tecla Escape (menú de pausa) al finalizar la cinemática
+        if (GameManager.HasReference)
+        {
+            GameManager.Instance.LockInput(false);
+        }
+
+        // 7. Trigger Announcement if requested
         if (ShowAnnouncementAtEnd && SurvivalTimerAnnouncement.Instance != null)
         {
             SurvivalTimerAnnouncement.Instance.Show();
         }
-
-        // Note: Component is no longer self-destroyed to allow UnlockDoor callback
     }
 
     public void UnlockDoor()

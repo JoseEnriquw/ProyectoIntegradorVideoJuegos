@@ -27,10 +27,18 @@ public class SurvivalTimerAnnouncement : MonoBehaviour
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
+        // Asegurarnos de que el panel de anuncio no bloquee clicks en la pantalla
+        CanvasGroup cg = GetComponent<CanvasGroup>();
+        if (cg == null) cg = gameObject.AddComponent<CanvasGroup>();
+        cg.blocksRaycasts = false;
+        cg.interactable = false;
+
         if (AnnouncementGroup != null)
         {
             AnnouncementGroup.alpha = 0f;
             AnnouncementGroup.gameObject.SetActive(false);
+            AnnouncementGroup.blocksRaycasts = false;
+            AnnouncementGroup.interactable = false;
         }
     }
 
