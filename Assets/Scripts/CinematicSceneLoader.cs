@@ -12,15 +12,23 @@ public class CinematicSceneLoader : MonoBehaviour
         // Verifica si es el auto (o el jugador) el que entra al trigger
         if (other.CompareTag("Player"))
         {
-            if (!string.IsNullOrEmpty(nextSceneName))
-            {
-                Debug.Log("[CinematicSceneLoader] Cambiando a la escena: " + nextSceneName);
-                SceneManager.LoadScene(nextSceneName);
-            }
-            else
-            {
-                Debug.LogWarning("[CinematicSceneLoader] El nombre de la escena está vacío.");
-            }
+            LoadNextScene();
+        }
+    }
+
+    /// <summary>
+    /// Ejecuta el cambio de escena directamente.
+    /// </summary>
+    public void LoadNextScene()
+    {
+        if (!string.IsNullOrEmpty(nextSceneName))
+        {
+            Debug.Log("[CinematicSceneLoader] Iniciando cambio automático a escena: " + nextSceneName);
+            SceneManager.LoadScene(nextSceneName);
+        }
+        else
+        {
+            Debug.LogWarning("[CinematicSceneLoader] No se puede cargar la escena porque el nombre está vacío.");
         }
     }
 }
