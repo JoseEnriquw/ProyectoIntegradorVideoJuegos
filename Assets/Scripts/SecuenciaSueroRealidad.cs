@@ -184,6 +184,7 @@ public class SecuenciaSueroRealidad : MonoBehaviour
         // 1. Congelar los controles físicos del jugador
         if (PlayerPresenceManager.HasReference)
         {
+            PlayerPresenceManager.Instance.PlayerIsUnlocked = false;
             PlayerPresenceManager.Instance.FreezePlayer(true);
             
             // Deshabilitar temporalmente el controlador de vista de mouse para que no sobreescriba la rotación de la cámara
@@ -374,6 +375,12 @@ public class SecuenciaSueroRealidad : MonoBehaviour
             }
             
             PlayerPresenceManager.Instance.UnlockPlayer();
+
+            // Esperar a que la rutina asíncrona de desbloqueo finalice para evitar condiciones de carrera con el cursor
+            while (!PlayerPresenceManager.Instance.PlayerIsUnlocked)
+            {
+                yield return null;
+            }
         }
 
         AlDespertar?.Invoke();
