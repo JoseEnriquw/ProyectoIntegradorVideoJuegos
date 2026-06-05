@@ -1,0 +1,17 @@
+=== Drawer & Switch Inspection ===
+DynamicObject Name: Cylinder.013
+IsLocked: False
+IsOpened: False
+useEvent1 PersistentEventCount: 2
+  useEvent1[0]: target=Switch (GameObject), method=SetActive, boolArg=True
+  useEvent1[1]: target=Cylinder.013 (DrawerColliderHelper), method=SetColliderEnabled, boolArg=False
+unlockedEvent PersistentEventCount: 1
+  unlockedEvent[0]: target=Cylinder.013 (DynamicObject), method=SetOpenState
+useEvent2 PersistentEventCount: 1
+  useEvent2[0]: target=Cylinder.013 (DrawerColliderHelper), method=SetColliderEnabled, boolArg=True
+Switch activeSelf: False
+Switch activeInHierarchy: False
+Switch collider: SphereCollider, enabled=True
+Switch InteractableItem: Found
+  interactable.enabled: True
+  interactable.InteractableType: InventoryItem

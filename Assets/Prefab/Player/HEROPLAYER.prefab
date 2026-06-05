@@ -4744,7 +4744,7 @@ MonoBehaviour:
       m_Item:
         Name: Suero
         GUID: a776f2b59be446cd8c8784353b90c320
-        Icon: {fileID: 2800000, guid: 47d8e78dd8e3c6e4ebf442550a18c2fe, type: 3}
+        Icon: {fileID: 2800000, guid: b5fc0f879f2ea9d4e870c726ffc86d23, type: 3}
       m_Section:
         Name: Healing Items
         GUID: bc38a49db3da43c8928dfbde7c7d1f1c
@@ -4815,6 +4815,30 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: MedicalItemEffect, Assembly-CSharp
           m_MethodName: ApplyCure
           m_Mode: 4
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 120
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - Item:
+      m_GUID: 440a82b7a986438e8554e592612f68c7
+      m_Item:
+        Name: Cura
+        GUID: 440a82b7a986438e8554e592612f68c7
+        Icon: {fileID: 2800000, guid: d46d22d68781c48429d23f9058ebde96, type: 3}
+      m_Section:
+        Name: Healing Items
+        GUID: bc38a49db3da43c8928dfbde7c7d1f1c
+    OnUse:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: SecuenciaSueroRealidad, Assembly-CSharp
+          m_MethodName: TomarSuero
+          m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -35669,7 +35693,7 @@ MonoBehaviour:
   EnableWallDetection: 1
   EnableMotionPreset: 1
   EnableExternalMotion: 0
-  EnableHintControls: 1
+  EnableHintControls: 0
   WallHitTransform: {fileID: 0}
   WallHitMask:
     serializedVersion: 2
@@ -35713,7 +35737,7 @@ MonoBehaviour:
   ReloadLightEnableOffset: 0.5
   BatteryFullColor: {r: 1, g: 1, b: 1, a: 1}
   BatteryLowColor: {r: 1, g: 0, b: 0, a: 1}
-  EnableUVFlashlight: 1
+  EnableUVFlashlight: 0
   UVBatteryDrainMultiplier: 1.2
   UVSwitchMethod: 1
   SwitchToUVFlashlight:
@@ -38178,7 +38202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3745de7da048ba84c99d02af31dbbaed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RaycastRange: 1.5
+  RaycastRange: 2.2
   HoldDistance: 2.5
   CullLayers:
     serializedVersion: 2

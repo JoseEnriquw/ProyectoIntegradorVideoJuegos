@@ -96,27 +96,6 @@ namespace UHFPS.Runtime
         {
             if (InteractType == DynamicObject.InteractType.Dynamic && !isMoving)
             {
-                targetMove = openLimits.min;
-                DynamicObject.PlaySound(DynamicSoundType.Close);
-                DynamicObject.useEvent2?.Invoke();
-
-                isOpened = true;
-                targetPosition = startPosition.SetComponent(pullAxis, targetMove);
-            }
-            else if (InteractType == DynamicObject.InteractType.Animation && !Animator.IsAnyPlaying())
-            {
-                Animator.SetTrigger(DynamicObject.useTrigger2);
-                DynamicObject.PlaySound(DynamicSoundType.Close);
-                DynamicObject.useEvent2?.Invoke();
-
-                isOpened = true;
-            }
-        }
-
-        public override void OnDynamicClose()
-        {
-            if (InteractType == DynamicObject.InteractType.Dynamic && !isMoving)
-            {
                 targetMove = openLimits.max;
                 DynamicObject.PlaySound(DynamicSoundType.Open);
                 DynamicObject.useEvent1?.Invoke();
@@ -131,6 +110,27 @@ namespace UHFPS.Runtime
                 DynamicObject.useEvent1?.Invoke();
 
                 isOpened = true;
+            }
+        }
+
+        public override void OnDynamicClose()
+        {
+            if (InteractType == DynamicObject.InteractType.Dynamic && !isMoving)
+            {
+                targetMove = openLimits.min;
+                DynamicObject.PlaySound(DynamicSoundType.Close);
+                DynamicObject.useEvent2?.Invoke();
+
+                isOpened = false;
+                targetPosition = startPosition.SetComponent(pullAxis, targetMove);
+            }
+            else if (InteractType == DynamicObject.InteractType.Animation && !Animator.IsAnyPlaying())
+            {
+                Animator.SetTrigger(DynamicObject.useTrigger2);
+                DynamicObject.PlaySound(DynamicSoundType.Close);
+                DynamicObject.useEvent2?.Invoke();
+
+                isOpened = false;
             }
         }
 

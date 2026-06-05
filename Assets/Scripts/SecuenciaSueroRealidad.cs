@@ -166,9 +166,25 @@ public class SecuenciaSueroRealidad : MonoBehaviour
         AlTomarSuero?.Invoke();
         Debug.Log("[SecuenciaSuero] Jugador consume el suero. Iniciando colapso...");
 
+        Vector3 posicionInicialMundo = Vector3.zero;
+        Vector2 rotacionLookInicial = Vector2.zero;
+        CharacterController playerCollider = null;
+        PlayerStateMachine stateMachine = null;
+
+        // Guardar la posición y rotación exactas del jugador al inicio
+        if (PlayerPresenceManager.HasReference && PlayerPresenceManager.Instance.Player != null)
+        {
+            posicionInicialMundo = PlayerPresenceManager.Instance.Player.transform.position;
+            if (PlayerPresenceManager.Instance.LookController != null)
+            {
+                rotacionLookInicial = PlayerPresenceManager.Instance.LookController.LookRotation;
+            }
+        }
+
         // 1. Congelar los controles físicos del jugador
         if (PlayerPresenceManager.HasReference)
         {
+            PlayerPresenceManager.Instance.PlayerIsUnlocked = false;
             PlayerPresenceManager.Instance.FreezePlayer(true);
             
             // Deshabilitar temporalmente el controlador de vista de mouse para que no sobreescriba la rotación de la cámara
@@ -176,6 +192,41 @@ public class SecuenciaSueroRealidad : MonoBehaviour
             {
                 PlayerPresenceManager.Instance.LookController.enabled = false;
             }
+
+            // Deshabilitar el PlayerStateMachine para evitar que los estados sobreescriban la posición de la cámara durante la secuencia
+            if (PlayerPresenceManager.Instance.StateMachine != null)
+            {
+                stateMachine = PlayerPresenceManager.Instance.StateMachine;
+                stateMachine.enabled = false;
+            }
+
+            // Deshabilitar el CharacterController para evitar desplazamientos por física/gravedad durante el desmayo
+            if (PlayerPresenceManager.Instance.StateMachine != null)
+            {
+                playerCollider = PlayerPresenceManager.Instance.StateMachine.PlayerCollider;
+                if (playerCollider != null)
+                {
+                    playerCollider.enabled = false;
+                }
+            }
+        }
+
+        // Determinar qué transform vamos a animar (preferir el CameraHolder para no entrar en conflicto con Cinemachine)
+        Transform transformAAnimar = null;
+        if (PlayerPresenceManager.HasReference && PlayerPresenceManager.Instance.PlayerManager != null)
+        {
+            transformAAnimar = PlayerPresenceManager.Instance.PlayerManager.CameraHolder;
+        }
+        
+        if (transformAAnimar == null)
+        {
+            transformAAnimar = camaraJugador;
+        }
+
+        if (transformAAnimar != null)
+        {
+            posicionInicialLocal = transformAAnimar.localPosition;
+            rotacionInicialLocal = transformAAnimar.localRotation;
         }
 
         // 2. Fundido a negro de la pantalla global (UHFPS GameManager)
@@ -196,26 +247,26 @@ public class SecuenciaSueroRealidad : MonoBehaviour
             float t = Mathf.Clamp01(tiempo / tiempoCaida);
             float tSuave = Mathf.SmoothStep(0f, 1f, t);
 
-            if (camaraJugador != null)
+            if (transformAAnimar != null)
             {
-                camaraJugador.localPosition = Vector3.Lerp(posicionInicialLocal, posicionCaida, tSuave);
-                camaraJugador.localRotation = Quaternion.Slerp(rotacionInicialLocal, rotacionCaida, tSuave);
+                transformAAnimar.localPosition = Vector3.Lerp(posicionInicialLocal, posicionCaida, tSuave);
+                transformAAnimar.localRotation = Quaternion.Slerp(rotacionInicialLocal, rotacionCaida, tSuave);
             }
 
             yield return null;
         }
 
         // Forzar valores exactos de caída
-        if (camaraJugador != null)
+        if (transformAAnimar != null)
         {
-            camaraJugador.localPosition = posicionCaida;
-            camaraJugador.localRotation = rotacionCaida;
+            transformAAnimar.localPosition = posicionCaida;
+            transformAAnimar.localRotation = rotacionCaida;
         }
 
         AlDesmayarse?.Invoke();
         Debug.Log("[SecuenciaSuero] Jugador desmayado. Pantalla en negro...");
 
-        // 4. Esperar el tiempo de inconsciencia del desmayo
+        // 4. Esperar el tiempo de unconsciousness del desmayo
         yield return new WaitForSeconds(tiempoInconsciencia);
 
         Debug.Log("[SecuenciaSuero] El jugador comienza a recuperar el conocimiento. Levantándose...");
@@ -235,20 +286,20 @@ public class SecuenciaSueroRealidad : MonoBehaviour
             float t = Mathf.Clamp01(tiempo / tiempoLevantarse);
             float tSuave = Mathf.SmoothStep(0f, 1f, t);
 
-            if (camaraJugador != null)
+            if (transformAAnimar != null)
             {
-                camaraJugador.localPosition = Vector3.Lerp(posicionCaida, posicionInicialLocal, tSuave);
-                camaraJugador.localRotation = Quaternion.Slerp(rotacionCaida, rotacionInicialLocal, tSuave);
+                transformAAnimar.localPosition = Vector3.Lerp(posicionCaida, posicionInicialLocal, tSuave);
+                transformAAnimar.localRotation = Quaternion.Slerp(rotacionCaida, rotacionInicialLocal, tSuave);
             }
 
             yield return null;
         }
 
         // Asegurar la restauración perfecta de la cabeza del jugador
-        if (camaraJugador != null)
+        if (transformAAnimar != null)
         {
-            camaraJugador.localPosition = posicionInicialLocal;
-            camaraJugador.localRotation = rotacionInicialLocal;
+            transformAAnimar.localPosition = posicionInicialLocal;
+            transformAAnimar.localRotation = rotacionInicialLocal;
         }
 
         // 6.5. Efecto de brazos cuando ya está levantado
@@ -302,12 +353,34 @@ public class SecuenciaSueroRealidad : MonoBehaviour
         // 8. Reactivar controles de UHFPS
         if (PlayerPresenceManager.HasReference)
         {
+            // Teletransportar al jugador de vuelta a la posición inicial guardada para corregir cualquier desplazamiento por físicas
+            PlayerPresenceManager.Instance.SetPlayerPositionAndLook(posicionInicialMundo, rotacionLookInicial);
+
+            // Reactivar el CharacterController antes de desbloquear al jugador
+            if (playerCollider != null)
+            {
+                playerCollider.enabled = true;
+                Physics.SyncTransforms(); // Sincronizar la posición física en Unity
+            }
+
+            // Reactivar el PlayerStateMachine
+            if (stateMachine != null)
+            {
+                stateMachine.enabled = true;
+            }
+
             if (PlayerPresenceManager.Instance.LookController != null)
             {
                 PlayerPresenceManager.Instance.LookController.enabled = true;
             }
             
             PlayerPresenceManager.Instance.UnlockPlayer();
+
+            // Esperar a que la rutina asíncrona de desbloqueo finalice para evitar condiciones de carrera con el cursor
+            while (!PlayerPresenceManager.Instance.PlayerIsUnlocked)
+            {
+                yield return null;
+            }
         }
 
         AlDespertar?.Invoke();

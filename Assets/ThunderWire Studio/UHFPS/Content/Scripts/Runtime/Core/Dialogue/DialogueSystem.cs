@@ -223,6 +223,9 @@ namespace UHFPS.Runtime
 
                 // send dialogue finish event
                 SendBinderEvent(DialogueBinderType.Finish);
+                
+                // Hide panel before the next dialogue starts
+                fadeDialoguePanel = false;
 
                 if (isSequenceType)
                 {
@@ -238,6 +241,7 @@ namespace UHFPS.Runtime
 
                 // handle next dialogue
                 yield return HandleSubtitles(nextDialogue);
+                yield break;
             }
 
             OnDialogueEnd.OnNext(Unit.Default);
