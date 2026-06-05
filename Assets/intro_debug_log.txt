@@ -1,31 +1,24 @@
-=== INTRO DEBUGGER LOG START: 4/6/2026 7:59:28 p. m. ===
-[19:59:28.395] Scene loaded: MainMenu
-[19:59:28.445] Helper component started.
-[19:59:28.446] PlayerIntroMovement NOT found in scene!
-[19:59:28.446] Found 0 DialogueTriggers in the scene:
-[19:59:28.446] Found 0 PlayDialogueOnStart components in the scene.
-[19:59:28.456] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[19:59:29.928] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[19:59:29.928]    UI Elements under mouse pointer: 3
-[19:59:29.929]      - Logo (Canvas: Canvas)
-[19:59:29.929]      - Blur (Canvas: Canvas)
-[19:59:29.929]      - Background (Canvas: Canvas)
-[19:59:31.430] Status Update -> EventSystem: NULL | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[19:59:33.943] Status Update -> EventSystem: NULL | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[19:59:35.586] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: False, LockState: Locked | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
-[19:59:35.588]    UI Elements under mouse pointer: 5
-[19:59:35.588]      - TimerAnnouncementPanel (Canvas: Canvas)
-[19:59:35.589]      - Border (Canvas: Canvas)
-[19:59:35.589]      - Slot [2,4] (Canvas: Canvas)
-[19:59:35.589]      - Background (Canvas: Canvas)
-[19:59:35.589]      - Background (Canvas: Canvas)
-[19:59:37.071] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: False, LockState: Locked | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
-[19:59:37.072]    UI Elements under mouse pointer: 5
-[19:59:37.072]      - TimerAnnouncementPanel (Canvas: Canvas)
-[19:59:37.072]      - Border (Canvas: Canvas)
-[19:59:37.073]      - Slot [2,4] (Canvas: Canvas)
-[19:59:37.073]      - Background (Canvas: Canvas)
-[19:59:37.073]      - Background (Canvas: Canvas)
-[19:59:37.981] Escape pressed! Force logging state...
-[19:59:37.982] Immediate State -> EventSystem: Active (Enabled: True) | Cursor: Visible: False, LockState: Locked | DialoguePlaying: True | DialogueAlpha: 1 | IsPaused: False
-[19:59:38.582] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: False, LockState: Locked | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+=== INTRO DEBUGGER LOG START: 4/6/2026 9:36:42 p. m. ===
+[21:36:42.877] Scene loaded: 2 Bosque
+[21:36:43.029] Helper component started.
+[21:36:43.030] PlayerIntroMovement found: InitialDialogue = NULL
+[21:36:43.031] Found 12 DialogueTriggers in the scene:
+[21:36:43.032]  - Trigger: HiddenDialogue_DuringSymptom_5, TriggerType: Event, Repeatable: False
+[21:36:43.032]  - Trigger: HiddenDialogue_DuringSymptom_4, TriggerType: Event, Repeatable: False
+[21:36:43.032]  - Trigger: HiddenDialogue_DuringSymptom_3, TriggerType: Event, Repeatable: False
+[21:36:43.033]  - Trigger: HiddenDialogue_DuringSymptom_2, TriggerType: Event, Repeatable: False
+[21:36:43.033]  - Trigger: HiddenDialogue_DuringSymptom_1, TriggerType: Event, Repeatable: False
+[21:36:43.033]  - Trigger: HiddenDialogue_DuringSymptom_0, TriggerType: Event, Repeatable: False
+[21:36:43.033]  - Trigger: Olvido, TriggerType: Trigger, Repeatable: False
+[21:36:43.034]  - Trigger: Dialog, TriggerType: Trigger, Repeatable: False
+[21:36:43.034]  - Trigger: PosteLuz, TriggerType: Trigger, Repeatable: False
+[21:36:43.035]  - Trigger: Trigger, TriggerType: Trigger, Repeatable: False
+[21:36:43.035]  - Trigger: DialogoLimite1, TriggerType: Trigger, Repeatable: True
+[21:36:43.035]  - Trigger: DialogoLimite2, TriggerType: Trigger, Repeatable: True
+[21:36:43.036] Found 0 PlayDialogueOnStart components in the scene.
+[21:36:43.062] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: False, LockState: Locked | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
+[21:36:44.514] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: False, LockState: Locked | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
+[21:36:46.032] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: False, LockState: Locked | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
+[21:36:47.537] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: False, LockState: Locked | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
+[21:36:49.038] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: False, LockState: Locked | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
+[21:36:50.553] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: False, LockState: Locked | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
