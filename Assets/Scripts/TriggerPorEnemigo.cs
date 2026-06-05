@@ -85,6 +85,7 @@ using UHFPS.Runtime; // Requerido para integrarse con UHFPS (Ultimate Horror FPS
 
         private void OnTriggerEnter(Collider other)
         {
+            if (!enabled) return;
             if (unaSolaVez && yaSeDisparoEnter) return;
 
             if (EsEnemigoValido(other))
@@ -100,6 +101,7 @@ using UHFPS.Runtime; // Requerido para integrarse con UHFPS (Ultimate Horror FPS
 
         private void OnTriggerExit(Collider other)
         {
+            if (!enabled) return;
             if (unaSolaVez && yaSeDisparoExit) return;
 
             if (EsEnemigoValido(other))
