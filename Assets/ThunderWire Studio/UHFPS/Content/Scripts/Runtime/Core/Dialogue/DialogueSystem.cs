@@ -45,6 +45,8 @@ namespace UHFPS.Runtime
         /// </summary>
         public bool IsPlaying => dialoguePlaying;
 
+        public DialogueTrigger CurrentTrigger => currentTrigger;
+
         public Subject<Unit> OnDialogueStart = new();
         public Subject<Unit> OnDialogueEnd = new();
 

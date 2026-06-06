@@ -8862,6 +8862,7 @@ Transform:
   - {fileID: 11210101}
   - {fileID: 306112113}
   - {fileID: 1446639987}
+  - {fileID: 211793387}
   - {fileID: 1635799528}
   - {fileID: 2090453656}
   - {fileID: 579763469}
@@ -27297,6 +27298,81 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6e3189c8f251ccb4abb64f3d59c2256a, type: 3}
+--- !u!1 &211793385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 211793387}
+  - component: {fileID: 211793386}
+  m_Layer: 0
+  m_Name: CinematicDialogueZoomCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &211793386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211793385}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+  Priority:
+    Enabled: 1
+    m_Value: 0
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20241001
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 0}
+    LookAtTarget: {fileID: 305158794}
+    CustomLookAtTarget: 1
+  Lens:
+    FieldOfView: 40
+    OrthographicSize: 10
+    NearClipPlane: 0.1
+    FarClipPlane: 5000
+    Dutch: 0
+    ModeOverride: 0
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
+--- !u!4 &211793387
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 211793385}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 90.252014, y: -0.09297943, z: 42.61508}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 83567484}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &213517305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -149711,13 +149787,14 @@ GameObject:
   - component: {fileID: 1446639990}
   - component: {fileID: 1446639989}
   - component: {fileID: 1446639988}
+  - component: {fileID: 1446639992}
   m_Layer: 0
   m_Name: Intro_ingreso_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1446639987
 Transform:
   m_ObjectHideFlags: 0
@@ -149762,7 +149839,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1446639986}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2137175018}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -149833,6 +149910,27 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1446639986}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1446639992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446639986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf6bb87f2db0714ab62cddaa180e4a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.CinematicDialogueZoom
+  TargetTrigger: {fileID: 1446639988}
+  ZoomCamera: {fileID: 211793386}
+  TargetLookAt: {fileID: 305158794}
+  CameraOffset: {x: 20, y: 3, z: 0}
+  FieldOfView: 40
+  ActivePriority: 20
+  BlendInTime: 1.5
+  BlendOutTime: 2.5
+  TransitionStyle: 1
 --- !u!1 &1447883406
 GameObject:
   m_ObjectHideFlags: 0
@@ -213175,6 +213273,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 490552, guid: 48a907058000acc4da8ac9293b565679, type: 3}
   m_PrefabInstance: {fileID: 1930988682}
   m_PrefabAsset: {fileID: 0}
+--- !u!134 &2137175018
+PhysicsMaterial:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ' (Instance)'
+  serializedVersion: 2
+  m_DynamicFriction: 0.6
+  m_StaticFriction: 0.6
+  m_Bounciness: 0
+  m_FrictionCombine: 0
+  m_BounceCombine: 0
 --- !u!4 &2137323866 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 565400181690422387, guid: 67bb9b84bdba41c48b022889613c2e69, type: 3}
