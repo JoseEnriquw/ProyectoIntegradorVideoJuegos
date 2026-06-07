@@ -2655,7 +2655,7 @@ Shader "Vefects/SH_Vefects_VFX_Wick_01"
 			}
 			#endif
 
-			FragmentOutput frag ( PackedVaryings input
+			GBufferFragOutput frag ( PackedVaryings input
 								#ifdef ASE_DEPTH_WRITE_ON
 								,out float outputDepth : ASE_SV_DEPTH
 								#endif
