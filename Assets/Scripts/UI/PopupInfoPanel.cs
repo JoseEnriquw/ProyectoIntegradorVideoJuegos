@@ -13,6 +13,9 @@ namespace UHFPS.Runtime
         [Tooltip("El Canvas Group que controla la opacidad y la interactividad de todo el panel.")]
         public CanvasGroup PanelCanvasGroup;
 
+        [Tooltip("El contenedor visual de este diálogo (MainDialogContainer).")]
+        public GameObject DialogContainer;
+
         [Tooltip("Texto para el título del cartel (ej. GUARDAR PARTIDA).")]
         public TMP_Text TitleText;
 
@@ -71,10 +74,10 @@ namespace UHFPS.Runtime
                 PanelCanvasGroup.alpha = 0f;
                 PanelCanvasGroup.interactable = false;
                 PanelCanvasGroup.blocksRaycasts = false;
-                if (!IsShown)
-                {
-                    PanelCanvasGroup.gameObject.SetActive(false);
-                }
+            }
+            if (DialogContainer != null)
+            {
+                DialogContainer.SetActive(false);
             }
         }
 
@@ -93,6 +96,17 @@ namespace UHFPS.Runtime
             Action onDismiss)
         {
             StopAllCoroutines();
+
+            // Asegurar activación del contenedor de información y desactivación del de controles
+            if (DialogContainer != null)
+            {
+                DialogContainer.SetActive(true);
+            }
+            Transform controlsContainer = transform.Find("ControlsDialogContainer");
+            if (controlsContainer != null)
+            {
+                controlsContainer.gameObject.SetActive(false);
+            }
 
             // Configurar Título
             if (TitleText != null)
@@ -236,7 +250,10 @@ namespace UHFPS.Runtime
                 PanelCanvasGroup.blocksRaycasts = false;
                 StartCoroutine(CanvasGroupFader.StartFade(PanelCanvasGroup, false, FadeSpeed, () =>
                 {
-                    PanelCanvasGroup.gameObject.SetActive(false);
+                    if (DialogContainer != null)
+                    {
+                        DialogContainer.SetActive(false);
+                    }
                     ResumeGame();
                 }));
             }
