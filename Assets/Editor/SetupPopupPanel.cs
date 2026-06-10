@@ -50,6 +50,13 @@ public static class SetupPopupPanel
             return;
         }
 
+        // Cargar fuente TMP y Sprite de Fondo
+        TMP_FontAsset notoThin = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/ThunderWire Studio/UHFPS/Content/Fonts/NotoSerif/TMP/Normal/Normal/NotoSerif-Thin SDF.asset");
+        TMP_FontAsset notoRegular = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/ThunderWire Studio/UHFPS/Content/Fonts/NotoSerif/TMP/Normal/Regular/NotoSerif-Regular SDF.asset");
+        if (notoRegular == null) notoRegular = notoThin;
+
+        Sprite fondoPopup = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/letreros/fondo_popup.png");
+
         // Verificar si MainDialogContainer ya existe para evitar duplicar
         Transform existingContainer = parentObj.transform.Find("MainDialogContainer");
         if (existingContainer != null)
@@ -70,7 +77,15 @@ public static class SetupPopupPanel
         containerRect.sizeDelta = new Vector2(1300, 800);
 
         Image containerImage = mainContainer.GetComponent<Image>();
-        containerImage.color = new Color(0.06f, 0.06f, 0.06f, 0.98f);
+        if (fondoPopup != null)
+        {
+            containerImage.sprite = fondoPopup;
+            containerImage.color = Color.white;
+        }
+        else
+        {
+            containerImage.color = new Color(0.06f, 0.06f, 0.06f, 0.98f);
+        }
         
         var outline = mainContainer.AddComponent<Outline>();
         outline.effectColor = new Color(0.3f, 0.3f, 0.3f, 0.4f);
@@ -82,10 +97,10 @@ public static class SetupPopupPanel
         Undo.RegisterCreatedObjectUndo(leftCol, "Crear LeftColumn");
 
         RectTransform leftColRect = leftCol.GetComponent<RectTransform>();
-        leftColRect.anchorMin = new Vector2(0f, 0.15f);
-        leftColRect.anchorMax = new Vector2(0.5f, 0.95f);
-        leftColRect.offsetMin = Vector2.zero;
-        leftColRect.offsetMax = Vector2.zero;
+        leftColRect.anchorMin = new Vector2(0f, 0.18f);
+        leftColRect.anchorMax = new Vector2(0.5f, 0.92f);
+        leftColRect.offsetMin = new Vector2(75f, 0f);
+        leftColRect.offsetMax = new Vector2(-25f, 0f);
 
         // 3. Crear TitleText (TMP)
         GameObject titleObj = new GameObject("TitleText", typeof(RectTransform), typeof(TextMeshProUGUI));
@@ -99,6 +114,7 @@ public static class SetupPopupPanel
         titleRect.offsetMax = Vector2.zero;
 
         TextMeshProUGUI titleTMP = titleObj.GetComponent<TextMeshProUGUI>();
+        if (notoThin != null) titleTMP.font = notoThin;
         titleTMP.text = "TÍTULO DEL POPUP";
         titleTMP.fontSize = 40;
         titleTMP.fontStyle = FontStyles.Bold;
@@ -115,7 +131,7 @@ public static class SetupPopupPanel
         iconRect.anchorMax = new Vector2(0.5f, 0.65f);
         iconRect.pivot = new Vector2(0.5f, 0.5f);
         iconRect.anchoredPosition = Vector2.zero;
-        iconRect.sizeDelta = new Vector2(120, 120);
+        iconRect.sizeDelta = new Vector2(110, 110);
 
         Image iconImage = iconObj.GetComponent<Image>();
         iconImage.color = Color.white;
@@ -129,12 +145,13 @@ public static class SetupPopupPanel
         Undo.RegisterCreatedObjectUndo(descObj, "Crear DescriptionText");
 
         RectTransform descRect = descObj.GetComponent<RectTransform>();
-        descRect.anchorMin = new Vector2(0.05f, 0.35f);
-        descRect.anchorMax = new Vector2(0.95f, 0.55f);
+        descRect.anchorMin = new Vector2(0f, 0.35f);
+        descRect.anchorMax = new Vector2(1f, 0.55f);
         descRect.offsetMin = Vector2.zero;
         descRect.offsetMax = Vector2.zero;
 
         TextMeshProUGUI descTMP = descObj.GetComponent<TextMeshProUGUI>();
+        if (notoRegular != null) descTMP.font = notoRegular;
         descTMP.text = "Aquí va la descripción del popup.";
         descTMP.fontSize = 24;
         descTMP.alignment = TextAlignmentOptions.MidlineLeft; // Alineado a la izquierda para coincidir con la tecla y la advertencia
@@ -146,8 +163,8 @@ public static class SetupPopupPanel
         Undo.RegisterCreatedObjectUndo(keyPromptObj, "Crear KeyPromptContainer");
 
         RectTransform keyPromptRect = keyPromptObj.GetComponent<RectTransform>();
-        keyPromptRect.anchorMin = new Vector2(0.05f, 0.20f);
-        keyPromptRect.anchorMax = new Vector2(0.95f, 0.30f);
+        keyPromptRect.anchorMin = new Vector2(0f, 0.20f);
+        keyPromptRect.anchorMax = new Vector2(1f, 0.30f);
         keyPromptRect.offsetMin = Vector2.zero;
         keyPromptRect.offsetMax = Vector2.zero;
 
@@ -190,6 +207,7 @@ public static class SetupPopupPanel
         keyIconTextRect.offsetMax = Vector2.zero;
 
         TextMeshProUGUI keyIconTextTMP = keyIconTextObj.GetComponent<TextMeshProUGUI>();
+        if (notoRegular != null) keyIconTextTMP.font = notoRegular;
         keyIconTextTMP.text = "E";
         keyIconTextTMP.fontSize = 24;
         keyIconTextTMP.fontStyle = FontStyles.Bold;
@@ -205,6 +223,7 @@ public static class SetupPopupPanel
         keyPromptTextRect.sizeDelta = new Vector2(350, 50);
 
         TextMeshProUGUI keyPromptTextTMP = keyPromptTextObj.GetComponent<TextMeshProUGUI>();
+        if (notoRegular != null) keyPromptTextTMP.font = notoRegular;
         keyPromptTextTMP.text = "para guardar.";
         keyPromptTextTMP.fontSize = 22;
         keyPromptTextTMP.alignment = TextAlignmentOptions.MidlineLeft;
@@ -216,8 +235,8 @@ public static class SetupPopupPanel
         Undo.RegisterCreatedObjectUndo(warningObj, "Crear WarningContainer");
 
         RectTransform warningRect = warningObj.GetComponent<RectTransform>();
-        warningRect.anchorMin = new Vector2(0.05f, 0.02f);
-        warningRect.anchorMax = new Vector2(0.95f, 0.15f);
+        warningRect.anchorMin = new Vector2(0f, 0.02f);
+        warningRect.anchorMax = new Vector2(1f, 0.15f);
         warningRect.offsetMin = Vector2.zero;
         warningRect.offsetMax = Vector2.zero;
 
@@ -242,9 +261,6 @@ public static class SetupPopupPanel
         warningIconImg.type = Image.Type.Simple;
         warningIconImg.preserveAspect = true;
         warningIconImg.color = new Color(0.9f, 0.2f, 0.2f, 1f); // Rojo para advertencias
-        
-        Sprite warningOutlineSprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UIOutline.psd");
-        if (warningOutlineSprite != null) warningIconImg.sprite = warningOutlineSprite;
 
         // 7b. Crear WarningText (El texto de la advertencia)
         GameObject warningTextObj = new GameObject("WarningText", typeof(RectTransform), typeof(TextMeshProUGUI));
@@ -255,6 +271,7 @@ public static class SetupPopupPanel
         warningTextRect.sizeDelta = new Vector2(350, 60);
 
         TextMeshProUGUI warningTextTMP = warningTextObj.GetComponent<TextMeshProUGUI>();
+        if (notoRegular != null) warningTextTMP.font = notoRegular;
         warningTextTMP.text = "Guarda con frecuencia. Nunca sabes lo que puede pasar.";
         warningTextTMP.fontSize = 18;
         warningTextTMP.alignment = TextAlignmentOptions.MidlineLeft;
@@ -266,10 +283,10 @@ public static class SetupPopupPanel
         Undo.RegisterCreatedObjectUndo(previewObj, "Crear PreviewImage");
 
         RectTransform previewRect = previewObj.GetComponent<RectTransform>();
-        previewRect.anchorMin = new Vector2(0.52f, 0.15f);
-        previewRect.anchorMax = new Vector2(0.98f, 0.95f);
-        previewRect.offsetMin = Vector2.zero;
-        previewRect.offsetMax = Vector2.zero;
+        previewRect.anchorMin = new Vector2(0.5f, 0.18f);
+        previewRect.anchorMax = new Vector2(1f, 0.92f);
+        previewRect.offsetMin = new Vector2(25f, 0f);
+        previewRect.offsetMax = new Vector2(-75f, 0f);
 
         Image previewImage = previewObj.GetComponent<Image>();
         previewImage.preserveAspect = true;
@@ -287,19 +304,19 @@ public static class SetupPopupPanel
         btnRect.anchorMin = new Vector2(0.5f, 0f);
         btnRect.anchorMax = new Vector2(0.5f, 0f);
         btnRect.pivot = new Vector2(0.5f, 0f);
-        btnRect.anchoredPosition = new Vector2(0, 40);
+        btnRect.anchoredPosition = new Vector2(0, 75);
         btnRect.sizeDelta = new Vector2(260, 60);
 
         Image btnImg = btnObj.GetComponent<Image>();
-        btnImg.color = new Color(0.12f, 0.12f, 0.12f, 1f);
+        btnImg.color = Color.white;
         Sprite defaultBtnBg = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UISprite.psd");
         if (defaultBtnBg != null) btnImg.sprite = defaultBtnBg;
 
         Button btnComp = btnObj.GetComponent<Button>();
         ColorBlock cb = btnComp.colors;
-        cb.normalColor = new Color(0.12f, 0.12f, 0.12f, 1f);
-        cb.highlightedColor = new Color(0.2f, 0.2f, 0.2f, 1f);
-        cb.pressedColor = new Color(0.3f, 0.3f, 0.3f, 1f);
+        cb.normalColor = new Color(0.6f, 0.05f, 0.05f, 1f); // Rojo oscuro
+        cb.highlightedColor = new Color(0.75f, 0.08f, 0.08f, 1f); // Rojo más claro al resaltar
+        cb.pressedColor = new Color(0.45f, 0.03f, 0.03f, 1f); // Rojo oscuro al presionar
         cb.selectedColor = cb.normalColor;
         btnComp.colors = cb;
 
@@ -315,6 +332,7 @@ public static class SetupPopupPanel
         btnTextRect.offsetMax = Vector2.zero;
 
         TextMeshProUGUI btnTextTMP = btnTextObj.GetComponent<TextMeshProUGUI>();
+        if (notoThin != null) btnTextTMP.font = notoThin;
         btnTextTMP.text = "ACEPTAR";
         btnTextTMP.fontSize = 22;
         btnTextTMP.fontStyle = FontStyles.Bold;
@@ -334,6 +352,7 @@ public static class SetupPopupPanel
             panelScript.PanelCanvasGroup = Undo.AddComponent<CanvasGroup>(parentObj);
         }
 
+        panelScript.DialogContainer = mainContainer;
         panelScript.TitleText = titleTMP;
         panelScript.TopicIcon = iconImage;
         panelScript.DescriptionText = descTMP;
@@ -351,8 +370,8 @@ public static class SetupPopupPanel
         EditorUtility.SetDirty(parentObj);
         EditorUtility.SetDirty(panelScript);
 
-        // Desactivar el panel principal para que empiece oculto por defecto
-        parentObj.SetActive(false);
+        // Asegurar que el panel principal empiece activo por defecto (su ocultación es por CanvasGroup)
+        parentObj.SetActive(true);
 
         // Seleccionar el objeto en el inspector
         Selection.activeGameObject = parentObj;
