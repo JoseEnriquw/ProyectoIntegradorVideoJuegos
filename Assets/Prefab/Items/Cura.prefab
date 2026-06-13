@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95280c35b4973a141aa7faeb2b789182, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.5890045
+      value: 2.884
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95280c35b4973a141aa7faeb2b789182, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.27300024
+      value: 0.639
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95280c35b4973a141aa7faeb2b789182, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.2697601
+      value: 3.987
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95280c35b4973a141aa7faeb2b789182, type: 3}
       propertyPath: m_LocalRotation.w
@@ -133,7 +133,7 @@ MonoBehaviour:
   Quantity: 1
   SlotsToExpand: 1
   ExpandRows: 0
-  UseInventoryTitle: 0
+  UseInventoryTitle: 1
   ExamineInventoryTitle: 0
   ShowExamineTitle: 1
   ShowFloatingIcon: 0
@@ -171,19 +171,7 @@ MonoBehaviour:
     volume: 0
   OnTakeEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SecuenciaSueroRealidad, Assembly-CSharp
-        m_MethodName: TomarSuero
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnExamineStartEvent:
     m_PersistentCalls:
       m_Calls: []
