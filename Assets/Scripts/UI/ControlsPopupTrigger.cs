@@ -5,7 +5,6 @@ using UHFPS.Tools;
 
 namespace UHFPS.Runtime
 {
-    [RequireComponent(typeof(Collider))]
     public class ControlsPopupTrigger : MonoBehaviour, IInteractStart
     {
         public enum TriggerTypeEnum { CollisionTrigger, DirectInteraction, CallOnly }
@@ -104,16 +103,16 @@ namespace UHFPS.Runtime
 
             // Configurar el collider para que sea trigger si se usa colisión
             Collider col = GetComponent<Collider>();
-            if (col != null)
+            if (TriggerType == TriggerTypeEnum.CollisionTrigger)
             {
-                if (TriggerType == TriggerTypeEnum.CollisionTrigger)
+                if (col != null)
                 {
                     col.isTrigger = true;
                 }
-            }
-            else
-            {
-                Debug.LogWarning($"[ControlsPopupTrigger] No se encontró un Collider en {gameObject.name}. El modo CollisionTrigger requiere un collider.");
+                else
+                {
+                    Debug.LogWarning($"[ControlsPopupTrigger] No se encontró un Collider en {gameObject.name}. El modo CollisionTrigger requiere un collider.");
+                }
             }
         }
 
