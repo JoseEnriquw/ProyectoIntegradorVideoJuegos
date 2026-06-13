@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UHFPS.Runtime;
@@ -10,6 +11,12 @@ public class PlayerSymptom : MonoBehaviour
     public enum SymptomType { None, Blur, BlackAndWhite, VHS, Drunk, Whispers, Rain }
     [Header("General Settings")]
     public bool EnableSymptoms = true;
+
+    [Header("First Symptom Event")]
+    [Tooltip("Evento que se dispara la primera vez que un síntoma se presenta en el juego.")]
+    public UnityEvent OnFirstSymptomActivated;
+
+    private bool hasTriggeredFirstSymptom = false;
 
     [Header("Timing Settings")]
     [Tooltip("Time in seconds before a new random symptom appears (used if UseRandomTimeRange is false).")]
@@ -573,6 +580,12 @@ public class PlayerSymptom : MonoBehaviour
             }
             else
             {
+                if (!hasTriggeredFirstSymptom)
+                {
+                    hasTriggeredFirstSymptom = true;
+                    OnFirstSymptomActivated?.Invoke();
+                }
+
                 // Un síntoma en curso: Aumentar su intensidad si EnableProgression es true
                 timeAlive += Time.deltaTime;
                 float progressMultiplier = 1f;
