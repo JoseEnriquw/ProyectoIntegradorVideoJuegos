@@ -2078,6 +2078,81 @@ public class BuildMainMenuBackground
         SceneView.RepaintAll();
         Debug.Log("Cinematic PS5 Post-Processing profile configured successfully (Highly Optimized).");
     }
+
+    [MenuItem("Antigravity/Configure Fog In-Place")]
+    public static void ConfigureFogInPlace()
+    {
+        GameObject root = GameObject.Find("= BACKGROUND");
+        if (root == null)
+        {
+            Debug.LogError("= BACKGROUND root not found in scene!");
+            return;
+        }
+
+        // 1. Reduce Global Fog Density to almost zero so the middle road is completely clear
+        RenderSettings.fog = true;
+        RenderSettings.fogMode = FogMode.ExponentialSquared;
+        RenderSettings.fogDensity = 0.003f; // Reveals the Matadero perfectly clear
+
+        // 2. Configure ThunderManager children states
+        GameObject thunderGo = GameObject.Find("ThunderManager");
+        if (thunderGo != null)
+        {
+            // Force active the rain system
+            Transform centralRain = thunderGo.transform.Find("Rain_Particle");
+            if (centralRain != null)
+            {
+                Undo.RegisterCompleteObjectUndo(centralRain.gameObject, "Enable Rain Particle");
+                centralRain.gameObject.SetActive(true);
+                Debug.Log("Enabled Rain_Particle under ThunderManager.");
+            }
+
+            // Force inactive the central fog system
+            Transform centralFog = thunderGo.transform.Find("Fog_Particle");
+            if (centralFog != null)
+            {
+                Undo.RegisterCompleteObjectUndo(centralFog.gameObject, "Disable Central Fog");
+                centralFog.gameObject.SetActive(false);
+                Debug.Log("Disabled default central Fog_Particle under ThunderManager.");
+            }
+        }
+
+        // 3. Load Fog_Particle prefab to instantiate on left and right
+        string fogPrefabPath = "Assets/AssetsDescargados/AdvancedMobileHorror/Prefabs/Others/Fog_Particle.prefab";
+        GameObject fogPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(fogPrefabPath);
+        if (fogPrefab == null)
+        {
+            Debug.LogError("Fog_Particle prefab not found at: " + fogPrefabPath);
+            return;
+        }
+
+        // 4. Instantiate Left Fog (force active!)
+        GameObject oldLeftFog = GameObject.Find("Left_Fog_Particles");
+        if (oldLeftFog != null) Undo.DestroyObjectImmediate(oldLeftFog);
+
+        GameObject leftFog = (GameObject)PrefabUtility.InstantiatePrefab(fogPrefab);
+        leftFog.name = "Left_Fog_Particles";
+        leftFog.transform.parent = root.transform;
+        leftFog.transform.localPosition = new Vector3(-12f, 0f, 15f);
+        leftFog.transform.localRotation = Quaternion.identity;
+        leftFog.SetActive(true); // Ensure it is active!
+        Undo.RegisterCreatedObjectUndo(leftFog, "Add Left Fog Particles");
+
+        // 5. Instantiate Right Fog (force active!)
+        GameObject oldRightFog = GameObject.Find("Right_Fog_Particles");
+        if (oldRightFog != null) Undo.DestroyObjectImmediate(oldRightFog);
+
+        GameObject rightFog = (GameObject)PrefabUtility.InstantiatePrefab(fogPrefab);
+        rightFog.name = "Right_Fog_Particles";
+        rightFog.transform.parent = root.transform;
+        rightFog.transform.localPosition = new Vector3(12f, 0f, 15f);
+        rightFog.transform.localRotation = Quaternion.identity;
+        rightFog.SetActive(true); // Ensure it is active!
+        Undo.RegisterCreatedObjectUndo(rightFog, "Add Right Fog Particles");
+
+        SceneView.RepaintAll();
+        Debug.Log("Fog configured successfully: Global density reduced, side particles activated.");
+    }
 }
 
 
