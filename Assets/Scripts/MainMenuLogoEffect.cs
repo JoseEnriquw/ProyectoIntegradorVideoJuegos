@@ -29,12 +29,7 @@ public class MainMenuLogoEffect : MonoBehaviour
         StartCoroutine(GlitchLoop());
     }
     
-    void Update()
-    {
-        // 1. Breathing Effect (pulsating local scale slowly)
-        float scaleOffset = 1f + Mathf.Sin(Time.time * breatheSpeed) * breatheAmount;
-        transform.localScale = baseScale * scaleOffset;
-    }
+
     
     IEnumerator GlitchLoop()
     {
