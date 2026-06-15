@@ -1091,6 +1091,283 @@ public class BuildMainMenuBackground
             crow3.transform.localScale = new Vector3(0.08f, 0.08f, 0.08f);
         }
 
+        // 14.7. AAA Forest Environmental Details
+        // 14.7.1. Fallen Logs
+        string logPrefabPath = "Assets/ThunderWire Studio/UHFPS/_Demo/Environment/Nature/Log/Log.prefab";
+        GameObject logPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(logPrefabPath);
+        if (logPrefab != null)
+        {
+            // Log 1: Left side, near the scarecrow
+            GameObject log1 = (GameObject)PrefabUtility.InstantiatePrefab(logPrefab);
+            log1.name = "Forest_Log_1";
+            log1.transform.parent = root.transform;
+            float l1X = -4.8f;
+            float l1Z = 3.5f;
+            float l1Y = GetTerrainHeight(l1X, l1Z, terrainComp) - 0.15f;
+            log1.transform.localPosition = new Vector3(l1X, l1Y, l1Z);
+            log1.transform.localEulerAngles = new Vector3(8f, 112f, -5f);
+            log1.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+
+            // Log 2: Right side, near the swing
+            GameObject log2 = (GameObject)PrefabUtility.InstantiatePrefab(logPrefab);
+            log2.name = "Forest_Log_2";
+            log2.transform.parent = root.transform;
+            float l2X = 4.2f;
+            float l2Z = -3.2f;
+            float l2Y = GetTerrainHeight(l2X, l2Z, terrainComp) - 0.2f;
+            log2.transform.localPosition = new Vector3(l2X, l2Y, l2Z);
+            log2.transform.localEulerAngles = new Vector3(-5f, 25f, 12f);
+            log2.transform.localScale = new Vector3(1.2f, 1.2f, 1.5f);
+        }
+
+        // 14.7.2. Mossy Rocks
+        string rockPrefabPath = "Assets/ThunderWire Studio/UHFPS/_Demo/Environment/Nature/Rock/RockB.prefab";
+        GameObject rockPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(rockPrefabPath);
+        if (rockPrefab != null)
+        {
+            // Rock 1: Right foreground
+            GameObject rock1 = (GameObject)PrefabUtility.InstantiatePrefab(rockPrefab);
+            rock1.name = "Forest_Rock_1";
+            rock1.transform.parent = root.transform;
+            float r1X = 3.8f;
+            float r1Z = -8.5f;
+            float r1Y = GetTerrainHeight(r1X, r1Z, terrainComp) - 0.3f;
+            rock1.transform.localPosition = new Vector3(r1X, r1Y, r1Z);
+            rock1.transform.localEulerAngles = new Vector3(12f, 45f, -8f);
+            rock1.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+
+            // Rock 2: Left midground, behind Epecuen sign
+            GameObject rock2 = (GameObject)PrefabUtility.InstantiatePrefab(rockPrefab);
+            rock2.name = "Forest_Rock_2";
+            rock2.transform.parent = root.transform;
+            float r2X = -5.2f;
+            float r2Z = -3.5f;
+            float r2Y = GetTerrainHeight(r2X, r2Z, terrainComp) - 0.2f;
+            rock2.transform.localPosition = new Vector3(r2X, r2Y, r2Z);
+            rock2.transform.localEulerAngles = new Vector3(-15f, 190f, 10f);
+            rock2.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+        }
+
+        // 14.7.3. Conifer Saplings (Small Trees for density)
+        string saplingPath = "Assets/Forst/Conifers [BOTD]/Render Pipeline Support/URP/Prefabs/PF Conifer Small BOTD URP.prefab";
+        GameObject saplingPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(saplingPath);
+        if (saplingPrefab != null)
+        {
+            // Spawn 16 saplings randomly in the background forest
+            Random.InitState(101); // fixed seed for consistency
+            for (int i = 0; i < 16; i++)
+            {
+                float z = Random.Range(-15f, 45f);
+                float x = Random.Range(0, 2) == 0 ? Random.Range(-18f, -7f) : Random.Range(7f, 18f);
+                GameObject sapling = (GameObject)PrefabUtility.InstantiatePrefab(saplingPrefab);
+                sapling.name = "Forest_Sapling_" + i;
+                sapling.transform.parent = root.transform;
+                float worldY = GetTerrainHeight(x, z, terrainComp) - 0.15f;
+                sapling.transform.localPosition = new Vector3(x, worldY, z);
+                sapling.transform.localEulerAngles = new Vector3(Random.Range(-3f, 3f), Random.Range(0f, 360f), Random.Range(-3f, 3f));
+                float scale = Random.Range(0.4f, 0.8f);
+                sapling.transform.localScale = new Vector3(scale, scale, scale);
+            }
+        }
+
+        // 14.7.4. Ground Foliage (Ferns and Dry Bushes)
+        string fernAPath = "Assets/Samples/Shader Graph/17.3.0/Production Ready Shaders/Environment/Details/Ferns/Fern_A.prefab";
+        string fernBPath = "Assets/Samples/Shader Graph/17.3.0/Production Ready Shaders/Environment/Details/Ferns/Fern_B.prefab";
+        GameObject fernAPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(fernAPath);
+        GameObject fernBPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(fernBPath);
+        
+        string bushPath = "Assets/TerrainSampleAssets/Prefabs/BushDry_A.prefab";
+        GameObject bushPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(bushPath);
+
+        // Spawn ferns near logs and rocks
+        GameObject foliageGroup = new GameObject("Ground_Foliage");
+        foliageGroup.transform.parent = root.transform;
+
+        if (fernAPrefab != null && fernBPrefab != null)
+        {
+            // Fern clusters around Log 1 (Left)
+            for (int i = 0; i < 4; i++)
+            {
+                GameObject fern = (GameObject)PrefabUtility.InstantiatePrefab(i % 2 == 0 ? fernAPrefab : fernBPrefab);
+                fern.name = "Fern_Log1_" + i;
+                fern.transform.parent = foliageGroup.transform;
+                float fx = -4.8f + Random.Range(-0.8f, 0.8f);
+                float fz = 3.5f + Random.Range(-1.2f, 1.2f);
+                float fy = GetTerrainHeight(fx, fz, terrainComp) - 0.05f;
+                fern.transform.localPosition = new Vector3(fx, fy, fz);
+                fern.transform.localEulerAngles = new Vector3(0f, Random.Range(0f, 360f), 0f);
+                float scale = Random.Range(0.8f, 1.3f);
+                fern.transform.localScale = new Vector3(scale, scale, scale);
+            }
+
+            // Fern clusters around Log 2 (Right)
+            for (int i = 0; i < 4; i++)
+            {
+                GameObject fern = (GameObject)PrefabUtility.InstantiatePrefab(i % 2 == 0 ? fernAPrefab : fernBPrefab);
+                fern.name = "Fern_Log2_" + i;
+                fern.transform.parent = foliageGroup.transform;
+                float fx = 4.2f + Random.Range(-0.8f, 0.8f);
+                float fz = -3.2f + Random.Range(-1.2f, 1.2f);
+                float fy = GetTerrainHeight(fx, fz, terrainComp) - 0.05f;
+                fern.transform.localPosition = new Vector3(fx, fy, fz);
+                fern.transform.localEulerAngles = new Vector3(0f, Random.Range(0f, 360f), 0f);
+                float scale = Random.Range(0.8f, 1.3f);
+                fern.transform.localScale = new Vector3(scale, scale, scale);
+            }
+
+            // Fern clusters around Rock 1 (Right foreground)
+            for (int i = 0; i < 3; i++)
+            {
+                GameObject fern = (GameObject)PrefabUtility.InstantiatePrefab(fernAPrefab);
+                fern.name = "Fern_Rock1_" + i;
+                fern.transform.parent = foliageGroup.transform;
+                float fx = 3.8f + Random.Range(-0.6f, 0.6f);
+                float fz = -8.5f + Random.Range(-0.6f, 0.6f);
+                float fy = GetTerrainHeight(fx, fz, terrainComp) - 0.05f;
+                fern.transform.localPosition = new Vector3(fx, fy, fz);
+                fern.transform.localEulerAngles = new Vector3(0f, Random.Range(0f, 360f), 0f);
+                float scale = Random.Range(0.9f, 1.2f);
+                fern.transform.localScale = new Vector3(scale, scale, scale);
+            }
+        }
+
+        if (bushPrefab != null)
+        {
+            // Spawn dry bushes along the tree line to hide bases
+            for (int i = 0; i < 8; i++)
+            {
+                GameObject bush = (GameObject)PrefabUtility.InstantiatePrefab(bushPrefab);
+                bush.name = "Dry_Bush_" + i;
+                bush.transform.parent = foliageGroup.transform;
+                float bx = i % 2 == 0 ? Random.Range(-14f, -6f) : Random.Range(6f, 14f);
+                float bz = Random.Range(-10f, 30f);
+                float by = GetTerrainHeight(bx, bz, terrainComp) - 0.1f;
+                bush.transform.localPosition = new Vector3(bx, by, bz);
+                bush.transform.localEulerAngles = new Vector3(0f, Random.Range(0f, 360f), 0f);
+                float scale = Random.Range(1.2f, 1.8f);
+                bush.transform.localScale = new Vector3(scale, scale, scale);
+            }
+        }
+
+        // 14.7.5. Grass Shoulders along Fences (Vallas)
+        string grassPath = "Assets/ThunderWire Studio/UHFPS/_Demo/Environment/Nature/GrassB/GrassB.prefab";
+        GameObject grassPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(grassPath);
+        if (grassPrefab != null)
+        {
+            // Place grass clumps at each fence post interval
+            float zStart = -15f;
+            float zEnd = 28f;
+            float step = 4.3f;
+            float leftX = -4.0f;
+            float rightX = 4.0f;
+
+            for (float zVal = zStart; zVal <= zEnd; zVal += step)
+            {
+                // Left Grass
+                if (zVal < -3f || zVal > 2f) // Skip welcome sign area
+                {
+                    for (int j = 0; j < 2; j++)
+                    {
+                        GameObject grass = (GameObject)PrefabUtility.InstantiatePrefab(grassPrefab);
+                        grass.name = "Grass_L_" + zVal + "_" + j;
+                        grass.transform.parent = foliageGroup.transform;
+                        float gx = leftX + Random.Range(-0.3f, 0.3f);
+                        float gz = zVal + Random.Range(-0.5f, 0.5f);
+                        float gy = GetTerrainHeight(gx, gz, terrainComp) - 0.05f;
+                        grass.transform.localPosition = new Vector3(gx, gy, gz);
+                        grass.transform.localEulerAngles = new Vector3(0f, Random.Range(0f, 360f), 0f);
+                        float scale = Random.Range(1.3f, 1.7f);
+                        grass.transform.localScale = new Vector3(scale, scale, scale);
+                    }
+                }
+
+                // Right Grass
+                for (int j = 0; j < 2; j++)
+                {
+                    GameObject grass = (GameObject)PrefabUtility.InstantiatePrefab(grassPrefab);
+                    grass.name = "Grass_R_" + zVal + "_" + j;
+                    grass.transform.parent = foliageGroup.transform;
+                    float gx = rightX + Random.Range(-0.3f, 0.3f);
+                    float gz = zVal + Random.Range(-0.5f, 0.5f);
+                    float gy = GetTerrainHeight(gx, gz, terrainComp) - 0.05f;
+                    grass.transform.localPosition = new Vector3(gx, gy, gz);
+                    grass.transform.localEulerAngles = new Vector3(0f, Random.Range(0f, 360f), 0f);
+                    float scale = Random.Range(1.3f, 1.7f);
+                    grass.transform.localScale = new Vector3(scale, scale, scale);
+                }
+            }
+        }
+
+        // 14.7.6. Ground Ritual Candles (Flickering candlelight on the soil)
+        string candlePrefabPath = "Assets/AssetsDescargados/Bosque/Prefaps/Candle.prefab";
+        GameObject groundCandlePrefab = AssetDatabase.LoadAssetAtPath<GameObject>(candlePrefabPath);
+        if (groundCandlePrefab != null)
+        {
+            // Ground Candle 1: Base of the Gallows (Ahorcado)
+            GameObject gc1 = (GameObject)PrefabUtility.InstantiatePrefab(groundCandlePrefab);
+            gc1.name = "Ground_Candle_Gallows";
+            gc1.transform.parent = root.transform;
+            float gc1X = 4.8f;
+            float gc1Z = 19.5f;
+            float gc1Y = GetTerrainHeight(gc1X, gc1Z, terrainComp) - 0.02f;
+            gc1.transform.localPosition = new Vector3(gc1X, gc1Y, gc1Z);
+            gc1.transform.localEulerAngles = Vector3.zero;
+            gc1.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+
+            Light gc1Light = gc1.GetComponentInChildren<Light>();
+            if (gc1Light == null)
+            {
+                GameObject gc1LightGo = new GameObject("Candle_Light");
+                gc1LightGo.transform.parent = gc1.transform;
+                gc1LightGo.transform.localPosition = new Vector3(0f, 0.2f, 0f);
+                gc1Light = gc1LightGo.AddComponent<Light>();
+                gc1Light.type = LightType.Point;
+                gc1LightGo.AddComponent<UniversalAdditionalLightData>();
+            }
+            gc1Light.color = new Color(0.98f, 0.45f, 0.08f);
+            gc1Light.intensity = 3.5f;
+            gc1Light.range = 5.0f;
+            gc1Light.shadows = LightShadows.Soft;
+
+            var gc1Flicker = gc1Light.gameObject.GetComponent<MainMenuLightFlicker>();
+            if (gc1Flicker == null) gc1Flicker = gc1Light.gameObject.AddComponent<MainMenuLightFlicker>();
+            gc1Flicker.flickerSpeed = 0.22f;
+            gc1Flicker.minIntensityMultiplier = 0.65f;
+            gc1Flicker.maxIntensityMultiplier = 1.35f;
+
+            // Ground Candle 2: Base of the Shrine (Santuario)
+            GameObject gc2 = (GameObject)PrefabUtility.InstantiatePrefab(groundCandlePrefab);
+            gc2.name = "Ground_Candle_Shrine";
+            gc2.transform.parent = root.transform;
+            float gc2X = -3.4f;
+            float gc2Z = -2.2f;
+            float gc2Y = GetTerrainHeight(gc2X, gc2Z, terrainComp) - 0.02f;
+            gc2.transform.localPosition = new Vector3(gc2X, gc2Y, gc2Z);
+            gc2.transform.localEulerAngles = Vector3.zero;
+            gc2.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+
+            Light gc2Light = gc2.GetComponentInChildren<Light>();
+            if (gc2Light == null)
+            {
+                GameObject gc2LightGo = new GameObject("Candle_Light");
+                gc2LightGo.transform.parent = gc2.transform;
+                gc2LightGo.transform.localPosition = new Vector3(0f, 0.2f, 0f);
+                gc2Light = gc2LightGo.AddComponent<Light>();
+                gc2Light.type = LightType.Point;
+                gc2LightGo.AddComponent<UniversalAdditionalLightData>();
+            }
+            gc2Light.color = new Color(0.98f, 0.45f, 0.08f);
+            gc2Light.intensity = 3.5f;
+            gc2Light.range = 5.0f;
+            gc2Light.shadows = LightShadows.Soft;
+
+            var gc2Flicker = gc2Light.gameObject.GetComponent<MainMenuLightFlicker>();
+            if (gc2Flicker == null) gc2Flicker = gc2Light.gameObject.AddComponent<MainMenuLightFlicker>();
+            gc2Flicker.flickerSpeed = 0.22f;
+            gc2Flicker.minIntensityMultiplier = 0.65f;
+            gc2Flicker.maxIntensityMultiplier = 1.35f;
+        }
+
         // Force scene view update
         SceneView.RepaintAll();
         EditorUtility.SetDirty(root);
@@ -1178,4 +1455,400 @@ public class BuildMainMenuBackground
         SceneView.RepaintAll();
         Debug.Log("Crow and Blood Decal added/refreshed on sign successfully in-place!");
     }
+
+    [MenuItem("Antigravity/Fix Black Screen UI")]
+    public static void FixBlackScreenUI()
+    {
+        GameObject mainMenuGo = GameObject.Find("MAINMENU");
+        if (mainMenuGo != null)
+        {
+            Transform canvasTrans = mainMenuGo.transform.Find("Canvas");
+            if (canvasTrans != null)
+            {
+                Transform bgTrans = canvasTrans.Find("Background");
+                if (bgTrans != null)
+                {
+                    var bgImage = bgTrans.GetComponent<UnityEngine.UI.Image>();
+                    if (bgImage != null)
+                    {
+                        Undo.RecordObject(bgImage, "Disable solid black background image");
+                        bgImage.enabled = false;
+                        Debug.Log("UI Background Image disabled successfully!");
+                    }
+                }
+            }
+        }
+        SceneView.RepaintAll();
+    }
+
+    [MenuItem("Antigravity/Add AAA Detailing In-Place")]
+    public static void AddAAADetailingInPlace()
+    {
+        GameObject root = GameObject.Find("= BACKGROUND");
+        if (root == null)
+        {
+            Debug.LogError("= BACKGROUND root not found in scene!");
+            return;
+        }
+
+        Terrain terrainComp = root.GetComponentInChildren<Terrain>();
+        if (terrainComp == null)
+        {
+            Debug.LogError("Terrain component not found in background!");
+            return;
+        }
+
+        // 1. Fallen Logs
+        string logPrefabPath = "Assets/ThunderWire Studio/UHFPS/_Demo/Environment/Nature/Log/Log.prefab";
+        GameObject logPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(logPrefabPath);
+        if (logPrefab != null)
+        {
+            if (GameObject.Find("Forest_Log_1") == null)
+            {
+                GameObject log1 = (GameObject)PrefabUtility.InstantiatePrefab(logPrefab);
+                log1.name = "Forest_Log_1";
+                log1.transform.parent = root.transform;
+                float l1X = -4.8f;
+                float l1Z = 3.5f;
+                float l1Y = GetTerrainHeight(l1X, l1Z, terrainComp) - 0.15f;
+                log1.transform.localPosition = new Vector3(l1X, l1Y, l1Z);
+                log1.transform.localEulerAngles = new Vector3(8f, 112f, -5f);
+                log1.transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+                Undo.RegisterCreatedObjectUndo(log1, "Add Log 1");
+            }
+
+            if (GameObject.Find("Forest_Log_2") == null)
+            {
+                GameObject log2 = (GameObject)PrefabUtility.InstantiatePrefab(logPrefab);
+                log2.name = "Forest_Log_2";
+                log2.transform.parent = root.transform;
+                float l2X = 4.2f;
+                float l2Z = -3.2f;
+                float l2Y = GetTerrainHeight(l2X, l2Z, terrainComp) - 0.2f;
+                log2.transform.localPosition = new Vector3(l2X, l2Y, l2Z);
+                log2.transform.localEulerAngles = new Vector3(-5f, 25f, 12f);
+                log2.transform.localScale = new Vector3(1.2f, 1.2f, 1.5f);
+                Undo.RegisterCreatedObjectUndo(log2, "Add Log 2");
+            }
+        }
+
+        // 2. Mossy Rocks
+        string rockPrefabPath = "Assets/ThunderWire Studio/UHFPS/_Demo/Environment/Nature/Rock/RockB.prefab";
+        GameObject rockPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(rockPrefabPath);
+        if (rockPrefab != null)
+        {
+            if (GameObject.Find("Forest_Rock_1") == null)
+            {
+                GameObject rock1 = (GameObject)PrefabUtility.InstantiatePrefab(rockPrefab);
+                rock1.name = "Forest_Rock_1";
+                rock1.transform.parent = root.transform;
+                float r1X = 3.8f;
+                float r1Z = -8.5f;
+                float r1Y = GetTerrainHeight(r1X, r1Z, terrainComp) - 0.3f;
+                rock1.transform.localPosition = new Vector3(r1X, r1Y, r1Z);
+                rock1.transform.localEulerAngles = new Vector3(12f, 45f, -8f);
+                rock1.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+                Undo.RegisterCreatedObjectUndo(rock1, "Add Rock 1");
+            }
+
+            if (GameObject.Find("Forest_Rock_2") == null)
+            {
+                GameObject rock2 = (GameObject)PrefabUtility.InstantiatePrefab(rockPrefab);
+                rock2.name = "Forest_Rock_2";
+                rock2.transform.parent = root.transform;
+                float r2X = -5.2f;
+                float r2Z = -3.5f;
+                float r2Y = GetTerrainHeight(r2X, r2Z, terrainComp) - 0.2f;
+                rock2.transform.localPosition = new Vector3(r2X, r2Y, r2Z);
+                rock2.transform.localEulerAngles = new Vector3(-15f, 190f, 10f);
+                rock2.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+                Undo.RegisterCreatedObjectUndo(rock2, "Add Rock 2");
+            }
+        }
+
+        // 3. Conifer Saplings
+        string saplingPath = "Assets/Forst/Conifers [BOTD]/Render Pipeline Support/URP/Prefabs/PF Conifer Small BOTD URP.prefab";
+        GameObject saplingPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(saplingPath);
+        if (saplingPrefab != null)
+        {
+            if (GameObject.Find("Forest_Sapling_0") == null)
+            {
+                Random.InitState(101);
+                for (int i = 0; i < 16; i++)
+                {
+                    float z = Random.Range(-15f, 45f);
+                    float x = Random.Range(0, 2) == 0 ? Random.Range(-18f, -7f) : Random.Range(7f, 18f);
+                    GameObject sapling = (GameObject)PrefabUtility.InstantiatePrefab(saplingPrefab);
+                    sapling.name = "Forest_Sapling_" + i;
+                    sapling.transform.parent = root.transform;
+                    float worldY = GetTerrainHeight(x, z, terrainComp) - 0.15f;
+                    sapling.transform.localPosition = new Vector3(x, worldY, z);
+                    sapling.transform.localEulerAngles = new Vector3(Random.Range(-3f, 3f), Random.Range(0f, 360f), Random.Range(-3f, 3f));
+                    float scale = Random.Range(0.4f, 0.8f);
+                    sapling.transform.localScale = new Vector3(scale, scale, scale);
+                    Undo.RegisterCreatedObjectUndo(sapling, "Add Sapling " + i);
+                }
+            }
+        }
+
+        // 4. Ground Foliage
+        GameObject foliageGroup = GameObject.Find("Ground_Foliage");
+        if (foliageGroup == null)
+        {
+            foliageGroup = new GameObject("Ground_Foliage");
+            foliageGroup.transform.parent = root.transform;
+            Undo.RegisterCreatedObjectUndo(foliageGroup, "Create Ground Foliage Group");
+
+            string fernAPath = "Assets/Samples/Shader Graph/17.3.0/Production Ready Shaders/Environment/Details/Ferns/Fern_A.prefab";
+            string fernBPath = "Assets/Samples/Shader Graph/17.3.0/Production Ready Shaders/Environment/Details/Ferns/Fern_B.prefab";
+            GameObject fernAPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(fernAPath);
+            GameObject fernBPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(fernBPath);
+            string bushPath = "Assets/TerrainSampleAssets/Prefabs/BushDry_A.prefab";
+            GameObject bushPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(bushPath);
+
+            if (fernAPrefab != null && fernBPrefab != null)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    GameObject fern = (GameObject)PrefabUtility.InstantiatePrefab(i % 2 == 0 ? fernAPrefab : fernBPrefab);
+                    fern.name = "Fern_Log1_" + i;
+                    fern.transform.parent = foliageGroup.transform;
+                    float fx = -4.8f + Random.Range(-0.8f, 0.8f);
+                    float fz = 3.5f + Random.Range(-1.2f, 1.2f);
+                    float fy = GetTerrainHeight(fx, fz, terrainComp) - 0.05f;
+                    fern.transform.localPosition = new Vector3(fx, fy, fz);
+                    fern.transform.localEulerAngles = new Vector3(0f, Random.Range(0f, 360f), 0f);
+                    float scale = Random.Range(0.8f, 1.3f);
+                    fern.transform.localScale = new Vector3(scale, scale, scale);
+                }
+
+                for (int i = 0; i < 4; i++)
+                {
+                    GameObject fern = (GameObject)PrefabUtility.InstantiatePrefab(i % 2 == 0 ? fernAPrefab : fernBPrefab);
+                    fern.name = "Fern_Log2_" + i;
+                    fern.transform.parent = foliageGroup.transform;
+                    float fx = 4.2f + Random.Range(-0.8f, 0.8f);
+                    float fz = -3.2f + Random.Range(-1.2f, 1.2f);
+                    float fy = GetTerrainHeight(fx, fz, terrainComp) - 0.05f;
+                    fern.transform.localPosition = new Vector3(fx, fy, fz);
+                    fern.transform.localEulerAngles = new Vector3(0f, Random.Range(0f, 360f), 0f);
+                    float scale = Random.Range(0.8f, 1.3f);
+                    fern.transform.localScale = new Vector3(scale, scale, scale);
+                }
+
+                for (int i = 0; i < 3; i++)
+                {
+                    GameObject fern = (GameObject)PrefabUtility.InstantiatePrefab(fernAPrefab);
+                    fern.name = "Fern_Rock1_" + i;
+                    fern.transform.parent = foliageGroup.transform;
+                    float fx = 3.8f + Random.Range(-0.6f, 0.6f);
+                    float fz = -8.5f + Random.Range(-0.6f, 0.6f);
+                    float fy = GetTerrainHeight(fx, fz, terrainComp) - 0.05f;
+                    fern.transform.localPosition = new Vector3(fx, fy, fz);
+                    fern.transform.localEulerAngles = new Vector3(0f, Random.Range(0f, 360f), 0f);
+                    float scale = Random.Range(0.9f, 1.2f);
+                    fern.transform.localScale = new Vector3(scale, scale, scale);
+                }
+            }
+
+            if (bushPrefab != null)
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    GameObject bush = (GameObject)PrefabUtility.InstantiatePrefab(bushPrefab);
+                    bush.name = "Dry_Bush_" + i;
+                    bush.transform.parent = foliageGroup.transform;
+                    float bx = i % 2 == 0 ? Random.Range(-14f, -6f) : Random.Range(6f, 14f);
+                    float bz = Random.Range(-10f, 30f);
+                    float by = GetTerrainHeight(bx, bz, terrainComp) - 0.1f;
+                    bush.transform.localPosition = new Vector3(bx, by, bz);
+                    bush.transform.localEulerAngles = new Vector3(0f, Random.Range(0f, 360f), 0f);
+                    float scale = Random.Range(1.2f, 1.8f);
+                    bush.transform.localScale = new Vector3(scale, scale, scale);
+                }
+            }
+
+            // 5. Grass
+            string grassPath = "Assets/ThunderWire Studio/UHFPS/_Demo/Environment/Nature/GrassB/GrassB.prefab";
+            GameObject grassPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(grassPath);
+            if (grassPrefab != null)
+            {
+                float zStart = -15f;
+                float zEnd = 28f;
+                float step = 4.3f;
+                float leftX = -4.0f;
+                float rightX = 4.0f;
+
+                for (float zVal = zStart; zVal <= zEnd; zVal += step)
+                {
+                    if (zVal < -3f || zVal > 2f)
+                    {
+                        for (int j = 0; j < 2; j++)
+                        {
+                            GameObject grass = (GameObject)PrefabUtility.InstantiatePrefab(grassPrefab);
+                            grass.name = "Grass_L_" + zVal + "_" + j;
+                            grass.transform.parent = foliageGroup.transform;
+                            float gx = leftX + Random.Range(-0.3f, 0.3f);
+                            float gz = zVal + Random.Range(-0.5f, 0.5f);
+                            float gy = GetTerrainHeight(gx, gz, terrainComp) - 0.05f;
+                            grass.transform.localPosition = new Vector3(gx, gy, gz);
+                            grass.transform.localEulerAngles = new Vector3(0f, Random.Range(0f, 360f), 0f);
+                            float scale = Random.Range(1.3f, 1.7f);
+                            grass.transform.localScale = new Vector3(scale, scale, scale);
+                        }
+                    }
+
+                    for (int j = 0; j < 2; j++)
+                    {
+                        GameObject grass = (GameObject)PrefabUtility.InstantiatePrefab(grassPrefab);
+                        grass.name = "Grass_R_" + zVal + "_" + j;
+                        grass.transform.parent = foliageGroup.transform;
+                        float gx = rightX + Random.Range(-0.3f, 0.3f);
+                        float gz = zVal + Random.Range(-0.5f, 0.5f);
+                        float gy = GetTerrainHeight(gx, gz, terrainComp) - 0.05f;
+                        grass.transform.localPosition = new Vector3(gx, gy, gz);
+                        grass.transform.localEulerAngles = new Vector3(0f, Random.Range(0f, 360f), 0f);
+                        float scale = Random.Range(1.3f, 1.7f);
+                        grass.transform.localScale = new Vector3(scale, scale, scale);
+                    }
+                }
+            }
+        }
+
+        // 6. Ground Ritual Candles
+        string candlePrefabPath = "Assets/AssetsDescargados/Bosque/Prefaps/Candle.prefab";
+        GameObject groundCandlePrefab = AssetDatabase.LoadAssetAtPath<GameObject>(candlePrefabPath);
+        if (groundCandlePrefab != null)
+        {
+            if (GameObject.Find("Ground_Candle_Gallows") == null)
+            {
+                GameObject gc1 = (GameObject)PrefabUtility.InstantiatePrefab(groundCandlePrefab);
+                gc1.name = "Ground_Candle_Gallows";
+                gc1.transform.parent = root.transform;
+                float gc1X = 4.8f;
+                float gc1Z = 19.5f;
+                float gc1Y = GetTerrainHeight(gc1X, gc1Z, terrainComp) - 0.02f;
+                gc1.transform.localPosition = new Vector3(gc1X, gc1Y, gc1Z);
+                gc1.transform.localEulerAngles = Vector3.zero;
+                gc1.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+
+                Light gc1Light = gc1.GetComponentInChildren<Light>();
+                if (gc1Light == null)
+                {
+                    GameObject gc1LightGo = new GameObject("Candle_Light");
+                    gc1LightGo.transform.parent = gc1.transform;
+                    gc1LightGo.transform.localPosition = new Vector3(0f, 0.2f, 0f);
+                    gc1Light = gc1LightGo.AddComponent<Light>();
+                    gc1Light.type = LightType.Point;
+                    gc1LightGo.AddComponent<UniversalAdditionalLightData>();
+                }
+                gc1Light.color = new Color(0.98f, 0.45f, 0.08f);
+                gc1Light.intensity = 3.5f;
+                gc1Light.range = 5.0f;
+                gc1Light.shadows = LightShadows.Soft;
+
+                var gc1Flicker = gc1Light.gameObject.GetComponent<MainMenuLightFlicker>();
+                if (gc1Flicker == null) gc1Flicker = gc1Light.gameObject.AddComponent<MainMenuLightFlicker>();
+                gc1Flicker.flickerSpeed = 0.22f;
+                gc1Flicker.minIntensityMultiplier = 0.65f;
+                gc1Flicker.maxIntensityMultiplier = 1.35f;
+                Undo.RegisterCreatedObjectUndo(gc1, "Add Ground Candle 1");
+            }
+
+            if (GameObject.Find("Ground_Candle_Shrine") == null)
+            {
+                GameObject gc2 = (GameObject)PrefabUtility.InstantiatePrefab(groundCandlePrefab);
+                gc2.name = "Ground_Candle_Shrine";
+                gc2.transform.parent = root.transform;
+                float gc2X = -3.4f;
+                float gc2Z = -2.2f;
+                float gc2Y = GetTerrainHeight(gc2X, gc2Z, terrainComp) - 0.02f;
+                gc2.transform.localPosition = new Vector3(gc2X, gc2Y, gc2Z);
+                gc2.transform.localEulerAngles = Vector3.zero;
+                gc2.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+
+                Light gc2Light = gc2.GetComponentInChildren<Light>();
+                if (gc2Light == null)
+                {
+                    GameObject gc2LightGo = new GameObject("Candle_Light");
+                    gc2LightGo.transform.parent = gc2.transform;
+                    gc2LightGo.transform.localPosition = new Vector3(0f, 0.2f, 0f);
+                    gc2Light = gc2LightGo.AddComponent<Light>();
+                    gc2Light.type = LightType.Point;
+                    gc2LightGo.AddComponent<UniversalAdditionalLightData>();
+                }
+                gc2Light.color = new Color(0.98f, 0.45f, 0.08f);
+                gc2Light.intensity = 3.5f;
+                gc2Light.range = 5.0f;
+                gc2Light.shadows = LightShadows.Soft;
+
+                var gc2Flicker = gc2Light.gameObject.GetComponent<MainMenuLightFlicker>();
+                if (gc2Flicker == null) gc2Flicker = gc2Light.gameObject.AddComponent<MainMenuLightFlicker>();
+                gc2Flicker.flickerSpeed = 0.22f;
+                gc2Flicker.minIntensityMultiplier = 0.65f;
+                gc2Flicker.maxIntensityMultiplier = 1.35f;
+                Undo.RegisterCreatedObjectUndo(gc2, "Add Ground Candle 2");
+            }
+        }
+
+        SceneView.RepaintAll();
+        Debug.Log("AAA Detailing added successfully in-place without overwriting existing assets!");
+    }
+
+    [MenuItem("Antigravity/Add Weather In-Place")]
+    public static void AddWeatherInPlace()
+    {
+        string thunderManagerPath = "Assets/AssetsDescargados/AdvancedMobileHorror/Prefabs/Managers/ThunderManager.prefab";
+        GameObject thunderPrefab = AssetDatabase.LoadAssetAtPath<GameObject>(thunderManagerPath);
+        if (thunderPrefab == null)
+        {
+            Debug.LogError("ThunderManager prefab not found at: " + thunderManagerPath);
+            return;
+        }
+
+        // Find existing ThunderManager in the scene
+        var existingManager = Object.FindAnyObjectByType<AdvancedHorrorFPS.ThunderManager>();
+        if (existingManager != null)
+        {
+            Debug.Log("ThunderManager already exists in the scene.");
+            // Make sure MainMenuThunderShadows is attached
+            var shadowsComp = existingManager.gameObject.GetComponent<MainMenuThunderShadows>();
+            if (shadowsComp == null)
+            {
+                shadowsComp = Undo.AddComponent<MainMenuThunderShadows>(existingManager.gameObject);
+                shadowsComp.maxAngleDriftY = 10f;
+                shadowsComp.maxAngleDriftX = 5f;
+                shadowsComp.speedX = 28f;
+                shadowsComp.speedY = 38f;
+                Debug.Log("Attached MainMenuThunderShadows to existing ThunderManager.");
+            }
+            return;
+        }
+
+        GameObject root = GameObject.Find("= BACKGROUND");
+        Transform parentTrans = root != null ? root.transform : null;
+
+        GameObject thunderGo = (GameObject)PrefabUtility.InstantiatePrefab(thunderPrefab);
+        thunderGo.name = "ThunderManager";
+        thunderGo.transform.parent = parentTrans;
+        thunderGo.transform.localPosition = Vector3.zero;
+        thunderGo.transform.localRotation = Quaternion.identity;
+
+        // Attach MainMenuThunderShadows
+        var shadows = thunderGo.GetComponent<MainMenuThunderShadows>();
+        if (shadows == null)
+        {
+            shadows = Undo.AddComponent<MainMenuThunderShadows>(thunderGo);
+        }
+        shadows.maxAngleDriftY = 10f;
+        shadows.maxAngleDriftX = 5f;
+        shadows.speedX = 28f;
+        shadows.speedY = 38f;
+
+        Undo.RegisterCreatedObjectUndo(thunderGo, "Add ThunderManager");
+
+        SceneView.RepaintAll();
+        Debug.Log("ThunderManager (with rain and thunder) added successfully in-place!");
+    }
 }
+
