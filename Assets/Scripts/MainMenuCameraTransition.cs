@@ -16,6 +16,9 @@ public class MainMenuCameraTransition : MonoBehaviour
     
     public Vector3 loadPosOffset = new Vector3(0.8f, -0.4f, 4f);
     public Vector3 loadRotOffset = new Vector3(4f, -8f, 0f);
+
+    [Header("Dynamic Targets")]
+    public Transform optionsTarget;
     
     private Vector3 defaultPos;
     private Quaternion defaultRot;
@@ -41,6 +44,16 @@ public class MainMenuCameraTransition : MonoBehaviour
             cameraBreathing.startPosition = defaultPos;
             cameraBreathing.startRotation = defaultRot;
         }
+
+        // Auto-find Gauchito if not set
+        if (optionsTarget == null)
+        {
+            GameObject gauchitoGo = GameObject.Find("Gauchito");
+            if (gauchitoGo != null)
+            {
+                optionsTarget = gauchitoGo.transform;
+            }
+        }
     }
     
     void Update()
@@ -48,8 +61,18 @@ public class MainMenuCameraTransition : MonoBehaviour
         // 1. Determine Target position and rotation based on which panel is active
         if (optionsPanel != null && optionsPanel.activeInHierarchy)
         {
-            targetPos = defaultPos + optionsPosOffset;
-            targetRot = Quaternion.Euler(defaultRot.eulerAngles + optionsRotOffset);
+            if (optionsTarget != null)
+            {
+                // Position camera offset from Gauchito, looking towards it
+                targetPos = optionsTarget.position + new Vector3(-1.0f, 0.7f, -2.2f);
+                Vector3 lookDir = (optionsTarget.position + new Vector3(0f, 0.3f, 0f)) - targetPos;
+                targetRot = Quaternion.LookRotation(lookDir);
+            }
+            else
+            {
+                targetPos = defaultPos + optionsPosOffset;
+                targetRot = Quaternion.Euler(defaultRot.eulerAngles + optionsRotOffset);
+            }
         }
         else if (loadGamePanel != null && loadGamePanel.activeInHierarchy)
         {
