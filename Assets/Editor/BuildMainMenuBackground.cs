@@ -1850,5 +1850,234 @@ public class BuildMainMenuBackground
         SceneView.RepaintAll();
         Debug.Log("ThunderManager (with rain and thunder) added successfully in-place!");
     }
+
+    [MenuItem("Antigravity/Add Spooky Details In-Place")]
+    public static void AddSpookyDetailsInPlace()
+    {
+        GameObject root = GameObject.Find("= BACKGROUND");
+        if (root == null)
+        {
+            Debug.LogError("= BACKGROUND root not found in scene!");
+            return;
+        }
+
+        // 1. Streetlight Moths Particle System
+        GameObject pole = GameObject.Find("Creepy_LightPole");
+        if (pole != null)
+        {
+            Transform existingMoths = pole.transform.Find("StreetLight_Moths");
+            if (existingMoths == null)
+            {
+                GameObject mothsGo = new GameObject("StreetLight_Moths");
+                mothsGo.transform.parent = pole.transform;
+                // Position it at the bulb
+                mothsGo.transform.localPosition = new Vector3(0f, 4.5f, -1.0f);
+                mothsGo.transform.localRotation = Quaternion.identity;
+
+                ParticleSystem ps = mothsGo.AddComponent<ParticleSystem>();
+                
+                // Configure Main module
+                var main = ps.main;
+                main.startLifetime = 1.2f;
+                main.startSize = 0.04f;
+                main.startSpeed = 0.3f;
+                main.maxParticles = 15;
+                main.simulationSpace = ParticleSystemSimulationSpace.Local;
+                main.loop = true;
+                main.playOnAwake = true;
+
+                // Configure Emission module
+                var emission = ps.emission;
+                emission.rateOverTime = 6f;
+
+                // Configure Shape module
+                var shape = ps.shape;
+                shape.shapeType = ParticleSystemShapeType.Sphere;
+                shape.radius = 0.4f;
+
+                // Configure Noise module for fluttering motion
+                var noise = ps.noise;
+                noise.enabled = true;
+                noise.strength = 0.8f;
+                noise.frequency = 2.0f;
+                noise.scrollSpeed = 1.0f;
+                noise.damping = true;
+
+                // Configure Color over Lifetime
+                var colorOverLifetime = ps.colorOverLifetime;
+                colorOverLifetime.enabled = true;
+                Gradient grad = new Gradient();
+                grad.SetKeys(
+                    new GradientColorKey[] { new GradientColorKey(new Color(0.8f, 0.7f, 0.4f), 0.0f), new GradientColorKey(new Color(0.8f, 0.7f, 0.4f), 1.0f) },
+                    new GradientAlphaKey[] { new GradientAlphaKey(0.0f, 0.0f), new GradientAlphaKey(0.8f, 0.2f), new GradientAlphaKey(0.8f, 0.8f), new GradientAlphaKey(0.0f, 1.0f) }
+                );
+                colorOverLifetime.color = new ParticleSystem.MinMaxGradient(grad);
+
+                // Apply material
+                var psRenderer = mothsGo.GetComponent<ParticleSystemRenderer>();
+                if (psRenderer != null)
+                {
+                    Material defaultMat = AssetDatabase.GetBuiltinExtraResource<Material>("Default-Particle.mat");
+                    if (defaultMat != null)
+                    {
+                        psRenderer.material = defaultMat;
+                    }
+                }
+
+                Undo.RegisterCreatedObjectUndo(mothsGo, "Add Streetlight Moths");
+                Debug.Log("Streetlight Moths Particle System added successfully.");
+            }
+            else
+            {
+                Debug.Log("StreetLight_Moths already exists.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("Creepy_LightPole not found in scene. Cannot add moths.");
+        }
+
+        // 2. Matadero Activity Light
+        GameObject matadero = GameObject.Find("MataderoViejo");
+        if (matadero != null)
+        {
+            GameObject activityLightGo = GameObject.Find("Matadero_Activity_Light");
+            if (activityLightGo == null)
+            {
+                activityLightGo = new GameObject("Matadero_Activity_Light");
+                activityLightGo.transform.parent = root.transform;
+                activityLightGo.transform.position = matadero.transform.position + new Vector3(0f, 3.0f, 1.5f);
+                activityLightGo.transform.localRotation = Quaternion.identity;
+
+                Light actLight = activityLightGo.AddComponent<Light>();
+                actLight.type = LightType.Point;
+                actLight.color = new Color(0.3f, 0.65f, 0.95f); // Cyan/cool blue
+                actLight.intensity = 4.0f;
+                actLight.range = 15f;
+                actLight.shadows = LightShadows.Soft;
+
+                activityLightGo.AddComponent<UniversalAdditionalLightData>();
+
+                var activityScript = activityLightGo.AddComponent<MainMenuMataderoActivity>();
+                activityScript.baseIntensity = 4.0f;
+                activityScript.moveSpeed = 0.4f;
+                activityScript.moveRange = new Vector3(8f, 1f, 3f);
+
+                Undo.RegisterCreatedObjectUndo(activityLightGo, "Add Matadero Activity Light");
+                Debug.Log("Matadero Activity Light added successfully.");
+            }
+            else
+            {
+                Debug.Log("Matadero_Activity_Light already exists.");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("MataderoViejo not found in scene. Cannot add activity light.");
+        }
+
+        SceneView.RepaintAll();
+    }
+
+    [MenuItem("Antigravity/Add Interactive Horror In-Place")]
+    public static void AddInteractiveHorrorInPlace()
+    {
+        GameObject root = GameObject.Find("= BACKGROUND");
+        if (root == null)
+        {
+            Debug.LogError("= BACKGROUND root not found in scene!");
+            return;
+        }
+
+        GameObject managerGo = GameObject.Find("Horror_Events_Manager");
+        if (managerGo == null)
+        {
+            managerGo = new GameObject("Horror_Events_Manager");
+            managerGo.transform.parent = root.transform;
+            managerGo.transform.localPosition = Vector3.zero;
+            managerGo.transform.localRotation = Quaternion.identity;
+
+            MainMenuHorrorEvents ev = managerGo.AddComponent<MainMenuHorrorEvents>();
+
+            // Load resources
+            AudioClip flickerSFX = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/AssetsDescargados/AdvancedMobileHorror/Sounds/Audio_ButtonClick.wav");
+            AudioClip whisperSFX = AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/Sounds/Sintomas/whisper.mp3");
+
+            ev.flickerSound = flickerSFX;
+            ev.whisperSound = whisperSFX;
+
+            Undo.RegisterCreatedObjectUndo(managerGo, "Add Horror Events Manager");
+            Debug.Log("Horror Events Manager added successfully.");
+        }
+        else
+        {
+            Debug.Log("Horror_Events_Manager already exists.");
+        }
+
+        SceneView.RepaintAll();
+    }
+
+    [MenuItem("Antigravity/Add Cinematic Post-Processing In-Place")]
+    public static void AddCinematicPostProcessingInPlace()
+    {
+        string volumeProfilePath = "Assets/Scenes/MainMenuProfile.asset";
+        VolumeProfile profile = AssetDatabase.LoadAssetAtPath<VolumeProfile>(volumeProfilePath);
+        if (profile == null)
+        {
+            Debug.LogError("MainMenuProfile profile asset not found at path: " + volumeProfilePath);
+            return;
+        }
+
+        Undo.RecordObject(profile, "Configure Cinematic PS5 Post-Processing");
+
+        // 1. ACES Tonemapping
+        Tonemapping tonemapping;
+        if (!profile.TryGet(out tonemapping)) tonemapping = profile.Add<Tonemapping>(true);
+        tonemapping.active = true;
+        tonemapping.mode.overrideState = true;
+        tonemapping.mode.value = TonemappingMode.ACES;
+
+        // 2. Gaussian Depth of Field (Very optimized cinematic blur)
+        DepthOfField dof;
+        if (!profile.TryGet(out dof)) dof = profile.Add<DepthOfField>(true);
+        dof.active = true;
+        dof.mode.overrideState = true;
+        dof.mode.value = DepthOfFieldMode.Gaussian;
+        dof.gaussianStart.overrideState = true;
+        dof.gaussianStart.value = 2.0f; // Start blurring very close to camera
+        dof.gaussianEnd.overrideState = true;
+        dof.gaussianEnd.value = 55.0f; // End blurring past Matadero (blur deep background forest)
+        dof.gaussianMaxRadius.overrideState = true;
+        dof.gaussianMaxRadius.value = 1.5f; // Clamped float for max radius (usually 0.5 to 1.5)
+
+        // 3. Color Adjustments (Cinematic Color Grading)
+        ColorAdjustments colorAdjust;
+        if (!profile.TryGet(out colorAdjust)) colorAdjust = profile.Add<ColorAdjustments>(true);
+        colorAdjust.active = true;
+        colorAdjust.postExposure.overrideState = true;
+        colorAdjust.postExposure.value = 0.15f; // Balance out ACES slight darkness
+        colorAdjust.contrast.overrideState = true;
+        colorAdjust.contrast.value = 18f;
+        colorAdjust.saturation.overrideState = true;
+        colorAdjust.saturation.value = -15f; // Desaturate slightly for horror realism
+        colorAdjust.colorFilter.overrideState = true;
+        colorAdjust.colorFilter.value = new Color(0.92f, 0.95f, 1.0f); // Cool blue-tinted filter
+
+        // 4. Split Toning / Shadows Midtones Highlights
+        ShadowsMidtonesHighlights smh;
+        if (!profile.TryGet(out smh)) smh = profile.Add<ShadowsMidtonesHighlights>(true);
+        smh.active = true;
+        smh.shadows.overrideState = true;
+        smh.shadows.value = new Vector4(0.9f, 0.92f, 1.0f, 0f); // Cold blue shadows
+        smh.midtones.overrideState = true;
+        smh.midtones.value = new Vector4(1.0f, 0.98f, 0.95f, 0f);
+
+        EditorUtility.SetDirty(profile);
+        AssetDatabase.SaveAssets();
+
+        SceneView.RepaintAll();
+        Debug.Log("Cinematic PS5 Post-Processing profile configured successfully (Highly Optimized).");
+    }
 }
+
 
