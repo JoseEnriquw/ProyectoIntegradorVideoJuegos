@@ -63,9 +63,11 @@ public class MainMenuCameraTransition : MonoBehaviour
         {
             if (optionsTarget != null)
             {
-                // Position camera offset from Gauchito, looking towards it
-                targetPos = optionsTarget.position + new Vector3(-1.0f, 0.7f, -2.2f);
-                Vector3 lookDir = (optionsTarget.position + new Vector3(0f, 0.3f, 0f)) - targetPos;
+                // Position camera offset from Gauchito, looking slightly to its left
+                // This frames Gauchito on the right side of the screen, leaving the left side clear for options UI
+                targetPos = optionsTarget.position + new Vector3(-1.6f, 0.7f, -2.4f);
+                Vector3 lookTargetPos = optionsTarget.position + new Vector3(-0.8f, 0.3f, 0.1f);
+                Vector3 lookDir = lookTargetPos - targetPos;
                 targetRot = Quaternion.LookRotation(lookDir);
             }
             else
