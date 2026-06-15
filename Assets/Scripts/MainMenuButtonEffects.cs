@@ -11,7 +11,7 @@ public class MainMenuButtonEffects : MonoBehaviour, IPointerEnterHandler, IPoint
     private AudioSource localAudioSource;
     
     [Header("Visual Settings")]
-    public Color hoverColor = new Color(0.7f, 0.05f, 0.05f); // Crimson red
+    public Color hoverColor = new Color(0.7f, 0.7f, 0.7f); // Ghostly ash gray
     private Color normalColor = Color.white;
     public float hoverScale = 1.08f;
     public float scaleSpeed = 6f;
@@ -65,8 +65,26 @@ public class MainMenuButtonEffects : MonoBehaviour, IPointerEnterHandler, IPoint
     
     void Update()
     {
+        Vector3 currentTargetScale = targetScale;
+        if (isHovered)
+        {
+            // Jitter scale slightly at high frequency to simulate trembling/horror voltage effect
+            float jitter = Mathf.Sin(Time.unscaledTime * 45f) * 0.015f;
+            currentTargetScale += new Vector3(jitter, jitter, jitter);
+
+            // Flickering amber glow: vary the brightness or interpolate slightly with white
+            if (buttonText != null)
+            {
+                float flicker = Random.Range(0.85f, 1.0f);
+                if (Random.value < 0.08f) // 8% chance of a quick drop/buzz
+                {
+                    flicker = Random.Range(0.3f, 0.6f);
+                }
+                buttonText.color = new Color(hoverColor.r * flicker, hoverColor.g * flicker, hoverColor.b * flicker, hoverColor.a);
+            }
+        }
         // Smoothly interpolate scale
-        transform.localScale = Vector3.Lerp(transform.localScale, targetScale, Time.unscaledDeltaTime * scaleSpeed);
+        transform.localScale = Vector3.Lerp(transform.localScale, currentTargetScale, Time.unscaledDeltaTime * scaleSpeed);
     }
     
     public void OnPointerEnter(PointerEventData eventData)
@@ -76,6 +94,7 @@ public class MainMenuButtonEffects : MonoBehaviour, IPointerEnterHandler, IPoint
         isHovered = true;
         targetScale = new Vector3(hoverScale, hoverScale, hoverScale);
         
+        // Initial color assignment, will be flickered dynamically in Update
         if (buttonText != null)
         {
             buttonText.color = hoverColor;
