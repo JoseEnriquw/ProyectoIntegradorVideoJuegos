@@ -274,7 +274,7 @@ public class ConvertHDRPToURP
                 if (revertProc.ExitCode == 0)
                 {
                     revertedCount++;
-                }
+}
                 else
                 {
                     Debug.LogError($"Failed to revert: {matPath}");
