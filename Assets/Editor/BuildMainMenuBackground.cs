@@ -2312,6 +2312,21 @@ public class BuildMainMenuBackground
             if (spasm == null) spasm = npcObj.AddComponent<MainMenuNPCSpasm>();
             Undo.RecordObject(spasm, "Configure NPC Spasm");
 
+            var animController = npcObj.GetComponent<MainMenuNPCAnimationController>();
+            if (animController == null) animController = npcObj.AddComponent<MainMenuNPCAnimationController>();
+            Undo.RecordObject(animController, "Configure NPC Animation Controller");
+            if (animController.animationSequence == null || animController.animationSequence.Length == 0)
+            {
+                animController.animationSequence = new MainMenuNPCAnimationController.AnimationStep[]
+                {
+                    new MainMenuNPCAnimationController.AnimationStep { stateName = "Walk", duration = 5f, crossfadeTime = 0.25f },
+                    new MainMenuNPCAnimationController.AnimationStep { stateName = "Idle", duration = 5f, crossfadeTime = 0.25f }
+                };
+            }
+            animController.loopSequence = true;
+            animController.playOnStart = true;
+            EditorUtility.SetDirty(animController);
+
             // Configure very dim, flickering body light parented to Spine2 bone (DEACTIVATED based on user request)
             Transform spine = FindChildRecursive(npcObj.transform, "mixamorig:Spine2");
             Transform bodyLightParent = spine != null ? spine : npcObj.transform;

@@ -3295,11 +3295,11 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 15a37ebcbb5ea2c4b89a889271064b62, type: 2}
     - target: {fileID: 7666680083751660616, guid: 84af63234cac3ca499997479e23d1239, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.0000005917523
+      value: 0.0000005917524
       objectReference: {fileID: 0}
     - target: {fileID: 7666680083751660616, guid: 84af63234cac3ca499997479e23d1239, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.004307083
+      value: -0.0043070833
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3317,6 +3317,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 84af63234cac3ca499997479e23d1239, type: 3}
       insertIndex: -1
       addedObject: {fileID: 678196384}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 84af63234cac3ca499997479e23d1239, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 678196387}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 84af63234cac3ca499997479e23d1239, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 678196388}
   m_SourcePrefab: {fileID: 100100000, guid: 84af63234cac3ca499997479e23d1239, type: 3}
 --- !u!4 &678196380 stripped
 Transform:
@@ -3401,6 +3407,44 @@ MonoBehaviour:
   enableGlowEyes: 0
   eyeColor: {r: 0.8, g: 0.88, b: 1, a: 1}
   eyeIntensity: 0
+--- !u!114 &678196387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678196381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a20b7477bddf414ab4f3a51afb64cc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainMenuWalkToPoint
+  useWalking: 1
+  speed: 1.3
+  stopDistance: 0.15
+  walkParam: Walk
+  idleParam: Idle
+--- !u!114 &678196388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 678196381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e41cf7b72df7f68419fee1523cd51ce1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainMenuNPCAnimationController
+  animationSequence:
+  - stateName: Walk
+    duration: 10
+    crossfadeTime: 0.25
+  - stateName: Idle
+    duration: 10
+    crossfadeTime: 0.25
+  loopSequence: 1
+  playOnStart: 1
 --- !u!1001 &680810431
 PrefabInstance:
   m_ObjectHideFlags: 0
