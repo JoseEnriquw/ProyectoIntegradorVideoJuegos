@@ -30,6 +30,7 @@ public class MainMenuButtonEffects : MonoBehaviour, IPointerEnterHandler, IPoint
     private Coroutine lightCoroutine;
     
     private float initialLanternIntensity = 5.5f;
+    private MainMenuCrowReaction crowReaction;
     
     void Start()
     {
@@ -61,6 +62,9 @@ public class MainMenuButtonEffects : MonoBehaviour, IPointerEnterHandler, IPoint
         {
             flashlightSpot.enabled = false;
         }
+
+        // Cache crow reaction
+        crowReaction = Object.FindAnyObjectByType<MainMenuCrowReaction>();
     }
     
     void Update()
@@ -104,6 +108,12 @@ public class MainMenuButtonEffects : MonoBehaviour, IPointerEnterHandler, IPoint
         if (hoverClip != null && localAudioSource != null)
         {
             localAudioSource.PlayOneShot(hoverClip, 0.45f);
+        }
+
+        // Trigger crow reaction on hover
+        if (crowReaction != null)
+        {
+            crowReaction.ReactToHover();
         }
         
         // AAA Interaction: Hover effects for specific buttons

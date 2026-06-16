@@ -24,6 +24,8 @@ public class MainMenuHorrorEvents : MonoBehaviour
     private float nextEventTime;
     private bool isEventRunning = false;
 
+    public bool IsEventRunning => isEventRunning;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();

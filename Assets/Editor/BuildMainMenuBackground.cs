@@ -2153,6 +2153,123 @@ public class BuildMainMenuBackground
         SceneView.RepaintAll();
         Debug.Log("Fog configured successfully: Global density reduced, side particles activated.");
     }
+
+    [MenuItem("Antigravity/Add Cinematic AAA Details In-Place")]
+    public static void AddCinematicAAADetails()
+    {
+        // 1. Configure Gallows and Lantern Sway
+        GameObject gallows = GameObject.Find("Creepy_Gallows");
+        if (gallows != null)
+        {
+            Transform lantern = gallows.transform.Find("Lantern");
+            Transform hangman = gallows.transform.Find("SM_Hangman");
+            Transform hangmanMasked = gallows.transform.Find("SM_Hangman_Masked");
+            Transform flame = gallows.transform.Find("Flame");
+            
+            if (lantern != null)
+            {
+                // Parent Flame (light) to Lantern if not already
+                if (flame != null && flame.parent != lantern)
+                {
+                    Undo.SetTransformParent(flame, lantern, "Parent Flame to Lantern");
+                }
+
+                // Add Sway to Lantern
+                var lanternSway = lantern.gameObject.GetComponent<MainMenuSway>();
+                if (lanternSway == null) lanternSway = lantern.gameObject.AddComponent<MainMenuSway>();
+                Undo.RecordObject(lanternSway, "Configure Lantern Sway");
+                lanternSway.speedX = 1.3f;
+                lanternSway.speedZ = 1.0f;
+                lanternSway.maxAngleX = 4.0f;
+                lanternSway.maxAngleZ = 4.5f;
+                EditorUtility.SetDirty(lanternSway);
+            }
+
+            if (hangman != null)
+            {
+                var hangmanSway = hangman.gameObject.GetComponent<MainMenuSway>();
+                if (hangmanSway == null) hangmanSway = hangman.gameObject.AddComponent<MainMenuSway>();
+                Undo.RecordObject(hangmanSway, "Configure Hangman Sway");
+                hangmanSway.speedX = 0.8f;
+                hangmanSway.speedZ = 0.6f;
+                hangmanSway.maxAngleX = 2.0f;
+                hangmanSway.maxAngleZ = 2.5f;
+                EditorUtility.SetDirty(hangmanSway);
+            }
+
+            if (hangmanMasked != null)
+            {
+                var hangmanMaskedSway = hangmanMasked.gameObject.GetComponent<MainMenuSway>();
+                if (hangmanMaskedSway == null) hangmanMaskedSway = hangmanMasked.gameObject.AddComponent<MainMenuSway>();
+                Undo.RecordObject(hangmanMaskedSway, "Configure Hangman Masked Sway");
+                hangmanMaskedSway.speedX = 0.82f;
+                hangmanMaskedSway.speedZ = 0.61f;
+                hangmanMaskedSway.maxAngleX = 2.0f;
+                hangmanMaskedSway.maxAngleZ = 2.5f;
+                EditorUtility.SetDirty(hangmanMaskedSway);
+            }
+            Debug.Log("Sway components configured on Gallows, Lantern and Hangman.");
+        }
+        else
+        {
+            Debug.LogWarning("Creepy_Gallows not found!");
+        }
+
+        // 2. Configure Candle Flicker on all Candle Point Lights
+        var allLights = GameObject.FindObjectsByType<Light>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        int candleCount = 0;
+        foreach (var l in allLights)
+        {
+            if (l.name == "Candle Point Light" || l.name == "Point Light" && l.transform.parent != null && l.transform.parent.name.Contains("Candle"))
+            {
+                var flicker = l.gameObject.GetComponent<MainMenuCandleFlicker>();
+                if (flicker == null) flicker = l.gameObject.AddComponent<MainMenuCandleFlicker>();
+                Undo.RecordObject(flicker, "Configure Candle Flicker");
+                flicker.minFlickerSpeed = 4f;
+                flicker.maxFlickerSpeed = 8f;
+                flicker.intensityRange = 0.12f;
+                EditorUtility.SetDirty(flicker);
+                candleCount++;
+            }
+        }
+        Debug.Log($"Configured storm-reactive CandleFlicker on {candleCount} candle lights.");
+
+        // 3. Configure Crow Reaction
+        GameObject crowObj = GameObject.Find("Crow_Sign/CilindroSuelo/Crow");
+        if (crowObj != null)
+        {
+            var crowReaction = crowObj.GetComponent<MainMenuCrowReaction>();
+            if (crowReaction == null) crowReaction = crowObj.AddComponent<MainMenuCrowReaction>();
+            Undo.RecordObject(crowReaction, "Configure Crow Reaction");
+            EditorUtility.SetDirty(crowReaction);
+            Debug.Log("Configured MainMenuCrowReaction on Crow.");
+        }
+        else
+        {
+            Debug.LogWarning("Crow GameObject not found at Crow_Sign/CilindroSuelo/Crow!");
+        }
+
+        // 4. Configure UI Logo Glitch
+        GameObject logoObj = GameObject.Find("MAINMENU/Canvas/Background/Blur/MainMenu/Logo");
+        if (logoObj != null)
+        {
+            var logoGlitch = logoObj.GetComponent<MainMenuUIGlitch>();
+            if (logoGlitch == null) logoGlitch = logoObj.AddComponent<MainMenuUIGlitch>();
+            Undo.RecordObject(logoGlitch, "Configure Logo Glitch");
+            logoGlitch.maxPositionOffset = 6f;
+            logoGlitch.maxRotationOffset = 1.8f;
+            logoGlitch.glitchChance = 0.35f;
+            EditorUtility.SetDirty(logoGlitch);
+            Debug.Log("Configured MainMenuUIGlitch on Logo.");
+        }
+        else
+        {
+            Debug.LogWarning("Logo GameObject not found at MAINMENU/Canvas/Background/Blur/MainMenu/Logo!");
+        }
+
+        UnityEditor.SceneManagement.EditorSceneManager.SaveOpenScenes();
+        Debug.Log("Cinematic AAA details configured and scene saved successfully!");
+    }
 }
 
 

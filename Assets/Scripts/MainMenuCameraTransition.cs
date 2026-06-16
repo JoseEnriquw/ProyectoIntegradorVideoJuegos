@@ -6,6 +6,7 @@ public class MainMenuCameraTransition : MonoBehaviour
     public GameObject mainMenuPanel;
     public GameObject optionsPanel;
     public GameObject loadGamePanel;
+    public GameObject creditsPanel;
     
     [Header("Transition Settings")]
     public float transitionSpeed = 3f;
@@ -16,6 +17,9 @@ public class MainMenuCameraTransition : MonoBehaviour
     
     public Vector3 loadPosOffset = new Vector3(0.8f, -0.4f, 4f);
     public Vector3 loadRotOffset = new Vector3(4f, -8f, 0f);
+
+    public Vector3 creditsPosOffset = new Vector3(1.5f, 0.8f, -1.0f);
+    public Vector3 creditsRotOffset = new Vector3(5f, -20f, 0f);
 
     [Header("Dynamic Targets")]
     public Transform optionsTarget;
@@ -80,6 +84,11 @@ public class MainMenuCameraTransition : MonoBehaviour
         {
             targetPos = defaultPos + loadPosOffset;
             targetRot = Quaternion.Euler(defaultRot.eulerAngles + loadRotOffset);
+        }
+        else if (creditsPanel != null && creditsPanel.activeInHierarchy)
+        {
+            targetPos = defaultPos + creditsPosOffset;
+            targetRot = Quaternion.Euler(defaultRot.eulerAngles + creditsRotOffset);
         }
         else
         {
