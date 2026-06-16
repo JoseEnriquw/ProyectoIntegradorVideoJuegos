@@ -5,13 +5,12 @@ using UHFPS.Runtime;
 
 namespace UHFPS.Runtime
 {
-    [RequireComponent(typeof(Collider))]
     public class GenericPopupInfoTrigger : MonoBehaviour, IInteractStart
     {
-        public enum TriggerTypeEnum { CollisionTrigger, DirectInteraction }
+        public enum TriggerTypeEnum { CollisionTrigger, DirectInteraction, CallOnly }
 
         [Header("Tipo de Activación")]
-        [Tooltip("CollisionTrigger: Se activa cuando el jugador entra al área del collider.\nDirectInteraction: Se activa al mirar el objeto e interactuar (sistema UHFPS).")]
+        [Tooltip("CollisionTrigger: Se activa cuando el jugador entra al área del collider.\nDirectInteraction: Se activa al mirar el objeto e interactuar (sistema UHFPS).\nCallOnly: Solo se activa llamando a TriggerPopup() por código o eventos.")]
         public TriggerTypeEnum TriggerType = TriggerTypeEnum.CollisionTrigger;
 
         [Tooltip("Indica si el popup solo debe mostrarse una única vez en el juego.")]
@@ -61,7 +60,14 @@ namespace UHFPS.Runtime
             Collider col = GetComponent<Collider>();
             if (TriggerType == TriggerTypeEnum.CollisionTrigger)
             {
-                col.isTrigger = true;
+                if (col != null)
+                {
+                    col.isTrigger = true;
+                }
+                else
+                {
+                    Debug.LogWarning($"[GenericPopupInfoTrigger] No se encontró un Collider en {gameObject.name}. El modo CollisionTrigger requiere un collider.");
+                }
             }
         }
 
@@ -86,7 +92,10 @@ namespace UHFPS.Runtime
             TriggerPopup();
         }
 
-        private void TriggerPopup()
+        /// <summary>
+        /// Muestra el popup con los textos y sprites configurados.
+        /// </summary>
+        public void TriggerPopup()
         {
             if (PopupInfoPanel.Instance == null)
             {
