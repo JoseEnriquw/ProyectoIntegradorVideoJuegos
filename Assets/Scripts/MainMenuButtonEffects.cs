@@ -15,6 +15,9 @@ public class MainMenuButtonEffects : MonoBehaviour, IPointerEnterHandler, IPoint
     private Color normalColor = Color.white;
     public float hoverScale = 1.08f;
     public float scaleSpeed = 6f;
+
+    [Header("AAA NPC Interaction")]
+    public int npcTargetBlinkIndex = -1; // -1 means no action
     
     [Header("Audio Settings")]
     public AudioClip hoverClip;
@@ -31,6 +34,7 @@ public class MainMenuButtonEffects : MonoBehaviour, IPointerEnterHandler, IPoint
     
     private float initialLanternIntensity = 5.5f;
     private MainMenuCrowReaction crowReaction;
+    private MainMenuBlinkNPC blinkNPC;
     
     void Start()
     {
@@ -65,6 +69,9 @@ public class MainMenuButtonEffects : MonoBehaviour, IPointerEnterHandler, IPoint
 
         // Cache crow reaction
         crowReaction = Object.FindAnyObjectByType<MainMenuCrowReaction>();
+
+        // Cache blink NPC
+        blinkNPC = Object.FindAnyObjectByType<MainMenuBlinkNPC>();
     }
     
     void Update()
@@ -115,6 +122,12 @@ public class MainMenuButtonEffects : MonoBehaviour, IPointerEnterHandler, IPoint
         {
             crowReaction.ReactToHover();
         }
+
+        // Force NPC teleport on hover
+        if (blinkNPC != null && npcTargetBlinkIndex >= 0)
+        {
+            blinkNPC.ForceTeleport(npcTargetBlinkIndex);
+        }
         
         // AAA Interaction: Hover effects for specific buttons
         if (name == "NewGame" && flashlightSpot != null)
@@ -136,6 +149,12 @@ public class MainMenuButtonEffects : MonoBehaviour, IPointerEnterHandler, IPoint
         if (buttonText != null)
         {
             buttonText.color = normalColor;
+        }
+
+        // Release forced NPC position on hover exit
+        if (blinkNPC != null && npcTargetBlinkIndex >= 0)
+        {
+            blinkNPC.ReleaseForce();
         }
         
         // Disable New Game flashlight

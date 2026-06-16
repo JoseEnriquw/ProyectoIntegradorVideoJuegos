@@ -287,6 +287,22 @@ public class BuildMainMenuBackground
             lightData = moonLightGo.AddComponent<UniversalAdditionalLightData>();
         }
 
+        // 6.1. Road Silhouette Rim Light (Backlight down the road)
+        GameObject backlightGo = new GameObject("Road Silhouette Light");
+        backlightGo.transform.parent = root.transform;
+        float backlightY = GetTerrainHeight(0f, 38f, terrainComp) + 5.0f;
+        backlightGo.transform.localPosition = new Vector3(0f, backlightY, 38f);
+        backlightGo.transform.localEulerAngles = new Vector3(15f, 180f, 0f); // Point down the road towards the player/camera
+        Light backlight = backlightGo.AddComponent<Light>();
+        backlight.type = LightType.Spot;
+        backlight.color = new Color(0.18f, 0.28f, 0.42f); // Cinematic cool steel blue
+        backlight.intensity = 8.5f; // Stronger to cut through fog and backlight the NPC
+        backlight.range = 45f;
+        backlight.spotAngle = 65f;
+        backlight.innerSpotAngle = 25f;
+        backlight.shadows = LightShadows.None;
+        backlightGo.AddComponent<UniversalAdditionalLightData>();
+
         // 7. Warm Window Glow
         GameObject warmGlow = new GameObject("Building Glow");
         warmGlow.transform.parent = root.transform;
@@ -909,7 +925,7 @@ public class BuildMainMenuBackground
             var animator = npc.GetComponent<Animator>();
             if (animator == null) animator = npc.AddComponent<Animator>();
             
-            string npcAnimPath = "Assets/Models/NPC/Lider/AC_NPC_Lider.controller";
+            string npcAnimPath = "Assets/ThunderWire Studio/UHFPS/Content/Animation/Zombie/Zombie.controller";
             var npcController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>(npcAnimPath);
             if (npcController != null)
             {
@@ -2234,15 +2250,16 @@ public class BuildMainMenuBackground
         }
         Debug.Log($"Configured storm-reactive CandleFlicker on {candleCount} candle lights.");
 
-        // 3. Configure Crow Reaction
+        // 3. Configure Crow Reaction (DEACTIVATED based on user request - destroy if exists)
         GameObject crowObj = GameObject.Find("Crow_Sign/CilindroSuelo/Crow");
         if (crowObj != null)
         {
             var crowReaction = crowObj.GetComponent<MainMenuCrowReaction>();
-            if (crowReaction == null) crowReaction = crowObj.AddComponent<MainMenuCrowReaction>();
-            Undo.RecordObject(crowReaction, "Configure Crow Reaction");
-            EditorUtility.SetDirty(crowReaction);
-            Debug.Log("Configured MainMenuCrowReaction on Crow.");
+            if (crowReaction != null)
+            {
+                Undo.DestroyObjectImmediate(crowReaction);
+                Debug.Log("Removed MainMenuCrowReaction component from Crow.");
+            }
         }
         else
         {
@@ -2267,8 +2284,301 @@ public class BuildMainMenuBackground
             Debug.LogWarning("Logo GameObject not found at MAINMENU/Canvas/Background/Blur/MainMenu/Logo!");
         }
 
+        // 5. Configure Creepy_NPC Animator, Blink and Spasm
+        GameObject npcObj = GameObject.Find("Creepy_NPC");
+        if (npcObj != null)
+        {
+            // Configure Animator to use Zombie.controller in-place
+            var animator = npcObj.GetComponent<Animator>();
+            if (animator == null) animator = npcObj.AddComponent<Animator>();
+            string npcAnimPath = "Assets/ThunderWire Studio/UHFPS/Content/Animation/Zombie/Zombie.controller";
+            var npcController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>(npcAnimPath);
+            if (npcController != null && animator.runtimeAnimatorController != npcController)
+            {
+                Undo.RecordObject(animator, "Update NPC Animator Controller");
+                animator.runtimeAnimatorController = npcController;
+            }
+
+            // Add or get components
+            var blinkNPC = npcObj.GetComponent<MainMenuBlinkNPC>();
+            if (blinkNPC == null) blinkNPC = npcObj.AddComponent<MainMenuBlinkNPC>();
+            Undo.RecordObject(blinkNPC, "Configure Blink NPC");
+
+            // Explicitly set eye color to spectral white/blue and lower intensity
+            blinkNPC.eyeColor = new Color(0.8f, 0.88f, 1.0f);
+            blinkNPC.eyeIntensity = 2.0f;
+
+            var spasm = npcObj.GetComponent<MainMenuNPCSpasm>();
+            if (spasm == null) spasm = npcObj.AddComponent<MainMenuNPCSpasm>();
+            Undo.RecordObject(spasm, "Configure NPC Spasm");
+
+            // Configure very dim, flickering body light parented to Spine2 bone (DEACTIVATED based on user request)
+            Transform spine = FindChildRecursive(npcObj.transform, "mixamorig:Spine2");
+            Transform bodyLightParent = spine != null ? spine : npcObj.transform;
+            for (int i = bodyLightParent.childCount - 1; i >= 0; i--)
+            {
+                if (bodyLightParent.GetChild(i).name == "NPCBodyLight")
+                {
+                    Undo.DestroyObjectImmediate(bodyLightParent.GetChild(i).gameObject);
+                }
+            }
+
+            blinkNPC.enableGlowEyes = false;
+            blinkNPC.eyeColor = new Color(0.8f, 0.88f, 1.0f);
+            blinkNPC.eyeIntensity = 0f; // Disable eye intensity as well to be completely safe
+
+            // Setup Waypoints dynamically using GetTerrainHeight
+            Terrain terrainComp = GameObject.Find("= BACKGROUND/Terrain")?.GetComponent<Terrain>();
+            if (terrainComp != null)
+            {
+                var waypoints = new MainMenuBlinkNPC.BlinkPosition[6];
+                
+                // Waypoint 0: Far (Default)
+                waypoints[0] = new MainMenuBlinkNPC.BlinkPosition {
+                    position = new Vector3(0.6f, GetTerrainHeight(0.6f, 28.0f, terrainComp) - 0.05f, 28.0f),
+                    rotation = new Vector3(0f, 180f, 0f),
+                    isVisible = true
+                };
+
+                // Waypoint 1: Mid (In the road clearing, half distance, right side)
+                waypoints[1] = new MainMenuBlinkNPC.BlinkPosition {
+                    position = new Vector3(1.2f, GetTerrainHeight(1.2f, 14.0f, terrainComp) - 0.05f, 14.0f),
+                    rotation = new Vector3(0f, 190f, 0f),
+                    isVisible = true
+                };
+
+                // Waypoint 2: Close (Right side next to fence/trees - Options)
+                waypoints[2] = new MainMenuBlinkNPC.BlinkPosition {
+                    position = new Vector3(2.8f, GetTerrainHeight(2.8f, 3.0f, terrainComp) - 0.05f, 3.0f),
+                    rotation = new Vector3(0f, 210f, 0f),
+                    isVisible = true
+                };
+
+                // Waypoint 3: Extreme Close (Foreground right near swing - Quit)
+                waypoints[3] = new MainMenuBlinkNPC.BlinkPosition {
+                    position = new Vector3(1.9f, GetTerrainHeight(1.9f, -5.5f, terrainComp) - 0.05f, -5.5f),
+                    rotation = new Vector3(0f, 225f, 0f),
+                    isVisible = true
+                };
+
+                // Waypoint 4: Intermediate Close (Right side further back - LoadGame)
+                waypoints[4] = new MainMenuBlinkNPC.BlinkPosition {
+                    position = new Vector3(2.1f, GetTerrainHeight(2.1f, 8.0f, terrainComp) - 0.05f, 8.0f),
+                    rotation = new Vector3(0f, 200f, 0f),
+                    isVisible = true
+                };
+
+                // Waypoint 5: Vanished (Invisible)
+                waypoints[5] = new MainMenuBlinkNPC.BlinkPosition {
+                    position = new Vector3(0.6f, GetTerrainHeight(0.6f, 28.0f, terrainComp) - 0.05f, 28.0f),
+                    rotation = new Vector3(0f, 180f, 0f),
+                    isVisible = false
+                };
+
+                blinkNPC.blinkPositions = waypoints;
+            }
+            
+            // Adjust NPC look speed to be creepier/slower
+            var creepyIdle = npcObj.GetComponent<MainMenuCreepyIdle>();
+            if (creepyIdle != null)
+            {
+                Undo.RecordObject(creepyIdle, "Configure NPC Look Speed");
+                creepyIdle.lookSpeed = 1.8f;
+                EditorUtility.SetDirty(creepyIdle);
+            }
+
+            EditorUtility.SetDirty(blinkNPC);
+            EditorUtility.SetDirty(spasm);
+            Debug.Log("Configured BlinkNPC and NPCSpasm on Creepy_NPC.");
+        }
+        else
+        {
+            Debug.LogWarning("Creepy_NPC not found!");
+        }
+
+        // 6. Configure Button NPC Targets
+        GameObject canvasGo = GameObject.Find("MAINMENU/Canvas");
+        if (canvasGo != null)
+        {
+            Transform buttonsParent = canvasGo.transform.Find("Background/Blur/MainMenu/MenuButtons");
+            if (buttonsParent != null)
+            {
+                string[] bNames = { "Continue", "NewGame", "LoadGame", "Options", "Quit" };
+                foreach (string bName in bNames)
+                {
+                    Transform t = buttonsParent.Find(bName);
+                    if (t != null)
+                    {
+                        var fx = t.gameObject.GetComponent<MainMenuButtonEffects>();
+                        if (fx != null)
+                        {
+                            Undo.RecordObject(fx, "Configure Hover NPC Index");
+                            if (bName == "NewGame") fx.npcTargetBlinkIndex = 1;      // Mid road clearing (inside flashlight beam)
+                            else if (bName == "Quit") fx.npcTargetBlinkIndex = 3;     // Extreme close
+                            else if (bName == "Options") fx.npcTargetBlinkIndex = 2;  // Close, behind sign
+                            else if (bName == "LoadGame") fx.npcTargetBlinkIndex = 4; // Intermediate Close
+                            else fx.npcTargetBlinkIndex = -1;
+                            EditorUtility.SetDirty(fx);
+                        }
+                    }
+                }
+                Debug.Log("Configured NPC hover target indices on Main Menu buttons.");
+            }
+        }
+
+        // 7. Configure Road Silhouette Light (Rim light backlight) in-place
+        GameObject backlightGo = GameObject.Find("= BACKGROUND/Road Silhouette Light") ?? GameObject.Find("Road Silhouette Light");
+        if (backlightGo == null)
+        {
+            backlightGo = new GameObject("Road Silhouette Light");
+            GameObject backgroundRoot = GameObject.Find("= BACKGROUND");
+            if (backgroundRoot != null)
+            {
+                backlightGo.transform.parent = backgroundRoot.transform;
+            }
+            Undo.RegisterCreatedObjectUndo(backlightGo, "Create Road Silhouette Light");
+        }
+        else
+        {
+            Undo.RecordObject(backlightGo.transform, "Update Road Silhouette Light Transform");
+        }
+
+        Terrain activeTerrain = GameObject.Find("= BACKGROUND/Terrain")?.GetComponent<Terrain>();
+        float finalBacklightY = 5.0f;
+        if (activeTerrain != null)
+        {
+            finalBacklightY = activeTerrain.SampleHeight(new Vector3(0f, 0f, 38f)) + activeTerrain.transform.position.y + 5.0f;
+        }
+        backlightGo.transform.position = new Vector3(0f, finalBacklightY, 38f);
+        backlightGo.transform.localEulerAngles = new Vector3(15f, 180f, 0f);
+
+        Light activeBacklight = backlightGo.GetComponent<Light>();
+        if (activeBacklight == null)
+        {
+            activeBacklight = backlightGo.AddComponent<Light>();
+        }
+        Undo.RecordObject(activeBacklight, "Configure Road Silhouette Light");
+        activeBacklight.type = LightType.Spot;
+        activeBacklight.color = new Color(0.18f, 0.28f, 0.42f);
+        activeBacklight.intensity = 8.5f;
+        activeBacklight.range = 45f;
+        activeBacklight.spotAngle = 65f;
+        activeBacklight.innerSpotAngle = 25f;
+        activeBacklight.shadows = LightShadows.None;
+        EditorUtility.SetDirty(activeBacklight);
+
+        var activeBacklightData = backlightGo.GetComponent<UniversalAdditionalLightData>();
+        if (activeBacklightData == null)
+        {
+            activeBacklightData = backlightGo.AddComponent<UniversalAdditionalLightData>();
+        }
+        EditorUtility.SetDirty(activeBacklightData);
+        Debug.Log("Configured Road Silhouette Light in-place.");
+
         UnityEditor.SceneManagement.EditorSceneManager.SaveOpenScenes();
         Debug.Log("Cinematic AAA details configured and scene saved successfully!");
+    }
+
+    [MenuItem("Antigravity/Test NPC Waypoint 3 In-Place")]
+    public static void TestNPCWaypoint3()
+    {
+        GameObject npcObj = GameObject.Find("Creepy_NPC");
+        if (npcObj == null)
+        {
+            Debug.LogError("NPC not found!");
+            return;
+        }
+
+        Terrain terrainComp = GameObject.Find("= BACKGROUND/Terrain")?.GetComponent<Terrain>();
+        if (terrainComp == null) return;
+
+        // Move to waypoint 3 (Extreme Close - Right side near swing)
+        float height = terrainComp.SampleHeight(new Vector3(1.9f, 0f, -5.5f)) + activeTerrainPos(terrainComp) - 0.05f;
+        npcObj.transform.position = new Vector3(1.9f, height, -5.5f);
+        npcObj.transform.localEulerAngles = new Vector3(0f, 225f, 0f);
+
+        // Find head
+        Transform head = FindChildRecursive(npcObj.transform, "mixamorig:Head");
+        if (head != null)
+        {
+            // Remove old eyes if any
+            Transform oldL = head.Find("LeftEyeLight");
+            if (oldL != null) Undo.DestroyObjectImmediate(oldL.gameObject);
+            Transform oldR = head.Find("RightEyeLight");
+            if (oldR != null) Undo.DestroyObjectImmediate(oldR.gameObject);
+
+            // Apply Z-axis head tilt (broken neck)
+            head.localRotation = Quaternion.Euler(0, 0, 30f);
+        }
+
+        SceneView.RepaintAll();
+        Debug.Log("NPC configured at Waypoint 3 for editor preview!");
+    }
+
+    [MenuItem("Antigravity/Restore NPC Editor Preview")]
+    public static void RestoreNPCEditorPreview()
+    {
+        GameObject npcObj = GameObject.Find("Creepy_NPC");
+        if (npcObj == null) return;
+
+        Terrain terrainComp = GameObject.Find("= BACKGROUND/Terrain")?.GetComponent<Terrain>();
+        if (terrainComp == null) return;
+
+        // Move to waypoint 0 (Far - Right side)
+        float height = terrainComp.SampleHeight(new Vector3(0.6f, 0f, 28.0f)) + activeTerrainPos(terrainComp) - 0.05f;
+        npcObj.transform.position = new Vector3(0.6f, height, 28.0f);
+        npcObj.transform.localEulerAngles = new Vector3(0f, 180f, 0f);
+
+        // Find head
+        Transform head = FindChildRecursive(npcObj.transform, "mixamorig:Head");
+        if (head != null)
+        {
+            // Remove old eyes
+            Transform oldL = head.Find("LeftEyeLight");
+            if (oldL != null) Undo.DestroyObjectImmediate(oldL.gameObject);
+            Transform oldR = head.Find("RightEyeLight");
+            if (oldR != null) Undo.DestroyObjectImmediate(oldR.gameObject);
+
+            // Reset rotation
+            head.localRotation = Quaternion.identity;
+        }
+
+        SceneView.RepaintAll();
+        Debug.Log("NPC restored to default position in editor preview!");
+    }
+
+    private static float activeTerrainPos(Terrain terrain)
+    {
+        return terrain != null ? terrain.transform.position.y : 0f;
+    }
+
+    private static void CreateEyeSphereEditor(Transform parent)
+    {
+        GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        Undo.RegisterCreatedObjectUndo(sphere, "Create Eye Sphere Editor");
+        UnityEngine.Object.DestroyImmediate(sphere.GetComponent<Collider>());
+        sphere.transform.parent = parent;
+        sphere.transform.localPosition = Vector3.zero;
+        sphere.transform.localScale = Vector3.one * 0.012f;
+
+        Material mat = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
+        if (mat != null)
+        {
+            Color eyesColor = new Color(0.85f, 0.9f, 1.0f);
+            mat.SetColor("_BaseColor", eyesColor * 3.5f);
+            sphere.GetComponent<Renderer>().sharedMaterial = mat;
+        }
+    }
+
+    private static Transform FindChildRecursive(Transform parent, string name)
+    {
+        if (parent.name == name) return parent;
+        for (int i = 0; i < parent.childCount; i++)
+        {
+            Transform found = FindChildRecursive(parent.GetChild(i), name);
+            if (found != null) return found;
+        }
+        return null;
     }
 }
 

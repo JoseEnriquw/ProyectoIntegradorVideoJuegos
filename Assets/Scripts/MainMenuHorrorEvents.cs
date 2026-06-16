@@ -113,9 +113,17 @@ public class MainMenuHorrorEvents : MonoBehaviour
         }
         if (creepyNpc != null)
         {
-            if (Random.value > 0.5f)
+            var blinkNPC = creepyNpc.GetComponent<MainMenuBlinkNPC>();
+            if (blinkNPC != null)
             {
-                creepyNpc.SetActive(!creepyNpc.activeSelf);
+                blinkNPC.OnBlackout();
+            }
+            else
+            {
+                if (Random.value > 0.5f)
+                {
+                    creepyNpc.SetActive(!creepyNpc.activeSelf);
+                }
             }
         }
 
