@@ -95603,7 +95603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &891116997
 Transform:
   m_ObjectHideFlags: 0
@@ -168438,12 +168438,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1623749071}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 341.22534, y: 17.22, z: 473.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1662456113}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1624022322 stripped
 Transform:
@@ -173239,6 +173239,7 @@ Transform:
   - {fileID: 1409245189}
   - {fileID: 1304450436}
   - {fileID: 667669660}
+  - {fileID: 1623749075}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1664415857
@@ -198775,6 +198776,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a0658c235e5bb49b72b187b1d7b049, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1926359118 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7995016699990300679, guid: 95af4357eda9cae4aa85a3b7cc128a1e, type: 3}
+  m_PrefabInstance: {fileID: 1926359091}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1926871659
 GameObject:
   m_ObjectHideFlags: 0
@@ -218262,6 +218268,10 @@ PrefabInstance:
       propertyPath: AlDespertar.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1780848227}
+    - target: {fileID: 1035344365487545052, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1320927598926353819, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
       propertyPath: m_Material
       value: 
@@ -218278,6 +218288,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2884123952433438814, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
+      propertyPath: 'otrosADesactivar.Array.data[3]'
+      value: 
+      objectReference: {fileID: 218795499}
+    - target: {fileID: 2884123952433438814, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
+      propertyPath: 'otrosADesactivar.Array.data[4]'
+      value: 
+      objectReference: {fileID: 577699558}
     - target: {fileID: 3074296982691040684, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
       propertyPath: m_Material
       value: 
@@ -218342,14 +218360,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: = CasaLider
       objectReference: {fileID: 0}
-    - target: {fileID: 7385641528564593806, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
+    - target: {fileID: 7402006499938241893, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1926359118}
+    - target: {fileID: 8254781378492304507, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8360429414165141139, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 1034340582}
+    - target: {fileID: 8901139937618251840, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9167721132108559924, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
       propertyPath: m_Material
       value: 
@@ -218646,4 +218672,3 @@ SceneRoots:
   - {fileID: 891116997}
   - {fileID: 79281043}
   - {fileID: 54864238}
-  - {fileID: 1623749075}

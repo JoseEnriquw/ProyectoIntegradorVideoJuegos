@@ -1,19 +1,19 @@
 {
-  "id": "3d658cc88e954a40bac40185fb38ddad",
+  "id": "6c1f1ef5761d4fc48768513586ad5b3d",
   "playerData": {
     "position": {
-      "x": 339.976685,
-      "y": 16.7527924,
-      "z": 475.524231
+      "x": 332.870544,
+      "y": 17.4675751,
+      "z": 546.001831
     },
     "rotation": {
-      "x": -12.0999975,
-      "y": -36.7
+      "x": 55.8250771,
+      "y": -12.7119122
     },
     "localData": {
       "health": 100,
       "crouched": false,
-      "selectedItem": -1,
+      "selectedItem": 5,
       "playerItems": {
         "playerItem_0": {
           "recordingTime": 0,
@@ -30,7 +30,7 @@
           "isUVLight": false
         },
         "playerItem_5": {
-          "currentFuel": 120.0
+          "currentFuel": 0.0
         },
         "playerItem_6": {},
         "playerItem_7": {},
@@ -43,7 +43,58 @@
     "globalData": {
       "inventory": {
         "expanded": 0,
-        "items": {},
+        "items": {
+          "item_0": {
+            "item": "3905d98ae65b4984a9b8fe2e994d6ead",
+            "quantity": 4,
+            "orientation": 0,
+            "position": {
+              "x": 0,
+              "y": 0
+            },
+            "customData": {}
+          },
+          "item_1": {
+            "item": "cc6f1cc8ccdc4588b87a90062377e156",
+            "quantity": 1,
+            "orientation": 0,
+            "position": {
+              "x": 1,
+              "y": 0
+            },
+            "customData": {}
+          },
+          "item_2": {
+            "item": "a776f2b59be446cd8c8784353b90c320",
+            "quantity": 2,
+            "orientation": 0,
+            "position": {
+              "x": 3,
+              "y": 0
+            },
+            "customData": {}
+          },
+          "item_3": {
+            "item": "9c45e9931ae9492dba1cf41854f95de0",
+            "quantity": 20,
+            "orientation": 0,
+            "position": {
+              "x": 4,
+              "y": 0
+            },
+            "customData": {}
+          },
+          "item_4": {
+            "item": "896bd5e3b27745d884a827b90ce02fb7",
+            "quantity": 0,
+            "orientation": 0,
+            "position": {
+              "x": 5,
+              "y": 0
+            },
+            "customData": {}
+          }
+        },
         "shortcuts": {
           "shortcut_0": "{}",
           "shortcut_1": "{}",
@@ -51,7 +102,41 @@
           "shortcut_3": "{}"
         }
       },
-      "objectives": {}
+      "objectives": {
+        "ingreso_alternativo": {
+          "isCompleted": false,
+          "subObjectives": {
+            "ir_granero": {
+              "completeCount": 3,
+              "isCompleted": true
+            },
+            "sube_puente": {
+              "completeCount": 3,
+              "isCompleted": true
+            },
+            "abre_reja": {
+              "completeCount": 3,
+              "isCompleted": true
+            },
+            "ingresar_feria": {
+              "completeCount": 3,
+              "isCompleted": true
+            },
+            "ir_casa_lider": {
+              "completeCount": 0,
+              "isCompleted": false
+            },
+            "distrae_epecuenses": {
+              "completeCount": 0,
+              "isCompleted": false
+            },
+            "encuentra_combustible": {
+              "completeCount": 0,
+              "isCompleted": false
+            }
+          }
+        }
+      }
     }
   },
   "worldState": {
@@ -61,17 +146,17 @@
       },
       "InteractableItem.93815765436246948b32e49b387ebca6": {
         "position": {
-          "x": -138.662079,
-          "y": -0.0823288,
-          "z": 191.76358
+          "x": -138.662048,
+          "y": -0.08232689,
+          "z": 191.7637
         },
         "rotation": {
-          "x": 3.86587524,
-          "y": 359.866638,
-          "z": 0.139913529
+          "x": 3.9604032,
+          "y": 359.8504,
+          "z": 0.394633144
         },
         "quantity": 1,
-        "enabledState": true,
+        "enabledState": false,
         "hotspotEnabled": true,
         "customData": {
           "fuel_liters": 5
@@ -146,14 +231,14 @@
       "DynamicObject.9717d17fd8cad964db485bb8a62900fa": {
         "localPosition": {
           "x": 1E-05,
-          "y": 0.02868,
+          "y": 0.03244,
           "z": -0.0093
         },
-        "isOpened": false,
-        "isLocked": true
+        "isOpened": true,
+        "isLocked": false
       },
       "SimpleSwitcher.e4b94ef4a80c0974b938ef2df56f89a1": {
-        "isSwitchedOn": false
+        "isSwitchedOn": true
       },
       "ActivadorDesactivadorDeObjetos.ebf79284033798e4e840787c5e39ed4a": {
         "yaSeEjecuto": false
@@ -176,14 +261,14 @@
       },
       "DraggableItem.e11f6deecdf7d8f4cbb3fa6f005108bb": {
         "position": {
-          "x": 426.4232,
-          "y": 20.3455,
-          "z": 385.858917
+          "x": 426.423126,
+          "y": 20.3454971,
+          "z": 385.858948
         },
         "rotation": {
-          "x": 359.718231,
-          "y": 275.7287,
-          "z": 179.3684
+          "x": 359.717957,
+          "y": 275.728973,
+          "z": 179.368118
         }
       },
       "AutosaveTrigger.9c6d6034b464239429d18f605caaf52b": {
@@ -193,7 +278,7 @@
         "objectActive": true
       },
       "ObjectiveTrigger.d5a9b3cbee346e548a42fa08eebf656b": {
-        "isTriggered": false
+        "isTriggered": true
       },
       "SaveableObject.fb1300090d26ee748b45110ea2000696": {
         "objectActive": true
@@ -210,7 +295,7 @@
         },
         "rotation": {
           "x": 270.0,
-          "y": 179.994186,
+          "y": 179.996414,
           "z": 0.0
         },
         "quantity": 1,
@@ -259,18 +344,18 @@
         "objectActive": true
       },
       "SaveableObject.d5e45208c5bf512418620a9a19f20b91": {
-        "objectActive": true
+        "objectActive": false
       },
       "DraggableItem.e1108845471897a44b27267337859cc5": {
         "position": {
-          "x": 543.2129,
-          "y": 20.3472767,
-          "z": 375.019135
+          "x": 543.205933,
+          "y": 20.3474026,
+          "z": 375.018951
         },
         "rotation": {
-          "x": 359.935364,
-          "y": 270.3,
-          "z": 180.006821
+          "x": 359.91687,
+          "y": 270.832062,
+          "z": 180.024811
         }
       },
       "DynamicObject.8ab4fa87dd68ccc47b2acc5f683e0462": {
@@ -303,14 +388,14 @@
       },
       "InteractableItem.0cb6c044eaa69b14ab75cfb2578446be": {
         "position": {
-          "x": -1.35899353,
-          "y": -2.67599988,
-          "z": -4.90179443
+          "x": -1.35906529,
+          "y": -3.23515129,
+          "z": -4.90241766
         },
         "rotation": {
-          "x": 270.666168,
-          "y": 182.234726,
-          "z": 12.4581528
+          "x": 270.019775,
+          "y": 194.687363,
+          "z": 0.0
         },
         "quantity": 1,
         "enabledState": false,
@@ -360,7 +445,7 @@
           "z": 270.984741
         },
         "quantity": 1,
-        "enabledState": true,
+        "enabledState": false,
         "hotspotEnabled": true,
         "customData": {}
       },
@@ -385,14 +470,14 @@
       },
       "DraggableItem.1c98a8dff10149e4399183b1ba51e795": {
         "position": {
-          "x": 581.0608,
-          "y": 17.0922,
-          "z": 372.015259
+          "x": 581.060852,
+          "y": 17.092207,
+          "z": 372.015228
         },
         "rotation": {
-          "x": 5.771723,
-          "y": 268.7977,
-          "z": 165.920319
+          "x": 5.772263,
+          "y": 268.7989,
+          "z": 165.921036
         }
       },
       "InteractableItem.3070c76811f11db44b206d544155b133": {
@@ -413,14 +498,14 @@
       },
       "DraggableItem.72f70c7832ccf3b49af04f9a3463f713": {
         "position": {
-          "x": 557.2352,
-          "y": 20.0532436,
-          "z": 369.600739
+          "x": 557.213135,
+          "y": 20.0577946,
+          "z": 369.593231
         },
         "rotation": {
-          "x": 1.95726824,
-          "y": 357.9206,
-          "z": 351.58194
+          "x": 1.74993312,
+          "y": 357.875824,
+          "z": 352.2136
         }
       },
       "InteractableItem.b41b3c20a25625744b65545f83f0ae5d": {
@@ -431,11 +516,11 @@
         },
         "rotation": {
           "x": 270.0,
-          "y": 179.993027,
+          "y": 179.99295,
           "z": 0.0
         },
         "quantity": 1,
-        "enabledState": true,
+        "enabledState": false,
         "hotspotEnabled": true,
         "customData": {}
       },
@@ -479,16 +564,16 @@
       "InteractableItem.af6c7e53ea0ea064dad6016cadd0c8c7": {
         "position": {
           "x": -139.2836,
-          "y": -0.09126091,
-          "z": 191.847626
+          "y": -0.09129715,
+          "z": 191.847565
         },
         "rotation": {
-          "x": 3.66086578,
-          "y": 359.992371,
-          "z": 0.5409645
+          "x": 3.66857362,
+          "y": 359.99057,
+          "z": 0.5369032
         },
         "quantity": 1,
-        "enabledState": true,
+        "enabledState": false,
         "hotspotEnabled": true,
         "customData": {
           "fuel_liters": 3
@@ -500,13 +585,13 @@
       "DraggableItem.5bfb4b1b0e804934683b7efaaf986b6a": {
         "position": {
           "x": 462.145844,
-          "y": 20.8486614,
-          "z": 376.027283
+          "y": 20.8486671,
+          "z": 376.027252
         },
         "rotation": {
-          "x": 359.985535,
-          "y": 0.051109042,
-          "z": 11.396
+          "x": 359.9858,
+          "y": 0.0496152751,
+          "z": 11.3962164
         }
       },
       "InteractableItem.218ff774e86dcbb4abfd34493ed7684c": {
@@ -613,22 +698,6 @@
       "SaveableObject.77a8c74e85ccc4e46bc719d9c8443f9b": {
         "objectActive": true
       },
-      "InteractableItem.c00bd6c8b8b2c2d439a601ac4e626b09": {
-        "position": {
-          "x": -1.61599731,
-          "y": -2.01063156,
-          "z": -5.093796
-        },
-        "rotation": {
-          "x": 90.0,
-          "y": 0.0,
-          "z": 0.0
-        },
-        "quantity": 1,
-        "enabledState": true,
-        "hotspotEnabled": true,
-        "customData": {}
-      },
       "InteractableItem.f0977f27862a624439fd6b17bbe23c29": {
         "position": {
           "x": -4.57505369,
@@ -647,14 +716,14 @@
       },
       "DraggableItem.89f2672f505407540806db7153fa8196": {
         "position": {
-          "x": 470.208527,
-          "y": 20.8949986,
-          "z": 373.048828
+          "x": 470.208557,
+          "y": 20.8949966,
+          "z": 373.048859
         },
         "rotation": {
-          "x": 0.00021429894,
-          "y": 359.844849,
-          "z": -0.0005448137
+          "x": 0.000352978124,
+          "y": 359.844818,
+          "z": 0.0003647894
         }
       },
       "DynamicObject.f2a97276f4ab7964d94417b04497e7f6": {
@@ -694,7 +763,7 @@
         "isSaved": false
       },
       "ActivadorDesactivadorDeObjetos.6a0b50925d02f9a40becdc4e37aac455": {
-        "yaSeEjecuto": false
+        "yaSeEjecuto": true
       },
       "SaveableObject.e9a61928d655a0c4fbe0d6c23e31713a": {
         "objectActive": true
@@ -710,7 +779,7 @@
         },
         "rotation": {
           "x": 270.0,
-          "y": 179.991043,
+          "y": 180.004715,
           "z": 0.0
         },
         "quantity": 1,
@@ -723,14 +792,14 @@
       },
       "DraggableItem.89b448ebaef70154cb1b4706cdfcf7d0": {
         "position": {
-          "x": 541.850464,
-          "y": 20.6736526,
-          "z": 375.020355
+          "x": 541.84906,
+          "y": 20.6764069,
+          "z": 375.024078
         },
         "rotation": {
-          "x": 32.22243,
-          "y": 270.130585,
-          "z": 179.9888
+          "x": 32.5585556,
+          "y": 269.965729,
+          "z": 179.87059
         }
       },
       "ObjectiveTrigger.8e4a53c4403a61b4893482ed5f919a70": {
@@ -806,12 +875,12 @@
       "InteractableItem.2023fb43a87c7ca4f992b21c9b0b3a26": {
         "position": {
           "x": 45.55798,
-          "y": 4.673691,
+          "y": 4.673689,
           "z": 184.181992
         },
         "rotation": {
           "x": 270.0,
-          "y": 269.999634,
+          "y": 270.002869,
           "z": 0.0
         },
         "quantity": 1,
@@ -873,13 +942,13 @@
       "DraggableItem.905c97885036e4f4fa69333c1a0154f3": {
         "position": {
           "x": 613.1345,
-          "y": 17.4378319,
+          "y": 17.43783,
           "z": 395.334564
         },
         "rotation": {
-          "x": 0.00047841575,
-          "y": 0.00117098,
-          "z": 0.0005399385
+          "x": 0.0001483756,
+          "y": -6.757702E-06,
+          "z": 0.0003636747
         }
       },
       "DynamicObject.340515011cf49b04b9f94edb021c462c": {
@@ -958,8 +1027,8 @@
           "z": 183.947983
         },
         "rotation": {
-          "x": 270.0,
-          "y": 269.9883,
+          "x": 270.027985,
+          "y": 269.9989,
           "z": 0.0
         },
         "quantity": 1,
@@ -979,7 +1048,7 @@
           "z": 0.0
         },
         "quantity": 1,
-        "enabledState": true,
+        "enabledState": false,
         "hotspotEnabled": true,
         "customData": {}
       },
@@ -1008,14 +1077,14 @@
       },
       "DraggableItem.438a1394713d29a46b1de460c1687cb8": {
         "position": {
-          "x": 474.0597,
-          "y": 20.75275,
-          "z": 372.8806
+          "x": 474.06076,
+          "y": 20.75039,
+          "z": 372.879242
         },
         "rotation": {
-          "x": 0.043223884,
-          "y": 359.34375,
-          "z": 0.169879273
+          "x": 0.00742599834,
+          "y": 359.312073,
+          "z": 0.0327320434
         }
       },
       "ActivadorDesactivadorDeObjetos.d5d3157b4f46f9a4ea005a4c70a1b64b": {
@@ -1041,7 +1110,7 @@
         }
       },
       "SaveableObject.a8366ab0b3aac26498a909c208285802": {
-        "objectActive": true
+        "objectActive": false
       },
       "InteractableItem.35e1322754f5e674a856a52e206f457a": {
         "position": {
@@ -1077,14 +1146,14 @@
       },
       "DraggableItem.e3c2062f3e7d97a4a82ffb21bfd45585": {
         "position": {
-          "x": 557.1443,
-          "y": 18.248642,
-          "z": 369.779633
+          "x": 557.071533,
+          "y": 18.3810635,
+          "z": 369.79187
         },
         "rotation": {
-          "x": 341.7008,
-          "y": 0.58751595,
-          "z": 344.493958
+          "x": 345.637146,
+          "y": 359.9654,
+          "z": 351.751282
         }
       },
       "ObjectiveTrigger.faeea2ebac174a444a78747a1076d0dc": {
@@ -1103,7 +1172,7 @@
         "isSaved": true
       },
       "ObjectiveTrigger.3148cb1fc62bd9042ac07d40214ea987": {
-        "isTriggered": false
+        "isTriggered": true
       },
       "DynamicObject.5b255b140094a534483225339bf92c1d": {
         "rotation": {
@@ -1129,9 +1198,9 @@
           "z": -20.1929932
         },
         "rotation": {
-          "x": -1.720754E-06,
-          "y": 179.9987,
-          "z": 2.14921852E-06
+          "x": -2.91620518E-06,
+          "y": 179.998672,
+          "z": -1.75947878E-06
         },
         "quantity": 1,
         "enabledState": true,
@@ -1213,33 +1282,33 @@
       },
       "DraggableItem.026d29ca3968ad040bb97a04298ca1ae": {
         "position": {
-          "x": 557.0175,
-          "y": 18.9613934,
-          "z": 371.3033
+          "x": 557.0117,
+          "y": 18.9581318,
+          "z": 371.300568
         },
         "rotation": {
-          "x": 337.324371,
-          "y": 2.40626574,
-          "z": 349.526154
+          "x": 337.036835,
+          "y": 1.91538167,
+          "z": 350.4236
         }
       },
       "DraggableItem.3653328169a663348843db537344de43": {
         "position": {
-          "x": 578.488,
-          "y": 17.0790768,
+          "x": 578.4879,
+          "y": 17.0790482,
           "z": 378.9483
         },
         "rotation": {
-          "x": 10.264863,
-          "y": 270.4083,
-          "z": 186.942825
+          "x": 10.2643929,
+          "y": 270.408264,
+          "z": 186.93811
         }
       },
       "DialogueTrigger.7bfb678eb4a1ff140900b1c46228fec3": {
-        "IsCompleted": false
+        "IsCompleted": true
       },
       "DialogueTrigger.e2fa91fd01c5e3f4ab26027e33d79409": {
-        "IsCompleted": false
+        "IsCompleted": true
       },
       "InteractableItem.9df2d2acbd264274a83f9d697e38b4ac": {
         "position": {
@@ -1272,13 +1341,13 @@
         "isOpenSound": false,
         "disableSounds": false,
         "isOpened": false,
-        "isLocked": true
+        "isLocked": false
       },
       "DialogueTrigger.74aaf16062957c54898e15e6fdc3be42": {
         "IsCompleted": false
       },
       "ActivadorDesactivadorDeObjetos.e88dfd4aabc112f4fa5dbd5593691cbd": {
-        "yaSeEjecuto": false
+        "yaSeEjecuto": true
       },
       "InteractableItem.a7e7faf473ccedf4ab93d11baa27a2da": {
         "position": {
@@ -1317,7 +1386,7 @@
         "isBroken": false
       },
       "DialogueTrigger.93e8900ce6f82094a929e039259dd54b": {
-        "IsCompleted": false
+        "IsCompleted": true
       },
       "SaveableObject.82e48f60806cc98478fb342445beb378": {
         "objectActive": true
