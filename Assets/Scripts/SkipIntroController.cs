@@ -1,0 +1,202 @@
+using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using System.Collections;
+using TMPro;
+using UHFPS.Runtime;
+
+public class SkipIntroController : MonoBehaviour
+{
+    private bool isSkipping = false;
+    private GameObject canvasGo;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    private static void OnSceneLoaded()
+    {
+        // Detect if the loaded scene is the introductory cutscene
+        if (SceneManager.GetActiveScene().name == "1 IntroCutScene")
+        {
+            Debug.Log("[SkipIntroController] Intro CutScene loaded, spawning skip controller.");
+            GameObject skipGo = new GameObject("SkipIntroController");
+            skipGo.AddComponent<SkipIntroController>();
+        }
+    }
+
+    private void Start()
+    {
+        CreateEventSystemIfNeeded();
+        CreateSkipUI();
+    }
+
+    private void CreateEventSystemIfNeeded()
+    {
+        if (EventSystem.current == null && FindObjectOfType<EventSystem>() == null)
+        {
+            Debug.Log("[SkipIntroController] EventSystem not found. Creating EventSystem dynamically to handle UI clicks.");
+            GameObject eventSystemGo = new GameObject("EventSystem");
+            eventSystemGo.AddComponent<EventSystem>();
+            
+            // Standard standalone input module handles input processing for EventSystem
+            eventSystemGo.AddComponent<StandaloneInputModule>();
+        }
+    }
+
+    private void Update()
+    {
+        // Force the cursor to be visible and unlocked so the player can interact with the skip button
+        if (Cursor.lockState != CursorLockMode.None)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+
+        if (!Cursor.visible)
+        {
+            Cursor.visible = true;
+        }
+    }
+
+    private void CreateSkipUI()
+    {
+        // 1. Create the Canvas Game Object
+        canvasGo = new GameObject("SkipIntroCanvas");
+        canvasGo.transform.SetParent(transform, false);
+
+        Canvas canvas = canvasGo.AddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = 9999; // Ensure it renders on top of dialogue panels and other overlays
+
+        CanvasScaler scaler = canvasGo.AddComponent<CanvasScaler>();
+        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        scaler.referenceResolution = new Vector2(1920, 1080);
+        scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
+        scaler.matchWidthOrHeight = 0.5f;
+
+        canvasGo.AddComponent<GraphicRaycaster>();
+
+        // 2. Create the Button Game Object
+        GameObject buttonGo = new GameObject("SkipButton");
+        buttonGo.transform.SetParent(canvasGo.transform, false);
+
+        // Styling the button background (solid dark charcoal/black)
+        Image buttonImg = buttonGo.AddComponent<Image>();
+        buttonImg.color = new Color(0.08f, 0.08f, 0.08f, 0.9f);
+
+        // Thin gray outline around the button matching the reference design
+        Outline outline = buttonGo.AddComponent<Outline>();
+        outline.effectColor = new Color(0.28f, 0.28f, 0.28f, 1f);
+        outline.effectDistance = new Vector2(1.5f, 1.5f);
+
+        Button buttonComp = buttonGo.AddComponent<Button>();
+        buttonComp.onClick.AddListener(SkipIntro);
+
+        // Hover & click visual transitions
+        ColorBlock colors = buttonComp.colors;
+        colors.normalColor = new Color(0.08f, 0.08f, 0.08f, 0.9f);
+        colors.highlightedColor = new Color(0.18f, 0.18f, 0.18f, 0.95f); // Lighter on hover
+        colors.pressedColor = new Color(0.04f, 0.04f, 0.04f, 0.95f);     // Darker on press
+        colors.selectedColor = colors.normalColor;
+        buttonComp.colors = colors;
+
+        // Add hover effects for border color changing
+        SkipButtonHoverEffects hoverEffects = buttonGo.AddComponent<SkipButtonHoverEffects>();
+        hoverEffects.Init(outline, new Color(0.28f, 0.28f, 0.28f, 1f), Color.white);
+
+        // Position at the bottom-right corner with responsive anchors
+        RectTransform rect = buttonGo.GetComponent<RectTransform>();
+        rect.anchorMin = new Vector2(1, 0); // Bottom Right
+        rect.anchorMax = new Vector2(1, 0);
+        rect.pivot = new Vector2(1, 0);
+        rect.sizeDelta = new Vector2(220, 65); // Width: 220, Height: 65
+        rect.anchoredPosition = new Vector2(-60, 60); // Inset from edge
+
+        // 3. Create the Text inside the Button
+        GameObject textGo = new GameObject("ButtonText");
+        textGo.transform.SetParent(buttonGo.transform, false);
+
+        TextMeshProUGUI textComp = textGo.AddComponent<TextMeshProUGUI>();
+        textComp.text = "Omitir intro";
+        textComp.fontSize = 22;
+        textComp.fontStyle = FontStyles.Normal;
+        textComp.color = Color.white;
+        textComp.alignment = TextAlignmentOptions.Center;
+
+        // Make the text expand and fill the entire button boundaries
+        RectTransform textRect = textGo.GetComponent<RectTransform>();
+        textRect.anchorMin = Vector2.zero;
+        textRect.anchorMax = Vector2.one;
+        textRect.sizeDelta = Vector2.zero;
+        textRect.anchoredPosition = Vector2.zero;
+    }
+
+    public void SkipIntro()
+    {
+        if (isSkipping) return;
+        isSkipping = true;
+
+        Debug.Log("[SkipIntroController] Skip button clicked. Transitioning to next scene...");
+
+        // Disable input locking to ensure everything cleans up properly
+        if (GameManager.HasReference)
+        {
+            GameManager.Instance.LockInput(false);
+        }
+
+        // Locate the CinematicSceneLoader component
+        var sceneLoader = FindObjectOfType<CinematicSceneLoader>();
+        if (sceneLoader != null)
+        {
+            if (GameManager.HasReference)
+            {
+                StartCoroutine(SkipRoutine(sceneLoader));
+            }
+            else
+            {
+                sceneLoader.LoadNextScene();
+            }
+        }
+        else
+        {
+            // Fallback load next scene directly if loader is not found
+            Debug.LogWarning("[SkipIntroController] CinematicSceneLoader not found. Loading 1 IntroHouse directly.");
+            SceneManager.LoadScene("1 IntroHouse");
+        }
+    }
+
+    private IEnumerator SkipRoutine(CinematicSceneLoader loader)
+    {
+        // Smoothly fade to black before switching scenes for a premium transition
+        yield return GameManager.Instance.StartBackgroundFade(false, fadeSpeed: 8f);
+        loader.LoadNextScene();
+    }
+}
+
+public class SkipButtonHoverEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+{
+    private Outline outline;
+    private Color normalColor;
+    private Color hoverColor;
+
+    public void Init(Outline outline, Color normalColor, Color hoverColor)
+    {
+        this.outline = outline;
+        this.normalColor = normalColor;
+        this.hoverColor = hoverColor;
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (outline != null)
+        {
+            outline.effectColor = hoverColor;
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (outline != null)
+        {
+            outline.effectColor = normalColor;
+        }
+    }
+}
