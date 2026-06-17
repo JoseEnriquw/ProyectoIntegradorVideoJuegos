@@ -7,6 +7,17 @@ public class CinematicSceneLoader : MonoBehaviour
     [Tooltip("Nombre de la siguiente escena a cargar")]
     public string nextSceneName;
 
+    private void Start()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName.Equals("2 Bosque_intro", System.StringComparison.OrdinalIgnoreCase))
+        {
+            Debug.Log("[CinematicSceneLoader] Ocultando y bloqueando cursor en la escena 2 Bosque_intro.");
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         // Verifica si es el auto (o el jugador) el que entra al trigger
