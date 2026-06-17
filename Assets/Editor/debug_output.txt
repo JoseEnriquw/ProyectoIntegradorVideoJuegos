@@ -1,17 +1,15 @@
-=== Drawer & Switch Inspection ===
-DynamicObject Name: Cylinder.013
-IsLocked: False
-IsOpened: False
-useEvent1 PersistentEventCount: 2
-  useEvent1[0]: target=Switch (GameObject), method=SetActive, boolArg=True
-  useEvent1[1]: target=Cylinder.013 (DrawerColliderHelper), method=SetColliderEnabled, boolArg=False
-unlockedEvent PersistentEventCount: 1
-  unlockedEvent[0]: target=Cylinder.013 (DynamicObject), method=SetOpenState
-useEvent2 PersistentEventCount: 1
-  useEvent2[0]: target=Cylinder.013 (DrawerColliderHelper), method=SetColliderEnabled, boolArg=True
-Switch activeSelf: False
-Switch activeInHierarchy: False
-Switch collider: SphereCollider, enabled=True
-Switch InteractableItem: Found
-  interactable.enabled: True
-  interactable.InteractableType: InventoryItem
+--- ThunderManager Component Details ---
+Component: Transform
+Component: Light
+Component: ThunderManager
+  Field: anonymousWaitTime = 0,1
+  Field: maxWaitTime = 0,3
+  Field: LastThunderTime = 0
+  Field: ThunderPeriod = 0
+  Field: ThunderPeriodMin = 5
+  Field: ThunderPeriodMax = 10
+  Field: thunderSounds = UnityEngine.AudioClip[]
+  Field: audioSource = ThunderManager (UnityEngine.AudioSource)
+Component: AudioSource
+Component: UniversalAdditionalLightData
+----------------------------------------
