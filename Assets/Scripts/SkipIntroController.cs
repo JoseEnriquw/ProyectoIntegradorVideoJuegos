@@ -12,10 +12,29 @@ public class SkipIntroController : MonoBehaviour
     private GameObject canvasGo;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-    private static void OnSceneLoaded()
+    private static void Init()
     {
-        // Detect if the loaded scene is the introductory cutscene
+        SceneManager.sceneLoaded += OnStaticSceneLoaded;
+
+        // If playing directly from the Editor, the scene is already active,
+        // so we spawn the controller immediately.
         if (SceneManager.GetActiveScene().name == "1 IntroCutScene")
+        {
+            SpawnController();
+        }
+    }
+
+    private static void OnStaticSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name == "1 IntroCutScene")
+        {
+            SpawnController();
+        }
+    }
+
+    private static void SpawnController()
+    {
+        if (FindObjectOfType<SkipIntroController>() == null)
         {
             Debug.Log("[SkipIntroController] Intro CutScene loaded, spawning skip controller.");
             GameObject skipGo = new GameObject("SkipIntroController");
@@ -40,6 +59,45 @@ public class SkipIntroController : MonoBehaviour
             // Standard standalone input module handles input processing for EventSystem
             eventSystemGo.AddComponent<StandaloneInputModule>();
         }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.activeSceneChanged += OnActiveSceneChanged;
+        SceneManager.sceneLoaded += OnOtherSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.activeSceneChanged -= OnActiveSceneChanged;
+        SceneManager.sceneLoaded -= OnOtherSceneLoaded;
+    }
+
+    private void OnActiveSceneChanged(Scene previousScene, Scene newScene)
+    {
+        if (newScene.name != "1 IntroCutScene")
+        {
+            CleanupAndDestroy();
+        }
+    }
+
+    private void OnOtherSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.name != "1 IntroCutScene")
+        {
+            CleanupAndDestroy();
+        }
+    }
+
+    private void CleanupAndDestroy()
+    {
+        Debug.Log("[SkipIntroController] Scene transition detected. Hiding button and destroying controller.");
+        if (canvasGo != null)
+        {
+            canvasGo.SetActive(false);
+            Destroy(canvasGo);
+        }
+        Destroy(gameObject);
     }
 
     private void Update()
@@ -129,12 +187,27 @@ public class SkipIntroController : MonoBehaviour
         textRect.anchoredPosition = Vector2.zero;
     }
 
+    public void HideButton()
+    {
+        if (canvasGo != null)
+        {
+            canvasGo.SetActive(false);
+            Destroy(canvasGo);
+        }
+    }
+
     public void SkipIntro()
     {
         if (isSkipping) return;
         isSkipping = true;
 
         Debug.Log("[SkipIntroController] Skip button clicked. Transitioning to next scene...");
+
+        // Hide the skip canvas immediately so the button disappears instantly
+        if (canvasGo != null)
+        {
+            canvasGo.SetActive(false);
+        }
 
         // Disable input locking to ensure everything cleans up properly
         if (GameManager.HasReference)
@@ -152,7 +225,7 @@ public class SkipIntroController : MonoBehaviour
             }
             else
             {
-                sceneLoader.LoadNextScene();
+                sceneLoader.LoadNextSceneDirect();
             }
         }
         else
@@ -167,7 +240,7 @@ public class SkipIntroController : MonoBehaviour
     {
         // Smoothly fade to black before switching scenes for a premium transition
         yield return GameManager.Instance.StartBackgroundFade(false, fadeSpeed: 8f);
-        loader.LoadNextScene();
+        loader.LoadNextSceneDirect();
     }
 }
 
