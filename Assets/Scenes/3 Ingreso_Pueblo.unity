@@ -95603,7 +95603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &891116997
 Transform:
   m_ObjectHideFlags: 0
@@ -178517,6 +178517,55 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 880155146}
   m_SourcePrefab: {fileID: 100100000, guid: 8711e1a4ae497094099397f723d35ac9, type: 3}
+--- !u!1 &1723722992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1723722994}
+  - component: {fileID: 1723722993}
+  m_Layer: 0
+  m_Name: Volumen_Lindo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1723722993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723722992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Core.Runtime::UnityEngine.Rendering.Volume
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 20cb5e89b43e3b14f95a3078a5ec5dee, type: 2}
+--- !u!4 &1723722994
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723722992}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.9472942, z: -0, w: 0.32036504}
+  m_LocalPosition: {x: 304.0842, y: 17.83723, z: 608.8902}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1724117572
 GameObject:
   m_ObjectHideFlags: 0
@@ -218260,6 +218309,10 @@ PrefabInstance:
       propertyPath: OnGeneratorStart.m_PersistentCalls.m_Calls.Array.data[5].m_Target
       value: 
       objectReference: {fileID: 1602170132}
+    - target: {fileID: 70603965252239830, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 816653202245083518, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
       propertyPath: camaraJugador
       value: 
@@ -218300,6 +218353,10 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 242157408}
+    - target: {fileID: 3859657668832517456, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
+      propertyPath: volumenLindo
+      value: 
+      objectReference: {fileID: 1723722993}
     - target: {fileID: 3956279982669532779, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 332.45
@@ -218344,6 +218401,14 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 368741787}
+    - target: {fileID: 4804863860350861396, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
+      propertyPath: objetosRealidadLinda.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804863860350861396, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
+      propertyPath: 'objetosRealidadLinda.Array.data[0]'
+      value: 
+      objectReference: {fileID: 495505555015132733}
     - target: {fileID: 5300778224221666364, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
       propertyPath: audioSourcePJ
       value: 
@@ -218372,10 +218437,6 @@ PrefabInstance:
       propertyPath: m_Material
       value: 
       objectReference: {fileID: 1034340582}
-    - target: {fileID: 8901139937618251840, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9167721132108559924, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
       propertyPath: m_Material
       value: 
@@ -218385,6 +218446,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
+--- !u!1 &495505555015132733 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 70603965252239830, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
+  m_PrefabInstance: {fileID: 495505555015132732}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &495505555015132734 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3498329478159520156, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
@@ -218672,3 +218738,4 @@ SceneRoots:
   - {fileID: 891116997}
   - {fileID: 79281043}
   - {fileID: 54864238}
+  - {fileID: 1723722994}
