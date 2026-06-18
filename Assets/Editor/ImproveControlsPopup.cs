@@ -9,9 +9,9 @@ public class ImproveControlsPopup : EditorWindow
     [MenuItem("Tools/Improve Controls Popup")]
     public static void ImprovePopup()
     {
-        Debug.Log("[ImproveControlsPopup] Starting advanced UX/UI improvements...");
+        Debug.Log("[ImproveControlsPopup] Starting advanced AAA UX/UI styling process...");
 
-        // 1. Corregir y configurar Texturas en el Asset Database
+        // 1. Corregir y configurar Texturas en el Asset Database (Usando FromInput ya que corregimos los archivos PNG)
         FixTextureImporter("Assets/Sprites/letreros/controls/movement_icon.png");
         FixTextureImporter("Assets/Sprites/letreros/controls/jump_icon.png");
         FixTextureImporter("Assets/Sprites/letreros/controls/crouch_icon.png");
@@ -41,11 +41,10 @@ public class ImproveControlsPopup : EditorWindow
             containerRect.anchorMin = new Vector2(0.5f, 0.5f);
             containerRect.anchorMax = new Vector2(0.5f, 0.5f);
             containerRect.pivot = new Vector2(0.5f, 0.5f);
-            containerRect.anchoredPosition = Vector2.zero; // Centrado exacto
-            containerRect.sizeDelta = new Vector2(1300, 800); // 1300x800 para fondo_popup.png
+            containerRect.anchoredPosition = Vector2.zero; 
+            containerRect.sizeDelta = new Vector2(1300, 800); 
         }
 
-        // Quitar Outline del contenedor principal
         Outline containerOutline = controlsContainer.GetComponent<Outline>();
         if (containerOutline != null)
         {
@@ -67,11 +66,13 @@ public class ImproveControlsPopup : EditorWindow
         // 5. Cargar fuentes del proyecto
         TMP_FontAsset titleFont = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/Fonts/horroroid/horroroidexpand SDF.asset");
         TMP_FontAsset bodyFont = AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/ThunderWire Studio/UHFPS/Content/Fonts/NotoSerif/TMP/Normal/Normal/NotoSerif-Thin SDF.asset");
+        TMP_FontAsset sansFont = Resources.Load<TMP_FontAsset>("Fonts & Materials/LiberationSans SDF"); // Fuente sans-serif limpia para las teclas
 
         if (titleFont == null) Debug.LogWarning("[ImproveControlsPopup] horroroidexpand SDF font not found!");
         if (bodyFont == null) Debug.LogWarning("[ImproveControlsPopup] NotoSerif-Thin SDF font not found!");
+        if (sansFont == null) sansFont = bodyFont; // Fallback si no está LiberationSans
 
-        // 6. Cabecera (Header)
+        // 6. Cabecera (Header) - Reajustado para dar más espacio vertical
         Transform headerTrans = controlsContainer.transform.Find("Header");
         if (headerTrans != null)
         {
@@ -79,7 +80,7 @@ public class ImproveControlsPopup : EditorWindow
             if (headerRect != null)
             {
                 Undo.RecordObject(headerRect, "Adjust Header Rect");
-                headerRect.anchorMin = new Vector2(0f, 0.80f); 
+                headerRect.anchorMin = new Vector2(0f, 0.83f); 
                 headerRect.anchorMax = new Vector2(1f, 1f);
                 headerRect.offsetMin = Vector2.zero;
                 headerRect.offsetMax = Vector2.zero;
@@ -90,8 +91,8 @@ public class ImproveControlsPopup : EditorWindow
             {
                 Undo.RecordObject(titleTxt, "Update Title Text Style");
                 if (titleFont != null) titleTxt.font = titleFont;
-                titleTxt.fontSize = 55; 
-                titleTxt.color = new Color(0.85f, 0.2f, 0.2f, 1f); // Crimson horror red
+                titleTxt.fontSize = 58; 
+                titleTxt.color = new Color(0.85f, 0.15f, 0.15f, 1f); 
                 titleTxt.fontStyle = FontStyles.Bold;
                 titleTxt.alignment = TextAlignmentOptions.Center;
             }
@@ -102,7 +103,7 @@ public class ImproveControlsPopup : EditorWindow
                 Undo.RecordObject(subtitleTxt, "Update Subtitle Text Style");
                 if (bodyFont != null) subtitleTxt.font = bodyFont;
                 subtitleTxt.fontSize = 22;
-                subtitleTxt.color = new Color(0.8f, 0.8f, 0.75f, 0.9f); // Crema suave
+                subtitleTxt.color = new Color(0.85f, 0.85f, 0.8f, 0.9f); 
                 subtitleTxt.alignment = TextAlignmentOptions.Center;
             }
 
@@ -113,8 +114,8 @@ public class ImproveControlsPopup : EditorWindow
                 if (sepRect != null)
                 {
                     Undo.RecordObject(sepRect, "Adjust Separator Rect");
-                    sepRect.anchorMin = new Vector2(0.25f, 0.05f);
-                    sepRect.anchorMax = new Vector2(0.75f, 0.08f);
+                    sepRect.anchorMin = new Vector2(0.20f, 0.04f);
+                    sepRect.anchorMax = new Vector2(0.80f, 0.08f);
                     sepRect.offsetMin = Vector2.zero;
                     sepRect.offsetMax = Vector2.zero;
                 }
@@ -122,12 +123,12 @@ public class ImproveControlsPopup : EditorWindow
                 if (sepImg != null)
                 {
                     Undo.RecordObject(sepImg, "Adjust Separator Color");
-                    sepImg.color = new Color(0.55f, 0.12f, 0.12f, 0.7f); // Rojo sangre traslúcido
+                    sepImg.color = new Color(0.55f, 0.12f, 0.12f, 0.75f); 
                 }
             }
         }
 
-        // 7. Cuerpo del diálogo (Body)
+        // 7. Cuerpo del diálogo (Body) - Ampliado del 18% al 82%
         Transform bodyTrans = controlsContainer.transform.Find("Body");
         if (bodyTrans != null)
         {
@@ -135,13 +136,13 @@ public class ImproveControlsPopup : EditorWindow
             if (bodyRect != null)
             {
                 Undo.RecordObject(bodyRect, "Adjust Body Rect");
-                bodyRect.anchorMin = new Vector2(0f, 0.22f); 
-                bodyRect.anchorMax = new Vector2(1f, 0.78f);
+                bodyRect.anchorMin = new Vector2(0f, 0.18f); 
+                bodyRect.anchorMax = new Vector2(1f, 0.82f);
                 bodyRect.offsetMin = Vector2.zero;
                 bodyRect.offsetMax = Vector2.zero;
             }
 
-            // 7a. Columna Izquierda (Controles teclado)
+            // 7a. Columna Izquierda (Controles teclado) - Ampliado margen derecho al 62%
             Transform leftColTrans = bodyTrans.Find("LeftColumn");
             if (leftColTrans != null)
             {
@@ -149,8 +150,8 @@ public class ImproveControlsPopup : EditorWindow
                 if (leftColRect != null)
                 {
                     Undo.RecordObject(leftColRect, "Adjust LeftColumn Rect");
-                    leftColRect.anchorMin = new Vector2(0.05f, 0f); 
-                    leftColRect.anchorMax = new Vector2(0.60f, 1f);
+                    leftColRect.anchorMin = new Vector2(0.04f, 0f); 
+                    leftColRect.anchorMax = new Vector2(0.62f, 1f);
                     leftColRect.offsetMin = Vector2.zero;
                     leftColRect.offsetMax = Vector2.zero;
                 }
@@ -159,20 +160,20 @@ public class ImproveControlsPopup : EditorWindow
                 if (vlg != null)
                 {
                     Undo.RecordObject(vlg, "Adjust Vertical Layout Group");
-                    vlg.spacing = 10; // Espaciado perfecto
+                    vlg.spacing = 10; 
                     vlg.padding = new RectOffset(10, 10, 10, 10);
                 }
 
                 // Configurar cada fila de control con su sprite correspondiente y estructura WASD / 3D
-                ConfigureControlRow(leftColTrans, "Row_Movement", "Assets/Sprites/letreros/controls/movement_icon.png", titleFont, bodyFont);
-                ConfigureControlRow(leftColTrans, "Row_Jump", "Assets/Sprites/letreros/controls/jump_icon.png", titleFont, bodyFont);
-                ConfigureControlRow(leftColTrans, "Row_Crouch", "Assets/Sprites/letreros/controls/crouch_icon.png", titleFont, bodyFont);
-                ConfigureControlRow(leftColTrans, "Row_Interact", "Assets/Sprites/letreros/controls/interact_icon.png", titleFont, bodyFont);
-                ConfigureControlRow(leftColTrans, "Row_Inventory", "Assets/Sprites/letreros/controls/inventory_icon.png", titleFont, bodyFont);
-                ConfigureControlRow(leftColTrans, "Row_Run", "Assets/Sprites/letreros/controls/run_icon.png", titleFont, bodyFont);
+                ConfigureControlRow(leftColTrans, "Row_Movement", "Assets/Sprites/letreros/controls/movement_icon.png", titleFont, bodyFont, sansFont);
+                ConfigureControlRow(leftColTrans, "Row_Jump", "Assets/Sprites/letreros/controls/jump_icon.png", titleFont, bodyFont, sansFont);
+                ConfigureControlRow(leftColTrans, "Row_Crouch", "Assets/Sprites/letreros/controls/crouch_icon.png", titleFont, bodyFont, sansFont);
+                ConfigureControlRow(leftColTrans, "Row_Interact", "Assets/Sprites/letreros/controls/interact_icon.png", titleFont, bodyFont, sansFont);
+                ConfigureControlRow(leftColTrans, "Row_Inventory", "Assets/Sprites/letreros/controls/inventory_icon.png", titleFont, bodyFont, sansFont);
+                ConfigureControlRow(leftColTrans, "Row_Run", "Assets/Sprites/letreros/controls/run_icon.png", titleFont, bodyFont, sansFont);
             }
 
-            // 7b. Columna Derecha (Mouse Girar)
+            // 7b. Columna Derecha (Mouse Girar) - Ampliado de 64% a 96%
             Transform rightColTrans = bodyTrans.Find("RightColumn");
             if (rightColTrans != null)
             {
@@ -181,7 +182,7 @@ public class ImproveControlsPopup : EditorWindow
                 {
                     Undo.RecordObject(rightColRect, "Adjust RightColumn Rect");
                     rightColRect.anchorMin = new Vector2(0.64f, 0f); 
-                    rightColRect.anchorMax = new Vector2(0.95f, 1f);
+                    rightColRect.anchorMax = new Vector2(0.96f, 1f);
                     rightColRect.offsetMin = Vector2.zero;
                     rightColRect.offsetMax = Vector2.zero;
                 }
@@ -191,8 +192,8 @@ public class ImproveControlsPopup : EditorWindow
                 {
                     Undo.RecordObject(mouseTitle, "Update Mouse Title");
                     if (titleFont != null) mouseTitle.font = titleFont;
-                    mouseTitle.fontSize = 28;
-                    mouseTitle.color = new Color(0.85f, 0.2f, 0.2f, 1f); 
+                    mouseTitle.fontSize = 32; // Más grande para AAA
+                    mouseTitle.color = new Color(0.85f, 0.15f, 0.15f, 1f); 
                     mouseTitle.fontStyle = FontStyles.Bold;
                     mouseTitle.alignment = TextAlignmentOptions.Center;
                 }
@@ -202,7 +203,7 @@ public class ImproveControlsPopup : EditorWindow
                 {
                     Undo.RecordObject(mouseSubtitle, "Update Mouse Subtitle");
                     if (titleFont != null) mouseSubtitle.font = titleFont;
-                    mouseSubtitle.fontSize = 22;
+                    mouseSubtitle.fontSize = 24;
                     mouseSubtitle.color = Color.white;
                     mouseSubtitle.alignment = TextAlignmentOptions.Center;
                 }
@@ -212,7 +213,7 @@ public class ImproveControlsPopup : EditorWindow
                 {
                     Undo.RecordObject(mouseDesc, "Update Mouse Description");
                     if (bodyFont != null) mouseDesc.font = bodyFont;
-                    mouseDesc.fontSize = 18;
+                    mouseDesc.fontSize = 20; // Más grande para AAA
                     mouseDesc.color = new Color(0.85f, 0.85f, 0.8f, 0.9f);
                     mouseDesc.alignment = TextAlignmentOptions.Center;
                 }
@@ -224,18 +225,18 @@ public class ImproveControlsPopup : EditorWindow
                     if (mouseIllRect != null)
                     {
                         Undo.RecordObject(mouseIllRect, "Adjust Mouse Illustration Rect");
-                        mouseIllRect.anchorMin = new Vector2(0.5f, 0.32f);
-                        mouseIllRect.anchorMax = new Vector2(0.5f, 0.32f);
+                        mouseIllRect.anchorMin = new Vector2(0.5f, 0.30f);
+                        mouseIllRect.anchorMax = new Vector2(0.5f, 0.30f);
                         mouseIllRect.pivot = new Vector2(0.5f, 0.5f);
                         mouseIllRect.anchoredPosition = Vector2.zero;
-                        mouseIllRect.sizeDelta = new Vector2(180, 180);
+                        mouseIllRect.sizeDelta = new Vector2(220, 220); // Más grande para llenar el espacio vacío
                     }
 
                     Image mouseIllImg = mouseIllustration.GetComponent<Image>();
                     if (mouseIllImg != null)
                     {
                         Undo.RecordObject(mouseIllImg, "Adjust Mouse Illustration Background");
-                        mouseIllImg.color = new Color(0.55f, 0.12f, 0.12f, 0.15f); // Brillo rojo sangre inmersivo
+                        mouseIllImg.color = new Color(0.55f, 0.12f, 0.12f, 0.18f); // Brillo rojo sangre inmersivo
                     }
 
                     Transform mouseIcon = mouseIllustration.Find("MouseIcon");
@@ -249,7 +250,7 @@ public class ImproveControlsPopup : EditorWindow
                             mouseIconRect.anchorMax = new Vector2(0.5f, 0.5f);
                             mouseIconRect.pivot = new Vector2(0.5f, 0.5f);
                             mouseIconRect.anchoredPosition = Vector2.zero;
-                            mouseIconRect.sizeDelta = new Vector2(100, 140);
+                            mouseIconRect.sizeDelta = new Vector2(130, 180); // Más grande
                         }
 
                         Image mouseIconImg = mouseIcon.GetComponent<Image>();
@@ -266,7 +267,7 @@ public class ImproveControlsPopup : EditorWindow
             }
         }
 
-        // 8. Footer (Advertencia y Decoración)
+        // 8. Footer (Advertencia y Decoración) - Bajado del 8% al 17%
         Transform footerTrans = controlsContainer.transform.Find("Footer");
         if (footerTrans != null)
         {
@@ -274,8 +275,8 @@ public class ImproveControlsPopup : EditorWindow
             if (footerRect != null)
             {
                 Undo.RecordObject(footerRect, "Adjust Footer Rect");
-                footerRect.anchorMin = new Vector2(0.05f, 0.11f); 
-                footerRect.anchorMax = new Vector2(0.95f, 0.21f);
+                footerRect.anchorMin = new Vector2(0.04f, 0.08f); 
+                footerRect.anchorMax = new Vector2(0.96f, 0.17f);
                 footerRect.offsetMin = Vector2.zero;
                 footerRect.offsetMax = Vector2.zero;
             }
@@ -305,7 +306,7 @@ public class ImproveControlsPopup : EditorWindow
                     warningIconRect.anchorMax = new Vector2(0.02f, 0.5f);
                     warningIconRect.pivot = new Vector2(0f, 0.5f);
                     warningIconRect.anchoredPosition = Vector2.zero;
-                    warningIconRect.sizeDelta = new Vector2(35, 32);
+                    warningIconRect.sizeDelta = new Vector2(40, 36);
                 }
 
                 Image warningIconImg = warningIcon.GetComponent<Image>();
@@ -314,7 +315,7 @@ public class ImproveControlsPopup : EditorWindow
                 {
                     Undo.RecordObject(warningIconImg, "Set Warning Icon Sprite");
                     warningIconImg.sprite = warningSprite;
-                    warningIconImg.color = new Color(0.85f, 0.2f, 0.2f, 1f); 
+                    warningIconImg.color = new Color(0.85f, 0.15f, 0.15f, 1f); 
                     warningIconImg.preserveAspect = true;
                 }
             }
@@ -365,15 +366,8 @@ public class ImproveControlsPopup : EditorWindow
                 btnRect.anchorMin = new Vector2(0.5f, 0f);
                 btnRect.anchorMax = new Vector2(0.5f, 0f);
                 btnRect.pivot = new Vector2(0.5f, 0f);
-                btnRect.anchoredPosition = new Vector2(0, 22);
+                btnRect.anchoredPosition = new Vector2(0, 18);
                 btnRect.sizeDelta = new Vector2(260, 50);
-            }
-
-            Outline btnOutline = actionBtnTrans.GetComponent<Outline>();
-            if (btnOutline != null)
-            {
-                Undo.RecordObject(btnOutline, "Disable Button Outline");
-                btnOutline.enabled = false;
             }
 
             Image btnImg = actionBtnTrans.GetComponent<Image>();
@@ -384,14 +378,13 @@ public class ImproveControlsPopup : EditorWindow
                 Sprite btnSprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UISprite.psd");
                 if (btnSprite != null) btnImg.sprite = btnSprite;
 
-                // Añadir un Outline sutil rojo apagado al botón
                 Outline outlineComponent = actionBtnTrans.GetComponent<Outline>();
                 if (outlineComponent == null)
                 {
                     outlineComponent = Undo.AddComponent<Outline>(actionBtnTrans.gameObject);
                 }
                 outlineComponent.enabled = true;
-                outlineComponent.effectColor = new Color(0.55f, 0.12f, 0.12f, 0.45f); // Borde rojo oscuro
+                outlineComponent.effectColor = new Color(0.55f, 0.12f, 0.12f, 0.45f); 
                 outlineComponent.effectDistance = new Vector2(1, -1);
             }
 
@@ -401,8 +394,8 @@ public class ImproveControlsPopup : EditorWindow
                 Undo.RecordObject(btnComp, "Configure Button States");
                 ColorBlock cb = btnComp.colors;
                 cb.normalColor = new Color(0.1f, 0.1f, 0.1f, 1f);
-                cb.highlightedColor = new Color(0.28f, 0.1f, 0.1f, 1f); // Rojo oscuro interactivo
-                cb.pressedColor = new Color(0.42f, 0.12f, 0.12f, 1f); // Brillo rojo al presionar
+                cb.highlightedColor = new Color(0.28f, 0.1f, 0.1f, 1f); 
+                cb.pressedColor = new Color(0.42f, 0.12f, 0.12f, 1f); 
                 cb.selectedColor = cb.normalColor;
                 cb.disabledColor = new Color(0.05f, 0.05f, 0.05f, 0.5f);
                 btnComp.colors = cb;
@@ -473,12 +466,9 @@ public class ImproveControlsPopup : EditorWindow
             EditorUtility.SetDirty(trigger);
         }
 
-        // Forzar actualización de UI en escena
         Canvas.ForceUpdateCanvases();
-        
-        // Marcar la escena como modificada
         UnityEditor.SceneManagement.EditorSceneManager.MarkAllScenesDirty();
-        Debug.Log("[ImproveControlsPopup] Completed! All UI positions, sprites, and margins have been polished.");
+        Debug.Log("[ImproveControlsPopup] Completed! Re-alignment and layout filling processes are finished.");
     }
 
     private static void FixTextureImporter(string path)
@@ -497,9 +487,10 @@ public class ImproveControlsPopup : EditorWindow
             dirty = true;
         }
 
-        if (importer.alphaSource != TextureImporterAlphaSource.FromGrayScale)
+        // Importante: Cambiamos FromGrayScale a FromInput porque los PNG ahora tienen canal alfa transparente real
+        if (importer.alphaSource != TextureImporterAlphaSource.FromInput)
         {
-            importer.alphaSource = TextureImporterAlphaSource.FromGrayScale;
+            importer.alphaSource = TextureImporterAlphaSource.FromInput;
             dirty = true;
         }
 
@@ -513,7 +504,7 @@ public class ImproveControlsPopup : EditorWindow
         {
             Undo.RecordObject(importer, $"Fix Importer for {path}");
             importer.SaveAndReimport();
-            Debug.Log($"[ImproveControlsPopup] Fixed texture settings & reimported: {path}");
+            Debug.Log($"[ImproveControlsPopup] Fixed texture importer settings to FromInput: {path}");
         }
     }
 
@@ -533,7 +524,7 @@ public class ImproveControlsPopup : EditorWindow
         return null;
     }
 
-    private static void ConfigureControlRow(Transform leftColTrans, string rowName, string spritePath, TMP_FontAsset titleFont, TMP_FontAsset bodyFont)
+    private static void ConfigureControlRow(Transform leftColTrans, string rowName, string spritePath, TMP_FontAsset titleFont, TMP_FontAsset bodyFont, TMP_FontAsset sansFont)
     {
         Transform row = leftColTrans.Find(rowName);
         if (row == null)
@@ -546,18 +537,18 @@ public class ImproveControlsPopup : EditorWindow
         if (rowRect != null)
         {
             Undo.RecordObject(rowRect, $"Adjust {rowName} size");
-            rowRect.sizeDelta = new Vector2(700, 75); 
+            rowRect.sizeDelta = new Vector2(700, 70); // Altura de fila de 70 para mejor llenado de espacio
         }
 
         HorizontalLayoutGroup hlg = row.GetComponent<HorizontalLayoutGroup>();
         if (hlg != null)
         {
             Undo.RecordObject(hlg, $"Adjust {rowName} layout");
-            hlg.spacing = 20;
+            hlg.spacing = 25; // Más espaciado entre el icono, las teclas y el texto
             hlg.childAlignment = TextAnchor.MiddleLeft;
         }
 
-        // 1. Icono
+        // 1. Icono decorativo de control (Agrandado a 60x60 para rellenar y con color nítido)
         Transform iconTrans = row.Find("Icon");
         if (iconTrans != null)
         {
@@ -565,7 +556,7 @@ public class ImproveControlsPopup : EditorWindow
             if (iconRect != null)
             {
                 Undo.RecordObject(iconRect, $"Adjust {rowName} Icon Rect");
-                iconRect.sizeDelta = new Vector2(40, 40);
+                iconRect.sizeDelta = new Vector2(60, 60); // Mucho más grande
             }
 
             Image iconImg = iconTrans.GetComponent<Image>();
@@ -574,18 +565,17 @@ public class ImproveControlsPopup : EditorWindow
             {
                 Undo.RecordObject(iconImg, $"Set {rowName} Sprite");
                 if (rowSprite != null) iconImg.sprite = rowSprite;
-                iconImg.color = new Color(0.9f, 0.85f, 0.75f, 0.9f); // Oro envejecido de horror
+                iconImg.color = new Color(0.95f, 0.95f, 0.9f, 1f); // Crema brillante para alta visibilidad
                 iconImg.preserveAspect = true;
             }
         }
 
-        // 2. Teclas con Relieve 3D Mecánico
+        // 2. Teclas con Relieve 3D Mecánico y fuente sans-serif ultra nítida
         Transform keysContainer = row.Find("KeysContainer");
         if (keysContainer != null)
         {
             RectTransform keysContRect = keysContainer.GetComponent<RectTransform>();
             
-            // Destruir teclas anteriores para recrearlas limpias en 3D
             var childKeys = new System.Collections.Generic.List<Transform>();
             foreach (Transform child in keysContainer)
             {
@@ -607,14 +597,14 @@ public class ImproveControlsPopup : EditorWindow
                 if (keysContRect != null)
                 {
                     Undo.RecordObject(keysContRect, "Adjust Movement KeysContainer");
-                    keysContRect.sizeDelta = new Vector2(116, 76);
+                    keysContRect.sizeDelta = new Vector2(132, 84); // Agrandado
                 }
 
-                // Cruz WASD Estilizada
-                Create3DKey(keysContainer, "Key_W", "W", new Vector2(0, 19), new Vector2(34, 34), titleFont);
-                Create3DKey(keysContainer, "Key_A", "A", new Vector2(-38, -19), new Vector2(34, 34), titleFont);
-                Create3DKey(keysContainer, "Key_S", "S", new Vector2(0, -19), new Vector2(34, 34), titleFont);
-                Create3DKey(keysContainer, "Key_D", "D", new Vector2(38, -19), new Vector2(34, 34), titleFont);
+                // Cruz WASD Estilizada y Grande
+                Create3DKey(keysContainer, "Key_W", "W", new Vector2(0, 21), new Vector2(38, 38), sansFont);
+                Create3DKey(keysContainer, "Key_A", "A", new Vector2(-43, -21), new Vector2(38, 38), sansFont);
+                Create3DKey(keysContainer, "Key_S", "S", new Vector2(0, -21), new Vector2(38, 38), sansFont);
+                Create3DKey(keysContainer, "Key_D", "D", new Vector2(43, -21), new Vector2(38, 38), sansFont);
             }
             else
             {
@@ -630,26 +620,26 @@ public class ImproveControlsPopup : EditorWindow
                 keysHlg.childForceExpandHeight = false;
                 keysHlg.childAlignment = TextAnchor.MiddleLeft;
 
-                float keyWidth = 40;
+                float keyWidth = 44;
                 string keyName = "E";
 
-                if (rowName == "Row_Jump") { keyWidth = 110; keyName = "SPACE"; }
-                else if (rowName == "Row_Crouch") { keyWidth = 70; keyName = "CTRL"; }
-                else if (rowName == "Row_Interact") { keyWidth = 40; keyName = "E"; }
-                else if (rowName == "Row_Inventory") { keyWidth = 60; keyName = "TAB"; }
-                else if (rowName == "Row_Run") { keyWidth = 70; keyName = "SHIFT"; }
+                if (rowName == "Row_Jump") { keyWidth = 120; keyName = "SPACE"; }
+                else if (rowName == "Row_Crouch") { keyWidth = 80; keyName = "CTRL"; }
+                else if (rowName == "Row_Interact") { keyWidth = 44; keyName = "E"; }
+                else if (rowName == "Row_Inventory") { keyWidth = 70; keyName = "TAB"; }
+                else if (rowName == "Row_Run") { keyWidth = 80; keyName = "SHIFT"; }
 
                 if (keysContRect != null)
                 {
                     Undo.RecordObject(keysContRect, $"Adjust {rowName} KeysContainer");
-                    keysContRect.sizeDelta = new Vector2(keyWidth, 40);
+                    keysContRect.sizeDelta = new Vector2(keyWidth, 44); // Más alta para mejor relieve
                 }
 
-                Create3DKey(keysContainer, "Key_" + keyName, keyName, Vector2.zero, new Vector2(keyWidth, 40), titleFont);
+                Create3DKey(keysContainer, "Key_" + keyName, keyName, Vector2.zero, new Vector2(keyWidth, 44), sansFont);
             }
         }
 
-        // 3. Textos (TextBlock)
+        // 3. Textos (TextBlock) - Agrandado para rellenar
         Transform textBlock = row.Find("TextBlock");
         if (textBlock != null)
         {
@@ -657,7 +647,7 @@ public class ImproveControlsPopup : EditorWindow
             if (txtBlockRect != null)
             {
                 Undo.RecordObject(txtBlockRect, $"Adjust {rowName} TextBlock Rect");
-                txtBlockRect.sizeDelta = new Vector2(400, 55);
+                txtBlockRect.sizeDelta = new Vector2(420, 60);
             }
 
             TMP_Text rowTitle = textBlock.Find("Title")?.GetComponent<TMP_Text>();
@@ -665,8 +655,8 @@ public class ImproveControlsPopup : EditorWindow
             {
                 Undo.RecordObject(rowTitle, $"Update {rowName} Title Style");
                 if (titleFont != null) rowTitle.font = titleFont;
-                rowTitle.fontSize = 24;
-                rowTitle.color = new Color(0.85f, 0.2f, 0.2f, 1f); 
+                rowTitle.fontSize = 28; // Título de la acción más grande para llenar el panel
+                rowTitle.color = new Color(0.9f, 0.15f, 0.15f, 1f); 
                 rowTitle.fontStyle = FontStyles.Bold;
             }
 
@@ -675,13 +665,13 @@ public class ImproveControlsPopup : EditorWindow
             {
                 Undo.RecordObject(rowDesc, $"Update {rowName} Description Style");
                 if (bodyFont != null) rowDesc.font = bodyFont;
-                rowDesc.fontSize = 18;
-                rowDesc.color = new Color(0.85f, 0.85f, 0.8f, 0.9f); 
+                rowDesc.fontSize = 20; // Descripción de la acción más grande
+                rowDesc.color = new Color(0.90f, 0.90f, 0.85f, 0.95f); 
             }
         }
     }
 
-    private static void Create3DKey(Transform parent, string goName, string keyName, Vector2 position, Vector2 size, TMP_FontAsset titleFont)
+    private static void Create3DKey(Transform parent, string goName, string keyName, Vector2 position, Vector2 size, TMP_FontAsset keyFont)
     {
         // 1. Sombra / Base 3D
         GameObject keyBase = new GameObject(goName, typeof(RectTransform), typeof(Image));
@@ -693,8 +683,7 @@ public class ImproveControlsPopup : EditorWindow
         baseRect.anchoredPosition = position;
 
         Image baseImg = keyBase.GetComponent<Image>();
-        baseImg.color = new Color(0.02f, 0.02f, 0.02f, 0.85f); 
-        Sprite keySprite = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/Sprites/letreros/controls/crouch_icon.png"); // Usamos crouch_icon temporalmente como sprite si es apto, o el UISprite por defecto
+        baseImg.color = new Color(0.01f, 0.01f, 0.01f, 0.9f); 
         Sprite uisprite = AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UISprite.psd");
         if (uisprite != null) baseImg.sprite = uisprite;
 
@@ -706,18 +695,18 @@ public class ImproveControlsPopup : EditorWindow
         RectTransform capRect = keyCap.GetComponent<RectTransform>();
         capRect.anchorMin = Vector2.zero;
         capRect.anchorMax = Vector2.one;
-        capRect.offsetMin = new Vector2(0, 3); // Relieve 3 px
-        capRect.offsetMax = new Vector2(0, 3);
+        capRect.offsetMin = new Vector2(0, 4); // Aumentado relieve a 4 px
+        capRect.offsetMax = new Vector2(0, 4);
 
         Image capImg = keyCap.GetComponent<Image>();
-        capImg.color = new Color(0.13f, 0.13f, 0.13f, 0.98f); 
+        capImg.color = new Color(0.14f, 0.14f, 0.14f, 0.98f); 
         if (uisprite != null) capImg.sprite = uisprite;
 
         Outline outline = keyCap.AddComponent<Outline>();
-        outline.effectColor = new Color(0.5f, 0.45f, 0.4f, 0.35f); // Oro/Crema apagado
+        outline.effectColor = new Color(0.55f, 0.5f, 0.45f, 0.4f); 
         outline.effectDistance = new Vector2(1, -1);
 
-        // 3. Texto de la Tecla
+        // 3. Texto de la Tecla (Nítido con fuente sansFont)
         GameObject keyTextObj = new GameObject("Text", typeof(RectTransform), typeof(TextMeshProUGUI));
         keyTextObj.transform.SetParent(keyCap.transform, false);
         Undo.RegisterCreatedObjectUndo(keyTextObj, $"Create {goName} Text");
@@ -730,10 +719,10 @@ public class ImproveControlsPopup : EditorWindow
 
         TextMeshProUGUI textTMP = keyTextObj.GetComponent<TextMeshProUGUI>();
         textTMP.text = keyName;
-        textTMP.fontSize = size.x > 40 ? 18 : 20;
+        textTMP.fontSize = size.x > 44 ? 18 : 22; // Letras más legibles
         textTMP.fontStyle = FontStyles.Bold;
         textTMP.alignment = TextAlignmentOptions.Center;
-        textTMP.color = new Color(0.9f, 0.85f, 0.8f, 1f); 
-        if (titleFont != null) textTMP.font = titleFont;
+        textTMP.color = new Color(0.95f, 0.95f, 0.9f, 1f); 
+        if (keyFont != null) textTMP.font = keyFont;
     }
 }
