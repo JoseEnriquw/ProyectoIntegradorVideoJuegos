@@ -3868,7 +3868,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 405980, guid: 4884e3768e9a2544a85d07afad356d87, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -79.390015
+      value: -81.89
       objectReference: {fileID: 0}
     - target: {fileID: 405980, guid: 4884e3768e9a2544a85d07afad356d87, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3876,7 +3876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 405980, guid: 4884e3768e9a2544a85d07afad356d87, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -288.05
+      value: -263.08
       objectReference: {fileID: 0}
     - target: {fileID: 405980, guid: 4884e3768e9a2544a85d07afad356d87, type: 3}
       propertyPath: m_LocalRotation.w
@@ -39180,7 +39180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 405980, guid: 4884e3768e9a2544a85d07afad356d87, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -92.32001
+      value: -88.88
       objectReference: {fileID: 0}
     - target: {fileID: 405980, guid: 4884e3768e9a2544a85d07afad356d87, type: 3}
       propertyPath: m_LocalPosition.y
@@ -39188,7 +39188,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 405980, guid: 4884e3768e9a2544a85d07afad356d87, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -158.64
+      value: -193.37
       objectReference: {fileID: 0}
     - target: {fileID: 405980, guid: 4884e3768e9a2544a85d07afad356d87, type: 3}
       propertyPath: m_LocalRotation.w
@@ -60950,6 +60950,7 @@ GameObject:
   - component: {fileID: 2126230735}
   - component: {fileID: 2126230734}
   - component: {fileID: 2126230737}
+  - component: {fileID: 2126230738}
   m_Layer: 0
   m_Name: DialogoLimite1
   m_TagString: Untagged
@@ -60966,7 +60967,7 @@ Transform:
   m_GameObject: {fileID: 2126230732}
   serializedVersion: 2
   m_LocalRotation: {x: 0.00064552086, y: 0.9979738, z: 0.005081058, w: 0.06341954}
-  m_LocalPosition: {x: -66.1, y: 11.97, z: -274.37}
+  m_LocalPosition: {x: -67.73, y: 11.83, z: -261.6}
   m_LocalScale: {x: 9.243917, y: 2.3544, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -61072,6 +61073,18 @@ MonoBehaviour:
   RangedDialogue: 0
   ResetDialogueWhenOut: 0
   LocalDialogueRange: 0
+--- !u!114 &2126230738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2126230732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e465b670f30d5914facf121df95767ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TurnPlayerAroundOnDialogue
 --- !u!1001 &2128542041
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61151,6 +61164,7 @@ GameObject:
   - component: {fileID: 2133908857}
   - component: {fileID: 2133908856}
   - component: {fileID: 2133908855}
+  - component: {fileID: 2133908859}
   m_Layer: 0
   m_Name: DialogoLimite2
   m_TagString: Untagged
@@ -61167,7 +61181,7 @@ Transform:
   m_GameObject: {fileID: 2133908853}
   serializedVersion: 2
   m_LocalRotation: {x: 0.00049640395, y: 0.9994033, z: 0.005097787, w: 0.03415857}
-  m_LocalPosition: {x: -73.03, y: 12, z: -175.42}
+  m_LocalPosition: {x: -71.8, y: 12.18, z: -193.41}
   m_LocalScale: {x: 9.243917, y: 2.3544, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -61273,6 +61287,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2133908853}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2133908859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133908853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e465b670f30d5914facf121df95767ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TurnPlayerAroundOnDialogue
 --- !u!4 &2135156259 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6b948b183589fd54c874ea255df6ec7f, type: 3}
