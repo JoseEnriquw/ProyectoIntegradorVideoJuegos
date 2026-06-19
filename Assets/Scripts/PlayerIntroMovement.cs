@@ -9,7 +9,7 @@ public class PlayerIntroMovement : MonoBehaviour
     [Tooltip("How long to wait after fading in before starting the intro events.")]
     public float WaitBeforeStart = 0.5f;
     [Tooltip("Speed of the initial fade from black.")]
-    public float FadeInSpeed = 2f;
+    public float FadeInSpeed = 1.5f;
     
     [Header("Door Interaction")]
     [Tooltip("The door that will close in front of the player.")]
@@ -135,12 +135,22 @@ public class PlayerIntroMovement : MonoBehaviour
         var sceneLoader = FindObjectOfType<CinematicSceneLoader>();
         if (sceneLoader != null)
         {
-            Debug.Log("[PlayerIntroMovement] Diálogo terminado. Iniciando fundido a negro...");
+            Debug.Log("[PlayerIntroMovement] Diálogo terminado. Deteniendo todos los sonidos e iniciando fundido a negro...");
             
-            // Fundido suave a negro (fadeOut = false) con velocidad 5
+            // Stop all active AudioSources in the scene immediately
+            AudioSource[] audioSources = FindObjectsOfType<AudioSource>();
+            foreach (AudioSource source in audioSources)
+            {
+                if (source != null && source.isPlaying)
+                {
+                    source.Stop();
+                }
+            }
+
+            // Fundido suave a negro (fadeOut = false) con velocidad 1.5
             if (GameManager.HasReference)
             {
-                yield return GameManager.Instance.StartBackgroundFade(false, fadeSpeed: 5f);
+                yield return GameManager.Instance.StartBackgroundFade(false, fadeSpeed: 1.5f);
             }
 
             Debug.Log("[PlayerIntroMovement] Fundido completado. Cargando siguiente escena a través de CinematicSceneLoader...");

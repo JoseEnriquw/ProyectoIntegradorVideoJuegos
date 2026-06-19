@@ -203,6 +203,16 @@ public class SkipIntroController : MonoBehaviour
 
         Debug.Log("[SkipIntroController] Skip button clicked. Transitioning to next scene...");
 
+        // Stop all background sounds and audio sources in the scene immediately
+        AudioSource[] audioSources = FindObjectsOfType<AudioSource>();
+        foreach (AudioSource source in audioSources)
+        {
+            if (source != null && source.isPlaying)
+            {
+                source.Stop();
+            }
+        }
+
         // Hide the skip canvas immediately so the button disappears instantly
         if (canvasGo != null)
         {
@@ -239,7 +249,7 @@ public class SkipIntroController : MonoBehaviour
     private IEnumerator SkipRoutine(CinematicSceneLoader loader)
     {
         // Smoothly fade to black before switching scenes for a premium transition
-        yield return GameManager.Instance.StartBackgroundFade(false, fadeSpeed: 8f);
+        yield return GameManager.Instance.StartBackgroundFade(false, fadeSpeed: 1.5f);
         loader.LoadNextSceneDirect();
     }
 }

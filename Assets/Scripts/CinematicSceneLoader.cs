@@ -39,6 +39,16 @@ public class CinematicSceneLoader : MonoBehaviour
             skipController.HideButton();
         }
 
+        // Stop all active AudioSources in the scene immediately
+        AudioSource[] audioSources = FindObjectsOfType<AudioSource>();
+        foreach (AudioSource source in audioSources)
+        {
+            if (source != null && source.isPlaying)
+            {
+                source.Stop();
+            }
+        }
+
         StartCoroutine(LoadSceneWithDelay());
     }
 
