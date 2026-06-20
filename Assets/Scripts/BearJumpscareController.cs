@@ -34,20 +34,7 @@ public class BearJumpscareController : MonoBehaviour
             Debug.LogWarning("[BearJumpscareController] Bear AudioSource or clip not found.");
         }
 
-        // 3. Configure JumpscareTrigger properties programmatically
-        jumpscareTrigger.JumpscareType = JumpscareTrigger.JumpscareTypeEnum.Audio;
-        jumpscareTrigger.TriggerType = JumpscareTrigger.TriggerTypeEnum.Event;
-        jumpscareTrigger.LookAtJumpscare = true;
-        jumpscareTrigger.LookAtTarget = transform;
-        jumpscareTrigger.LookAtDuration = 0.5f;
-        jumpscareTrigger.InfluenceWobble = true;
-        jumpscareTrigger.WobbleAmplitudeGain = 0.8f;
-        jumpscareTrigger.WobbleFrequencyGain = 8f;
-        jumpscareTrigger.WobbleDuration = 0.8f;
-        jumpscareTrigger.InfluenceFear = true;
-        jumpscareTrigger.FearDuration = 2.0f;
-
-        // 4. Add a trigger CapsuleCollider for proximity/touch detection
+        // Find the original non-trigger collider first so we can use it for calculations
         originalCol = null;
         CapsuleCollider[] allColliders = GetComponents<CapsuleCollider>();
         foreach (var col in allColliders)
@@ -59,6 +46,33 @@ public class BearJumpscareController : MonoBehaviour
             }
         }
 
+        // 3. Configure JumpscareTrigger properties programmatically
+        jumpscareTrigger.JumpscareType = JumpscareTrigger.JumpscareTypeEnum.Audio;
+        jumpscareTrigger.TriggerType = JumpscareTrigger.TriggerTypeEnum.Event;
+        jumpscareTrigger.LookAtJumpscare = true;
+
+        // Create a child look-at target at the bear's head (top portion of capsule collider)
+        GameObject lookAtTargetGo = new GameObject("Jumpscare_HeadLookAt");
+        lookAtTargetGo.transform.SetParent(transform, false);
+        if (originalCol != null)
+        {
+            lookAtTargetGo.transform.localPosition = originalCol.center + new Vector3(0f, originalCol.height * 0.45f, 0f);
+        }
+        else
+        {
+            lookAtTargetGo.transform.localPosition = new Vector3(-0.01f, 0.6f, -0.55f);
+        }
+        jumpscareTrigger.LookAtTarget = lookAtTargetGo.transform;
+
+        jumpscareTrigger.LookAtDuration = 0.5f;
+        jumpscareTrigger.InfluenceWobble = true;
+        jumpscareTrigger.WobbleAmplitudeGain = 0.8f;
+        jumpscareTrigger.WobbleFrequencyGain = 8f;
+        jumpscareTrigger.WobbleDuration = 0.8f;
+        jumpscareTrigger.InfluenceFear = true;
+        jumpscareTrigger.FearDuration = 2.0f;
+
+        // 4. Add a trigger CapsuleCollider for proximity/touch detection
         CapsuleCollider triggerCol = gameObject.AddComponent<CapsuleCollider>();
         triggerCol.isTrigger = true;
 
