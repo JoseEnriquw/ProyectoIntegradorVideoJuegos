@@ -29,6 +29,10 @@ namespace UHFPS.Runtime
         public GString ObjectiveAdded;
         public GString ObjectiveCompleted;
 
+        [Header("Audio Settings")]
+        public SoundClip ObjectiveAddedSound;
+        public SoundClip ObjectiveCompletedSound;
+
         private readonly Dictionary<string, ObjectiveCache> objectivesCache = new();
         private readonly Dictionary<string, ObjectiveData> activeObjectives = new();
         private ObjectiveEvent[] objectiveEvents;
@@ -78,7 +82,7 @@ namespace UHFPS.Runtime
             activeObjectives.Add(key, objectiveData);
 
             // show objective notification
-            ObjectiveNotification.ShowNotification(ObjectiveAdded, NotificationDuration);
+            ObjectiveNotification.ShowNotification(ObjectiveAdded, NotificationDuration, ObjectiveAddedSound);
         }
 
         public void AddSubObjective(string key, string[] subKey)
@@ -104,7 +108,7 @@ namespace UHFPS.Runtime
                 }
 
                 // show objective notification
-                ObjectiveNotification.ShowNotification(ObjectiveAdded, NotificationDuration);
+                ObjectiveNotification.ShowNotification(ObjectiveAdded, NotificationDuration, ObjectiveAddedSound);
             }
         }
 
@@ -129,7 +133,7 @@ namespace UHFPS.Runtime
                     data.IsCompleted.OnNext(true);
 
                     // show objective notification
-                    ObjectiveNotification.ShowNotification(ObjectiveCompleted, NotificationDuration);
+                    ObjectiveNotification.ShowNotification(ObjectiveCompleted, NotificationDuration, ObjectiveCompletedSound);
                 }
             }
         }
