@@ -73,6 +73,7 @@ namespace UHFPS.Editors
                 {
                     Properties.Draw("IsInvisibleToEnemies");
                     Properties.Draw("IsInvisibleToAllies");
+                    Properties.Draw("TimeOutDeathGloc");
                 }
             }
             serializedObject.ApplyModifiedProperties();
