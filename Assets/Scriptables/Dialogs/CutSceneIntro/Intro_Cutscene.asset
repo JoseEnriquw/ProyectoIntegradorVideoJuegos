@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Intro_Cutscene
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Scriptable.DialogueAsset
   Dialogues:
-  - DialogueAudio: {fileID: 8300000, guid: 9b90e95baf5500e4090d9a2f5fcf53bc, type: 3}
+  - DialogueAudio: {fileID: 8300000, guid: c3446f311a4f2c147b0d7109555a0efc, type: 3}
     SubtitleType: 1
     SingleSubtitle:
       Time: 0
@@ -23,7 +23,6 @@ MonoBehaviour:
         GlocText: dialog_intro_cutscene.intro.cutscene
         NormalText: 
     Subtitles:
-    - rid: 60967987387039931
     - rid: 60967987387039933
     - rid: 60967987387039935
     - rid: 60967987387039936
@@ -42,22 +41,14 @@ MonoBehaviour:
     - rid: 60967987387039949
     - rid: 60967987387039950
     - rid: 60967987387039951
+    - rid: 631314752231178433
   references:
     version: 2
     RefIds:
-    - rid: 60967987387039931
-      type: {class: DialogueAsset/DialogueSubtitle, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
-      data:
-        Time: 0
-        Narrator: 
-        NarratorColor: {r: 1, g: 1, b: 1, a: 1}
-        Text:
-          GlocText: "La noche que enterr\xE9 a mi padre, algo regres\xF3 conmigo"
-          NormalText: 
     - rid: 60967987387039933
       type: {class: DialogueAsset/DialogueSubtitle, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
       data:
-        Time: 7.7637095
+        Time: 10.910053
         Narrator: 
         NarratorColor: {r: 1, g: 1, b: 1, a: 1}
         Text:
@@ -67,7 +58,7 @@ MonoBehaviour:
     - rid: 60967987387039935
       type: {class: DialogueAsset/DialogueSubtitle, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
       data:
-        Time: 12.001618
+        Time: 14.569549
         Narrator: 
         NarratorColor: {r: 1, g: 1, b: 1, a: 1}
         Text:
@@ -77,7 +68,7 @@ MonoBehaviour:
     - rid: 60967987387039936
       type: {class: DialogueAsset/DialogueSubtitle, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
       data:
-        Time: 17.9069
+        Time: 21.640064
         Narrator: 
         NarratorColor: {r: 1, g: 1, b: 1, a: 1}
         Text:
@@ -87,16 +78,16 @@ MonoBehaviour:
     - rid: 60967987387039937
       type: {class: DialogueAsset/DialogueSubtitle, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
       data:
-        Time: 24.43745
+        Time: 28.603453
         Narrator: 
         NarratorColor: {r: 1, g: 1, b: 1, a: 1}
         Text:
-          GlocText: "Pero yo estuve all\xED."
+          GlocText: "Pero yo estuve  ah\xED."
           NormalText: 
     - rid: 60967987387039938
       type: {class: DialogueAsset/DialogueSubtitle, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
       data:
-        Time: 26.1743
+        Time: 30.41804
         Narrator: 
         NarratorColor: {r: 1, g: 1, b: 1, a: 1}
         Text:
@@ -105,7 +96,7 @@ MonoBehaviour:
     - rid: 60967987387039939
       type: {class: DialogueAsset/DialogueSubtitle, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
       data:
-        Time: 29.23115
+        Time: 32.87551
         Narrator: 
         NarratorColor: {r: 1, g: 1, b: 1, a: 1}
         Text:
@@ -115,63 +106,74 @@ MonoBehaviour:
     - rid: 60967987387039940
       type: {class: DialogueAsset/DialogueSubtitle, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
       data:
-        Time: 35.06696
+        Time: 38.473087
         Narrator: 
         NarratorColor: {r: 1, g: 1, b: 1, a: 1}
         Text:
-          GlocText: "Todav\xEDa no me animo a ir a su casa, pero necesito esas escrituras."
+          GlocText: "No logro entender qu\xE9 le pas\xF3 a mi padre... pero empiezo
+            a temer que pronto me pase a m\xED tambi\xE9n.  "
           NormalText: 
     - rid: 60967987387039941
       type: {class: DialogueAsset/DialogueSubtitle, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
       data:
-        Time: 39.304867
+        Time: 46.036636
         Narrator: 
         NarratorColor: {r: 1, g: 1, b: 1, a: 1}
         Text:
-          GlocText: Solo voy a entrar, recoger los papeles e irme.
+          GlocText: "Todav\xEDa no me animo a volver a su casa, pero debo hacerlo,
+            no tengo elecci\xF3n\u2026"
           NormalText: 
     - rid: 60967987387039942
       type: {class: DialogueAsset/SubtitleBreak, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
       data:
-        Time: 2.4836926
+        Time: 5.0253797
     - rid: 60967987387039943
       type: {class: DialogueAsset/SubtitleBreak, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
       data:
-        Time: 6.7910748
+        Time: 9.933537
     - rid: 60967987387039944
       type: {class: DialogueAsset/SubtitleBreak, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
       data:
-        Time: 17.00374
+        Time: 20.890162
     - rid: 60967987387039945
       type: {class: DialogueAsset/SubtitleBreak, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
       data:
-        Time: 28.119568
+        Time: 32.520542
     - rid: 60967987387039946
       type: {class: DialogueAsset/SubtitleBreak, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
       data:
-        Time: 23.325867
+        Time: 27.85355
     - rid: 60967987387039947
       type: {class: DialogueAsset/SubtitleBreak, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
       data:
-        Time: 34.02485
+        Time: 37.653927
     - rid: 60967987387039948
       type: {class: DialogueAsset/SubtitleBreak, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
       data:
-        Time: 38.610126
+        Time: 45.135563
     - rid: 60967987387039949
       type: {class: DialogueAsset/DialogueSubtitle, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
       data:
-        Time: 3.4563267
+        Time: 5.9122114
         Narrator: 
         NarratorColor: {r: 1, g: 1, b: 1, a: 1}
         Text:
-          GlocText: "No fue solo el dolor, tampoco el vac\xEDo que deja la muerte."
+          GlocText: "No fue solo el dolor, tampoco el vac\xEDo que deja la muerte. "
           NormalText: 
     - rid: 60967987387039950
       type: {class: DialogueAsset/SubtitleBreak, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
       data:
-        Time: 11.306879
+        Time: 14.033904
     - rid: 60967987387039951
       type: {class: DialogueAsset/SubtitleBreak, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
       data:
-        Time: 25.479559
+        Time: 29.790018
+    - rid: 631314752231178433
+      type: {class: DialogueAsset/DialogueSubtitle, ns: UHFPS.Scriptable, asm: Assembly-CSharp}
+      data:
+        Time: 1.108466
+        Narrator: 
+        NarratorColor: {r: 1, g: 1, b: 1, a: 1}
+        Text:
+          GlocText: "La noche que enterr\xE9 a mi viejo, algo regres\xF3 conmigo"
+          NormalText: 

@@ -11,6 +11,8 @@ using UnityEngine.Rendering.Universal; // Requerido para URP Decal Projector
 /// </summary>
 public class ControladorCambioRealidad : MonoBehaviour
 {
+    public static ControladorCambioRealidad Instancia { get; private set; }
+
     [Header("Objetos de cada Realidad")]
     [Tooltip("Objetos de la realidad 'linda' (normal).")]
     public List<GameObject> objetosLindos = new List<GameObject>();
@@ -69,6 +71,8 @@ public class ControladorCambioRealidad : MonoBehaviour
     public bool iniciarEnPodrido = false;
 
     private bool esMundoPodrido = false;
+    public bool EsMundoPodrido => esMundoPodrido;
+    
     private Coroutine rutinaTransicion;
     private MaterialPropertyBlock propBlock;
     private int idPropDissolve;
@@ -83,6 +87,11 @@ public class ControladorCambioRealidad : MonoBehaviour
 
     private void Awake()
     {
+        if (Instancia == null)
+        {
+            Instancia = this;
+        }
+
         propBlock = new MaterialPropertyBlock();
         idPropDissolve = Shader.PropertyToID(parametroDissolve);
 
