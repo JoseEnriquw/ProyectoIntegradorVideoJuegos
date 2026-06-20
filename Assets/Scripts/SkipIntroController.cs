@@ -55,8 +55,6 @@ public class SkipIntroController : MonoBehaviour
             Debug.Log("[SkipIntroController] EventSystem not found. Creating EventSystem dynamically to handle UI clicks.");
             GameObject eventSystemGo = new GameObject("EventSystem");
             eventSystemGo.AddComponent<EventSystem>();
-            
-            // Standard standalone input module handles input processing for EventSystem
             eventSystemGo.AddComponent<StandaloneInputModule>();
         }
     }
@@ -136,55 +134,122 @@ public class SkipIntroController : MonoBehaviour
         GameObject buttonGo = new GameObject("SkipButton");
         buttonGo.transform.SetParent(canvasGo.transform, false);
 
-        // Styling the button background (solid dark charcoal/black)
+        // Styling the button background (semi-transparent dark charcoal)
         Image buttonImg = buttonGo.AddComponent<Image>();
-        buttonImg.color = new Color(0.08f, 0.08f, 0.08f, 0.9f);
+        buttonImg.color = new Color(0.05f, 0.05f, 0.05f, 0.7f);
+
+        // Attempt to load rounded corner background from UHFPS assets
+        Sprite roundedSprite = null;
+#if UNITY_EDITOR
+        roundedSprite = UnityEditor.AssetDatabase.LoadAssetAtPath<Sprite>("Assets/ThunderWire Studio/UHFPS/Content/Art/Textures/UI/SoftMasks/SoftMask_Circle.png");
+#else
+        Sprite[] sprites = Resources.FindObjectsOfTypeAll<Sprite>();
+        foreach (var s in sprites)
+        {
+            if (s.name == "SoftMask_Circle")
+            {
+                roundedSprite = s;
+                break;
+            }
+        }
+#endif
+        if (roundedSprite != null)
+        {
+            buttonImg.sprite = roundedSprite;
+            buttonImg.type = Image.Type.Sliced;
+        }
 
         // Thin gray outline around the button matching the reference design
         Outline outline = buttonGo.AddComponent<Outline>();
-        outline.effectColor = new Color(0.28f, 0.28f, 0.28f, 1f);
-        outline.effectDistance = new Vector2(1.5f, 1.5f);
+        outline.effectColor = new Color(0.2f, 0.2f, 0.2f, 0.7f);
+        outline.effectDistance = new Vector2(1.2f, 1.2f);
 
         Button buttonComp = buttonGo.AddComponent<Button>();
         buttonComp.onClick.AddListener(SkipIntro);
 
-        // Hover & click visual transitions
+        // Hover & click background visual transitions
         ColorBlock colors = buttonComp.colors;
-        colors.normalColor = new Color(0.08f, 0.08f, 0.08f, 0.9f);
-        colors.highlightedColor = new Color(0.18f, 0.18f, 0.18f, 0.95f); // Lighter on hover
-        colors.pressedColor = new Color(0.04f, 0.04f, 0.04f, 0.95f);     // Darker on press
+        colors.normalColor = new Color(0.05f, 0.05f, 0.05f, 0.7f);
+        colors.highlightedColor = new Color(0.12f, 0.12f, 0.12f, 0.85f); // Lighter on hover
+        colors.pressedColor = new Color(0.02f, 0.02f, 0.02f, 0.9f);       // Darker on press
         colors.selectedColor = colors.normalColor;
+        colors.fadeDuration = 0.15f;
         buttonComp.colors = colors;
-
-        // Add hover effects for border color changing
-        SkipButtonHoverEffects hoverEffects = buttonGo.AddComponent<SkipButtonHoverEffects>();
-        hoverEffects.Init(outline, new Color(0.28f, 0.28f, 0.28f, 1f), Color.white);
 
         // Position at the bottom-right corner with responsive anchors
         RectTransform rect = buttonGo.GetComponent<RectTransform>();
         rect.anchorMin = new Vector2(1, 0); // Bottom Right
         rect.anchorMax = new Vector2(1, 0);
         rect.pivot = new Vector2(1, 0);
-        rect.sizeDelta = new Vector2(220, 65); // Width: 220, Height: 65
-        rect.anchoredPosition = new Vector2(-60, 60); // Inset from edge
+        rect.sizeDelta = new Vector2(240, 55); // Container size
+        rect.anchoredPosition = new Vector2(-70, 70); // Inset from edge
 
         // 3. Create the Text inside the Button
         GameObject textGo = new GameObject("ButtonText");
         textGo.transform.SetParent(buttonGo.transform, false);
 
         TextMeshProUGUI textComp = textGo.AddComponent<TextMeshProUGUI>();
-        textComp.text = "Omitir intro";
-        textComp.fontSize = 22;
+        textComp.text = "OMITIR INTRO";
+        textComp.fontSize = 19; // Increased font size as requested for better visibility
+        textComp.characterSpacing = 4f; // Spaced out lettering for cinematic look
         textComp.fontStyle = FontStyles.Normal;
-        textComp.color = Color.white;
+        textComp.color = new Color(0.9f, 0.9f, 0.9f, 1f);
         textComp.alignment = TextAlignmentOptions.Center;
+
+        // Load Roboto Condensed font from assets for consistency with UHFPS UI
+        TMP_FontAsset mainFont = null;
+#if UNITY_EDITOR
+        mainFont = UnityEditor.AssetDatabase.LoadAssetAtPath<TMP_FontAsset>("Assets/ThunderWire Studio/UHFPS/Content/Fonts/Roboto Condensed/TMP/RobotoCondensed-Regular SDF.asset");
+#else
+        TMP_Text[] allTexts = Resources.FindObjectsOfTypeAll<TMP_Text>();
+        foreach (var t in allTexts)
+        {
+            if (t.font != null && t.font.name.Contains("RobotoCondensed"))
+            {
+                mainFont = t.font;
+                break;
+            }
+        }
+        if (mainFont == null && allTexts.Length > 0)
+        {
+            mainFont = allTexts[0].font;
+        }
+#endif
+        if (mainFont != null)
+        {
+            textComp.font = mainFont;
+        }
 
         // Make the text expand and fill the entire button boundaries
         RectTransform textRect = textGo.GetComponent<RectTransform>();
         textRect.anchorMin = Vector2.zero;
         textRect.anchorMax = Vector2.one;
         textRect.sizeDelta = Vector2.zero;
-        textRect.anchoredPosition = Vector2.zero;
+        textRect.anchoredPosition = new Vector2(2, 0); // Center adjustment for character spacing offset
+
+        // 4. Load Audio Clip for Click (no hover sound)
+        AudioClip clickClip = null;
+#if UNITY_EDITOR
+        clickClip = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>("Assets/AssetsDescargados/AdvancedMobileHorror/Sounds/Audio_ButtonClick.wav");
+#else
+        AudioClip[] clips = Resources.FindObjectsOfTypeAll<AudioClip>();
+        foreach (var clip in clips)
+        {
+            if (clip.name == "Audio_ButtonClick") clickClip = clip;
+        }
+#endif
+
+        // Add hover effects for border, text color, and scale
+        SkipButtonHoverEffects hoverEffects = buttonGo.AddComponent<SkipButtonHoverEffects>();
+        hoverEffects.Init(
+            outline, 
+            textComp, 
+            new Color(0.2f, 0.2f, 0.2f, 0.7f), // Normal border
+            new Color(1f, 1f, 1f, 0.85f),      // Hover border (white highlight)
+            new Color(0.9f, 0.9f, 0.9f, 1f),   // Normal text
+            Color.white,                       // Hover text
+            clickClip
+        );
     }
 
     public void HideButton()
@@ -254,32 +319,71 @@ public class SkipIntroController : MonoBehaviour
     }
 }
 
-public class SkipButtonHoverEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class SkipButtonHoverEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     private Outline outline;
-    private Color normalColor;
-    private Color hoverColor;
+    private TextMeshProUGUI textComp;
+    private RectTransform rectTransform;
+    private AudioSource audioSource;
 
-    public void Init(Outline outline, Color normalColor, Color hoverColor)
+    private Color normalOutlineColor;
+    private Color hoverOutlineColor;
+    private Color normalTextColor;
+    private Color hoverTextColor;
+
+    private AudioClip clickSound;
+
+    private Vector3 normalScale = Vector3.one;
+    private Vector3 hoverScale = new Vector3(1.03f, 1.03f, 1.03f); // Subtle, professional zoom
+
+    private bool isHovered = false;
+
+    public void Init(Outline outline, TextMeshProUGUI textComp, Color normalOutline, Color hoverOutline, Color normalText, Color hoverText, AudioClip clickClip)
     {
         this.outline = outline;
-        this.normalColor = normalColor;
-        this.hoverColor = hoverColor;
+        this.textComp = textComp;
+        this.rectTransform = GetComponent<RectTransform>();
+
+        this.normalOutlineColor = normalOutline;
+        this.hoverOutlineColor = hoverOutline;
+        this.normalTextColor = normalText;
+        this.hoverTextColor = hoverText;
+
+        this.clickSound = clickClip;
+
+        // Add AudioSource for UI sound feedback
+        this.audioSource = gameObject.AddComponent<AudioSource>();
+        this.audioSource.playOnAwake = false;
+        this.audioSource.spatialBlend = 0f; // 2D UI Sound
+        this.audioSource.volume = 0.5f;
+    }
+
+    private void Update()
+    {
+        // Smoothly transition scale
+        Vector3 targetScale = isHovered ? hoverScale : normalScale;
+        rectTransform.localScale = Vector3.Lerp(rectTransform.localScale, targetScale, Time.deltaTime * 10f);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (outline != null)
-        {
-            outline.effectColor = hoverColor;
-        }
+        isHovered = true;
+        if (outline != null) outline.effectColor = hoverOutlineColor;
+        if (textComp != null) textComp.color = hoverTextColor;
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (outline != null)
+        isHovered = false;
+        if (outline != null) outline.effectColor = normalOutlineColor;
+        if (textComp != null) textComp.color = normalTextColor;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (audioSource != null && clickSound != null)
         {
-            outline.effectColor = normalColor;
+            audioSource.PlayOneShot(clickSound);
         }
     }
 }

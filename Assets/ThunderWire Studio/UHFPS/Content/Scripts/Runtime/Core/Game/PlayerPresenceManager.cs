@@ -38,6 +38,11 @@ namespace UHFPS.Runtime
         public bool IsCameraSwitched;
 
         private bool isBackgroundFadedOut;
+        public bool IsBackgroundFadedOut
+        {
+            get => isBackgroundFadedOut;
+            set => isBackgroundFadedOut = value;
+        }
 
         private PlayerManager playerManager;
 
@@ -78,6 +83,7 @@ namespace UHFPS.Runtime
         {
             gameManager = GetComponent<GameManager>();
             playerComponents = Player.GetComponentsInChildren<PlayerComponent>(true);
+            IntroDebugger.Log($"[PlayerPresenceManager] Awake: found {playerComponents.Length} PlayerComponents.");
 
             // keep player frozen at start
             FreezePlayer(true);
@@ -116,6 +122,7 @@ namespace UHFPS.Runtime
 
         public void FreezePlayer(bool freeze, bool showCursor = false)
         {
+            IntroDebugger.Log($"[PlayerPresenceManager] FreezePlayer: freeze={freeze}, showCursor={showCursor}");
             GameTools.ShowCursor(!showCursor, showCursor);
 
             foreach (var component in playerComponents)
@@ -138,16 +145,39 @@ namespace UHFPS.Runtime
 
         public void UnlockPlayer()
         {
+            IntroDebugger.Log("[PlayerPresenceManager] UnlockPlayer called.");
             StartCoroutine(DoUnlockPlayer());
         }
 
         private IEnumerator DoUnlockPlayer()
         {
+            IntroDebugger.Log($"[PlayerPresenceManager] DoUnlockPlayer started. isBackgroundFadedOut={isBackgroundFadedOut}");
             if (!isBackgroundFadedOut)
+            {
+                IntroDebugger.Log("[PlayerPresenceManager] DoUnlockPlayer: Background is not faded out, waiting for fade...");
                 yield return gameManager.StartBackgroundFade(true, WaitFadeOutTime, FadeOutSpeed);
+                isBackgroundFadedOut = true;
+            }
 
-            FreezePlayer(false);
             PlayerIsUnlocked = true;
+
+            // Check if there is any active popup or if the game is paused.
+            // If so, we do NOT unfreeze the player now, because the popup/pause menu expects the player to remain frozen.
+            // The popup/pause menu will call FreezePlayer(false) when it is dismissed.
+            bool anyPopupShown = (ControlsPopupPanel.HasReference && ControlsPopupPanel.Instance.IsShown) 
+                || (PopupInfoPanel.HasReference && PopupInfoPanel.Instance.IsShown) 
+                || (gameManager != null && gameManager.IsPaused);
+
+            IntroDebugger.Log($"[PlayerPresenceManager] DoUnlockPlayer: anyPopupShown={anyPopupShown} (ControlsPopup={ControlsPopupPanel.HasReference && ControlsPopupPanel.Instance.IsShown}, PopupInfo={PopupInfoPanel.HasReference && PopupInfoPanel.Instance.IsShown}, Paused={gameManager != null && gameManager.IsPaused})");
+
+            if (!anyPopupShown)
+            {
+                FreezePlayer(false);
+            }
+            else
+            {
+                IntroDebugger.Log("[PlayerPresenceManager] DoUnlockPlayer: Player remains frozen because a popup is open or game is paused.");
+            }
         }
 
         public (Vector3 position, Vector2 rotation) GetPlayerTransform()
