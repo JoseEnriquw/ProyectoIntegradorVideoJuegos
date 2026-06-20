@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using ThunderWire.Attributes;
 using TMPro;
+using UHFPS.Tools;
 
 namespace UHFPS.Runtime
 {
@@ -18,7 +19,7 @@ namespace UHFPS.Runtime
 
         private bool isShowed;
 
-        public void ShowNotification(string title, float duration)
+        public void ShowNotification(string title, float duration, SoundClip sound = null)
         {
             if (isShowed)
                 return;
@@ -27,6 +28,11 @@ namespace UHFPS.Runtime
             Animator.SetTrigger(ShowTrigger);
             StartCoroutine(OnShowNotification(duration));
             isShowed = true;
+
+            if (sound != null && sound.audioClip != null)
+            {
+                GameTools.PlayOneShot2D(transform.position, sound, "NotificationSound");
+            }
         }
 
         IEnumerator OnShowNotification(float duration)

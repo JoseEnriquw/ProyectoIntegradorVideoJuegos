@@ -23523,6 +23523,12 @@ MonoBehaviour:
   ObjectiveCompleted:
     GlocText: messages.objective.completed
     NormalText: 
+  ObjectiveAddedSound:
+    audioClip: {fileID: 8300000, guid: 394e7c977b001e44dbf3014442f73945, type: 3}
+    volume: 0.25
+  ObjectiveCompletedSound:
+    audioClip: {fileID: 8300000, guid: e29867e066e44f545911a1c1fb34f74c, type: 3}
+    volume: 0.25
 --- !u!114 &4695644743655989518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36205,6 +36211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.PopupInfoPanel
   PanelCanvasGroup: {fileID: 4421520424082602977}
+  DialogContainer: {fileID: 0}
   TitleText: {fileID: 5346439757829667808}
   TopicIcon: {fileID: 3224284630072597442}
   DescriptionText: {fileID: 7604282468322773312}
