@@ -1,44 +1,270 @@
-=== INTRO DEBUGGER LOG START: 19/6/2026 11:59:16 p. m. ===
-[23:59:16.520] Scene loaded: 0 AccessibilitySplash
-[23:59:16.580] Helper component started.
-[23:59:16.582] PlayerIntroMovement NOT found in scene!
-[23:59:16.583] Found 0 DialogueTriggers in the scene:
-[23:59:16.583] Found 0 PlayDialogueOnStart components in the scene.
-[23:59:16.596] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[23:59:18.094] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[23:59:18.095]    UI Elements under mouse pointer: 1
-[23:59:18.095]      - Background (Canvas: Canvas_Accessibility)
-[23:59:19.596] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[23:59:19.597]    UI Elements under mouse pointer: 1
-[23:59:19.597]      - Background (Canvas: Canvas_Accessibility)
-[23:59:21.098] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[23:59:21.100]    UI Elements under mouse pointer: 2
-[23:59:21.101]      - WarningText (Canvas: Canvas_Accessibility)
-[23:59:21.102]      - Background (Canvas: Canvas_Accessibility)
-[23:59:22.600] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[23:59:22.600]    UI Elements under mouse pointer: 1
-[23:59:22.601]      - Background (Canvas: Canvas_Accessibility)
-[23:59:24.104] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[23:59:24.104]    UI Elements under mouse pointer: 2
-[23:59:24.105]      - WarningText (Canvas: Canvas_Accessibility)
-[23:59:24.105]      - Background (Canvas: Canvas_Accessibility)
-[23:59:25.604] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[23:59:27.926] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[23:59:27.927]    UI Elements under mouse pointer: 3
-[23:59:27.927]      - Text (TMP) (Canvas: Canvas)
-[23:59:27.928]      - Quit (Canvas: Canvas)
-[23:59:27.928]      - Blur (Canvas: Canvas)
-[23:59:29.424] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[23:59:29.425]    UI Elements under mouse pointer: 1
-[23:59:29.426]      - Blur (Canvas: Canvas)
-[23:59:30.926] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[23:59:30.927]    UI Elements under mouse pointer: 3
-[23:59:30.928]      - Text (TMP) (Canvas: Canvas)
-[23:59:30.928]      - Credits (Canvas: Canvas)
-[23:59:30.928]      - Blur (Canvas: Canvas)
-[23:59:32.430] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[23:59:32.432]    UI Elements under mouse pointer: 4
-[23:59:32.432]      - Text (TMP) (Canvas: Canvas)
-[23:59:32.433]      - Continue (Canvas: Canvas)
-[23:59:32.433]      - Logo (Canvas: Canvas)
-[23:59:32.433]      - Blur (Canvas: Canvas)
+=== INTRO DEBUGGER LOG START: 20/6/2026 12:21:21 p. m. ===
+[12:21:21.491] Scene loaded: 1 IntroCutScene
+[12:21:21.556] Helper component started.
+[12:21:21.556] PlayerIntroMovement found: InitialDialogue = Intro
+[12:21:21.557] Found 7 DialogueTriggers in the scene:
+[12:21:21.557]  - Trigger: HiddenDialogue_DuringSymptom_5, TriggerType: Event, Repeatable: False
+[12:21:21.558]  - Trigger: HiddenDialogue_DuringSymptom_4, TriggerType: Event, Repeatable: False
+[12:21:21.558]  - Trigger: HiddenDialogue_DuringSymptom_3, TriggerType: Event, Repeatable: False
+[12:21:21.558]  - Trigger: HiddenDialogue_DuringSymptom_2, TriggerType: Event, Repeatable: False
+[12:21:21.559]  - Trigger: HiddenDialogue_DuringSymptom_1, TriggerType: Event, Repeatable: False
+[12:21:21.559]  - Trigger: HiddenDialogue_DuringSymptom_0, TriggerType: Event, Repeatable: False
+[12:21:21.560]  - Trigger: Intro, TriggerType: Event, Repeatable: False
+[12:21:21.560] Found 1 PlayDialogueOnStart components in the scene.
+[12:21:21.586] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: False, LockState: Locked | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
+[12:21:23.096] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
+[12:21:23.097]    UI Elements under mouse pointer: 2
+[12:21:23.097]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:23.097]      - Background (Canvas: Canvas)
+[12:21:24.605] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 0 | IsPaused: False
+[12:21:24.605]    UI Elements under mouse pointer: 5
+[12:21:24.605]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:24.605]      - Border (Canvas: Canvas)
+[12:21:24.607]      - Slot [4,5] (Canvas: Canvas)
+[12:21:24.607]      - Background (Canvas: Canvas)
+[12:21:24.608]      - Background (Canvas: Canvas)
+[12:21:26.112] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:26.114]    UI Elements under mouse pointer: 5
+[12:21:26.114]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:26.114]      - Border (Canvas: Canvas)
+[12:21:26.115]      - Slot [4,5] (Canvas: Canvas)
+[12:21:26.116]      - Background (Canvas: Canvas)
+[12:21:26.117]      - Background (Canvas: Canvas)
+[12:21:27.613] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:27.614]    UI Elements under mouse pointer: 5
+[12:21:27.615]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:27.616]      - Border (Canvas: Canvas)
+[12:21:27.616]      - Slot [4,5] (Canvas: Canvas)
+[12:21:27.616]      - Background (Canvas: Canvas)
+[12:21:27.616]      - Background (Canvas: Canvas)
+[12:21:29.119] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 0,578633 | IsPaused: False
+[12:21:29.119]    UI Elements under mouse pointer: 5
+[12:21:29.121]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:29.121]      - Border (Canvas: Canvas)
+[12:21:29.122]      - Slot [4,5] (Canvas: Canvas)
+[12:21:29.122]      - Background (Canvas: Canvas)
+[12:21:29.123]      - Background (Canvas: Canvas)
+[12:21:30.625] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:30.626]    UI Elements under mouse pointer: 5
+[12:21:30.626]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:30.626]      - Border (Canvas: Canvas)
+[12:21:30.627]      - Slot [4,5] (Canvas: Canvas)
+[12:21:30.627]      - Background (Canvas: Canvas)
+[12:21:30.627]      - Background (Canvas: Canvas)
+[12:21:32.125] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:32.126]    UI Elements under mouse pointer: 5
+[12:21:32.126]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:32.126]      - Border (Canvas: Canvas)
+[12:21:32.126]      - Slot [4,5] (Canvas: Canvas)
+[12:21:32.128]      - Background (Canvas: Canvas)
+[12:21:32.128]      - Background (Canvas: Canvas)
+[12:21:33.636] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:33.637]    UI Elements under mouse pointer: 5
+[12:21:33.638]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:33.638]      - Border (Canvas: Canvas)
+[12:21:33.638]      - Slot [4,5] (Canvas: Canvas)
+[12:21:33.639]      - Background (Canvas: Canvas)
+[12:21:33.639]      - Background (Canvas: Canvas)
+[12:21:35.138] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:35.139]    UI Elements under mouse pointer: 5
+[12:21:35.139]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:35.140]      - Border (Canvas: Canvas)
+[12:21:35.140]      - Slot [4,5] (Canvas: Canvas)
+[12:21:35.140]      - Background (Canvas: Canvas)
+[12:21:35.140]      - Background (Canvas: Canvas)
+[12:21:36.641] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:36.642]    UI Elements under mouse pointer: 5
+[12:21:36.642]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:36.643]      - Border (Canvas: Canvas)
+[12:21:36.643]      - Slot [4,5] (Canvas: Canvas)
+[12:21:36.643]      - Background (Canvas: Canvas)
+[12:21:36.644]      - Background (Canvas: Canvas)
+[12:21:38.150] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 0,4222985 | IsPaused: False
+[12:21:38.152]    UI Elements under mouse pointer: 5
+[12:21:38.152]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:38.153]      - Border (Canvas: Canvas)
+[12:21:38.153]      - Slot [4,5] (Canvas: Canvas)
+[12:21:38.154]      - Background (Canvas: Canvas)
+[12:21:38.155]      - Background (Canvas: Canvas)
+[12:21:39.652] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:39.655]    UI Elements under mouse pointer: 5
+[12:21:39.655]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:39.655]      - Border (Canvas: Canvas)
+[12:21:39.655]      - Slot [4,5] (Canvas: Canvas)
+[12:21:39.656]      - Background (Canvas: Canvas)
+[12:21:39.656]      - Background (Canvas: Canvas)
+[12:21:41.162] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:41.162]    UI Elements under mouse pointer: 5
+[12:21:41.162]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:41.164]      - Border (Canvas: Canvas)
+[12:21:41.164]      - Slot [4,5] (Canvas: Canvas)
+[12:21:41.164]      - Background (Canvas: Canvas)
+[12:21:41.164]      - Background (Canvas: Canvas)
+[12:21:42.666] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:42.666]    UI Elements under mouse pointer: 5
+[12:21:42.667]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:42.667]      - Border (Canvas: Canvas)
+[12:21:42.668]      - Slot [4,5] (Canvas: Canvas)
+[12:21:42.668]      - Background (Canvas: Canvas)
+[12:21:42.670]      - Background (Canvas: Canvas)
+[12:21:44.167] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:44.168]    UI Elements under mouse pointer: 5
+[12:21:44.169]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:44.169]      - Border (Canvas: Canvas)
+[12:21:44.170]      - Slot [4,5] (Canvas: Canvas)
+[12:21:44.170]      - Background (Canvas: Canvas)
+[12:21:44.171]      - Background (Canvas: Canvas)
+[12:21:45.672] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 0,111956 | IsPaused: False
+[12:21:45.673]    UI Elements under mouse pointer: 5
+[12:21:45.674]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:45.674]      - Border (Canvas: Canvas)
+[12:21:45.675]      - Slot [4,5] (Canvas: Canvas)
+[12:21:45.675]      - Background (Canvas: Canvas)
+[12:21:45.675]      - Background (Canvas: Canvas)
+[12:21:47.177] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:47.178]    UI Elements under mouse pointer: 5
+[12:21:47.178]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:47.178]      - Border (Canvas: Canvas)
+[12:21:47.179]      - Slot [4,5] (Canvas: Canvas)
+[12:21:47.179]      - Background (Canvas: Canvas)
+[12:21:47.179]      - Background (Canvas: Canvas)
+[12:21:48.683] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:48.684]    UI Elements under mouse pointer: 5
+[12:21:48.685]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:48.685]      - Border (Canvas: Canvas)
+[12:21:48.685]      - Slot [4,5] (Canvas: Canvas)
+[12:21:48.686]      - Background (Canvas: Canvas)
+[12:21:48.686]      - Background (Canvas: Canvas)
+[12:21:50.188] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:50.189]    UI Elements under mouse pointer: 5
+[12:21:50.189]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:50.189]      - Border (Canvas: Canvas)
+[12:21:50.190]      - Slot [4,5] (Canvas: Canvas)
+[12:21:50.190]      - Background (Canvas: Canvas)
+[12:21:50.190]      - Background (Canvas: Canvas)
+[12:21:51.691] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:51.691]    UI Elements under mouse pointer: 5
+[12:21:51.693]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:51.693]      - Border (Canvas: Canvas)
+[12:21:51.693]      - Slot [4,5] (Canvas: Canvas)
+[12:21:51.694]      - Background (Canvas: Canvas)
+[12:21:51.694]      - Background (Canvas: Canvas)
+[12:21:53.197] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:53.198]    UI Elements under mouse pointer: 5
+[12:21:53.199]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:53.199]      - Border (Canvas: Canvas)
+[12:21:53.199]      - Slot [4,5] (Canvas: Canvas)
+[12:21:53.199]      - Background (Canvas: Canvas)
+[12:21:53.200]      - Background (Canvas: Canvas)
+[12:21:54.705] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:54.705]    UI Elements under mouse pointer: 5
+[12:21:54.705]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:54.707]      - Border (Canvas: Canvas)
+[12:21:54.707]      - Slot [4,5] (Canvas: Canvas)
+[12:21:54.708]      - Background (Canvas: Canvas)
+[12:21:54.708]      - Background (Canvas: Canvas)
+[12:21:56.205] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:56.205]    UI Elements under mouse pointer: 5
+[12:21:56.206]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:56.206]      - Border (Canvas: Canvas)
+[12:21:56.206]      - Slot [4,5] (Canvas: Canvas)
+[12:21:56.207]      - Background (Canvas: Canvas)
+[12:21:56.208]      - Background (Canvas: Canvas)
+[12:21:57.712] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:57.713]    UI Elements under mouse pointer: 5
+[12:21:57.713]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:57.715]      - Border (Canvas: Canvas)
+[12:21:57.715]      - Slot [4,5] (Canvas: Canvas)
+[12:21:57.716]      - Background (Canvas: Canvas)
+[12:21:57.716]      - Background (Canvas: Canvas)
+[12:21:59.217] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:21:59.219]    UI Elements under mouse pointer: 5
+[12:21:59.219]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:21:59.220]      - Border (Canvas: Canvas)
+[12:21:59.220]      - Slot [4,5] (Canvas: Canvas)
+[12:21:59.221]      - Background (Canvas: Canvas)
+[12:21:59.221]      - Background (Canvas: Canvas)
+[12:22:00.719] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:22:00.720]    UI Elements under mouse pointer: 5
+[12:22:00.721]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:22:00.721]      - Border (Canvas: Canvas)
+[12:22:00.722]      - Slot [4,5] (Canvas: Canvas)
+[12:22:00.722]      - Background (Canvas: Canvas)
+[12:22:00.726]      - Background (Canvas: Canvas)
+[12:22:02.224] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 0 | IsPaused: False
+[12:22:02.225]    UI Elements under mouse pointer: 5
+[12:22:02.226]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:22:02.227]      - Border (Canvas: Canvas)
+[12:22:02.227]      - Slot [4,5] (Canvas: Canvas)
+[12:22:02.228]      - Background (Canvas: Canvas)
+[12:22:02.228]      - Background (Canvas: Canvas)
+[12:22:03.724] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:22:03.725]    UI Elements under mouse pointer: 5
+[12:22:03.726]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:22:03.726]      - Border (Canvas: Canvas)
+[12:22:03.727]      - Slot [4,5] (Canvas: Canvas)
+[12:22:03.727]      - Background (Canvas: Canvas)
+[12:22:03.727]      - Background (Canvas: Canvas)
+[12:22:05.229] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:22:05.231]    UI Elements under mouse pointer: 5
+[12:22:05.231]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:22:05.231]      - Border (Canvas: Canvas)
+[12:22:05.232]      - Slot [4,5] (Canvas: Canvas)
+[12:22:05.232]      - Background (Canvas: Canvas)
+[12:22:05.233]      - Background (Canvas: Canvas)
+[12:22:06.732] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:22:06.734]    UI Elements under mouse pointer: 5
+[12:22:06.734]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:22:06.735]      - Border (Canvas: Canvas)
+[12:22:06.735]      - Slot [4,5] (Canvas: Canvas)
+[12:22:06.735]      - Background (Canvas: Canvas)
+[12:22:06.735]      - Background (Canvas: Canvas)
+[12:22:08.243] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:22:08.244]    UI Elements under mouse pointer: 5
+[12:22:08.245]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:22:08.245]      - Border (Canvas: Canvas)
+[12:22:08.246]      - Slot [4,5] (Canvas: Canvas)
+[12:22:08.246]      - Background (Canvas: Canvas)
+[12:22:08.247]      - Background (Canvas: Canvas)
+[12:22:09.752] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 0 | IsPaused: False
+[12:22:09.754]    UI Elements under mouse pointer: 5
+[12:22:09.755]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:22:09.755]      - Border (Canvas: Canvas)
+[12:22:09.756]      - Slot [4,5] (Canvas: Canvas)
+[12:22:09.757]      - Background (Canvas: Canvas)
+[12:22:09.758]      - Background (Canvas: Canvas)
+[12:22:11.261] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:22:11.263]    UI Elements under mouse pointer: 5
+[12:22:11.263]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:22:11.263]      - Border (Canvas: Canvas)
+[12:22:11.264]      - Slot [4,5] (Canvas: Canvas)
+[12:22:11.264]      - Background (Canvas: Canvas)
+[12:22:11.265]      - Background (Canvas: Canvas)
+[12:22:12.768] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:22:12.769]    UI Elements under mouse pointer: 5
+[12:22:12.769]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:22:12.769]      - Border (Canvas: Canvas)
+[12:22:12.770]      - Slot [4,5] (Canvas: Canvas)
+[12:22:12.770]      - Background (Canvas: Canvas)
+[12:22:12.770]      - Background (Canvas: Canvas)
+[12:22:14.268] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:22:14.269]    UI Elements under mouse pointer: 5
+[12:22:14.270]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:22:14.271]      - Border (Canvas: Canvas)
+[12:22:14.271]      - Slot [4,5] (Canvas: Canvas)
+[12:22:14.272]      - Background (Canvas: Canvas)
+[12:22:14.273]      - Background (Canvas: Canvas)
+[12:22:15.778] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[12:22:15.778]    UI Elements under mouse pointer: 5
+[12:22:15.779]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:22:15.780]      - Border (Canvas: Canvas)
+[12:22:15.781]      - Slot [4,5] (Canvas: Canvas)
+[12:22:15.784]      - Background (Canvas: Canvas)
+[12:22:15.785]      - Background (Canvas: Canvas)
+[12:22:17.285] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: 0,3326955 | IsPaused: False
+[12:22:17.286]    UI Elements under mouse pointer: 5
+[12:22:17.286]      - TimerAnnouncementPanel (Canvas: Canvas)
+[12:22:17.286]      - Border (Canvas: Canvas)
+[12:22:17.287]      - Slot [4,5] (Canvas: Canvas)
+[12:22:17.288]      - Background (Canvas: Canvas)
+[12:22:17.288]      - Background (Canvas: Canvas)
