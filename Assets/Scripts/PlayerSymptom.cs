@@ -171,6 +171,7 @@ public class PlayerSymptom : MonoBehaviour
     private ParticleSystem rainParticleSystem;
 
     private PlayerStateMachine playerStateMachine;
+    private UnityEngine.UI.Slider lastPositionedStaminaSlider;
 
     public static PlayerSymptom Instance { get; private set; }
     public SymptomType CurrentSymptom => currentActiveSymptom;
@@ -730,6 +731,37 @@ public class PlayerSymptom : MonoBehaviour
                     playerStateMachine.ChangeToIdle();
                 }
             }
+
+            // --- ACTUALIZACIÓN VISUAL DEL STAMINA SLIDER EN EL HUD ---
+            if (GameManager.Instance != null && GameManager.Instance.StaminaSlider != null)
+            {
+                UnityEngine.UI.Slider slider = GameManager.Instance.StaminaSlider;
+
+                // Si detectamos un nuevo slider (o cambio de escena), lo reposicionamos abajo a la izquierda
+                if (slider != lastPositionedStaminaSlider)
+                {
+                    RectTransform rect = slider.GetComponent<RectTransform>();
+                    if (rect != null)
+                    {
+                        rect.anchorMin = new Vector2(0f, 0f);
+                        rect.anchorMax = new Vector2(0f, 0f);
+                        rect.pivot = new Vector2(0f, 0f);
+                        rect.anchoredPosition = new Vector2(50f, 50f); // Desplazado 50px de la esquina inferior izquierda
+                    }
+                    lastPositionedStaminaSlider = slider;
+                }
+
+                float staminaPercent = 1f - (sprintDurationElapsed / MaxSprintDuration);
+                slider.value = staminaPercent;
+
+                CanvasGroup staminaGroup = slider.GetComponent<CanvasGroup>();
+                if (staminaGroup != null)
+                {
+                    // Mostramos la barra si ha consumido stamina (< 99%) o está fatigado
+                    bool showSlider = staminaPercent < 0.99f || isFatigued;
+                    staminaGroup.alpha = Mathf.MoveTowards(staminaGroup.alpha, showSlider ? 1f : 0f, Time.deltaTime * 3f);
+                }
+            }
         }
 
         // Físicas del movimiento de borracho: torpeza y forcejeos direccionales
@@ -803,6 +835,38 @@ public class PlayerSymptom : MonoBehaviour
     }
 
     /// <summary>
+    /// Detiene el reloj de supervivencia (SurvivalTimer).
+    /// </summary>
+    public void StopSurvivalTimer()
+    {
+        if (SurvivalTimer.Instance != null)
+        {
+            SurvivalTimer.Instance.TimerRunning = false;
+            Debug.Log("[PlayerSymptom] Reloj de supervivencia detenido.");
+        }
+        else
+        {
+            Debug.LogWarning("[PlayerSymptom] No se encontró la instancia de SurvivalTimer.");
+        }
+    }
+
+    /// <summary>
+    /// Reanuda el reloj de supervivencia (SurvivalTimer).
+    /// </summary>
+    public void StartSurvivalTimer()
+    {
+        if (SurvivalTimer.Instance != null)
+        {
+            SurvivalTimer.Instance.TimerRunning = true;
+            Debug.Log("[PlayerSymptom] Reloj de supervivencia reanudado.");
+        }
+        else
+        {
+            Debug.LogWarning("[PlayerSymptom] No se encontró la instancia de SurvivalTimer.");
+        }
+    }
+
+    /// <summary>
     /// Alivia temporalmente los síntomas.
     /// extraWaitTime: tiempo adicional que se suma al TimeBetweenSymptoms base.
     /// </summary>
@@ -822,6 +886,17 @@ public class PlayerSymptom : MonoBehaviour
         }
 
         Debug.Log($"[PlayerSymptom] Síntomas curados. Esperando {timer} segundos para el próximo síntoma.");
+    }
+
+    /// <summary>
+    /// Reproduce los sonidos globales de la cura del jugador.
+    /// </summary>
+    public void PlayGlobalCureSounds()
+    {
+        if (CureSound != null || CureSoundSecondary != null)
+        {
+            StartCoroutine(PlayCureSoundsRoutine());
+        }
     }
 
     private System.Collections.IEnumerator PlayCureSoundsRoutine()
