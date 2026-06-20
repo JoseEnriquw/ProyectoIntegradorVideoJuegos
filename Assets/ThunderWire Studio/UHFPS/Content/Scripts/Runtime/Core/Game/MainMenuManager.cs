@@ -38,5 +38,28 @@ namespace UHFPS.Runtime
             Application.Quit();
 #endif
         }
+
+        public void LoadScene(string sceneName)
+        {
+            if (string.IsNullOrEmpty(sceneName)) return;
+            SaveGameManager.ClearLoadType();
+            StartCoroutine(LoadSceneRoutine(sceneName));
+        }
+
+        IEnumerator LoadSceneRoutine(string sceneName)
+        {
+            if (BackgroundFader != null)
+                yield return BackgroundFader.StartBackgroundFade(false);
+
+            SaveGameManager.LoadSceneName = sceneName;
+            SceneManager.LoadScene(SaveGameManager.LMS);
+        }
+
+        public void LoadSceneDirect(string sceneName)
+        {
+            if (string.IsNullOrEmpty(sceneName)) return;
+            SaveGameManager.ClearLoadType();
+            SceneManager.LoadScene(sceneName);
+        }
     }
 }
