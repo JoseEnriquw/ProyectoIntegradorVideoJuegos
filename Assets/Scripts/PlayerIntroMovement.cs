@@ -95,6 +95,13 @@ public class PlayerIntroMovement : MonoBehaviour
         // Wait a frame to ensure all systems are ready
         yield return null;
 
+        // Wait until the IntroDisclaimer has finished showing and destroyed itself
+        IntroDisclaimer disclaimer = FindObjectOfType<IntroDisclaimer>();
+        if (disclaimer != null)
+        {
+            yield return new WaitUntil(() => disclaimer == null);
+        }
+
         // 2. Fade In from Black
         if (GameManager.HasReference)
         {
