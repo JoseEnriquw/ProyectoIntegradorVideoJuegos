@@ -342,6 +342,7 @@ public class SurvivalTimer : MonoBehaviour, ISaveable
         PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
         if (playerHealth != null)
         {
+            playerHealth.DeathByTimer = true;
             playerHealth.ApplyDamageMax();
             playerIsDead = true;
         }
