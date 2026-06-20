@@ -82,6 +82,7 @@ namespace UHFPS.Runtime.States
             {
                 agent.speed = asset.velocidadPersecucion;
                 agent.stoppingDistance = asset.distanciaDeAtaque;
+                if (agent.isOnNavMesh) agent.isStopped = false;
                 
                 machine.RotateAgentManually = true;
                 timerNoVisto = 0f;
@@ -200,6 +201,11 @@ namespace UHFPS.Runtime.States
                         agent.isStopped = true;
                         UpdateAnimator(false, false, true); 
                         timerNoVisto += Time.deltaTime;
+                    }
+                    else
+                    {
+                        if (agent.isOnNavMesh) agent.isStopped = false;
+                        UpdateAnimator(false, true, false); // Corriendo
                     }
                 }
             }

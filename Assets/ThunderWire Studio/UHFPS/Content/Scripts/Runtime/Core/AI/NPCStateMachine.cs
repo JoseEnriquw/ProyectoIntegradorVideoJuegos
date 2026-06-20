@@ -186,8 +186,12 @@ namespace UHFPS.Runtime
         /// </summary>
         private void RotateManually()
         {
+            if (Agent == null || Agent.isStopped || !Agent.hasPath) return;
+
             Vector3 target = Agent.steeringTarget;
             Vector3 direction = (target - transform.position).normalized;
+            if (direction.sqrMagnitude < 0.001f) return;
+
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             transform.rotation = Quaternion.SlerpUnclamped(transform.rotation, lookRotation, Time.deltaTime * SteeringSpeed);
         }

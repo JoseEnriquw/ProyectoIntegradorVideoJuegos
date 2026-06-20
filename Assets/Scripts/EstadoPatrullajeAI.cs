@@ -18,6 +18,10 @@ namespace UHFPS.Runtime.States
         [Tooltip("Ajusta este valor para sincronizar la animación (1 = velocidad real, 0.5 = mitad de velocidad, etc)")]
         public float multiplicadorVelocidadAnim = 1.0f;
 
+        [Header("Configuracion de Vigilante")]
+        [Tooltip("Si es true, este NPC actuará como vigilante (delatará al jugador en vez de perseguirlo).")]
+        public bool esVigilante = false;
+
         public override FSMAIState InitState(NPCStateMachine machine, AIStatesGroup group)
         {
             // Pasamos también el grupo (donde definimos los parámetros del Animador)
@@ -186,10 +190,16 @@ namespace UHFPS.Runtime.States
 
             public override Transition[] OnGetTransitions()
             {
-                // Agregamos la lógica para saltar a persecución si nos detecta
                 return new Transition[]
                 {
+                    Transition.To<EstadoDelatarAI>(() =>
+                        asset.esVigilante &&
+                        !IsPlayerDead &&
+                        !playerMachine.IsCurrent(PlayerStateMachine.HIDING_STATE) &&
+                        SeesPlayerOrClose(asset.distanciaDeteccionCercana)),
+
                     Transition.To<EstadoPersecucionAI>(() =>
+                        !asset.esVigilante &&
                         !IsPlayerDead && // No te persigue si ya te mató
                         !playerMachine.IsCurrent(PlayerStateMachine.HIDING_STATE) && // No te persigue si estás escondido
                         SeesPlayerOrClose(asset.distanciaDeteccionCercana)) // Te persigue si entras a su visión o estás tan cerca que te "oye"
