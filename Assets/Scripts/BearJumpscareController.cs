@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UHFPS.Runtime;
+using UHFPS.Tools;
 
 public class BearJumpscareController : MonoBehaviour
 {
@@ -222,20 +223,25 @@ public class BearJumpscareController : MonoBehaviour
         hasTriggered = true;
         jumpscareTrigger.TriggerJumpscare();
 
-        // Deactivate the door jumpscare trigger so it can't trigger anymore!
+        // Copy the door jumpscare configuration and close the door if the bear is triggered first!
         JumpscareTrigger doorTrigger = FindDoorTrigger();
         if (doorTrigger != null)
         {
-            Debug.Log("[BearJumpscareController] Bear jumpscare was triggered. Deactivating door trigger GameObject and disabling components.");
+            Debug.Log("[BearJumpscareController] Bear jumpscare was triggered. Executing door close and sound events from Trigger_AudioEvent.");
             
-            // Disable collider
+            // 1. Invoke the door trigger's events (closes the door and triggers sounds)
+            doorTrigger.OnJumpscareStarted?.Invoke();
+            
+            // 2. Play the door slam audio clip at the door's position
+            if (doorTrigger.JumpscareSound != null)
+            {
+                GameTools.PlayOneShot2D(doorTrigger.transform.position, doorTrigger.JumpscareSound, "Jumpscare Sound");
+            }
+
+            // 3. Disable the door trigger collider and script so it cannot trigger again
             var col = doorTrigger.GetComponent<Collider>();
             if (col != null) col.enabled = false;
-
-            // Disable the JumpscareTrigger component
             doorTrigger.enabled = false;
-
-            // Deactivate the GameObject
             doorTrigger.gameObject.SetActive(false);
         }
     }
