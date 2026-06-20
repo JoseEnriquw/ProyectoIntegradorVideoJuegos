@@ -80,6 +80,7 @@ public class PlayerIntroMovement : MonoBehaviour
 
     private IEnumerator IntroRoutine()
     {
+        IntroDebugger.Log($"[PlayerIntroMovement] IntroRoutine started in scene: {UnityEngine.SceneManagement.SceneManager.GetActiveScene().name}");
         // Deshabilitar la tecla Escape (menú de pausa) e Inventario durante toda la cinemática
         if (GameManager.HasReference)
         {
@@ -94,31 +95,43 @@ public class PlayerIntroMovement : MonoBehaviour
 
         // Wait a frame to ensure all systems are ready
         yield return null;
+        IntroDebugger.Log("[PlayerIntroMovement] Frame 1 wait completed");
 
         // Wait until the IntroDisclaimer has finished showing and destroyed itself
         IntroDisclaimer disclaimer = FindObjectOfType<IntroDisclaimer>();
         if (disclaimer != null)
         {
+            IntroDebugger.Log("[PlayerIntroMovement] Disclaimer found, waiting for it to destroy");
             yield return new WaitUntil(() => disclaimer == null);
+            IntroDebugger.Log("[PlayerIntroMovement] Disclaimer destroyed");
         }
 
         // 2. Fade In from Black
         if (GameManager.HasReference)
         {
+            IntroDebugger.Log("[PlayerIntroMovement] Starting fade in");
             yield return GameManager.Instance.StartBackgroundFade(true, fadeSpeed: FadeInSpeed);
+            if (PlayerPresenceManager.HasReference)
+            {
+                PlayerPresenceManager.Instance.IsBackgroundFadedOut = true;
+            }
+            IntroDebugger.Log("[PlayerIntroMovement] Fade in completed");
         }
 
         yield return new WaitForSeconds(WaitBeforeStart);
+        IntroDebugger.Log("[PlayerIntroMovement] WaitBeforeStart completed");
 
         // 3. Play initial dialogue
         if (InitialDialogue != null)
         {
+            IntroDebugger.Log($"[PlayerIntroMovement] Triggering dialogue: {InitialDialogue.name}");
             InitialDialogue.TriggerDialogue();
         }
 
         // 4. Door Interaction: Close
         if (IntroDoor != null)
         {
+            IntroDebugger.Log("[PlayerIntroMovement] IntroDoor is closing");
             yield return new WaitForSeconds(CloseDelay);
             IntroDoor.SetCloseState();
 
@@ -127,19 +140,24 @@ public class PlayerIntroMovement : MonoBehaviour
 
             // 4.1 Block the door
             IntroDoor.SetLockedStatus(true);
+            IntroDebugger.Log("[PlayerIntroMovement] IntroDoor is locked");
         }
 
         // ESPERAR a que termine el diálogo inicial antes de continuar
         if (DialogueSystem.HasReference)
         {
+            IntroDebugger.Log("[PlayerIntroMovement] Waiting for dialogue to finish");
             yield return new WaitUntil(() => !DialogueSystem.Instance.IsPlaying);
+            IntroDebugger.Log("[PlayerIntroMovement] Dialogue finished");
         }
 
         // Esperar 1 segundo de pausa después de finalizar el audio/subtítulo
         yield return new WaitForSeconds(1.0f);
+        IntroDebugger.Log("[PlayerIntroMovement] 1.0 second wait completed");
 
         // 5. Activar el Trigger de Cambio de Escena (CinematicSceneLoader) de forma automática
         var sceneLoader = FindObjectOfType<CinematicSceneLoader>();
+        IntroDebugger.Log($"[PlayerIntroMovement] CinematicSceneLoader check: {(sceneLoader != null ? "Found" : "NULL")}");
         if (sceneLoader != null)
         {
             Debug.Log("[PlayerIntroMovement] Diálogo terminado. Deteniendo todos los sonidos e iniciando fundido a negro...");
@@ -154,14 +172,20 @@ public class PlayerIntroMovement : MonoBehaviour
                 }
             }
 
+            // Disable input locking to ensure everything cleans up properly (identical to skip button)
+            if (GameManager.HasReference)
+            {
+                GameManager.Instance.LockInput(false);
+            }
+
             // Fundido suave a negro (fadeOut = false) con velocidad 1.5
             if (GameManager.HasReference)
             {
                 yield return GameManager.Instance.StartBackgroundFade(false, fadeSpeed: 1.5f);
             }
 
-            Debug.Log("[PlayerIntroMovement] Fundido completado. Cargando siguiente escena a través de CinematicSceneLoader...");
-            sceneLoader.LoadNextScene();
+            Debug.Log("[PlayerIntroMovement] Fundido completado. Cargando siguiente escena de forma directa...");
+            sceneLoader.LoadNextSceneDirect();
             yield break; // Finaliza la corrutina aquí ya que cambiamos de escena
         }
 
@@ -173,13 +197,16 @@ public class PlayerIntroMovement : MonoBehaviour
 
         if (PlayerPresenceManager.HasReference)
         {
+            IntroDebugger.Log("[PlayerIntroMovement] Unlocking player...");
             PlayerPresenceManager.Instance.UnlockPlayer();
+            IntroDebugger.Log("[PlayerIntroMovement] UnlockPlayer called");
         }
 
         // Habilitar de nuevo la tecla Escape (menú de pausa) al finalizar la cinemática
         if (GameManager.HasReference)
         {
             GameManager.Instance.LockInput(false);
+            IntroDebugger.Log("[PlayerIntroMovement] LockInput(false) called");
         }
 
         // 7. Trigger Announcement if requested
@@ -187,6 +214,7 @@ public class PlayerIntroMovement : MonoBehaviour
         {
             SurvivalTimerAnnouncement.Instance.Show();
         }
+        IntroDebugger.Log("[PlayerIntroMovement] IntroRoutine fully finished");
     }
 
     public void UnlockDoor()
