@@ -24,6 +24,8 @@ namespace UHFPS.Runtime.States
         public string InteractParameter = "Interact";
         [Tooltip("Parámetro (Trigger) utilizado cuando lanza un ataque / atrapa al player")]
         public string AttackTrigger = "Attack";
+        [Tooltip("Nombre del parámetro Bool en el Animator para apuntar al jugador (Vigilante)")]
+        public string PointingParameter = "Pointing";
 
         // ─────────────────────────────────────────────────────────────
         //  SISTEMA DE SONIDO PARA TERROR
