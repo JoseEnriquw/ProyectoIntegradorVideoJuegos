@@ -20,6 +20,9 @@ namespace UHFPS.Runtime
         public Transform TargetLookAt;
 
         [Header("Camera Zoom Settings")]
+        [Tooltip("If true, the camera will be dynamically positioned relative to the target. If false, it will keep its default scene position and rotation.")]
+        public bool UseDynamicPositioning = false;
+
         [Tooltip("Offset of the camera relative to the target. Z is distance in front, X is side offset, Y is height offset.")]
         public Vector3 CameraOffset = new Vector3(0.8f, 1.5f, 3.0f);
 
@@ -116,7 +119,7 @@ namespace UHFPS.Runtime
                 if (ZoomCamera != null)
                 {
                     // Dynamically position camera relative to target
-                    if (TargetLookAt != null)
+                    if (UseDynamicPositioning && TargetLookAt != null)
                     {
                         Vector3 targetPos = TargetLookAt.position;
                         Vector3 targetForward = TargetLookAt.forward;
@@ -125,6 +128,7 @@ namespace UHFPS.Runtime
                         // Position camera in front of target using offset values
                         Vector3 camPos = targetPos + targetForward * CameraOffset.z + targetRight * CameraOffset.x + Vector3.up * CameraOffset.y;
                         ZoomCamera.transform.position = camPos;
+                        ZoomCamera.transform.LookAt(targetPos);
                         ZoomCamera.LookAt = TargetLookAt;
                     }
 
