@@ -16191,7 +16191,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7354007625842433576, guid: 061618acf8459f34bb03bf93931470ad, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7873838424638768274, guid: 061618acf8459f34bb03bf93931470ad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -23650,7 +23650,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &773601904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31380,7 +31380,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7354007625842433576, guid: 061618acf8459f34bb03bf93931470ad, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7873838424638768274, guid: 061618acf8459f34bb03bf93931470ad, type: 3}
       propertyPath: m_LocalPosition.x
@@ -61567,6 +61567,7 @@ GameObject:
   - component: {fileID: 2117787226}
   - component: {fileID: 2117787225}
   - component: {fileID: 2117787227}
+  - component: {fileID: 2117787228}
   m_Layer: 2
   m_Name: Trigger_AudioEvent
   m_TagString: Untagged
@@ -61758,6 +61759,28 @@ MonoBehaviour:
   AlRevertirAccion:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2117787228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117787223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 463818b2825d6b0439a2f9ff3b9ab45f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.DialogueTrigger
+  TriggerType: 0
+  DialogueType: 0
+  DialogueContinue: 0
+  Dialogue: {fileID: 11400000, guid: 295c5f4ed8f4d5847abd1c84d18ccfeb, type: 2}
+  DialogueAudio: {fileID: 917429894}
+  BinderName: yo
+  Repeatable: 0
+  RangedDialogue: 0
+  ResetDialogueWhenOut: 1
+  LocalDialogueRange: 2.7
 --- !u!1 &2126230732
 GameObject:
   m_ObjectHideFlags: 0
