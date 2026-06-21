@@ -70,12 +70,29 @@ namespace UHFPS.Runtime.States
             {
                 return new Transition[]
                 {
-                    // Volver a Patrullar si se rinde buscándote, te escondes en un locker, o mueres
-                    Transition.To<EstadoPatrullajeAI>(() => 
-                        timerNoVisto > asset.tiempoParaRendirse || 
+                    Transition.To<EstadoVigilanciaEstaticaAI>(() => 
+                        (timerNoVisto > asset.tiempoParaRendirse || 
                         playerMachine.IsCurrent(PlayerStateMachine.HIDING_STATE) || 
-                        IsPlayerDead)
+                        IsPlayerDead) && TieneEstado<EstadoVigilanciaEstaticaAI>()),
+
+                    Transition.To<EstadoPatrullajeAI>(() => 
+                        (timerNoVisto > asset.tiempoParaRendirse || 
+                        playerMachine.IsCurrent(PlayerStateMachine.HIDING_STATE) || 
+                        IsPlayerDead) && !TieneEstado<EstadoVigilanciaEstaticaAI>() && TieneEstado<EstadoPatrullajeAI>())
                 };
+            }
+
+            private bool TieneEstado<T>() where T : AIStateAsset
+            {
+                if (machine == null || machine.StatesAssetRuntime == null) return false;
+                foreach (var stateData in machine.StatesAssetRuntime.AIStates)
+                {
+                    if (stateData.StateAsset != null && stateData.StateAsset is T && stateData.IsEnabled)
+                    {
+                        return true;
+                    }
+                }
+                return false;
             }
 
             public override void OnStateEnter()
@@ -89,20 +106,53 @@ namespace UHFPS.Runtime.States
                 atacando = false;
                 coolDownAtaque = 0f;
 
-                // Resolvemos los AudioSources aquí para garantizar que Unity ya los inicializó.
+                // Resolvemos los AudioSources del NPC.
                 AudioSource[] sources = machine.GetComponentsInChildren<AudioSource>();
-                if (sources.Length >= 1) audioSourcePrincipal = sources[0];
-                if (sources.Length >= 2) audioSourceLoop      = sources[1];
-                else                     audioSourceLoop      = sources.Length > 0 ? sources[0] : null;
-
-                // Si el usuario olvidó poner un AudioSource, le agregamos uno en runtime para que no se rompa el código
-                if (audioSourcePrincipal == null)
+                
+                if (sources.Length >= 1)
                 {
+                    audioSourcePrincipal = sources[0];
+                }
+                else
+                {
+                    // Si no tiene ninguno, creamos el principal en el objeto de la máquina
                     audioSourcePrincipal = machine.gameObject.AddComponent<AudioSource>();
                     audioSourcePrincipal.spatialBlend = 1f; // Sonido 3D
                     audioSourcePrincipal.maxDistance = 20f;
-                    audioSourceLoop = audioSourcePrincipal;
-                    Debug.LogWarning($"[EstadoPersecucionAI] No se encontró AudioSource en {machine.name}, se agregó uno automáticamente en 3D.");
+                    Debug.LogWarning($"[EstadoPersecucionAI] No se encontró AudioSource en {machine.name}, se agregó el principal automáticamente.");
+                }
+
+                // Para el loop de tensión, necesitamos un AudioSource dedicado.
+                // Si encontramos un segundo AudioSource en los hijos, lo usamos.
+                if (sources.Length >= 2)
+                {
+                    audioSourceLoop = sources[1];
+                }
+                else
+                {
+                    // Si solo hay 1 AudioSource en total (o creamos el principal),
+                    // buscamos si ya agregamos previamente un segundo AudioSource en el objeto de la máquina para no duplicarlo.
+                    AudioSource[] rootSources = machine.GetComponents<AudioSource>();
+                    if (rootSources.Length >= 2)
+                    {
+                        audioSourceLoop = rootSources[1];
+                    }
+                    else if (rootSources.Length == 1 && rootSources[0] != audioSourcePrincipal)
+                    {
+                        // Si el del root es diferente del principal (por ejemplo, el principal estaba en un hijo)
+                        audioSourceLoop = rootSources[0];
+                    }
+                    else
+                    {
+                        // Creamos un segundo AudioSource dedicado para el loop en el objeto de la máquina
+                        audioSourceLoop = machine.gameObject.AddComponent<AudioSource>();
+                        audioSourceLoop.spatialBlend = audioSourcePrincipal.spatialBlend;
+                        audioSourceLoop.maxDistance = audioSourcePrincipal.maxDistance;
+                        audioSourceLoop.minDistance = audioSourcePrincipal.minDistance;
+                        audioSourceLoop.rolloffMode = audioSourcePrincipal.rolloffMode;
+                        audioSourceLoop.outputAudioMixerGroup = audioSourcePrincipal.outputAudioMixerGroup;
+                        audioSourceLoop.playOnAwake = false;
+                    }
                 }
 
                 if (customGroup != null)

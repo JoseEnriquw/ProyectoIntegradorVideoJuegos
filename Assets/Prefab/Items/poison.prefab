@@ -22,31 +22,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 607.802
+      value: -10.49736
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 17.239
+      value: 1.1826301
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 335.968
+      value: -2.7918549
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99553734
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.09436894
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 10.83
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -82,6 +82,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6357025648823568451}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3950288830309643004}
   m_SourcePrefab: {fileID: 100100000, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
 --- !u!1 &7354007625842433576 stripped
 GameObject:
@@ -208,3 +211,63 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -9063845125465063565, guid: 8455c88774c662843841bd6dbd1a800c, type: 3}
+--- !u!114 &3950288830309643004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7354007625842433576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e2230d6857bf14995464535978be6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.CustomInteractTitle
+  DynamicTitle:
+    ReflectType: 0
+    Instance: {fileID: 0}
+    ReflectName: 
+    ReflectDerived: 0
+  DynamicUseTitle:
+    ReflectType: 0
+    Instance: {fileID: 0}
+    ReflectName: 
+    ReflectDerived: 0
+  DynamicExamineTitle:
+    ReflectType: 0
+    Instance: {fileID: 0}
+    ReflectName: 
+    ReflectDerived: 0
+  OverrideTitle: 0
+  OverrideUseTitle: 1
+  OverrideExamineTitle: 0
+  UseTitleDynamic: 0
+  UseUseTitleDynamic: 0
+  UseExamineTitleDynamic: 0
+  Title:
+    GlocText: interactions.grab
+    NormalText: 
+  TrueTitle:
+    GlocText: 
+    NormalText: 
+  FalseTitle:
+    GlocText: 
+    NormalText: 
+  UseTitle:
+    GlocText: interactions.grab
+    NormalText: 
+  TrueUseTitle:
+    GlocText: 
+    NormalText: 
+  FalseUseTitle:
+    GlocText: 
+    NormalText: 
+  ExamineTitle:
+    GlocText: 
+    NormalText: 
+  TrueExamineTitle:
+    GlocText: 
+    NormalText: 
+  FalseExamineTitle:
+    GlocText: 
+    NormalText: 
