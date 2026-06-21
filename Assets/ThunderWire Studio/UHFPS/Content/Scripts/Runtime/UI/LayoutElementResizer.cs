@@ -17,12 +17,15 @@ namespace UHFPS.Runtime
         public float WidthPadding;
         public float HeightPadding;
 
+        public float MaxWidth = -1f;
+
         public override float preferredWidth
         {
             get
             {
                 if (AutoResizeWidth)
                 {
+                    float width = 0f;
                     if (!CustomWidthResize)
                     {
                         for (int i = 0; i < transform.childCount; i++)
@@ -32,13 +35,20 @@ namespace UHFPS.Runtime
                                 continue;
 
                             RectTransform rectTransform = tr as RectTransform;
-                            return LayoutUtility.GetPreferredWidth(rectTransform) + WidthPadding;
+                            width = LayoutUtility.GetPreferredWidth(rectTransform) + WidthPadding;
+                            break;
                         }
                     }
                     else
                     {
-                        return LayoutUtility.GetPreferredWidth(WidthTarget) + WidthPadding;
+                        width = LayoutUtility.GetPreferredWidth(WidthTarget) + WidthPadding;
                     }
+
+                    if (MaxWidth > 0f && width > MaxWidth)
+                    {
+                        return MaxWidth;
+                    }
+                    return width;
                 }
 
                 return base.preferredWidth;

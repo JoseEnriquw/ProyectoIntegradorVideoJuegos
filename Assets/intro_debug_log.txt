@@ -1,38 +1,60 @@
-=== INTRO DEBUGGER LOG START: 21/6/2026 12:10:42 p. m. ===
-[12:10:42.912] Scene loaded: MainMenu
-[12:10:42.976] Helper component started.
-[12:10:42.976] PlayerIntroMovement NOT found in scene!
-[12:10:42.976] Found 0 DialogueTriggers in the scene:
-[12:10:42.978] Found 0 PlayDialogueOnStart components in the scene.
-[12:10:42.991] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[12:10:44.450] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[12:10:45.954] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[12:10:47.461] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[12:10:47.461]    UI Elements under mouse pointer: 4
-[12:10:47.462]      - Text (TMP) (Canvas: Canvas)
-[12:10:47.462]      - NewGame (Canvas: Canvas)
-[12:10:47.464]      - Logo (Canvas: Canvas)
-[12:10:47.464]      - Blur (Canvas: Canvas)
-[12:10:48.965] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[12:10:48.965]    UI Elements under mouse pointer: 3
-[12:10:48.966]      - Text (TMP) (Canvas: Canvas)
-[12:10:48.966]      - Credits (Canvas: Canvas)
-[12:10:48.966]      - Blur (Canvas: Canvas)
-[12:10:50.465] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[12:10:50.466]    UI Elements under mouse pointer: 3
-[12:10:50.466]      - Text (TMP) (Canvas: Canvas)
-[12:10:50.468]      - LoadGame (Canvas: Canvas)
-[12:10:50.468]      - Blur (Canvas: Canvas)
-[12:10:51.969] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[12:10:51.970]    UI Elements under mouse pointer: 1
-[12:10:51.971]      - Blur (Canvas: Canvas)
-[12:10:53.472] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[12:10:53.472]    UI Elements under mouse pointer: 4
-[12:10:53.473]      - Text (TMP) (Canvas: Canvas)
-[12:10:53.474]      - Continue (Canvas: Canvas)
-[12:10:53.474]      - Logo (Canvas: Canvas)
-[12:10:53.475]      - Blur (Canvas: Canvas)
-[12:10:54.972] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[12:10:54.972]    UI Elements under mouse pointer: 1
-[12:10:54.973]      - Blur (Canvas: Canvas)
-[12:10:56.474] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
+=== INTRO DEBUGGER LOG START: 21/6/2026 7:48:09 p. m. ===
+[19:48:09.601] Scene loaded: 1 IntroCutScene
+[19:48:09.931] [PlayerIntroMovement] IntroRoutine started in scene: 1 IntroCutScene
+[19:48:09.931] [PlayerPresenceManager] FreezePlayer: freeze=True, showCursor=False
+[19:48:09.963] [PlayerPresenceManager] UnlockPlayer called.
+[19:48:09.964] [PlayerPresenceManager] DoUnlockPlayer started. isBackgroundFadedOut=False
+[19:48:09.964] [PlayerPresenceManager] DoUnlockPlayer: Background is not faded out, waiting for fade...
+[19:48:09.972] Helper component started.
+[19:48:09.972] PlayerIntroMovement found: InitialDialogue = Intro
+[19:48:09.973] Found 7 DialogueTriggers in the scene:
+[19:48:09.974]  - Trigger: HiddenDialogue_DuringSymptom_5, TriggerType: Event, Repeatable: False
+[19:48:09.974]  - Trigger: HiddenDialogue_DuringSymptom_4, TriggerType: Event, Repeatable: False
+[19:48:09.974]  - Trigger: HiddenDialogue_DuringSymptom_3, TriggerType: Event, Repeatable: False
+[19:48:09.975]  - Trigger: HiddenDialogue_DuringSymptom_2, TriggerType: Event, Repeatable: False
+[19:48:09.975]  - Trigger: HiddenDialogue_DuringSymptom_1, TriggerType: Event, Repeatable: False
+[19:48:09.975]  - Trigger: HiddenDialogue_DuringSymptom_0, TriggerType: Event, Repeatable: False
+[19:48:09.976]  - Trigger: Intro, TriggerType: Event, Repeatable: False
+[19:48:09.977] Found 1 PlayDialogueOnStart components in the scene.
+[19:48:10.012] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: False, LockState: Locked | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
+[19:48:11.397] [PlayerIntroMovement] Frame 1 wait completed
+[19:48:11.398] [PlayerIntroMovement] Disclaimer found, waiting for it to destroy
+[19:48:11.511] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
+[19:48:11.991] [PlayerPresenceManager] DoUnlockPlayer: anyPopupShown=False (ControlsPopup=False, PopupInfo=False, Paused=False)
+[19:48:11.992] [PlayerPresenceManager] FreezePlayer: freeze=False, showCursor=False
+[19:48:13.014] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
+[19:48:13.014]    UI Elements under mouse pointer: 2
+[19:48:13.016]      - TimerAnnouncementPanel (Canvas: Canvas)
+[19:48:13.017]      - Background (Canvas: Canvas)
+[19:48:14.514] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
+[19:48:14.516]    UI Elements under mouse pointer: 2
+[19:48:14.516]      - TimerAnnouncementPanel (Canvas: Canvas)
+[19:48:14.517]      - Background (Canvas: Canvas)
+[19:48:16.022] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
+[19:48:16.023]    UI Elements under mouse pointer: 2
+[19:48:16.023]      - TimerAnnouncementPanel (Canvas: Canvas)
+[19:48:16.024]      - Background (Canvas: Canvas)
+[19:48:17.534] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
+[19:48:19.040] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
+[19:48:19.041]    UI Elements under mouse pointer: 2
+[19:48:19.041]      - TimerAnnouncementPanel (Canvas: Canvas)
+[19:48:19.042]      - Background (Canvas: Canvas)
+[19:48:19.448] [PlayerIntroMovement] Disclaimer destroyed
+[19:48:19.449] [PlayerIntroMovement] Starting fade in
+[19:48:19.462] [PlayerIntroMovement] Fade in completed
+[19:48:19.966] [PlayerIntroMovement] WaitBeforeStart completed
+[19:48:19.967] [PlayerIntroMovement] Triggering dialogue: Intro
+[19:48:20.022] [PlayerIntroMovement] Waiting for dialogue to finish
+[19:48:20.543] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 0 | IsPaused: False
+[19:48:20.543]    UI Elements under mouse pointer: 2
+[19:48:20.544]      - TimerAnnouncementPanel (Canvas: Canvas)
+[19:48:20.545]      - Background (Canvas: Canvas)
+[19:48:22.045] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[19:48:22.046]    UI Elements under mouse pointer: 2
+[19:48:22.047]      - TimerAnnouncementPanel (Canvas: Canvas)
+[19:48:22.048]      - Background (Canvas: Canvas)
+[19:48:23.553] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
+[19:48:23.554]    UI Elements under mouse pointer: 2
+[19:48:23.555]      - TimerAnnouncementPanel (Canvas: Canvas)
+[19:48:23.555]      - Background (Canvas: Canvas)
+[19:48:25.066] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 0,929183 | IsPaused: False
