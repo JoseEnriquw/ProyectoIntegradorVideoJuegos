@@ -21,7 +21,9 @@ public class MainMenuButtonEffects : MonoBehaviour, IPointerEnterHandler, IPoint
     
     [Header("Audio Settings")]
     public AudioClip hoverClip;
+    [Range(0f, 1f)] public float hoverVolume = 0.15f;
     public AudioClip clickClip;
+    [Range(0f, 1f)] public float clickVolume = 0.6f;
     public AudioClip whisperClip;
     
     [Header("3D Light References")]
@@ -114,7 +116,7 @@ public class MainMenuButtonEffects : MonoBehaviour, IPointerEnterHandler, IPoint
         // Play hover SFX
         if (hoverClip != null && localAudioSource != null)
         {
-            localAudioSource.PlayOneShot(hoverClip, 0.45f);
+            localAudioSource.PlayOneShot(hoverClip, hoverVolume);
         }
 
         // Trigger crow reaction on hover
@@ -176,7 +178,7 @@ public class MainMenuButtonEffects : MonoBehaviour, IPointerEnterHandler, IPoint
         
         if (clickClip != null && localAudioSource != null)
         {
-            localAudioSource.PlayOneShot(clickClip, 1.0f);
+            localAudioSource.PlayOneShot(clickClip, clickVolume);
         }
     }
     
