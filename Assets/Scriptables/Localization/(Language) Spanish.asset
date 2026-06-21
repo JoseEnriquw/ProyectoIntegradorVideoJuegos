@@ -324,6 +324,10 @@ MonoBehaviour:
     Key: titles.TimerAnnouncement
     Value: Tienes {0} hasta que la enfermedad te mate, deberas encontrar la cura
       antes.   Podras ver el tiempo presionando Tab
+  - EntryId: 34168794
+    SectionId: 59169988
+    Key: titles.deathbytime
+    Value: Te has quedado sin tiempo
   - EntryId: 94577514
     SectionId: 69673941
     Key: interactions.use
@@ -1208,8 +1212,8 @@ MonoBehaviour:
   - EntryId: 88446583
     SectionId: 38271540
     Key: dialogs.mission1.picture.frame
-    Value: "Parece mentira que te fuiste pap\xE1, no entiendo como en el hospital
-      no pudieron hacer nada para salvarte."
+    Value: " Todav\xEDa no puedo creer que te hayas ido, viejo... No entiendo c\xF3mo
+      nadie pudo hacer nada. "
   - EntryId: 25660704
     SectionId: 38271540
     Key: dialogs.mission1.letter1
@@ -1217,11 +1221,11 @@ MonoBehaviour:
   - EntryId: 78023030
     SectionId: 38271540
     Key: dialogs.mission1.letter2
-    Value: "Las cartas de amor que le mandaba mam\xE1 a pap\xE1"
+    Value: "Las cartas que le escrib\xEDa mam\xE1... nunca las tir\xF3"
   - EntryId: 12305486
     SectionId: 38271540
     Key: dialogs.mission1.books
-    Value: "A pap\xE1 le gustaban los cuentos de terror"
+    Value: ' Los cuentos de terror eran su debilidad'
   - EntryId: 63409302
     SectionId: 38271540
     Key: dialogs.mission1.mate
@@ -1230,21 +1234,23 @@ MonoBehaviour:
   - EntryId: 77435737
     SectionId: 38271540
     Key: dialogs.mission1.clothes
-    Value: "Que voy a hacer con toda esta ropa, tendr\xE9 que donarla a la iglesia"
+    Value: Voy a tener que juntar esta ropa y llevarla a la iglesia
   - EntryId: 87732939
     SectionId: 38271540
     Key: dialogs.mission1.door
-    Value: "Deber\xEDa seguir buscando informaci\xF3n"
+    Value: "Deber\xEDa seguir buscando"
   - EntryId: 28608808
     SectionId: 38271540
     Key: dialogs.mission1.window
-    Value: "El clima est\xE1 muy feo hoy"
+    Value: "Qu\xE9 d\xEDa de mierda"
   - EntryId: 71346679
     SectionId: 38271540
     Key: dialogs.mission1.main.letter
-    Value: "Hijo, tienes que saber que me han descubierto y ya no puedo seguir ayud\xE1ndote.
-      No conf\xEDes en nadie. Si no vuelves a Epecu\xE9n, la enfermedad terminar\xE1
-      por consumirte."
+    Value: "Hijo\u2026 Debes saber que me han descubierto y ya no puedo seguir ayud\xE1ndote..
+      Estos son los \xFAltimos frascos. No los desperdicies. Cuando se agoten, Comenzar\xE1n
+      los s\xEDntomas y la enfermedad avanzar\xE1 sin control provocando la muerte,
+      espero que puedas volver a epecu\xE9n antes que eso suceda No conf\xEDes en
+      nadie. Pap\xE1. "
   - EntryId: 81320009
     SectionId: 38271540
     Key: dialogs.mission1.intro
@@ -1253,12 +1259,13 @@ MonoBehaviour:
   - EntryId: 63534897
     SectionId: 38271540
     Key: dialogs.PostAbuelo
-    Value: "Esa ciudad de nuevo... \xBFEl sab\xEDa de la enfermedad? Ser\xE1 mejor
-      pegarle una visita."
+    Value: "No puede ser.. esto es mucho para procesar.. Si lo que dice esta carta
+      es cierto, no me queda mucho tiempo. Voy a tener que ir a ese maldito pueblo
+      y encontrar a mi abuelo. Necesito averiguar qu\xE9 carajo est\xE1 pasando aca."
   - EntryId: 83540004
     SectionId: 38271540
     Key: dialogs.dolorcabeza
-    Value: Ay estos dolores de cabeza...
+    Value: "Estos dolores de cabeza... me est\xE1n matando.."
   - EntryId: 85472762
     SectionId: 38271540
     Key: dialogs.suero
@@ -1266,11 +1273,11 @@ MonoBehaviour:
   - EntryId: 59516480
     SectionId: 38271540
     Key: dialogs.Cuadro_Azul
-    Value: Ese es el cementerio de azul?
+    Value: Ese no es el cementerio de azul?
   - EntryId: 22915260
     SectionId: 11930759
     Key: dialogs_pueblo.limite.carretera
-    Value: "No creo que el pueblo quede por ac\xE1\u2026"
+    Value: "No parece que el pueblo quede por ac\xE1."
   - EntryId: 16471321
     SectionId: 11930759
     Key: dialogs_pueblo.desequipar.linterna
@@ -1278,7 +1285,7 @@ MonoBehaviour:
   - EntryId: 27943259
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.Olvido
-    Value: "Este lugar qued\xF3 en el olvido\u2026"
+    Value: "Parece que nadie pasa por ac\xE1 hace a\xF1os"
   - EntryId: 75171280
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.posteluz
@@ -1286,45 +1293,45 @@ MonoBehaviour:
   - EntryId: 51158971
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.nene.che
-    Value: "\xA1Che, nene!"
+    Value: "\xA1Eh, nene! estas bien?"
   - EntryId: 80669082
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.nene.para
-    Value: "Eh, par\xE1\u2026 no te vayas."
+    Value: "Para\u2026 no te vayas!."
   - EntryId: 79278245
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.arvol.caida
-    Value: "\xA1Mierda! No tengo tiempo para esto\u2026 tengo que encontrar otro
-      camino."
+    Value: "\xA1La puta madre!..  Que locura, casi me mata...  Voy a tener que buscar
+      otro camino. "
   - EntryId: 43885748
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.niebla
-    Value: "Esto no estaba antes\u2026 \xBFqu\xE9 est\xE1 pasando?"
+    Value: "Puedo jurar que esta niebla no estaba ac\xE1"
   - EntryId: 91080227
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.firshouse
-    Value: "\xBFHola? \xBFHay alguien ah\xED?"
+    Value: "\xBFHola? \xBFHay alguien?"
   - EntryId: 51662929
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.secondhouse
-    Value: "\xBFOtra caba\xF1a?"
+    Value: y esto?
   - EntryId: 78003352
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.silla
-    Value: "Ac\xE1 hubo alguien hace poco\u2026"
+    Value: "Parece que alguien estuvo ac\xE1 hace poco. "
   - EntryId: 32551320
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.medicina
-    Value: "Son los mismos frascos\u2026 los de casa\u2026\u201D  \u201CCapaz\u2026
-      era esto lo que manten\xEDa con vida a pap\xE1."
+    Value: "Son iguales a los de casa... Capaz\u2026 era esto lo que manten\xEDa
+      con vida a pap\xE1"
   - EntryId: 86614006
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.linternakero
-    Value: "Bueno\u2026 luz. No es mucho, pero sirve."
+    Value: Bueno... Mejor que nada
   - EntryId: 77694860
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.foto.abuelo
-    Value: "Esta es la misma foto\u2026 \xBFes mi abuelo? Tengo que encontrarlo."
+    Value: "Esta es la misma foto\u2026 \xBFes mi abuelo?.. Tengo que encontrarlo."
   - EntryId: 27680312
     SectionId: 11930759
     Key: dialogs_pueblo.bosque.golpepuerta
@@ -1398,21 +1405,21 @@ MonoBehaviour:
   - EntryId: 71713302
     SectionId: 55496470
     Key: dialog_ingreso_pueblo.intro_ingreso1
-    Value: Este lugar me da miedo
+    Value: "Este lugar s\xED que da miedo"
   - EntryId: 57736921
     SectionId: 55496470
     Key: dialog_ingreso_pueblo.intro_ingreso2
-    Value: Hay gente custodiando la entrada, debo buscar otra manera de ingresar..
+    Value: Hay gente custodiando la entrada. Voy a tener que entrar por otro lado..
   - EntryId: 68139067
     SectionId: 55496470
     Key: dialog_ingreso_pueblo.feria_cerrado
-    Value: "Mmm, parece que por ac\xE1 no puedo seguir avanzando. Voy a ver si hay
-      otra entrada por la cerca."
+    Value: "Mmm, por ac\xE1 no puedo pasar, voy a rodear la cerca a ver si encuentro
+      otra entrada"
   - EntryId: 91826483
     SectionId: 55496470
     Key: dialog_ingreso_pueblo.maizal
-    Value: "Est\xE1 plagado de estas criaturas\u2026  Voy a tener que perderme entre
-      el maizal para evitarlos"
+    Value: "El camino est\xE1 lleno de esas cosas.. quiz\xE1s si atravieso el maizal
+      no me vean."
   - EntryId: 42857841
     SectionId: 55496470
     Key: "dialog_ingreso_pueblo.Persecuci\xF3n1"
@@ -1420,11 +1427,12 @@ MonoBehaviour:
   - EntryId: 63575913
     SectionId: 55496470
     Key: dialog_ingreso_pueblo.esconderse
-    Value: "Ese ba\xF1o\u2026 por favor que est\xE9 abierto!"
+    Value: 'Tengo que esconderme! '
   - EntryId: 49913073
     SectionId: 55496470
     Key: dialog_ingreso_pueblo.voces_forasteros
-    Value: Un intruso... hay que encontrarlo y avisarle al lider que tenemos visita...
+    Value: "Donde se fue?? No puede haber llegado muy lejos.. ser\xE1 mejor avisar
+      que tenemos visita\u2026"
   - EntryId: 60315446
     SectionId: 55496470
     Key: dialog_ingreso_pueblo.lluvia
@@ -1432,8 +1440,7 @@ MonoBehaviour:
   - EntryId: 57025345
     SectionId: 55496470
     Key: dialog_ingreso_pueblo.puente
-    Value: "No puede ser, el puente se desplom\xF3, tendr\xE9 que buscar algo que
-      me ayude a subir"
+    Value: Que cagada.. Necesito algo para subir.
   - EntryId: 13376603
     SectionId: 55496470
     Key: dialog_ingreso_pueblo.granero
@@ -1441,8 +1448,8 @@ MonoBehaviour:
   - EntryId: 88846228
     SectionId: 55496470
     Key: dialog_ingreso_pueblo.combustible_granero
-    Value: Este generador no funciona.. Tendre que buscar el combustible y la pieza
-      que falta
+    Value: 'Este aparato no funciona, parece que le falta una pieza para encenderlo
+      y el combustible '
   - EntryId: 75148231
     SectionId: 55496470
     Key: dialog_ingreso_pueblo.esconderse_granero
@@ -1468,7 +1475,7 @@ MonoBehaviour:
   - EntryId: 10387736
     SectionId: 55496470
     Key: dialog_ingreso_pueblo.distraccion_guardia
-    Value: Debo encontrar una manera de distraer al guardia de la entrada..
+    Value: "Hay una persona vigilando, podr\xEDa distraerlo con algo.."
   - EntryId: 21320959
     SectionId: 32159731
     Key: popups.banio_title

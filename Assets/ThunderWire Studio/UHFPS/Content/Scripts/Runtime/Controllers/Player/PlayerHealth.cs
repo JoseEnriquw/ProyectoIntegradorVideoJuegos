@@ -33,6 +33,11 @@ namespace UHFPS.Runtime
         public bool IsInvisibleToEnemies;
         public bool IsInvisibleToAllies;
 
+        public GString TimeOutDeathGloc;
+
+        [HideInInspector]
+        public bool DeathByTimer;
+
         private PlayerStateMachine player;
         private GameManager gameManager;
         private EyeBlink eyeBlink;
@@ -60,6 +65,12 @@ namespace UHFPS.Runtime
 
             if (!SaveGameManager.GameWillLoad || !SaveGameManager.GameStateExist)
                 InitHealth();
+        }
+
+        private void Start()
+        {
+            if (TimeOutDeathGloc != null)
+                TimeOutDeathGloc.SubscribeGloc();
         }
 
         private void Update()
@@ -140,6 +151,7 @@ namespace UHFPS.Runtime
         public void InitHealth()
         {
             InitializeHealth((int)StartHealth, (int)MaxHealth);
+            DeathByTimer = false;
 
             if (StartHealth <= MinHealthFade)
             {
@@ -196,6 +208,22 @@ namespace UHFPS.Runtime
 
         public override void OnHealthZero()
         {
+            if (DeathByTimer && TimeOutDeathGloc != null && !string.IsNullOrEmpty(TimeOutDeathGloc.Value))
+            {
+                if (gameManager.DeadPanel != null)
+                {
+                    Transform titleTransform = gameManager.DeadPanel.transform.Find("Panel/Title");
+                    if (titleTransform != null)
+                    {
+                        var titleText = titleTransform.GetComponent<TMPro.TMP_Text>();
+                        if (titleText != null)
+                        {
+                            titleText.text = TimeOutDeathGloc.Value;
+                        }
+                    }
+                }
+            }
+
             gameManager.ShowPanel(PanelType.DeadPanel);
             gameManager.PlayerPresence.FreezePlayer(true, true);
             gameManager.PlayerPresence.PlayerManager.PlayerItems.DeactivateCurrentItem();
