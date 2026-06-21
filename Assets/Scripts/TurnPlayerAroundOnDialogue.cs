@@ -4,6 +4,10 @@ using UHFPS.Runtime;
 
 public class TurnPlayerAroundOnDialogue : MonoBehaviour
 {
+    [Header("Target Settings")]
+    [Tooltip("El objeto de referencia al que el jugador debe darse vuelta a mirar. Si se deja vacío, buscará el auto por defecto.")]
+    public Transform targetReference;
+
     private DialogueTrigger dialogueTrigger;
     private bool isPlayerInTrigger = false;
     private bool shouldRotate = false;
@@ -21,36 +25,36 @@ public class TurnPlayerAroundOnDialogue : MonoBehaviour
             {
                 isPlayerInTrigger = true;
 
-                // Check if the player is looking towards the car or away from it
+                // Check if the player is looking towards the target or away from it
                 if (PlayerPresenceManager.HasReference && PlayerPresenceManager.Instance.Player != null)
                 {
                     var lookController = PlayerPresenceManager.Instance.Player.GetComponentInChildren<LookController>();
                     if (lookController != null)
                     {
                         Vector3 playerPos = PlayerPresenceManager.Instance.Player.transform.position;
-                        Vector3 carPos = FindCarPosition();
+                        Vector3 targetPos = GetTargetPosition();
 
                         Vector3 playerLookDir = lookController.LookForward2D;
                         playerLookDir.y = 0;
                         playerLookDir.Normalize();
 
-                        Vector3 dirToCar = carPos - playerPos;
-                        dirToCar.y = 0;
-                        dirToCar.Normalize();
+                        Vector3 dirToTarget = targetPos - playerPos;
+                        dirToTarget.y = 0;
+                        dirToTarget.Normalize();
 
-                        float dot = Vector3.Dot(playerLookDir, dirToCar);
+                        float dot = Vector3.Dot(playerLookDir, dirToTarget);
                         
-                        // If dot < 0.1, the player is looking away from the car (front towards the boundary).
-                        // If dot >= 0.1, the player is looking towards the car (going back first/de espaldas).
+                        // If dot < 0.1, the player is looking away from the target (front towards the boundary).
+                        // If dot >= 0.1, the player is looking towards the target (going back first/de espaldas).
                         if (dot < 0.1f)
                         {
                             shouldRotate = true;
-                            Debug.Log($"[TurnPlayerAroundOnDialogue] Player entered looking away from the car (dot: {dot}). Will rotate on dialogue end.");
+                            Debug.Log($"[TurnPlayerAroundOnDialogue] Player entered looking away from the target (dot: {dot}). Will rotate on dialogue end.");
                         }
                         else
                         {
                             shouldRotate = false;
-                            Debug.Log($"[TurnPlayerAroundOnDialogue] Player entered looking towards the car (dot: {dot}). Will NOT rotate.");
+                            Debug.Log($"[TurnPlayerAroundOnDialogue] Player entered looking towards the target (dot: {dot}). Will NOT rotate.");
                         }
                     }
                 }
@@ -79,24 +83,24 @@ public class TurnPlayerAroundOnDialogue : MonoBehaviour
             yield return new WaitUntil(() => !DialogueSystem.Instance.IsPlaying);
         }
 
-        // 3. Rotate the player to face the car if they entered facing away from it
+        // 3. Rotate the player to face the target if they entered facing away from it
         if (shouldRotate && PlayerPresenceManager.HasReference && PlayerPresenceManager.Instance.Player != null)
         {
             var lookController = PlayerPresenceManager.Instance.Player.GetComponentInChildren<LookController>();
             if (lookController != null)
             {
                 Vector3 playerPos = PlayerPresenceManager.Instance.Player.transform.position;
-                Vector3 carPos = FindCarPosition();
+                Vector3 targetPos = GetTargetPosition();
 
-                Vector3 directionToCar = carPos - playerPos;
-                directionToCar.y = 0; // Keep rotation on the horizontal plane
+                Vector3 directionToTarget = targetPos - playerPos;
+                directionToTarget.y = 0; // Keep rotation on the horizontal plane
                 
-                if (directionToCar.sqrMagnitude > 0.01f)
+                if (directionToTarget.sqrMagnitude > 0.01f)
                 {
-                    Quaternion rotationToCar = Quaternion.LookRotation(directionToCar);
-                    float targetYaw = rotationToCar.eulerAngles.y;
+                    Quaternion rotationToTarget = Quaternion.LookRotation(directionToTarget);
+                    float targetYaw = rotationToTarget.eulerAngles.y;
 
-                    Debug.Log($"[TurnPlayerAroundOnDialogue] Dialogue finished. Rotating player to face the car (Target Yaw: {targetYaw}).");
+                    Debug.Log($"[TurnPlayerAroundOnDialogue] Dialogue finished. Rotating player to face the target (Target Yaw: {targetYaw}).");
                     lookController.LerpRotation(new Vector2(targetYaw, lookController.LookRotation.y), 1.0f);
                 }
             }
@@ -105,8 +109,13 @@ public class TurnPlayerAroundOnDialogue : MonoBehaviour
         shouldRotate = false;
     }
 
-    private Vector3 FindCarPosition()
+    private Vector3 GetTargetPosition()
     {
+        if (targetReference != null)
+        {
+            return targetReference.position;
+        }
+
         GameObject car = GameObject.Find("peugeot 504");
         if (car != null)
         {

@@ -1,38 +1,30 @@
-=== INTRO DEBUGGER LOG START: 21/6/2026 12:10:42 p. m. ===
-[12:10:42.912] Scene loaded: MainMenu
-[12:10:42.976] Helper component started.
-[12:10:42.976] PlayerIntroMovement NOT found in scene!
-[12:10:42.976] Found 0 DialogueTriggers in the scene:
-[12:10:42.978] Found 0 PlayDialogueOnStart components in the scene.
-[12:10:42.991] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[12:10:44.450] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[12:10:45.954] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[12:10:47.461] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[12:10:47.461]    UI Elements under mouse pointer: 4
-[12:10:47.462]      - Text (TMP) (Canvas: Canvas)
-[12:10:47.462]      - NewGame (Canvas: Canvas)
-[12:10:47.464]      - Logo (Canvas: Canvas)
-[12:10:47.464]      - Blur (Canvas: Canvas)
-[12:10:48.965] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[12:10:48.965]    UI Elements under mouse pointer: 3
-[12:10:48.966]      - Text (TMP) (Canvas: Canvas)
-[12:10:48.966]      - Credits (Canvas: Canvas)
-[12:10:48.966]      - Blur (Canvas: Canvas)
-[12:10:50.465] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[12:10:50.466]    UI Elements under mouse pointer: 3
-[12:10:50.466]      - Text (TMP) (Canvas: Canvas)
-[12:10:50.468]      - LoadGame (Canvas: Canvas)
-[12:10:50.468]      - Blur (Canvas: Canvas)
-[12:10:51.969] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[12:10:51.970]    UI Elements under mouse pointer: 1
-[12:10:51.971]      - Blur (Canvas: Canvas)
-[12:10:53.472] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[12:10:53.472]    UI Elements under mouse pointer: 4
-[12:10:53.473]      - Text (TMP) (Canvas: Canvas)
-[12:10:53.474]      - Continue (Canvas: Canvas)
-[12:10:53.474]      - Logo (Canvas: Canvas)
-[12:10:53.475]      - Blur (Canvas: Canvas)
-[12:10:54.972] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
-[12:10:54.972]    UI Elements under mouse pointer: 1
-[12:10:54.973]      - Blur (Canvas: Canvas)
-[12:10:56.474] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: -1 | IsPaused: N/A
+=== INTRO DEBUGGER LOG START: 21/06/2026 18:16:01 ===
+[18:16:01.821] Scene loaded: 3 Ingreso_Pueblo
+[18:16:01.960] [PlayerPresenceManager] UnlockPlayer called.
+[18:16:01.962] [PlayerPresenceManager] DoUnlockPlayer started. isBackgroundFadedOut=False
+[18:16:01.962] [PlayerPresenceManager] DoUnlockPlayer: Background is not faded out, waiting for fade...
+[18:16:02.002] Helper component started.
+[18:16:02.006] PlayerIntroMovement found: InitialDialogue = NULL
+[18:16:02.008] Found 16 DialogueTriggers in the scene:
+[18:16:02.010]  - Trigger: HiddenDialogue_Dialogo, TriggerType: Event, Repeatable: False
+[18:16:02.012]  - Trigger: HiddenDialogue_DialogoAparecer, TriggerType: Event, Repeatable: False
+[18:16:02.012]  - Trigger: HiddenDialogue_DuringSymptom_5, TriggerType: Event, Repeatable: False
+[18:16:02.013]  - Trigger: HiddenDialogue_DuringSymptom_4, TriggerType: Event, Repeatable: False
+[18:16:02.014]  - Trigger: HiddenDialogue_DuringSymptom_3, TriggerType: Event, Repeatable: False
+[18:16:02.016]  - Trigger: HiddenDialogue_DuringSymptom_2, TriggerType: Event, Repeatable: False
+[18:16:02.018]  - Trigger: HiddenDialogue_DuringSymptom_1, TriggerType: Event, Repeatable: False
+[18:16:02.018]  - Trigger: HiddenDialogue_DuringSymptom_0, TriggerType: Event, Repeatable: False
+[18:16:02.019]  - Trigger: distraccion_guardia, TriggerType: Trigger, Repeatable: False
+[18:16:02.020]  - Trigger: Intro_ingreso_1, TriggerType: Trigger, Repeatable: False
+[18:16:02.021]  - Trigger: feria_cerrado, TriggerType: Trigger, Repeatable: False
+[18:16:02.022]  - Trigger: Puente, TriggerType: Trigger, Repeatable: False
+[18:16:02.022]  - Trigger: Intro_ingreso_2, TriggerType: Trigger, Repeatable: False
+[18:16:02.023]  - Trigger: maizal, TriggerType: Trigger, Repeatable: False
+[18:16:02.024]  - Trigger: Persecución1, TriggerType: Trigger, Repeatable: False
+[18:16:02.025]  - Trigger: combustible_granero, TriggerType: Trigger, Repeatable: False
+[18:16:02.028] Found 0 PlayDialogueOnStart components in the scene.
+[18:16:02.154] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: False, LockState: Locked | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
+[18:16:04.891] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: False, LockState: Locked | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
+[18:16:06.087] [PlayerPresenceManager] DoUnlockPlayer: anyPopupShown=False (ControlsPopup=False, PopupInfo=False, Paused=False)
+[18:16:06.088] [PlayerPresenceManager] FreezePlayer: freeze=False, showCursor=False
+[18:16:06.383] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: False, LockState: Locked | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
