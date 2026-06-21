@@ -1,60 +1,30 @@
-=== INTRO DEBUGGER LOG START: 21/6/2026 7:48:09 p. m. ===
-[19:48:09.601] Scene loaded: 1 IntroCutScene
-[19:48:09.931] [PlayerIntroMovement] IntroRoutine started in scene: 1 IntroCutScene
-[19:48:09.931] [PlayerPresenceManager] FreezePlayer: freeze=True, showCursor=False
-[19:48:09.963] [PlayerPresenceManager] UnlockPlayer called.
-[19:48:09.964] [PlayerPresenceManager] DoUnlockPlayer started. isBackgroundFadedOut=False
-[19:48:09.964] [PlayerPresenceManager] DoUnlockPlayer: Background is not faded out, waiting for fade...
-[19:48:09.972] Helper component started.
-[19:48:09.972] PlayerIntroMovement found: InitialDialogue = Intro
-[19:48:09.973] Found 7 DialogueTriggers in the scene:
-[19:48:09.974]  - Trigger: HiddenDialogue_DuringSymptom_5, TriggerType: Event, Repeatable: False
-[19:48:09.974]  - Trigger: HiddenDialogue_DuringSymptom_4, TriggerType: Event, Repeatable: False
-[19:48:09.974]  - Trigger: HiddenDialogue_DuringSymptom_3, TriggerType: Event, Repeatable: False
-[19:48:09.975]  - Trigger: HiddenDialogue_DuringSymptom_2, TriggerType: Event, Repeatable: False
-[19:48:09.975]  - Trigger: HiddenDialogue_DuringSymptom_1, TriggerType: Event, Repeatable: False
-[19:48:09.975]  - Trigger: HiddenDialogue_DuringSymptom_0, TriggerType: Event, Repeatable: False
-[19:48:09.976]  - Trigger: Intro, TriggerType: Event, Repeatable: False
-[19:48:09.977] Found 1 PlayDialogueOnStart components in the scene.
-[19:48:10.012] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: False, LockState: Locked | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
-[19:48:11.397] [PlayerIntroMovement] Frame 1 wait completed
-[19:48:11.398] [PlayerIntroMovement] Disclaimer found, waiting for it to destroy
-[19:48:11.511] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
-[19:48:11.991] [PlayerPresenceManager] DoUnlockPlayer: anyPopupShown=False (ControlsPopup=False, PopupInfo=False, Paused=False)
-[19:48:11.992] [PlayerPresenceManager] FreezePlayer: freeze=False, showCursor=False
-[19:48:13.014] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
-[19:48:13.014]    UI Elements under mouse pointer: 2
-[19:48:13.016]      - TimerAnnouncementPanel (Canvas: Canvas)
-[19:48:13.017]      - Background (Canvas: Canvas)
-[19:48:14.514] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
-[19:48:14.516]    UI Elements under mouse pointer: 2
-[19:48:14.516]      - TimerAnnouncementPanel (Canvas: Canvas)
-[19:48:14.517]      - Background (Canvas: Canvas)
-[19:48:16.022] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
-[19:48:16.023]    UI Elements under mouse pointer: 2
-[19:48:16.023]      - TimerAnnouncementPanel (Canvas: Canvas)
-[19:48:16.024]      - Background (Canvas: Canvas)
-[19:48:17.534] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
-[19:48:19.040] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
-[19:48:19.041]    UI Elements under mouse pointer: 2
-[19:48:19.041]      - TimerAnnouncementPanel (Canvas: Canvas)
-[19:48:19.042]      - Background (Canvas: Canvas)
-[19:48:19.448] [PlayerIntroMovement] Disclaimer destroyed
-[19:48:19.449] [PlayerIntroMovement] Starting fade in
-[19:48:19.462] [PlayerIntroMovement] Fade in completed
-[19:48:19.966] [PlayerIntroMovement] WaitBeforeStart completed
-[19:48:19.967] [PlayerIntroMovement] Triggering dialogue: Intro
-[19:48:20.022] [PlayerIntroMovement] Waiting for dialogue to finish
-[19:48:20.543] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 0 | IsPaused: False
-[19:48:20.543]    UI Elements under mouse pointer: 2
-[19:48:20.544]      - TimerAnnouncementPanel (Canvas: Canvas)
-[19:48:20.545]      - Background (Canvas: Canvas)
-[19:48:22.045] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
-[19:48:22.046]    UI Elements under mouse pointer: 2
-[19:48:22.047]      - TimerAnnouncementPanel (Canvas: Canvas)
-[19:48:22.048]      - Background (Canvas: Canvas)
-[19:48:23.553] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 1 | IsPaused: False
-[19:48:23.554]    UI Elements under mouse pointer: 2
-[19:48:23.555]      - TimerAnnouncementPanel (Canvas: Canvas)
-[19:48:23.555]      - Background (Canvas: Canvas)
-[19:48:25.066] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: True, LockState: None | IsDialoguePlaying: True | DialoguePanelAlpha: 0,929183 | IsPaused: False
+=== INTRO DEBUGGER LOG START: 21/06/2026 18:16:01 ===
+[18:16:01.821] Scene loaded: 3 Ingreso_Pueblo
+[18:16:01.960] [PlayerPresenceManager] UnlockPlayer called.
+[18:16:01.962] [PlayerPresenceManager] DoUnlockPlayer started. isBackgroundFadedOut=False
+[18:16:01.962] [PlayerPresenceManager] DoUnlockPlayer: Background is not faded out, waiting for fade...
+[18:16:02.002] Helper component started.
+[18:16:02.006] PlayerIntroMovement found: InitialDialogue = NULL
+[18:16:02.008] Found 16 DialogueTriggers in the scene:
+[18:16:02.010]  - Trigger: HiddenDialogue_Dialogo, TriggerType: Event, Repeatable: False
+[18:16:02.012]  - Trigger: HiddenDialogue_DialogoAparecer, TriggerType: Event, Repeatable: False
+[18:16:02.012]  - Trigger: HiddenDialogue_DuringSymptom_5, TriggerType: Event, Repeatable: False
+[18:16:02.013]  - Trigger: HiddenDialogue_DuringSymptom_4, TriggerType: Event, Repeatable: False
+[18:16:02.014]  - Trigger: HiddenDialogue_DuringSymptom_3, TriggerType: Event, Repeatable: False
+[18:16:02.016]  - Trigger: HiddenDialogue_DuringSymptom_2, TriggerType: Event, Repeatable: False
+[18:16:02.018]  - Trigger: HiddenDialogue_DuringSymptom_1, TriggerType: Event, Repeatable: False
+[18:16:02.018]  - Trigger: HiddenDialogue_DuringSymptom_0, TriggerType: Event, Repeatable: False
+[18:16:02.019]  - Trigger: distraccion_guardia, TriggerType: Trigger, Repeatable: False
+[18:16:02.020]  - Trigger: Intro_ingreso_1, TriggerType: Trigger, Repeatable: False
+[18:16:02.021]  - Trigger: feria_cerrado, TriggerType: Trigger, Repeatable: False
+[18:16:02.022]  - Trigger: Puente, TriggerType: Trigger, Repeatable: False
+[18:16:02.022]  - Trigger: Intro_ingreso_2, TriggerType: Trigger, Repeatable: False
+[18:16:02.023]  - Trigger: maizal, TriggerType: Trigger, Repeatable: False
+[18:16:02.024]  - Trigger: Persecución1, TriggerType: Trigger, Repeatable: False
+[18:16:02.025]  - Trigger: combustible_granero, TriggerType: Trigger, Repeatable: False
+[18:16:02.028] Found 0 PlayDialogueOnStart components in the scene.
+[18:16:02.154] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: False, LockState: Locked | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
+[18:16:04.891] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: False, LockState: Locked | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
+[18:16:06.087] [PlayerPresenceManager] DoUnlockPlayer: anyPopupShown=False (ControlsPopup=False, PopupInfo=False, Paused=False)
+[18:16:06.088] [PlayerPresenceManager] FreezePlayer: freeze=False, showCursor=False
+[18:16:06.383] Status Update -> EventSystem: Active (Enabled: True, Current Selected: None) | Cursor: Visible: False, LockState: Locked | IsDialoguePlaying: False | DialoguePanelAlpha: 0 | IsPaused: False
