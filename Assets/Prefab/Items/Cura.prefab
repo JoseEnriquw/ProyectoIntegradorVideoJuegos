@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95280c35b4973a141aa7faeb2b789182, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.884
+      value: 317.8788
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95280c35b4973a141aa7faeb2b789182, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.639
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95280c35b4973a141aa7faeb2b789182, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.987
+      value: 568.58923
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 95280c35b4973a141aa7faeb2b789182, type: 3}
       propertyPath: m_LocalRotation.w
@@ -78,6 +78,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 95280c35b4973a141aa7faeb2b789182, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7680182564053374221}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 95280c35b4973a141aa7faeb2b789182, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2933840443189944877}
   m_SourcePrefab: {fileID: 100100000, guid: 95280c35b4973a141aa7faeb2b789182, type: 3}
 --- !u!1 &3396463926717918354 stripped
 GameObject:
@@ -204,3 +207,63 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -9063845125465063565, guid: 95280c35b4973a141aa7faeb2b789182, type: 3}
+--- !u!114 &2933840443189944877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3396463926717918354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44e2230d6857bf14995464535978be6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.CustomInteractTitle
+  DynamicTitle:
+    ReflectType: 0
+    Instance: {fileID: 0}
+    ReflectName: 
+    ReflectDerived: 0
+  DynamicUseTitle:
+    ReflectType: 0
+    Instance: {fileID: 0}
+    ReflectName: 
+    ReflectDerived: 0
+  DynamicExamineTitle:
+    ReflectType: 0
+    Instance: {fileID: 0}
+    ReflectName: 
+    ReflectDerived: 0
+  OverrideTitle: 0
+  OverrideUseTitle: 1
+  OverrideExamineTitle: 0
+  UseTitleDynamic: 0
+  UseUseTitleDynamic: 0
+  UseExamineTitleDynamic: 0
+  Title:
+    GlocText: interactions.grab
+    NormalText: 
+  TrueTitle:
+    GlocText: 
+    NormalText: 
+  FalseTitle:
+    GlocText: 
+    NormalText: 
+  UseTitle:
+    GlocText: interactions.grab
+    NormalText: 
+  TrueUseTitle:
+    GlocText: 
+    NormalText: 
+  FalseUseTitle:
+    GlocText: 
+    NormalText: 
+  ExamineTitle:
+    GlocText: 
+    NormalText: 
+  TrueExamineTitle:
+    GlocText: 
+    NormalText: 
+  FalseExamineTitle:
+    GlocText: 
+    NormalText: 
