@@ -14,7 +14,7 @@ namespace UHFPS.Runtime.States
         
         [Header("Perdida de Vision")]
         [Tooltip("Cuántos segundos busca en el mismo lugar antes de volver a patrullar si te pierde de vista")]
-        public float tiempoParaRendirse = 4f;
+        public float tiempoParaRendirse = 10f;
         [Tooltip("Radio extra por si le pasas muy por la espalda mientras te busca")]
         public float radioDeteccionCercana = 1.5f;
 
@@ -57,6 +57,8 @@ namespace UHFPS.Runtime.States
             private float timerNoVisto;
             private bool atacando;
             private float coolDownAtaque;
+            private Vector3 lastKnownPosition;
+            private bool hasSetSearchDestination;
 
             public EstadoPersecucionAI_State(NPCStateMachine machine, EstadoPersecucionAI stateAsset, AIStatesGroup group) : base(machine)
             {
@@ -72,12 +74,10 @@ namespace UHFPS.Runtime.States
                 {
                     Transition.To<EstadoVigilanciaEstaticaAI>(() => 
                         (timerNoVisto > asset.tiempoParaRendirse || 
-                        playerMachine.IsCurrent(PlayerStateMachine.HIDING_STATE) || 
                         IsPlayerDead) && TieneEstado<EstadoVigilanciaEstaticaAI>()),
 
                     Transition.To<EstadoPatrullajeAI>(() => 
                         (timerNoVisto > asset.tiempoParaRendirse || 
-                        playerMachine.IsCurrent(PlayerStateMachine.HIDING_STATE) || 
                         IsPlayerDead) && !TieneEstado<EstadoVigilanciaEstaticaAI>() && TieneEstado<EstadoPatrullajeAI>())
                 };
             }
@@ -105,6 +105,8 @@ namespace UHFPS.Runtime.States
                 timerNoVisto = 0f;
                 atacando = false;
                 coolDownAtaque = 0f;
+                lastKnownPosition = PlayerPosition;
+                hasSetSearchDestination = false;
 
                 // Resolvemos los AudioSources del NPC.
                 AudioSource[] sources = machine.GetComponentsInChildren<AudioSource>();
@@ -216,10 +218,16 @@ namespace UHFPS.Runtime.States
                     }
                 }
 
-                if (SeesPlayerOrClose(asset.radioDeteccionCercana))
+                // Si el jugador está escondido en un armario/escondite, es completamente indetectable (evita detección por proximidad o por clipping de colisiones)
+                bool playerHiding = playerMachine.IsCurrent(PlayerStateMachine.HIDING_STATE);
+                bool sees = !playerHiding && SeesPlayerOrClose(asset.radioDeteccionCercana);
+
+                if (sees)
                 {
                     timerNoVisto = 0f;
-                    SetDestination(PlayerPosition);
+                    lastKnownPosition = PlayerPosition;
+                    SetDestination(lastKnownPosition);
+                    hasSetSearchDestination = false;
 
                     if (InPlayerDistance(asset.distanciaDeAtaque) && coolDownAtaque <= 0f)
                     {
@@ -244,18 +252,27 @@ namespace UHFPS.Runtime.States
                 }
                 else
                 {
-                    SetDestination(PlayerPosition);
+                    // Fijamos el destino hacia la última posición conocida una sola vez
+                    if (!hasSetSearchDestination)
+                    {
+                        SetDestination(lastKnownPosition);
+                        hasSetSearchDestination = true;
+                    }
                     
-                    if (PathDistanceCompleted()) 
+                    // El agente ha llegado a la última posición si finalizó la ruta o si se detuvo completamente cerca de ella
+                    bool reached = PathDistanceCompleted() 
+                                   || (!agent.pathPending && agent.remainingDistance <= 1.5f && agent.velocity.sqrMagnitude <= 0.1f);
+
+                    if (reached) 
                     {
                         agent.isStopped = true;
-                        UpdateAnimator(false, false, true); 
+                        UpdateAnimator(false, false, true); // Parado buscando
                         timerNoVisto += Time.deltaTime;
                     }
                     else
                     {
                         if (agent.isOnNavMesh) agent.isStopped = false;
-                        UpdateAnimator(false, true, false); // Corriendo
+                        UpdateAnimator(false, true, false); // Corriendo hacia la última posición
                     }
                 }
             }
