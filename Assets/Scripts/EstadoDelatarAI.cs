@@ -23,6 +23,49 @@ namespace UHFPS.Runtime.States
         [Tooltip("Tiempo de gracia (segundos) que espera el vigilante sin ver al jugador antes de bajar el brazo y volver a su estado base.")]
         public float tiempoPerdidaVista = 1.5f;
 
+        [Header("Voces del Vigilante")]
+        [Tooltip("Sonidos aleatorios que reproduce mientras detecta y apunta al jugador.")]
+        public AudioClip[] sonidosVigilante;
+        
+        [Tooltip("Volumen de reproducción de los sonidos.")]
+        [Range(0f, 1f)]
+        public float volumenVigilante = 1.0f;
+
+        [Tooltip("Tiempo mínimo en segundos entre reproducciones de voz si sigue viendo al jugador.")]
+        public float intervaloVozMin = 4.0f;
+
+        [Tooltip("Tiempo máximo en segundos entre reproducciones de voz si sigue viendo al jugador.")]
+        public float intervaloVozMax = 7.0f;
+
+#if UNITY_EDITOR
+        private void OnValidate()
+        {
+            if (sonidosVigilante == null || sonidosVigilante.Length == 0)
+            {
+                string[] paths = new string[]
+                {
+                    "Assets/Sounds/NPC/ahi esta.wav",
+                    "Assets/Sounds/NPC/atrapenlo.wav",
+                    "Assets/Sounds/NPC/el intruso.wav",
+                    "Assets/Sounds/NPC/un intruso.wav"
+                };
+
+                List<AudioClip> clips = new List<AudioClip>();
+                foreach (var path in paths)
+                {
+                    AudioClip clip = UnityEditor.AssetDatabase.LoadAssetAtPath<AudioClip>(path);
+                    if (clip != null) clips.Add(clip);
+                }
+
+                if (clips.Count > 0)
+                {
+                    sonidosVigilante = clips.ToArray();
+                    UnityEditor.EditorUtility.SetDirty(this);
+                }
+            }
+        }
+#endif
+
         public override FSMAIState InitState(NPCStateMachine machine, AIStatesGroup group)
         {
             return new EstadoDelatarAI_State(machine, this, group);
@@ -40,6 +83,7 @@ namespace UHFPS.Runtime.States
             private float timerDelacion;
             private bool alertaEnviada;
             private float timerPerdidaVista;
+            private float timerVoz;
 
             public EstadoDelatarAI_State(NPCStateMachine machine, EstadoDelatarAI stateAsset, AIStatesGroup group) : base(machine)
             {
@@ -106,8 +150,13 @@ namespace UHFPS.Runtime.States
                     audioSourcePrincipal.maxDistance = 20f;
                 }
 
-                // Reproducir animacion de delatar y sonido de alerta
-                if (customGroup != null)
+                // Reproducir primer grito de voz de delación inmediatamente
+                if (asset.sonidosVigilante != null && asset.sonidosVigilante.Length > 0)
+                {
+                    ReproducirVozAleatoria();
+                    timerVoz = Random.Range(asset.intervaloVozMin, asset.intervaloVozMax);
+                }
+                else if (customGroup != null)
                 {
                     if (customGroup.sonidosAlerta != null && customGroup.sonidosAlerta.Length > 0)
                     {
@@ -117,7 +166,10 @@ namespace UHFPS.Runtime.States
                             audioSourcePrincipal.PlayOneShot(clip, customGroup.volumenAlerta);
                         }
                     }
+                }
 
+                if (customGroup != null)
+                {
                     // Reset movement animations
                     customGroup.ResetMovementParameters(animator);
                     
@@ -180,6 +232,28 @@ namespace UHFPS.Runtime.States
                         Quaternion targetRot = Quaternion.LookRotation(playerDir);
                         machine.transform.rotation = Quaternion.Slerp(machine.transform.rotation, targetRot, Time.deltaTime * 5f);
                     }
+
+                    // Sistema de voz repetitiva si sigue viendo al jugador
+                    if (asset.sonidosVigilante != null && asset.sonidosVigilante.Length > 0)
+                    {
+                        timerVoz -= Time.deltaTime;
+                        if (timerVoz <= 0f)
+                        {
+                            ReproducirVozAleatoria();
+                            timerVoz = Random.Range(asset.intervaloVozMin, asset.intervaloVozMax);
+                        }
+                    }
+                }
+            }
+
+            private void ReproducirVozAleatoria()
+            {
+                if (audioSourcePrincipal == null || asset.sonidosVigilante == null || asset.sonidosVigilante.Length == 0) return;
+                
+                AudioClip clip = asset.sonidosVigilante[Random.Range(0, asset.sonidosVigilante.Length)];
+                if (clip != null)
+                {
+                    audioSourcePrincipal.PlayOneShot(clip, asset.volumenVigilante);
                 }
             }
 
