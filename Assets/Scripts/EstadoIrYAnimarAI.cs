@@ -213,9 +213,29 @@ namespace UHFPS.Runtime.States
                 }
             }
 
+            private bool TieneEstado<T>() where T : AIStateAsset
+            {
+                if (machine == null || machine.StatesAssetRuntime == null) return false;
+                foreach (var stateData in machine.StatesAssetRuntime.AIStates)
+                {
+                    if (stateData.StateAsset != null && stateData.StateAsset is T && stateData.IsEnabled)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
             public override Transition[] OnGetTransitions()
             {
-                return new Transition[0];
+                return new Transition[]
+                {
+                    Transition.To<EstadoPersecucionAI>(() =>
+                        !IsPlayerDead &&
+                        !playerMachine.IsCurrent(PlayerStateMachine.HIDING_STATE) &&
+                        SeesPlayerOrClose(1.5f) &&
+                        TieneEstado<EstadoPersecucionAI>())
+                };
             }
         }
     }
