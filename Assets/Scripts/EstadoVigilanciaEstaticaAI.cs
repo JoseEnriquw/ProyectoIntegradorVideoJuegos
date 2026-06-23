@@ -151,7 +151,7 @@ namespace UHFPS.Runtime.States
                         UpdateAnimator(isIdle: true);
 
                         // Seguir al jugador con la mirada si está en rango de visión y no está escondido
-                        if (!playerMachine.IsCurrent(PlayerStateMachine.HIDING_STATE) && SeesObject(machine.SightsDistance, PlayerHead))
+                        if (!playerMachine.IsCurrent(PlayerStateMachine.HIDING_STATE) && SeesPlayer())
                         {
                             Vector3 playerDir = PlayerPosition - machine.transform.position;
                             playerDir.y = 0f;
