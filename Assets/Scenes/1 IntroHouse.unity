@@ -2116,6 +2116,15 @@ MonoBehaviour:
     ObjectiveKey: Last_Words
     SubObjectives:
     - Inspect_Room
+  skipIfHasItem:
+    m_GUID: 
+    m_Item:
+      Name: 
+      GUID: 
+      Icon: {fileID: 0}
+    m_Section:
+      Name: 
+      GUID: 
 --- !u!1 &197652375
 GameObject:
   m_ObjectHideFlags: 0
@@ -22075,6 +22084,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: poison_1
       objectReference: {fileID: 0}
+    - target: {fileID: 7354007625842433576, guid: 061618acf8459f34bb03bf93931470ad, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7873838424638768274, guid: 061618acf8459f34bb03bf93931470ad, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.02039
@@ -22419,6 +22432,15 @@ MonoBehaviour:
   objectiveToComplete:
     ObjectiveKey: 
     SubObjectives: []
+  skipIfHasItem:
+    m_GUID: 
+    m_Item:
+      Name: 
+      GUID: 
+      Icon: {fileID: 0}
+    m_Section:
+      Name: 
+      GUID: 
 --- !u!65 &1549174064
 BoxCollider:
   m_ObjectHideFlags: 0
