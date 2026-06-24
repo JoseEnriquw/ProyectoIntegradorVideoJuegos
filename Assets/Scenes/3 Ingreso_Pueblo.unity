@@ -4001,6 +4001,7 @@ GameObject:
   - component: {fileID: 42610711}
   - component: {fileID: 42610710}
   - component: {fileID: 42610709}
+  - component: {fileID: 42610713}
   m_Layer: 0
   m_Name: distraccion_guardia
   m_TagString: Untagged
@@ -4052,7 +4053,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 42610707}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 1789217520}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -4123,6 +4124,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 42610707}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &42610713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42610707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcf6bb87f2db0714ab62cddaa180e4a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.CinematicDialogueZoom
+  TargetTrigger: {fileID: 42610709}
+  ZoomCamera: {fileID: 604430862}
+  TargetLookAt: {fileID: 781132168}
+  UseDynamicPositioning: 1
+  CameraOffset: {x: 0, y: 4, z: -8}
+  FieldOfView: 60
+  ActivePriority: 20
+  BlendInTime: 1.5
+  BlendOutTime: 2.5
+  TransitionStyle: 6
 --- !u!1001 &42738617
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9743,6 +9766,7 @@ Transform:
   - {fileID: 704699807}
   - {fileID: 1937969796}
   - {fileID: 1380339328}
+  - {fileID: 604430861}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &83567485
@@ -21793,6 +21817,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 410414, guid: 149f31fa3c070bf44a66da3a784cdc43, type: 3}
   m_PrefabInstance: {fileID: 1454942494}
   m_PrefabAsset: {fileID: 0}
+--- !u!134 &134838328
+PhysicsMaterial:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ' (Instance) (Instance) (Instance) (Instance)'
+  serializedVersion: 2
+  m_DynamicFriction: 0.6
+  m_StaticFriction: 0.6
+  m_Bounciness: 0
+  m_FrictionCombine: 0
+  m_BounceCombine: 0
 --- !u!1001 &135075420
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25579,7 +25616,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.06666667
+  m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 1855c9b85a9fdb44ea572ef904c89d73, type: 2}
   m_BuildHeightMesh: 0
@@ -65003,6 +65040,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 490552, guid: 48a907058000acc4da8ac9293b565679, type: 3}
   m_PrefabInstance: {fileID: 1602990814}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &604430860
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 604430861}
+  - component: {fileID: 604430862}
+  m_Layer: 0
+  m_Name: CinematicDialogueZoomCamera_Guardia
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &604430861
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604430860}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0137152225, y: 0.00084382, z: 0.000011574271, w: 0.9999056}
+  m_LocalPosition: {x: -183.2, y: 0.5, z: 131.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 83567484}
+  m_LocalEulerAnglesHint: {x: 10.64, y: 0, z: 0}
+--- !u!114 &604430862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 604430860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+  Priority:
+    Enabled: 1
+    m_Value: 0
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20241001
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 0}
+    LookAtTarget: {fileID: 781132168}
+    CustomLookAtTarget: 1
+  Lens:
+    FieldOfView: 40
+    OrthographicSize: 10
+    NearClipPlane: 0.1
+    FarClipPlane: 5000
+    Dutch: 0
+    ModeOverride: 0
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
 --- !u!4 &604881133 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 464194, guid: b4bb1f5d4e31a07409ece01b4cf53b22, type: 3}
@@ -88498,6 +88610,10 @@ PrefabInstance:
     - target: {fileID: 5085615733676273147, guid: 46ebad5d23f57b442a4891f6dd4702fd, type: 3}
       propertyPath: m_Name
       value: Crate_Big_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5085615733676273147, guid: 46ebad5d23f57b442a4891f6dd4702fd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -132021,7 +132137,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1198148740}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 1530292216}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -155829,7 +155945,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1446639986}
-  m_Material: {fileID: 1997946389}
+  m_Material: {fileID: 134838328}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -162930,6 +163046,19 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 469502, guid: 04c36f15bbecd854cab50deedb5c594f, type: 3}
   m_PrefabInstance: {fileID: 930626612}
   m_PrefabAsset: {fileID: 0}
+--- !u!134 &1530292216
+PhysicsMaterial:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  serializedVersion: 2
+  m_DynamicFriction: 0.6
+  m_StaticFriction: 0.6
+  m_Bounciness: 0
+  m_FrictionCombine: 0
+  m_BounceCombine: 0
 --- !u!4 &1530671779 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bb49c7113d6585f478a194fe115088be, type: 3}
@@ -180469,6 +180598,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate_Big
       objectReference: {fileID: 0}
+    - target: {fileID: 5085615733676273147, guid: 46ebad5d23f57b442a4891f6dd4702fd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -189202,6 +189335,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1419492990}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!134 &1789217520
+PhysicsMaterial:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ' (Instance) (Instance) (Instance)'
+  serializedVersion: 2
+  m_DynamicFriction: 0.6
+  m_StaticFriction: 0.6
+  m_Bounciness: 0
+  m_FrictionCombine: 0
+  m_BounceCombine: 0
 --- !u!4 &1791788518 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 454322, guid: 74e94f0416ca474418749ee6c97439b2, type: 3}
@@ -211052,19 +211198,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 416718, guid: 601b7f10102e66b41b534b7b077bd9a0, type: 3}
   m_PrefabInstance: {fileID: 852713719}
   m_PrefabAsset: {fileID: 0}
---- !u!134 &1997946389
-PhysicsMaterial:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: ' (Instance) (Instance) (Instance)'
-  serializedVersion: 2
-  m_DynamicFriction: 0.6
-  m_StaticFriction: 0.6
-  m_Bounciness: 0
-  m_FrictionCombine: 0
-  m_BounceCombine: 0
 --- !u!1001 &1998693582
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -219632,6 +219765,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crate_Big_2
       objectReference: {fileID: 0}
+    - target: {fileID: 5085615733676273147, guid: 46ebad5d23f57b442a4891f6dd4702fd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -223452,6 +223589,10 @@ PrefabInstance:
       propertyPath: DialogueAudio
       value: 
       objectReference: {fileID: 154615285}
+    - target: {fileID: 2599565391079904066, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2761001043495603375, guid: 9e39307e62e22e043bd534a7cdc8d2cf, type: 3}
       propertyPath: DialogueAudio
       value: 
