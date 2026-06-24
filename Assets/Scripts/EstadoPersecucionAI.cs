@@ -11,6 +11,8 @@ namespace UHFPS.Runtime.States
         public float velocidadPersecucion = 3.5f;
         [Tooltip("A qué distancia se detiene para golpear/atrapar")]
         public float distanciaDeAtaque = 1.0f;
+        [Tooltip("Distancia máxima a la que el NPC seguirá persiguiendo al jugador. Si el jugador supera esta distancia, el NPC lo perderá de vista.")]
+        public float distanciaMaximaPersecucion = 20.0f;
         
         [Header("Perdida de Vision")]
         [Tooltip("Cuántos segundos busca en el mismo lugar antes de volver a patrullar si te pierde de vista")]
@@ -59,6 +61,7 @@ namespace UHFPS.Runtime.States
             private float coolDownAtaque;
             private Vector3 lastKnownPosition;
             private bool hasSetSearchDestination;
+            private float originalSightsDistance;
 
             public EstadoPersecucionAI_State(NPCStateMachine machine, EstadoPersecucionAI stateAsset, AIStatesGroup group) : base(machine)
             {
@@ -107,6 +110,9 @@ namespace UHFPS.Runtime.States
                 coolDownAtaque = 0f;
                 lastKnownPosition = PlayerPosition;
                 hasSetSearchDestination = false;
+
+                originalSightsDistance = machine.SightsDistance;
+                machine.SightsDistance = asset.distanciaMaximaPersecucion;
 
                 // Resolvemos los AudioSources del NPC.
                 AudioSource[] sources = machine.GetComponentsInChildren<AudioSource>();
@@ -183,6 +189,8 @@ namespace UHFPS.Runtime.States
             {
                 machine.RotateAgentManually = false;
                 if (agent.isOnNavMesh) agent.ResetPath();
+
+                machine.SightsDistance = originalSightsDistance;
 
                 // ⑤ Sonido al PERDER al jugador (frustración, renuncia)
                 if (customGroup != null)
