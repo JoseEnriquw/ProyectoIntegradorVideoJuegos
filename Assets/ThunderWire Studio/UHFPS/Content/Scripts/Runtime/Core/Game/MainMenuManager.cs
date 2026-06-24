@@ -12,6 +12,12 @@ namespace UHFPS.Runtime
         public string NewGameSceneName;
         public bool NewGameRemoveSaves;
 
+        private void Start()
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
         public void NewGame()
         {
             if (string.IsNullOrEmpty(NewGameSceneName))
