@@ -15,7 +15,7 @@ MonoBehaviour:
   velocidadPatrullaje: 1.5
   distanciaDeParada: 1
   tiempoEsperaEnPunto: 4
-  distanciaDeteccionCercana: 1.5
+  distanciaDeteccionCercana: 3
   multiplicadorVelocidadAnim: 1
   esVigilante: 0
 --- !u!114 &11400000
@@ -86,8 +86,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.EstadoPersecucionAI
   velocidadPersecucion: 1
   distanciaDeAtaque: 1
+  distanciaMaximaPersecucion: 20
   tiempoParaRendirse: 3
-  radioDeteccionCercana: 2
+  radioDeteccionCercana: 3
 --- !u!114 &8755880265959894010
 MonoBehaviour:
   m_ObjectHideFlags: 0
