@@ -143,8 +143,14 @@ namespace UHFPS.Runtime
             }
         }
 
+        private GameObject thunderManagerObj;
+
         private void Start()
         {
+            Transform tm = transform.Find("FPView/ThunderManager_2");
+            if (tm == null) tm = transform.Find("FPView/ThunderManager");
+            if (tm != null) thunderManagerObj = tm.gameObject;
+
             if (!SaveGameManager.GameWillLoad || !SaveGameManager.GameStateExist)
             {
                 // transfer player rotation to look rotation
@@ -201,6 +207,12 @@ namespace UHFPS.Runtime
 
             if(LoadSelectedItem) data.Add("selectedItem", PlayerItems.CurrentItemIndex);
             data.Add("playerItems", playerItemsData);
+
+            if (thunderManagerObj != null)
+            {
+                data.Add("thunderManagerActive", thunderManagerObj.activeSelf);
+            }
+
             return data;
         }
 
@@ -234,6 +246,12 @@ namespace UHFPS.Runtime
             {
                 int itemIndex = (int)data["selectedItem"];
                 if(itemIndex != -1) PlayerItems.ActivateItem(itemIndex);
+            }
+
+            if (thunderManagerObj != null && data["thunderManagerActive"] != null)
+            {
+                bool active = data["thunderManagerActive"].ToObject<bool>();
+                thunderManagerObj.SetActive(active);
             }
         }
     }

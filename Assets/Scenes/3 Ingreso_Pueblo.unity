@@ -20763,13 +20763,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c2cfaccfa80f343807a0be42c701ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.NPCStateMachine
-  StatesAsset: {fileID: 11400000, guid: beebdf7d8f489bf4bb0aec4ab767d3e2, type: 2}
+  StatesAsset: {fileID: 11400000, guid: a7398188143cecb4ea5494fb37d45ff8, type: 2}
   StatesAssetRuntime: {fileID: 0}
-  Animator: {fileID: 1049103836}
-  HeadBone: {fileID: 1615175146}
+  Animator: {fileID: 511083405}
+  HeadBone: {fileID: 511083404}
   SightsMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 65
   NPCType: 0
   SightsFOV: 110
   SightsDistance: 10
@@ -65087,13 +65087,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c2cfaccfa80f343807a0be42c701ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.NPCStateMachine
-  StatesAsset: {fileID: 11400000, guid: beebdf7d8f489bf4bb0aec4ab767d3e2, type: 2}
+  StatesAsset: {fileID: 11400000, guid: a7398188143cecb4ea5494fb37d45ff8, type: 2}
   StatesAssetRuntime: {fileID: 0}
-  Animator: {fileID: 602496284}
-  HeadBone: {fileID: 1615175146}
+  Animator: {fileID: 511083405}
+  HeadBone: {fileID: 511083404}
   SightsMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 65
   NPCType: 0
   SightsFOV: 110
   SightsDistance: 10
@@ -65122,11 +65122,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!95 &602496284 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: b0fefc869df8f3f41801e28bb2d97cac, type: 3}
-  m_PrefabInstance: {fileID: 926156850}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &602496285
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115125,11 +115120,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b0fefc869df8f3f41801e28bb2d97cac, type: 3}
   m_PrefabInstance: {fileID: 1049103833}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1049103836 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: b0fefc869df8f3f41801e28bb2d97cac, type: 3}
-  m_PrefabInstance: {fileID: 1049103833}
-  m_PrefabAsset: {fileID: 0}
 --- !u!82 &1049103837
 AudioSource:
   m_ObjectHideFlags: 0
@@ -115275,13 +115265,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71c2cfaccfa80f343807a0be42c701ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.NPCStateMachine
-  StatesAsset: {fileID: 11400000, guid: beebdf7d8f489bf4bb0aec4ab767d3e2, type: 2}
+  StatesAsset: {fileID: 11400000, guid: a7398188143cecb4ea5494fb37d45ff8, type: 2}
   StatesAssetRuntime: {fileID: 0}
-  Animator: {fileID: 1049103836}
-  HeadBone: {fileID: 1615175146}
+  Animator: {fileID: 511083405}
+  HeadBone: {fileID: 511083404}
   SightsMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 65
   NPCType: 0
   SightsFOV: 110
   SightsDistance: 10
@@ -190733,7 +190723,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 145104, guid: de989d50c4fd676479d25b597fc65314, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 416318, guid: de989d50c4fd676479d25b597fc65314, type: 3}
       propertyPath: m_LocalPosition.x
