@@ -51910,7 +51910,7 @@ GameObject:
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3956279982669532779
 Transform:
   m_ObjectHideFlags: 0
@@ -68391,6 +68391,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cura
       objectReference: {fileID: 0}
+    - target: {fileID: 5306882734783959991, guid: bec51c2dc4bdb854a8cade8ad4ca91c0, type: 3}
+      propertyPath: OnTakeEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306882734783959991, guid: bec51c2dc4bdb854a8cade8ad4ca91c0, type: 3}
+      propertyPath: OnTakeEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306882734783959991, guid: bec51c2dc4bdb854a8cade8ad4ca91c0, type: 3}
+      propertyPath: OnTakeEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306882734783959991, guid: bec51c2dc4bdb854a8cade8ad4ca91c0, type: 3}
+      propertyPath: OnTakeEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306882734783959991, guid: bec51c2dc4bdb854a8cade8ad4ca91c0, type: 3}
+      propertyPath: OnTakeEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306882734783959991, guid: bec51c2dc4bdb854a8cade8ad4ca91c0, type: 3}
+      propertyPath: OnTakeEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5306882734783959991, guid: bec51c2dc4bdb854a8cade8ad4ca91c0, type: 3}
+      propertyPath: OnTakeEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -71271,7 +71299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4072368983051103529, guid: bc85fd93ea5ea5743a7c7e92d9b4b188, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7353679561843901513, guid: bc85fd93ea5ea5743a7c7e92d9b4b188, type: 3}
       propertyPath: m_Name
