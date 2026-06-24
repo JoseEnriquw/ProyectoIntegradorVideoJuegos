@@ -17,6 +17,7 @@ MonoBehaviour:
   tiempoEsperaEnPunto: 4
   distanciaDeteccionCercana: 1.5
   multiplicadorVelocidadAnim: 1
+  esVigilante: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41,6 +42,7 @@ MonoBehaviour:
   RunParameter: Run
   InteractParameter: Interact
   AttackTrigger: Attack
+  PointingParameter: Pointing
   sonidosAlerta:
   - {fileID: 8300000, guid: cd1a67992c0404703ae43942c68e89cd, type: 3}
   volumenAlerta: 1
@@ -82,7 +84,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f6444d5e576e2740bd836c58f03384a, type: 3}
   m_Name: ' (UHFPS.Runtime.States.EstadoPersecucionAI)'
   m_EditorClassIdentifier: Assembly-CSharp::UHFPS.Runtime.States.EstadoPersecucionAI
-  velocidadPersecucion: 3
+  velocidadPersecucion: 1
   distanciaDeAtaque: 1
   tiempoParaRendirse: 3
   radioDeteccionCercana: 2
