@@ -14,6 +14,10 @@ namespace UHFPS.Runtime
         public ObjectiveSelect objectiveToAdd;
         public ObjectiveSelect objectiveToComplete;
 
+        [Header("Inventory Check")]
+        [Tooltip("Si el jugador tiene este Item en el inventario, no se disparará el trigger.")]
+        public ItemProperty skipIfHasItem;
+
         private bool isTriggered;
 
         private ObjectiveManager objectiveManager;
@@ -28,10 +32,24 @@ namespace UHFPS.Runtime
             }
         }
 
+        private bool ShouldSkipTrigger()
+        {
+            if (skipIfHasItem == null || string.IsNullOrEmpty(skipIfHasItem.GUID))
+                return false;
+
+            return skipIfHasItem.InInventory;
+        }
+
         public void InteractStart()
         {
             if (triggerType != TriggerType.Interact || triggerType == TriggerType.Event || isTriggered)
                 return;
+
+            if (ShouldSkipTrigger())
+            {
+                isTriggered = true;
+                return;
+            }
 
             TriggerObjective();
             isTriggered = true;
@@ -44,6 +62,12 @@ namespace UHFPS.Runtime
 
             if (other.CompareTag("Player"))
             {
+                if (ShouldSkipTrigger())
+                {
+                    isTriggered = true;
+                    return;
+                }
+
                 TriggerObjective();
                 isTriggered = true;
             }
@@ -51,6 +75,9 @@ namespace UHFPS.Runtime
 
         public void TriggerObjective()
         {
+            if (ShouldSkipTrigger())
+                return;
+
             if (objectiveType == ObjectiveType.New)
             {
                 ObjectiveManager.AddObjective(objectiveToAdd.ObjectiveKey, objectiveToAdd.SubObjectives);

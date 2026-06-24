@@ -832,7 +832,60 @@ public class PlayerSymptom : MonoBehaviour
         EnableSymptoms = false;
         currentActiveSymptom = SymptomType.None;
         timeAlive = 0f;
+        ResetAllSymptomEffectsImmediate();
     }
+
+    /// <summary>
+    /// Resetea inmediatamente todos los efectos visuales y de audio de los síntomas.
+    /// </summary>
+    public void ResetAllSymptomEffectsImmediate()
+    {
+        currentActiveSymptom = SymptomType.None;
+        timeAlive = 0f;
+
+        if (blurVolume != null) blurVolume.weight = 0f;
+        if (bwVolume != null) bwVolume.weight = 0f;
+        if (vhsVolume != null) vhsVolume.weight = 0f;
+        if (drunkVolume != null) drunkVolume.weight = 0f;
+        if (rainVolume != null) rainVolume.weight = 0f;
+        whispersWeight = 0f;
+
+        if (symptomAudioSource != null)
+        {
+            symptomAudioSource.Stop();
+            symptomAudioSource.clip = null;
+        }
+
+        if (rainParticleSystem != null)
+        {
+            rainParticleSystem.Stop();
+            var emission = rainParticleSystem.emission;
+            emission.enabled = false;
+        }
+
+        StopVoiceRoutines();
+    }
+
+    private void OnDisable()
+    {
+        ResetAllSymptomEffectsImmediate();
+
+        if (blurVolumeObject != null) blurVolumeObject.SetActive(false);
+        if (bwVolumeObject != null) bwVolumeObject.SetActive(false);
+        if (vhsVolumeObject != null) vhsVolumeObject.SetActive(false);
+        if (drunkVolumeObject != null) drunkVolumeObject.SetActive(false);
+        if (rainVolumeObject != null) rainVolumeObject.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        if (blurVolumeObject != null) blurVolumeObject.SetActive(true);
+        if (bwVolumeObject != null) bwVolumeObject.SetActive(true);
+        if (vhsVolumeObject != null) vhsVolumeObject.SetActive(true);
+        if (drunkVolumeObject != null) drunkVolumeObject.SetActive(true);
+        if (rainVolumeObject != null) rainVolumeObject.SetActive(true);
+    }
+
 
     /// <summary>
     /// Detiene el reloj de supervivencia (SurvivalTimer).

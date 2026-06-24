@@ -11,6 +11,7 @@ namespace UHFPS.Editors
     {
         SerializedProperty triggerType;
         SerializedProperty objectiveType;
+        SerializedProperty skipIfHasItem;
 
         SerializedProperty objective;
         SerializedProperty completeObjective;
@@ -21,6 +22,7 @@ namespace UHFPS.Editors
         {
             triggerType = serializedObject.FindProperty("triggerType");
             objectiveType = serializedObject.FindProperty("objectiveType");
+            skipIfHasItem = serializedObject.FindProperty("skipIfHasItem");
 
             objective = serializedObject.FindProperty("objectiveToAdd");
             completeObjective = serializedObject.FindProperty("objectiveToComplete");
@@ -60,6 +62,9 @@ namespace UHFPS.Editors
                 EditorGUILayout.Space(2f);
                 EditorGUILayout.PropertyField(completeObjective);
             }
+
+            EditorGUILayout.Space();
+            EditorGUILayout.PropertyField(skipIfHasItem);
 
             EditorGUILayout.Space();
             using (new EditorGUI.DisabledGroupScope(objectivesAsset == null))
